@@ -24,7 +24,7 @@ const SignUp = ({ signUpForm, setSignUpForm, setAuth }: SignUpProps) => {
       onSubmit={signUpHandler}
       className="flex w-full flex-col items-center gap-2 p-4"
     >
-      <div className="flex w-full items-center justify-between gap-4">
+      <div className="flex w-full items-center justify-between gap-8">
         <label htmlFor="email">Email</label>
         <input
           className="w-full rounded-md border-2 px-2 py-1"
@@ -53,7 +53,7 @@ const SignUp = ({ signUpForm, setSignUpForm, setAuth }: SignUpProps) => {
       <div className="flex w-full items-center justify-between">
         <label htmlFor="surname">Soy isim</label>
         <input
-          className=" rounded-md border-2 px-2 py-1"
+          className="rounded-md border-2 px-2 py-1"
           type="text"
           name="surname"
           id="surname"

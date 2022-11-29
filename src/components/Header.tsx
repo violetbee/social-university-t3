@@ -1,4 +1,4 @@
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { FC, useState } from "react";
@@ -39,18 +39,38 @@ const Header: FC = () => {
         <button className="rounded-lg bg-[#B21EED] px-9 py-2">
           Gönderi Paylaş
         </button>
-        <div className="hidden justify-between rounded-lg bg-[#383F68] md:flex">
+        <div className="hidden justify-between  md:flex">
           {session ? (
-            <div>
-              <Image
-                alt="item"
-                src={session?.user?.image}
-                width={50}
-                height={50}
-              />
+            <div className="flex items-center gap-2">
+              <button
+                className="text-slate-900"
+                onClick={() => {
+                  signOut();
+                }}
+              >
+                Çıkış Yap
+              </button>
+              {session?.user?.image ? (
+                <Image
+                  className="rounded-full"
+                  alt="item"
+                  src={session?.user?.image as string}
+                  width={50}
+                  height={50}
+                />
+              ) : (
+                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-slate-900/70">
+                  <p className="text-2xl font-bold text-white">
+                    {session?.user?.name?.charAt(0).toUpperCase()}
+                  </p>
+                </div>
+              )}
             </div>
           ) : (
-            <Link href="/auth" className="py-2 px-4">
+            <Link
+              href="/auth"
+              className="h-full rounded-lg bg-[#383F68] py-2 px-4"
+            >
               Giriş Yap
             </Link>
           )}

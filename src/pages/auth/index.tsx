@@ -6,6 +6,8 @@ import { useState } from "react";
 import type { UserSignInForm, UserSignUpForm } from "../../types/app";
 import SignIn from "../../components/SignIn";
 import SignUp from "../../components/SignUp";
+import { unstable_getServerSession } from "next-auth";
+import { authOptions } from "../api/auth/[...nextauth]";
 
 enum AUTH {
   SIGN_IN = "SIGN_IN",
@@ -26,7 +28,7 @@ const Auth = () => {
     image: null,
   });
   const [auth, setAuth] = useState<AUTH>(AUTH.SIGN_IN);
-  // const session = useSession();
+
   return (
     <div
       className={`flex min-h-screen w-full  items-center ${dosis.className} justify-center bg-[#F6F8FC]`}
@@ -53,3 +55,24 @@ const Auth = () => {
 };
 
 export default Auth;
+
+export async function getServerSideProps(context: any) {
+  const session = await unstable_getServerSession(
+    context.req,
+    context.res,
+    authOptions
+  );
+  if (session) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
+  return {
+    props: {
+      session,
+    },
+  };
+}
