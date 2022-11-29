@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { SignUpProps } from "../types/app";
 import { trpc } from "../utils/trpc";
 

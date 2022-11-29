@@ -8,6 +8,7 @@ import SignIn from "../../components/SignIn";
 import SignUp from "../../components/SignUp";
 import { unstable_getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]";
+import { GetServerSideProps } from "next";
 
 enum AUTH {
   SIGN_IN = "SIGN_IN",
@@ -56,7 +57,7 @@ const Auth = () => {
 
 export default Auth;
 
-export async function getServerSideProps(context: any) {
+export const getServerSideProps: GetServerSideProps = async (context) => {
   const session = await unstable_getServerSession(
     context.req,
     context.res,
@@ -75,4 +76,4 @@ export async function getServerSideProps(context: any) {
       session,
     },
   };
-}
+};
