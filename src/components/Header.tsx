@@ -4,7 +4,7 @@ import Link from "next/link";
 import { FC, useState } from "react";
 import { BiSearchAlt } from "react-icons/bi";
 import LeftSideBar from "./LeftSideBar";
-// import { trpc } from "../utils/trpc";
+import { trpc } from "../utils/trpc";
 
 const Header: FC = () => {
   // If there is session
@@ -12,6 +12,8 @@ const Header: FC = () => {
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isMobileMenuContentOpen, setIsMobileMenuContentOpen] = useState(false);
+
+  const removeUsers = trpc.user.deleteAllUsers.useMutation();
 
   const menuHandler = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -36,7 +38,15 @@ const Header: FC = () => {
           />
           <BiSearchAlt className="absolute top-1/2 right-2 h-full -translate-y-1/2 transform text-2xl text-slate-900/70" />
         </label>
-        <button className="rounded-lg bg-[#B21EED] px-9 py-2">
+        <button
+          onClick={
+            // This button removes users for a while
+            async () => {
+              await removeUsers.mutateAsync();
+            }
+          }
+          className="rounded-lg bg-[#B21EED] px-9 py-2"
+        >
           Gönderi Paylaş
         </button>
         <div className="hidden justify-between  md:flex">

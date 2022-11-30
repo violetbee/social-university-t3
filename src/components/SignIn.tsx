@@ -1,5 +1,9 @@
 import type { SignInProps } from "../types/app";
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
+import { toast } from "react-toastify";
+import { FaDiscord, FaTwitter } from "react-icons/fa";
+import { FcGoogle } from "react-icons/fc";
+import { MdOutlineAlternateEmail } from "react-icons/md";
 
 enum AUTH {
   SIGN_IN = "SIGN_IN",
@@ -7,17 +11,30 @@ enum AUTH {
 }
 
 const SignIn = ({ signInForm, setSignInForm, setAuth }: SignInProps) => {
+  const { data } = useSession();
   return (
     <>
       <form
         onSubmit={async (e) => {
           e.preventDefault();
-          const res = await signIn("credentials", {
+          await signIn("credentials", {
             email: signInForm.email,
             password: signInForm.password,
-            callbackUrl: "http://localhost:3000",
+            redirect: false,
+          }).then((res) => {
+            res?.error
+              ? toast(res?.error, {
+                  type: "error",
+                  autoClose: 2000,
+                })
+              : toast("Giriş başarılı", {
+                  type: "success",
+                  autoClose: 1000,
+                }) &&
+                setTimeout(() => {
+                  window.location.href = "/";
+                }, 1000);
           });
-          console.log(res);
         }}
         className="flex w-full flex-col items-center gap-2 px-4 py-3"
       >
@@ -47,45 +64,53 @@ const SignIn = ({ signInForm, setSignInForm, setAuth }: SignInProps) => {
             }}
           />
         </div>
-        <button type="submit" className="w-full rounded-md border-2 px-2 py-1">
+        <button
+          disabled={data ? true : false}
+          type="submit"
+          className="w-full rounded-md border-2 px-2 py-1"
+        >
           Giriş Yap
         </button>
       </form>
       <div className="flex w-full flex-col">
-        <div className="flex w-full divide-x-2 rounded-md border-2">
+        <div className="flex w-full">
           <button
             onClick={() => {
               setAuth(AUTH.SIGN_UP);
             }}
-            className="w-full rounded-l-md bg-sky-800 px-2 py-1 text-white"
+            className="flex w-full items-center justify-center rounded-l-md bg-sky-800 p-2 text-white"
           >
-            @
+            <MdOutlineAlternateEmail size={25} />
+          </button>
+          <button
+            onClick={() => {
+              toast("Google ile giriş işlemleri geliştirme aşamasında.", {
+                type: "info",
+              });
+            }}
+            className="flex w-full items-center justify-center bg-white p-2 text-white"
+          >
+            <FcGoogle size={25} />
           </button>
           <button
             onClick={() => {
               signIn("discord", {
-                callbackUrl: "http://localhost:3000",
+                redirect: false,
+              }).then((res) => console.log(res));
+            }}
+            className="flex w-full items-center justify-center bg-[#5662f6] p-2 text-white"
+          >
+            <FaDiscord size={25} />
+          </button>
+          <button
+            onClick={() => {
+              toast("Twitter ile giriş işlemleri geliştirme aşamasında.", {
+                type: "info",
               });
             }}
-            className="w-full bg-orange-300 px-2 py-1 text-white"
+            className="flex w-full items-center justify-center rounded-r-md bg-[#30c2f2] px-2 py-1 text-white"
           >
-            D
-          </button>
-          <button
-            onClick={() => {
-              setAuth(AUTH.SIGN_UP);
-            }}
-            className="w-full px-2 py-1"
-          >
-            B
-          </button>
-          <button
-            onClick={() => {
-              setAuth(AUTH.SIGN_UP);
-            }}
-            className="w-full px-2 py-1"
-          >
-            B
+            <FaTwitter size={25} />
           </button>
         </div>
       </div>

@@ -49,14 +49,18 @@ export const authOptions: NextAuthOptions = {
       },
       async authorize(credentials) {
         // Add logic here to look up the user from the credentials supplied
+        if (credentials) {
+          if (credentials?.password?.length < 8) {
+            throw new Error("Şifre en az 8 karakter olmalıdır.");
+          }
+        }
         const user = await prisma.user.findUnique({
           where: {
             email: credentials?.email,
           },
         });
-
         if (!user) {
-          throw new Error("No user found");
+          throw new Error("Veritabanımızda böyle bir kullanıcı bulunamadı.");
         } else {
           // If you return null or false then the credentials will be rejected
           const isValid = bcrypt.compareSync(
@@ -64,10 +68,9 @@ export const authOptions: NextAuthOptions = {
             user.password as string
           );
           if (isValid) {
-            console.log(user);
             return user;
           } else {
-            throw new Error("Invalid password");
+            throw new Error("Lütfen şifrenizi kontrol edin");
           }
           // You can also Reject this callback with an Error or with a URL:
           // throw new Error('error message') // Redirect to error page

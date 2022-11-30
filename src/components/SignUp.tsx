@@ -1,6 +1,8 @@
 import React from "react";
-import { SignUpProps } from "../types/app";
+import { SignUpProps, TRPCError } from "../types/app";
 import { trpc } from "../utils/trpc";
+import { toast } from "react-toastify";
+import { signIn } from "next-auth/react";
 
 enum AUTH {
   SIGN_IN = "SIGN_IN",
@@ -11,12 +13,46 @@ const SignUp = ({ signUpForm, setSignUpForm, setAuth }: SignUpProps) => {
   const user = trpc.user.signUp.useMutation();
   const signUpHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    await user.mutateAsync({
-      email: signUpForm.email,
-      password: signUpForm.password,
-      name: signUpForm.name,
-      surname: signUpForm.surname,
-    });
+    await user.mutateAsync(
+      {
+        email: signUpForm.email,
+        password: signUpForm.password,
+        name: signUpForm.name,
+        surname: signUpForm.surname,
+      },
+      {
+        onSuccess: async () => {
+          toast.success("Başarıyla kayıt oldunuz.", {
+            autoClose: 2000,
+          });
+          await signIn("credentials", {
+            email: signUpForm.email,
+            password: signUpForm.password,
+            redirect: false,
+          }).then(() =>
+            setTimeout(() => {
+              window.location.href = "/";
+            }, 2000)
+          );
+        },
+        onError: (error) => {
+          if (error.message.includes("[")) {
+            const parsedError = JSON.parse(error.message);
+            parsedError.forEach((err: TRPCError) => {
+              toast(err.message, {
+                type: "error",
+                autoClose: 2000,
+              });
+            });
+          } else {
+            toast(error.message, {
+              type: "error",
+              autoClose: 2000,
+            });
+          }
+        },
+      }
+    );
   };
 
   return (
