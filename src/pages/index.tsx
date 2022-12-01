@@ -12,7 +12,7 @@ const Home: NextPage = () => {
       </Head>
       <Layout>
         <div className="flex flex-col flex-wrap lg:flex-row">
-          <div className=" h-52 w-full p-2 lg:w-1/2">
+          <div className="h-52 w-full p-2 lg:w-1/2">
             <div className="h-full w-full rounded-md bg-[#F0D4C5] shadow-sm"></div>
           </div>
           <div className="h-52 w-full p-2 lg:w-1/2">
