@@ -39,6 +39,7 @@ export const authOptions: NextAuthOptions = {
     DiscordProvider({
       clientId: env.DISCORD_CLIENT_ID,
       clientSecret: env.DISCORD_CLIENT_SECRET,
+      allowDangerousEmailAccountLinking: true,
     }),
     CredentialsProvider({
       id: "credentials",

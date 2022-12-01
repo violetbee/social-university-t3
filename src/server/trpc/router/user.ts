@@ -37,7 +37,7 @@ export const userRouter = router({
         },
       });
     }),
-    deleteAllUsers: publicProcedure.mutation(async ({ctx})=>{
-      await ctx.prisma.user.deleteMany();
-    })
+  deleteAllUsers: publicProcedure.mutation(async ({ ctx }) => {
+    await ctx.prisma.user.deleteMany();
+  }),
 });
