@@ -9,29 +9,34 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
 
 export const authOptions: NextAuthOptions = {
+  jwt: {
+    secret: "secret",
+    maxAge: 3000,
+  },
   session: {
     strategy: "jwt",
     maxAge: 3000,
   },
-
+  secret: "secret",
   // Include user.id on session
   callbacks: {
-    jwt({ token, user }) {
+    async jwt({ token, user }) {
       if (user) {
         token.id = user.id;
       }
       return token;
     },
-    session({ session, token }) {
+    async session({ session, token }) {
       if (token && session.user) {
-        session.user.id = token.id;
+        session.user = {
+          id: token.id,
+          name: session.user.name,
+          email: session.user.email,
+          image: session.user.image,
+        };
       }
       return session;
     },
-  },
-  secret: "secret",
-  jwt: {
-    secret: "secret",
   },
   // Configure one or more authentication providers
   adapter: PrismaAdapter(prisma),

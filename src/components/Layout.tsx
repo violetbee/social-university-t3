@@ -3,7 +3,11 @@ import LeftSideBar from "./LeftSideBar";
 import RightSideBar from "./RightSideBar";
 import Header from "./Header";
 
-const dosis = Dosis({ weight: "400", preload: true, subsets: ["latin"] });
+const dosis = Dosis({
+  weight: ["200", "300", "400", "500", "600", "700", "800"],
+  preload: true,
+  subsets: ["latin"],
+});
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -15,11 +19,11 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         </div>
         <div className="flex w-full flex-col gap-4 sm:space-y-4">
           <Header />
-          <div className="flex w-full space-x-4">
-            <div className="sm:px-none w-full rounded-md bg-white px-2 text-stone-700">
+          <div className="flex space-x-4">
+            <div className="sm:px-none flex flex-1 flex-col gap-2">
               {children}
             </div>
-            <div className="hidden w-60 md:flex">
+            <div className="hidden md:flex">
               <RightSideBar />
             </div>
           </div>

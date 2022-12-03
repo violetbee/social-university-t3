@@ -60,21 +60,6 @@ const Header: FC = () => {
               >
                 Çıkış Yap
               </button>
-              {session?.user?.image ? (
-                <Image
-                  className="rounded-full"
-                  alt="item"
-                  src={session?.user?.image as string}
-                  width={50}
-                  height={50}
-                />
-              ) : (
-                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-slate-900/70">
-                  <p className="text-2xl font-bold text-white">
-                    {session?.user?.name?.charAt(0).toUpperCase()}
-                  </p>
-                </div>
-              )}
             </div>
           ) : (
             <Link

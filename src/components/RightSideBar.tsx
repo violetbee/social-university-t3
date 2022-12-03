@@ -1,10 +1,8 @@
-import { cookies } from "next/headers";
-
 import { FC } from "react";
 
 const RightSideBar: FC = () => {
   return (
-    <div className="flex w-40 flex-col gap-6 lg:w-60">
+    <div className="flex w-48 flex-col gap-6 lg:w-52 xl:w-60">
       <div className="w-full space-y-2 rounded-md bg-white p-4 shadow-sm">
         <h1 className="text-xl text-slate-900/70">Popüler Yazılar</h1>
         <ul className="divide-y rounded-lg border-[1px] text-stone-700">
