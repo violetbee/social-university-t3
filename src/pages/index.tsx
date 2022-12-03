@@ -11,7 +11,6 @@ type Props = {
 };
 
 const Home: NextPage<Props> = ({ auth_session: session }) => {
-  console.log(session);
   return (
     <div className="bg-[#F6F8FC]">
       <Head>
