@@ -2,7 +2,7 @@ import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import { FC, useState } from "react";
 import { BiSearchAlt } from "react-icons/bi";
-import { RiLogoutCircleLine } from "react-icons/ri";
+import { HiOutlineUserCircle } from "react-icons/hi";
 import { CiUser } from "react-icons/ci";
 import LeftSideBar from "./LeftSideBar";
 import { trpc } from "../utils/trpc";
@@ -56,7 +56,7 @@ const Header: FC = () => {
         <div className="hidden justify-end md:flex md:flex-1">
           {session ? (
             <div className="flex items-center gap-2">
-              <div className="group flex w-[50px] justify-end rounded-full border-[6px] border-green-900 bg-slate-600/20 duration-200 hover:w-40">
+              <div className="group flex w-[50px] justify-end rounded-full border-4 border-green-900/20 bg-slate-600/80 duration-200 hover:w-40">
                 <div className="flex w-full items-center justify-around ">
                   <button
                     className="hidden group-hover:block group-hover:duration-200"
@@ -72,12 +72,12 @@ const Header: FC = () => {
                       signOut();
                     }}
                   >
-                    <RiLogoutCircleLine className="text-2xl" />
+                    <HiOutlineUserCircle className="text-2xl" />
                   </button>
                 </div>
                 {session?.user?.image ? (
                   <Image
-                    className="h-[38px] w-[52px] rounded-full object-cover"
+                    className="h-[42px] w-[54px] rounded-full  "
                     alt="item"
                     src={session?.user?.image as string}
                     width={50}
