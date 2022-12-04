@@ -1,16 +1,21 @@
-import type { GetServerSideProps, NextPage } from "next";
+import type { GetServerSidePropsContext, NextPage } from "next";
 import Head from "next/head";
 import Layout from "../components/Layout";
 import { BiLeftArrowAlt, BiRightArrowAlt } from "react-icons/bi";
 import Image from "next/image";
 import { getServerAuthSession } from "../server/common/get-server-auth-session";
-import { DefaultSession } from "next-auth";
+import { useSession } from "next-auth/react";
+import { prisma } from "../server/db/client";
+import { User } from "@prisma/client";
 
 type Props = {
-  auth_session: DefaultSession;
+  user: User;
 };
 
-const Home: NextPage<Props> = ({ auth_session: session }) => {
+const Home: NextPage<Props> = ({ user }) => {
+  console.log(user);
+  const { data: session } = useSession();
+
   return (
     <div className="bg-[#F6F8FC]">
       <Head>
@@ -19,34 +24,6 @@ const Home: NextPage<Props> = ({ auth_session: session }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Layout>
-        {session?.user && (
-          <div
-            className={`flex  ${
-              session && "h-52"
-            } w-full rounded-md bg-white shadow-sm`}
-          >
-            <div className="flex w-1/4 flex-col items-center justify-center rounded-l-md border-r-[1px] border-b-zinc-500/70 bg-slate-400/30">
-              {session?.user?.image ? (
-                <Image
-                  className="rounded-full"
-                  alt="item"
-                  src={session?.user?.image as string}
-                  width={100}
-                  height={150}
-                />
-              ) : (
-                <div className="flex h-20 w-20 items-center justify-center rounded-full bg-slate-900/70">
-                  <p className="text-2xl font-bold text-white">
-                    {session?.user?.name?.charAt(0).toUpperCase()}
-                  </p>
-                </div>
-              )}
-              <p>{`${session?.user?.name} ${session?.user?.surname}`}</p>
-            </div>
-            <div></div>
-          </div>
-        )}
-
         <div className="flex flex-col flex-wrap rounded-md bg-white p-[2px] shadow-sm lg:flex-row">
           <div className="w-full p-[4px] lg:w-9/12">
             <div className="flex h-full w-full flex-col rounded-md border-y-[1px] border-l-[5px] border-r-[1px] border-l-green-800 shadow-sm">
@@ -93,14 +70,35 @@ const Home: NextPage<Props> = ({ auth_session: session }) => {
 
 export default Home;
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export const getServerSideProps = async (
+  context: GetServerSidePropsContext
+) => {
   const session = await getServerAuthSession({
     req: context.req,
     res: context.res,
   });
-  return {
-    props: {
-      auth_session: session,
-    },
-  };
+
+  if (session?.user) {
+    const user = await prisma.user.findUnique({
+      where: {
+        id: session.user.id,
+      },
+      select: {
+        id: true,
+        name: true,
+        surname: true,
+        email: true,
+        emailVerified: true,
+      },
+    });
+    return {
+      props: {
+        user,
+      },
+    };
+  } else {
+    return {
+      props: {},
+    };
+  }
 };

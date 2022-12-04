@@ -2,13 +2,15 @@ import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import { FC, useState } from "react";
 import { BiSearchAlt } from "react-icons/bi";
+import { RiLogoutCircleLine } from "react-icons/ri";
+import { CiUser } from "react-icons/ci";
 import LeftSideBar from "./LeftSideBar";
 import { trpc } from "../utils/trpc";
+import Image from "next/image";
 
 const Header: FC = () => {
   // If there is session
   const { data: session } = useSession();
-  console.log(session);
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isMobileMenuContentOpen, setIsMobileMenuContentOpen] = useState(false);
@@ -30,36 +32,65 @@ const Header: FC = () => {
     <>
       {/* MediumScreen */}
       <div className="hidden w-full items-center justify-between text-white sm:flex">
-        <label htmlFor="searchBar" className="relative">
-          <input
-            type="text"
-            className="w-full rounded-2xl bg-white px-8 py-2 pl-4 pr-10 text-stone-700 shadow-sm outline-none lg:w-96"
-            id="searchBar"
-          />
-          <BiSearchAlt className="absolute top-1/2 right-2 h-full -translate-y-1/2 transform text-2xl text-slate-900/70" />
-        </label>
-        <button
-          onClick={
-            // This button removes users for a while
-            async () => {
-              await removeUsers.mutateAsync();
+        <div className="flex justify-between gap-10">
+          <label htmlFor="searchBar" className="relative">
+            <input
+              type="text"
+              className="w-full rounded-2xl bg-white px-8 py-2 pl-4 pr-10 text-stone-700 shadow-sm outline-none lg:w-96"
+              id="searchBar"
+            />
+            <BiSearchAlt className="absolute top-1/2 right-2 h-full -translate-y-1/2 transform text-2xl text-slate-900/70" />
+          </label>
+          <button
+            onClick={
+              // This button removes users for a while
+              async () => {
+                await removeUsers.mutateAsync();
+              }
             }
-          }
-          className="rounded-lg bg-[#B21EED] px-9 py-2"
-        >
-          Gönderi Paylaş
-        </button>
-        <div className="hidden justify-between  md:flex">
+            className="rounded-lg bg-[#B21EED] px-9 py-2"
+          >
+            Gönderi Paylaş
+          </button>
+        </div>
+        <div className="hidden justify-end md:flex md:flex-1">
           {session ? (
             <div className="flex items-center gap-2">
-              <button
-                className="text-slate-900"
-                onClick={() => {
-                  signOut();
-                }}
-              >
-                Çıkış Yap
-              </button>
+              <div className="group flex w-[50px] justify-end rounded-full border-[6px] border-green-900 bg-slate-600/20 duration-200 hover:w-40">
+                <div className="flex w-full items-center justify-around ">
+                  <button
+                    className="hidden group-hover:block group-hover:duration-200"
+                    onClick={() => {
+                      signOut();
+                    }}
+                  >
+                    <CiUser color="white" className="text-2xl" />
+                  </button>
+                  <button
+                    className="hidden group-hover:block group-hover:duration-200"
+                    onClick={() => {
+                      signOut();
+                    }}
+                  >
+                    <RiLogoutCircleLine className="text-2xl" />
+                  </button>
+                </div>
+                {session?.user?.image ? (
+                  <Image
+                    className="h-[38px] w-[52px] rounded-full object-cover"
+                    alt="item"
+                    src={session?.user?.image as string}
+                    width={50}
+                    height={75}
+                  />
+                ) : (
+                  <div className="flex h-20 w-20 items-center justify-center rounded-full bg-slate-900/70">
+                    <p className="text-2xl font-bold text-white">
+                      {session?.user?.name?.charAt(0).toUpperCase()}
+                    </p>
+                  </div>
+                )}
+              </div>
             </div>
           ) : (
             <Link
