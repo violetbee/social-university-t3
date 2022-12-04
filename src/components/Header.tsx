@@ -8,6 +8,7 @@ import { trpc } from "../utils/trpc";
 const Header: FC = () => {
   // If there is session
   const { data: session } = useSession();
+  console.log(session);
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isMobileMenuContentOpen, setIsMobileMenuContentOpen] = useState(false);
@@ -71,7 +72,7 @@ const Header: FC = () => {
         </div>
       </div>
       {/* SmallScreen */}
-      <div className="sticky top-0 flex h-14 w-full items-center justify-between bg-slate-200 px-2 shadow-md shadow-slate-500 sm:hidden">
+      <div className="sticky top-0 flex h-14 w-full items-center justify-between bg-slate-200 px-2 shadow-sm shadow-slate-500 sm:hidden">
         <div className="flex h-full items-center justify-between">
           <Link href="/">
             <div className="rounded-full bg-gradient-to-tr from-blue-700 via-purple-500 to-orange-700 px-4 py-2">
