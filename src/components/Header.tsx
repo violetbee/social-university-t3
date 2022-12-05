@@ -3,7 +3,7 @@ import Link from "next/link";
 import { FC, useState } from "react";
 import { BiSearchAlt } from "react-icons/bi";
 import { HiOutlineUserCircle } from "react-icons/hi";
-import { CiUser } from "react-icons/ci";
+import { RiLogoutCircleRLine } from "react-icons/ri";
 import LeftSideBar from "./LeftSideBar";
 import { trpc } from "../utils/trpc";
 import Image from "next/image";
@@ -56,7 +56,7 @@ const Header: FC = () => {
         <div className="hidden justify-end md:flex md:flex-1">
           {session ? (
             <div className="flex items-center gap-2">
-              <div className="group flex w-[50px] justify-end rounded-full border-4 border-green-900/20 bg-slate-600/80 duration-200 hover:w-40">
+              <div className="group flex w-[50px] justify-end rounded-full border-4 border-green-900/60 bg-slate-100 duration-200 hover:w-40">
                 <div className="flex w-full items-center justify-around ">
                   <button
                     className="hidden group-hover:block group-hover:duration-200"
@@ -64,7 +64,7 @@ const Header: FC = () => {
                       signOut();
                     }}
                   >
-                    <CiUser color="white" className="text-2xl" />
+                    <HiOutlineUserCircle color="black" className="text-2xl" />
                   </button>
                   <button
                     className="hidden group-hover:block group-hover:duration-200"
@@ -72,7 +72,7 @@ const Header: FC = () => {
                       signOut();
                     }}
                   >
-                    <HiOutlineUserCircle className="text-2xl" />
+                    <RiLogoutCircleRLine color="black" className="text-2xl" />
                   </button>
                 </div>
                 {session?.user?.image ? (
@@ -84,8 +84,8 @@ const Header: FC = () => {
                     height={75}
                   />
                 ) : (
-                  <div className="flex h-20 w-20 items-center justify-center rounded-full bg-slate-900/70">
-                    <p className="text-2xl font-bold text-white">
+                  <div className=" rounded-full bg-slate-900">
+                    <p className="flex h-full w-[42px] items-center justify-center text-2xl font-bold text-white">
                       {session?.user?.name?.charAt(0).toUpperCase()}
                     </p>
                   </div>

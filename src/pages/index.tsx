@@ -2,9 +2,7 @@ import type { GetServerSidePropsContext, NextPage } from "next";
 import Head from "next/head";
 import Layout from "../components/Layout";
 import { BiLeftArrowAlt, BiRightArrowAlt } from "react-icons/bi";
-import Image from "next/image";
 import { getServerAuthSession } from "../server/common/get-server-auth-session";
-import { useSession } from "next-auth/react";
 import { prisma } from "../server/db/client";
 import { User } from "@prisma/client";
 
@@ -14,7 +12,6 @@ type Props = {
 
 const Home: NextPage<Props> = ({ user }) => {
   console.log(user);
-  const { data: session } = useSession();
 
   return (
     <div className="bg-[#F6F8FC]">
