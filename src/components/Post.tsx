@@ -23,9 +23,7 @@ const Post = ({ post }: { post: PostType }) => {
         post.type === "text" ? "border-l-green-700" : "border-l-red-700"
       } p-3`}
     >
-      <h3 className="text-md font-medium text-stone-900">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis,
-      </h3>
+      <h3 className="text-md font-medium text-stone-900">{post.title}</h3>
       {post.type === "text" ? (
         <p className="text-sm ">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea asperiores
@@ -33,12 +31,27 @@ const Post = ({ post }: { post: PostType }) => {
           hic?
         </p>
       ) : (
-        <div className="relative w-2/3 rounded-md bg-green-600/40 px-4 py-2">
+        <div className="relative w-full rounded-md bg-green-600/40 px-4 py-2 md:w-2/3">
           <ImDownload
             className="absolute right-1 bottom-1 opacity-40"
             size={30}
           />
-          2021 Algoritma Tasarımı Vize örnek sorular
+          <p>
+            <span className="font-medium">Bölüm: </span>Yazılım Mühendisliği
+          </p>
+          <p>
+            <span className="font-medium">Ders: </span>Yazılım Gerçekleme ve
+            Test
+          </p>
+          <p>
+            <span className="font-medium">İçerik: </span>2021 Vize Çalışma
+            Soruları
+          </p>
+          <p>
+            <span className="font-medium text-red-700">Uyarı!: </span>Dökümanlar
+            zararlı içerik içerebilir, kontrolü size aittir, indirirken dikkatli
+            olun.
+          </p>
         </div>
       )}
       <div className="mt-2 flex flex-col gap-2 md:flex-row md:items-center md:justify-between md:gap-0">

@@ -119,7 +119,7 @@ const Header: FC = () => {
           {/* Burger Menu */}
           <div
             onClick={menuHandler}
-            className="relative flex cursor-pointer flex-col items-center justify-center gap-2"
+            className="relative z-50 flex cursor-pointer flex-col items-center justify-center gap-2"
           >
             {isMenuOpen ? (
               <>

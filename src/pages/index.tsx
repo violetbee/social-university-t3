@@ -5,12 +5,6 @@ import { MdSort, MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { getServerAuthSession } from "../server/common/get-server-auth-session";
 import { prisma } from "../server/db/client";
 import { User } from "@prisma/client";
-
-import { FcLike, FcDislike } from "react-icons/fc";
-import { GoCommentDiscussion } from "react-icons/go";
-import { TiWarning } from "react-icons/ti";
-import { BiArchive } from "react-icons/bi";
-import { ImDownload } from "react-icons/im";
 import Post from "../components/Post";
 
 type Props = {
@@ -86,7 +80,7 @@ const Home: NextPage<Props> = ({ user }) => {
             <p className="text-lg font-[500] text-stone-900">
               Kullanıcılar neler diyor?
             </p>
-            <div className="flex items-center gap-1 rounded-md border-[1px] px-10 py-1 shadow-sm">
+            <div className="flex items-center gap-1 rounded-md border-[1px] px-3 py-1 shadow-sm sm-m:px-10 ">
               <MdSort />
               <p className="mb-[1px]">Sırala</p>
               <MdOutlineKeyboardArrowDown />
