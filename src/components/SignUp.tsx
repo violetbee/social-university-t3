@@ -114,7 +114,10 @@ const SignUp = ({ signUpForm, setSignUpForm, setAuth }: SignUpProps) => {
         />
       </div>
 
-      <button type="submit" className="w-full rounded-md border-2 px-2 py-1">
+      <button
+        type="submit"
+        className="w-full rounded-md bg-[#B21EED] px-2 py-1 text-white"
+      >
         Üye Ol
       </button>
       <button
@@ -122,7 +125,7 @@ const SignUp = ({ signUpForm, setSignUpForm, setAuth }: SignUpProps) => {
           setAuth(AUTH.SIGN_IN);
         }}
         type="submit"
-        className="w-full rounded-md border-2 px-2 py-1"
+        className="w-full rounded-md bg-[#1e89ed] px-2 py-1 text-white"
       >
         Üyeliğin var mı? Öyleyse giriş yap
       </button>

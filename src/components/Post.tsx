@@ -59,7 +59,7 @@ const Post = ({ post }: { post: PostType }) => {
           <p>{post.user.name}</p> · <p>10 dakika önce</p>
         </div>
         <div className="flex items-center justify-end gap-2">
-          <div className="flex items-center divide-x-2 rounded-lg border-[1px]">
+          <div className="flex items-center rounded-lg">
             <button className="px-2 py-1">
               <FcLike />
             </button>
@@ -69,20 +69,11 @@ const Post = ({ post }: { post: PostType }) => {
             </button>
           </div>
           <p className="hidden lg:block">·</p>
-          <div className="flex items-center divide-x-2 rounded-lg border-[1px]">
+          <div className="flex items-center rounded-lg">
             <button className="px-2 py-1">
               <GoCommentDiscussion />
             </button>
             <div className="px-2">0</div>
-          </div>
-          <p className="hidden lg:block">·</p>
-          <div className="flex items-center divide-x-2 rounded-lg border-[1px]">
-            <button className="px-2 py-1">
-              <BiArchive />
-            </button>
-            <button className="px-2 py-1">
-              <TiWarning color="#910108" />
-            </button>
           </div>
         </div>
       </div>

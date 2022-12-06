@@ -67,7 +67,7 @@ const SignIn = ({ signInForm, setSignInForm, setAuth }: SignInProps) => {
         <button
           disabled={data ? true : false}
           type="submit"
-          className="w-full rounded-md border-2 px-2 py-1"
+          className="w-full rounded-md bg-[#B21EED] px-2 py-1 text-white"
         >
           Giriş Yap
         </button>
