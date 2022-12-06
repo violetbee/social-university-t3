@@ -3,7 +3,11 @@ import Link from "next/link";
 import { FC, useState } from "react";
 import { BiSearchAlt } from "react-icons/bi";
 import { HiOutlineUserCircle } from "react-icons/hi";
-import { RiLogoutCircleRLine } from "react-icons/ri";
+import {
+  RiUser5Line,
+  RiSettings3Line,
+  RiLogoutCircleLine,
+} from "react-icons/ri";
 import LeftSideBar from "./LeftSideBar";
 import { trpc } from "../utils/trpc";
 import Image from "next/image";
@@ -31,65 +35,71 @@ const Header: FC = () => {
   return (
     <>
       {/* MediumScreen */}
-      <div className="hidden w-full items-center justify-between text-white sm:flex">
-        <div className="flex justify-between gap-10">
+      <div className="hidden w-full items-center justify-between gap-2 text-white sm:flex">
+        <div className="flex flex-1 justify-between gap-4 sm:flex-none md:gap-10 ">
           <label htmlFor="searchBar" className="relative">
             <input
               type="text"
-              className="w-full rounded-2xl bg-white px-8 py-2 pl-4 pr-10 text-stone-700 shadow-sm outline-none lg:w-96"
+              className={`${
+                !session && "md:w-80"
+              } w-full rounded-2xl bg-white px-8 py-2 pl-4 pr-10 text-stone-700 shadow-sm outline-none lg:w-96`}
               id="searchBar"
             />
             <BiSearchAlt className="absolute top-1/2 right-2 h-full -translate-y-1/2 transform text-2xl text-slate-900/70" />
           </label>
-          <button
-            onClick={
-              // This button removes users for a while
-              async () => {
-                await removeUsers.mutateAsync();
+          {session && (
+            <button
+              onClick={
+                // This button removes users for a while
+                async () => {
+                  await removeUsers.mutateAsync();
+                }
               }
-            }
-            className="rounded-lg bg-[#B21EED] px-9 py-2"
-          >
-            Gönderi Paylaş
-          </button>
+              className="rounded-lg bg-[#B21EED] px-4 py-2 md:px-9"
+            >
+              Gönderi Paylaş
+            </button>
+          )}
         </div>
-        <div className="hidden justify-end md:flex md:flex-1">
+        <div className="hidden justify-end sm:flex md:flex-1">
           {session ? (
-            <div className="flex items-center gap-2">
-              <div className="group flex w-[50px] justify-end rounded-full border-4 border-green-900/60 bg-slate-100 duration-200 hover:w-40">
-                <div className="flex w-full items-center justify-around ">
-                  <button
-                    className="hidden group-hover:block group-hover:duration-200"
-                    onClick={() => {
-                      signOut();
-                    }}
-                  >
-                    <HiOutlineUserCircle color="black" className="text-2xl" />
-                  </button>
-                  <button
-                    className="hidden group-hover:block group-hover:duration-200"
-                    onClick={() => {
-                      signOut();
-                    }}
-                  >
-                    <RiLogoutCircleRLine color="black" className="text-2xl" />
-                  </button>
-                </div>
-                {session?.user?.image ? (
-                  <Image
-                    className="h-[42px] w-[54px] rounded-full  "
-                    alt="item"
-                    src={session?.user?.image as string}
-                    width={50}
-                    height={75}
-                  />
-                ) : (
-                  <div className=" rounded-full bg-slate-900">
-                    <p className="flex h-full w-[42px] items-center justify-center text-2xl font-bold text-white">
-                      {session?.user?.name?.charAt(0).toUpperCase()}
-                    </p>
+            <div className="group relative rounded-full bg-slate-800">
+              {session?.user?.image ? (
+                <Image
+                  src={session.user.image as string}
+                  alt="User Image"
+                  width={40}
+                  height={40}
+                  className="rounded-full"
+                />
+              ) : (
+                <HiOutlineUserCircle className="group relative h-[38px] w-[38px] text-2xl" />
+              )}
+              <div className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-[#B21EED] text-xs text-white">
+                1
+              </div>
+              <div className="absolute -bottom-[140px] right-0 hidden w-36 py-2 group-hover:flex">
+                <div className="h-full w-full rounded-md bg-white p-[2px]">
+                  <div className="h-full w-full divide-y-2 rounded-md border-2 bg-white text-black">
+                    <div className="flex cursor-pointer items-center justify-center gap-2 p-2">
+                      <RiUser5Line color="black" />
+                      <p>Profil</p>
+                    </div>
+                    <div className="flex cursor-pointer items-center justify-center gap-2 p-2">
+                      <RiSettings3Line color="black" />
+                      <p>Ayarlar</p>
+                    </div>
+                    <div
+                      onClick={() => {
+                        signOut();
+                      }}
+                      className="flex cursor-pointer items-center justify-center gap-2 p-2"
+                    >
+                      <RiLogoutCircleLine color="black" />
+                      <p>Çıkış Yap</p>
+                    </div>
                   </div>
-                )}
+                </div>
               </div>
             </div>
           ) : (
