@@ -1,17 +1,77 @@
 import type { GetServerSidePropsContext, NextPage } from "next";
 import Head from "next/head";
 import Layout from "../components/Layout";
-import { BiLeftArrowAlt, BiRightArrowAlt } from "react-icons/bi";
+import { MdSort, MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { getServerAuthSession } from "../server/common/get-server-auth-session";
 import { prisma } from "../server/db/client";
 import { User } from "@prisma/client";
+
+import { FcLike, FcDislike } from "react-icons/fc";
+import { GoCommentDiscussion } from "react-icons/go";
+import { TiWarning } from "react-icons/ti";
+import { BiArchive } from "react-icons/bi";
+import { ImDownload } from "react-icons/im";
+import Post from "../components/Post";
 
 type Props = {
   user: User;
 };
 
+type PostType = {
+  id: number;
+  title: string;
+  content: string;
+  type: "text" | "doc";
+  user: {
+    id: number;
+    name: string;
+    createdAt: string;
+  };
+};
+
+const OrnekTemplate: PostType[] = [
+  {
+    id: 1,
+    title: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis,",
+    content:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea asperiores sint reiciendis eum quis delectus nihil quidem perspiciatis repellat hic?",
+    type: "text",
+    user: {
+      id: 1,
+      name: "Çağlar K.",
+      createdAt: "2021-10-10T00:00:00.000Z",
+    },
+  },
+  {
+    id: 2,
+    title: "Lorem ipsum dolor adipisicing elit.",
+    content:
+      "Lorem ipsum reiciendis eum quis delectus nihil quidem perspiciatis repellat hic? dolor sit amet consectetur adipisicing elit. Ea asperiores sint",
+    type: "doc",
+    user: {
+      id: 1,
+      name: "Nazlı D.",
+      createdAt: "2021-10-10T00:00:00.000Z",
+    },
+  },
+  {
+    id: 3,
+    title: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis,",
+    content:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea asperiores sint reiciendis eum quis delectus nihil quidem perspiciatis repellat hic?",
+    type: "text",
+    user: {
+      id: 1,
+      name: "Çağlar K.",
+      createdAt: "2021-10-10T00:00:00.000Z",
+    },
+  },
+];
+
 const Home: NextPage<Props> = ({ user }) => {
   console.log(user);
+
+  const reversedPosts = [...OrnekTemplate].reverse();
 
   return (
     <div className="bg-[#F6F8FC]">
@@ -21,44 +81,20 @@ const Home: NextPage<Props> = ({ user }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Layout>
-        <div className="flex flex-col flex-wrap rounded-md bg-white p-[2px] shadow-sm lg:flex-row">
-          <div className="w-full p-[4px] lg:w-9/12">
-            <div className="flex h-full w-full flex-col rounded-md border-y-[1px] border-l-[5px] border-r-[1px] border-l-green-800 shadow-sm">
-              <div className="w-full border-b-[1px] border-b-zinc-500/20 bg-neutral-50 px-2">
-                <h1 className="py-2 font-[600]">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Magnam, placeat?
-                </h1>
-              </div>
-              <div className="flex flex-1 flex-col justify-between gap-4">
-                <div className="w-full bg-neutral-50/50">
-                  <p className="px-2 py-1">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Alias doloremque minus officia tenetur accusamus libero in
-                    corporis tempore aperiam! Laboriosam.
-                  </p>
-                </div>
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="p-2 text-[#0F172A]">Çağlar Karahüseyin</p>
-                  </div>
-                  <div className="flex gap-4 pr-4">
-                    <BiLeftArrowAlt size={24} />
-                    <BiRightArrowAlt size={24} />
-                  </div>
-                </div>
-              </div>
+        <div className="flex flex-col divide-y-[1px] rounded-md bg-white shadow-sm">
+          <div className="flex items-center justify-between px-5 py-4">
+            <p className="text-lg font-[500] text-stone-900">
+              Kullanıcılar neler diyor?
+            </p>
+            <div className="flex items-center gap-1 rounded-md border-[1px] px-10 py-1 shadow-sm">
+              <MdSort />
+              <p className="mb-[1px]">Sırala</p>
+              <MdOutlineKeyboardArrowDown />
             </div>
           </div>
-          <div className="h-52 w-full p-[4px] lg:w-3/12">
-            <div className="h-full w-full rounded-md border-y-[1px] border-l-[5px] border-r-[1px] border-l-red-800 shadow-sm"></div>
-          </div>
-          <div className="h-52 w-full p-[4px] lg:w-1/2">
-            <div className="h-full w-full rounded-md border-y-[1px] border-l-[5px] border-r-[1px] border-l-yellow-400 shadow-sm"></div>
-          </div>
-          <div className="h-52 w-full p-[4px] lg:w-1/2">
-            <div className="h-full w-full rounded-md border-y-[1px] border-l-[5px] border-r-[1px] border-l-blue-800 shadow-sm"></div>
-          </div>
+          {reversedPosts.map((post) => (
+            <Post post={post} key={post.id} />
+          ))}
         </div>
       </Layout>
     </div>

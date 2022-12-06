@@ -115,11 +115,11 @@ const Header: FC = () => {
             </div>
           </Link>
         </div>
-        <div>
+        <>
           {/* Burger Menu */}
           <div
             onClick={menuHandler}
-            className="relative z-50 flex cursor-pointer flex-col items-center justify-center gap-2"
+            className="relative flex cursor-pointer flex-col items-center justify-center gap-2"
           >
             {isMenuOpen ? (
               <>
@@ -140,27 +140,25 @@ const Header: FC = () => {
             } h-screen  bg-gray-800`}
           >
             {isMobileMenuContentOpen && (
-              <>
-                <div className="flex h-full w-full flex-col items-center justify-evenly">
-                  {/* Register and Login */}
-                  <div className="flex gap-4 pt-14 font-bold text-white">
-                    <Link href="/auth">
-                      <button className="rounded-lg bg-[#B21EED] px-10 py-2">
-                        Üye Ol
-                      </button>
-                    </Link>
-                    <Link href="">
-                      <button className="rounded-lg bg-[#B21EED] px-10 py-2">
-                        Giriş Yap
-                      </button>
-                    </Link>
-                  </div>
-                  <LeftSideBar />
+              <div className="flex h-full w-full flex-col items-center justify-evenly">
+                {/* Register and Login */}
+                <div className="flex gap-4 pt-14 font-bold text-white">
+                  <Link href="/auth">
+                    <button className="rounded-lg bg-[#B21EED] px-10 py-2">
+                      Üye Ol
+                    </button>
+                  </Link>
+                  <Link href="">
+                    <button className="rounded-lg bg-[#B21EED] px-10 py-2">
+                      Giriş Yap
+                    </button>
+                  </Link>
                 </div>
-              </>
+                <LeftSideBar />
+              </div>
             )}
           </div>
-        </div>
+        </>
       </div>
     </>
   );

@@ -1,9 +1,8 @@
-import { Dosis } from "@next/font/google";
+import { Fira_Sans_Condensed } from "@next/font/google";
 import LeftSideBar from "./LeftSideBar";
-import RightSideBar from "./RightSideBar";
 import Header from "./Header";
 
-const dosis = Dosis({
+const dosis = Fira_Sans_Condensed({
   weight: ["200", "300", "400", "500", "600", "700", "800"],
   preload: true,
   subsets: ["latin"],
@@ -18,13 +17,12 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           <LeftSideBar />
         </div>
         <div className="flex w-full flex-col gap-4 sm:space-y-4">
-          <Header />
+          <div style={{ zIndex: "1" }}>
+            <Header />
+          </div>
           <div className="flex space-x-4">
             <div className="sm:px-none flex flex-1 flex-col gap-2">
               {children}
-            </div>
-            <div className="hidden md:flex">
-              <RightSideBar />
             </div>
           </div>
         </div>
