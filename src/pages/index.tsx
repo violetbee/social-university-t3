@@ -66,16 +66,6 @@ const OrnekTemplate: PostType[] = [
 
 const Home: NextPage<Props> = ({ user }) => {
   const reversedPosts = [...OrnekTemplate].reverse();
-  const [currentPage, setCurrentPage] = useState(1);
-
-  const postsPerPage = 10;
-  const indexOfLastPost = currentPage * postsPerPage;
-  const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = reversedPosts.slice(indexOfFirstPost, indexOfLastPost);
-
-  const handlePageChange = (page: number) => {
-    setCurrentPage(page);
-  };
 
   return (
     <div className="bg-[#F6F8FC]">

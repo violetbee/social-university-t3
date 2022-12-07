@@ -46,3 +46,15 @@ export interface TRPCError {
   type: string;
   inclusive?: boolean;
 }
+
+enum POST_TYPE {
+  TEXT,
+  DOC,
+}
+
+export interface SharePost {
+  type: POST_TYPE;
+  title: string;
+  content: string;
+  categoryId: string;
+}

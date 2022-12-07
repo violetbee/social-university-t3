@@ -1,6 +1,6 @@
 import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
-import { FC, useState } from "react";
+import { FC, useState, useEffect } from "react";
 import { BiSearchAlt } from "react-icons/bi";
 import { HiOutlineUserCircle } from "react-icons/hi";
 import {
@@ -11,6 +11,8 @@ import {
 import LeftSideBar from "./LeftSideBar";
 import { trpc } from "../utils/trpc";
 import Image from "next/image";
+import Popup from "reactjs-popup";
+import SharePost from "./SharePost";
 
 const Header: FC = () => {
   // If there is session
@@ -32,9 +34,20 @@ const Header: FC = () => {
     }
   };
 
+  // const category = trpc.category.create
+  //   .useMutation()
+  //   .mutateAsync({ name: "Üni. Yorumları" });
+
   return (
     <>
       {/* MediumScreen */}
+      <button
+        onClick={() => {
+          trpc.category.deleteAll.useMutation().mutateAsync();
+        }}
+      >
+        Kategorileri Sil
+      </button>
       <div className="hidden w-full items-center justify-between gap-2 text-white sm:flex">
         <div className="flex flex-1 justify-between gap-4 sm:flex-none md:gap-10 ">
           <label htmlFor="searchBar" className="relative">
@@ -48,17 +61,24 @@ const Header: FC = () => {
             <BiSearchAlt className="absolute top-1/2 right-2 h-full -translate-y-1/2 transform text-2xl text-slate-900/70" />
           </label>
           {session && (
-            <button
-              onClick={
-                // This button removes users for a while
-                async () => {
-                  await removeUsers.mutateAsync();
-                }
+            <Popup
+              trigger={
+                <button
+                  onClick={
+                    // This button removes users for a while
+                    async () => {
+                      await removeUsers.mutateAsync();
+                    }
+                  }
+                  className="rounded-lg bg-[#B21EED] px-4 py-2 md:px-9"
+                >
+                  Gönderi Paylaş
+                </button>
               }
-              className="rounded-lg bg-[#B21EED] px-4 py-2 md:px-9"
+              modal
             >
-              Gönderi Paylaş
-            </button>
+              <SharePost />
+            </Popup>
           )}
         </div>
         <div className="hidden justify-end sm:flex md:flex-1">

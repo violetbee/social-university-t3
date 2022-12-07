@@ -1,8 +1,7 @@
-import { BiArchive } from "react-icons/bi";
 import { FcDislike, FcLike } from "react-icons/fc";
 import { GoCommentDiscussion } from "react-icons/go";
 import { ImDownload } from "react-icons/im";
-import { TiWarning } from "react-icons/ti";
+import { trpc } from "../utils/trpc";
 
 type PostType = {
   id: number;
@@ -17,6 +16,11 @@ type PostType = {
 };
 
 const Post = ({ post }: { post: PostType }) => {
+  const { data } = trpc.like.totalLikes.useQuery({
+    postId: post.id.toString(),
+  });
+  const like = trpc.like.like.useMutation();
+
   return (
     <div
       className={`flex w-full flex-col gap-1 border-l-4 ${
@@ -60,10 +64,15 @@ const Post = ({ post }: { post: PostType }) => {
         </div>
         <div className="flex items-center justify-end gap-2">
           <div className="flex items-center rounded-lg">
-            <button className="px-2 py-1">
+            <button
+              onClick={() => {
+                like.mutateAsync({ postId: post.id.toString() });
+              }}
+              className="px-2 py-1"
+            >
               <FcLike />
             </button>
-            <div className="px-2">-1</div>
+            <div className="px-2">{}</div>
             <button className="px-2 py-1">
               <FcDislike />
             </button>

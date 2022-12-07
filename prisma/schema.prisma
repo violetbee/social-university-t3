@@ -14,10 +14,6 @@ datasource db {
     url      = env("DATABASE_URL")
 }
 
-model Example {
-    id String @id @default(cuid())
-}
-
 // Necessary for Next auth
 model Account {
     id                String  @id @default(cuid())
@@ -61,24 +57,23 @@ model User {
 }
 
 model Category {
-    id          String @id @default(cuid())
-    name        String
-    description String
-    image       String
-    posts       Post[]
+    id    String @id @default(cuid())
+    name  String
+    posts Post[]
 }
 
 model Post {
-    id          String    @id @default(cuid())
-    title       String
-    description String
-    image       String
-    category    Category  @relation(fields: [categoryId], references: [id])
-    author      User      @relation(fields: [userId], references: [id])
-    comments    Comment[]
-    categoryId  String
-    userId      String
-    Like        Like[]
+    id         String    @id @default(cuid())
+    title      String
+    content    String
+    image      String?
+    category   Category  @relation(fields: [categoryId], references: [id])
+    author     User      @relation(fields: [userId], references: [id])
+    comments   Comment[]
+    categoryId String
+    userId     String
+    Like       Like[]
+    type       POST_TYPE
 }
 
 model Like {
@@ -87,6 +82,8 @@ model Like {
     user   User   @relation(fields: [userId], references: [id])
     postId String
     userId String
+
+    @@unique([postId, userId])
 }
 
 model Comment {
@@ -104,4 +101,9 @@ model VerificationToken {
     expires    DateTime
 
     @@unique([identifier, token])
+}
+
+enum POST_TYPE {
+    TEXT
+    DOC
 }
