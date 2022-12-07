@@ -41,13 +41,13 @@ const Header: FC = () => {
   return (
     <>
       {/* MediumScreen */}
-      <button
+      {/* <button
         onClick={() => {
           trpc.category.deleteAll.useMutation().mutateAsync();
         }}
       >
         Kategorileri Sil
-      </button>
+      </button> */}
       <div className="hidden w-full items-center justify-between gap-2 text-white sm:flex">
         <div className="flex flex-1 justify-between gap-4 sm:flex-none md:gap-10 ">
           <label htmlFor="searchBar" className="relative">
