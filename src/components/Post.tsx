@@ -1,34 +1,47 @@
+import { Category, Like, User } from "@prisma/client";
 import { FcDislike, FcLike } from "react-icons/fc";
 import { GoCommentDiscussion } from "react-icons/go";
 import { ImDownload } from "react-icons/im";
 import { trpc } from "../utils/trpc";
 
 type PostType = {
-  id: number;
+  id: string;
+  createdAt: Date;
   title: string;
   content: string;
-  type: "text" | "doc";
-  user: {
-    id: number;
-    name: string;
-    createdAt: string;
-  };
+  image: string | null;
+  categoryId: string;
+  userId: string;
+  type: "TEXT" | "DOC";
+  user: User;
+  category: Category;
+  like: Like[];
 };
 
 const Post = ({ post }: { post: PostType }) => {
-  const { data } = trpc.like.totalLikes.useQuery({
-    postId: post.id.toString(),
+  const ctx = trpc.useContext();
+  const like = trpc.like.like.useMutation({
+    onSuccess: () => {
+      ctx.like.invalidate();
+    },
   });
-  const like = trpc.like.like.useMutation();
+  const dislike = trpc.like.dislike.useMutation({
+    onSuccess: () => {
+      ctx.like.invalidate();
+    },
+  });
+  const getAllLikes = trpc.like.totalLikes.useQuery({
+    postId: post.id,
+  });
 
   return (
     <div
       className={`flex w-full flex-col gap-1 border-l-4 ${
-        post.type === "text" ? "border-l-green-700" : "border-l-red-700"
+        post.type === "TEXT" ? "border-l-green-700" : "border-l-red-700"
       } p-3`}
     >
       <h3 className="text-md font-medium text-stone-900">{post.title}</h3>
-      {post.type === "text" ? (
+      {post.type === "TEXT" ? (
         <p className="text-sm ">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea asperiores
           sint reiciendis eum quis delectus nihil quidem perspiciatis repellat
@@ -72,8 +85,13 @@ const Post = ({ post }: { post: PostType }) => {
             >
               <FcLike />
             </button>
-            <div className="px-2">{}</div>
-            <button className="px-2 py-1">
+            <div className="px-2">{getAllLikes.data}</div>
+            <button
+              onClick={() => {
+                dislike.mutateAsync({ postId: post.id.toString() });
+              }}
+              className="px-2 py-1"
+            >
               <FcDislike />
             </button>
           </div>

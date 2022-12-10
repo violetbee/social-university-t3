@@ -7,65 +7,14 @@ import { prisma } from "../server/db/client";
 import { User } from "@prisma/client";
 import Post from "../components/Post";
 import { BiArrowFromLeft, BiArrowFromRight } from "react-icons/bi";
-import { useState } from "react";
+import { trpc } from "../utils/trpc";
 
 type Props = {
   user: User;
 };
 
-type PostType = {
-  id: number;
-  title: string;
-  content: string;
-  type: "text" | "doc";
-  user: {
-    id: number;
-    name: string;
-    createdAt: string;
-  };
-};
-
-const OrnekTemplate: PostType[] = [
-  {
-    id: 1,
-    title: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis,",
-    content:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea asperiores sint reiciendis eum quis delectus nihil quidem perspiciatis repellat hic?",
-    type: "text",
-    user: {
-      id: 1,
-      name: "Çağlar K.",
-      createdAt: "2021-10-10T00:00:00.000Z",
-    },
-  },
-  {
-    id: 2,
-    title: "Lorem ipsum dolor adipisicing elit.",
-    content:
-      "Lorem ipsum reiciendis eum quis delectus nihil quidem perspiciatis repellat hic? dolor sit amet consectetur adipisicing elit. Ea asperiores sint",
-    type: "doc",
-    user: {
-      id: 1,
-      name: "Nazlı D.",
-      createdAt: "2021-10-10T00:00:00.000Z",
-    },
-  },
-  {
-    id: 3,
-    title: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis,",
-    content:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea asperiores sint reiciendis eum quis delectus nihil quidem perspiciatis repellat hic?",
-    type: "text",
-    user: {
-      id: 1,
-      name: "Çağlar K.",
-      createdAt: "2021-10-10T00:00:00.000Z",
-    },
-  },
-];
-
 const Home: NextPage<Props> = ({ user }) => {
-  const reversedPosts = [...OrnekTemplate].reverse();
+  const { data } = trpc.post.getAllPosts.useQuery();
 
   return (
     <div className="bg-[#F6F8FC]">
@@ -86,9 +35,11 @@ const Home: NextPage<Props> = ({ user }) => {
               <MdOutlineKeyboardArrowDown />
             </div>
           </div>
-          {reversedPosts.map((post) => (
-            <Post post={post} key={post.id} />
-          ))}
+          {data?.map(
+            (post): JSX.Element => (
+              <Post post={post} key={post.id} />
+            )
+          )}
           {/* Pagination */}
           <div className="flex items-center justify-between rounded-b-md border-t border-gray-200 bg-white px-4 py-3 sm:px-6">
             <div className="flex flex-1 justify-between sm:hidden">

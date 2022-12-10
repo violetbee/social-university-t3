@@ -38,16 +38,38 @@ const Header: FC = () => {
   //   .useMutation()
   //   .mutateAsync({ name: "Üni. Yorumları" });
 
+  const createCategory = trpc.category.create.useMutation();
+  const deleteAllCategories = trpc.category.deleteAll.useMutation();
+  const deleteAllPosts = trpc.post.removePosts.useMutation();
+
   return (
     <>
       {/* MediumScreen */}
-      {/* <button
+      <button
+        className="mr-10"
         onClick={() => {
-          trpc.category.deleteAll.useMutation().mutateAsync();
+          deleteAllCategories.mutateAsync();
         }}
       >
         Kategorileri Sil
-      </button> */}
+      </button>
+      <button
+        className="mr-10"
+        onClick={() => {
+          createCategory.mutateAsync({
+            name: "Dökümanlar",
+          });
+        }}
+      >
+        New Category
+      </button>
+      <button
+        onClick={() => {
+          deleteAllPosts.mutateAsync();
+        }}
+      >
+        Postları Sil
+      </button>
       <div className="hidden w-full items-center justify-between gap-2 text-white sm:flex">
         <div className="flex flex-1 justify-between gap-4 sm:flex-none md:gap-10 ">
           <label htmlFor="searchBar" className="relative">

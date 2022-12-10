@@ -2,7 +2,7 @@ import { router, publicProcedure } from "../trpc";
 import { z } from "zod";
 
 export const postRouter = router({
-  sharePost: publicProcedure
+  create: publicProcedure
     .input(
       z.object({
         type: z.enum(["TEXT", "DOC"]),
@@ -22,4 +22,22 @@ export const postRouter = router({
         },
       });
     }),
+
+  removePosts: publicProcedure.mutation(async ({ ctx }) => {
+    await ctx.prisma.post.deleteMany();
+  }),
+
+  getAllPosts: publicProcedure.query(async ({ ctx }) => {
+    const posts = await ctx.prisma.post.findMany({
+      orderBy: {
+        createdAt: "desc",
+      },
+      include: {
+        user: true,
+        category: true,
+        like: true,
+      },
+    });
+    return posts;
+  }),
 });

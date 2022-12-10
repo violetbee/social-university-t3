@@ -48,8 +48,8 @@ export interface TRPCError {
 }
 
 enum POST_TYPE {
-  TEXT,
-  DOC,
+  TEXT = "TEXT",
+  DOC = "DOC",
 }
 
 export interface SharePost {

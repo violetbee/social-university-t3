@@ -43,6 +43,7 @@ model Session {
 
 model User {
     id            String    @id @default(cuid())
+    createdAt     DateTime  @default(now())
     name          String?
     surname       String?
     email         String?   @unique
@@ -51,9 +52,9 @@ model User {
     image         String?
     accounts      Account[]
     sessions      Session[]
-    Post          Post[]
+    post          Post[]
     Comment       Comment[]
-    Like          Like[]
+    like          Like[]
 }
 
 model Category {
@@ -64,22 +65,24 @@ model Category {
 
 model Post {
     id         String    @id @default(cuid())
+    createdAt  DateTime  @default(now())
     title      String
     content    String
     image      String?
     category   Category  @relation(fields: [categoryId], references: [id])
-    author     User      @relation(fields: [userId], references: [id])
+    user       User      @relation(fields: [userId], references: [id])
     comments   Comment[]
     categoryId String
     userId     String
-    Like       Like[]
+    like       Like[]
     type       POST_TYPE
 }
 
 model Like {
-    id     String @id @default(cuid())
-    post   Post   @relation(fields: [postId], references: [id])
-    user   User   @relation(fields: [userId], references: [id])
+    id     String  @id @default(cuid())
+    isLike Boolean @default(true)
+    post   Post    @relation(fields: [postId], references: [id], onDelete: Cascade)
+    user   User    @relation(fields: [userId], references: [id], onDelete: Cascade)
     postId String
     userId String
 
@@ -89,7 +92,7 @@ model Like {
 model Comment {
     id      String @id @default(cuid())
     content String
-    author  User   @relation(fields: [userId], references: [id])
+    user    User   @relation(fields: [userId], references: [id])
     post    Post   @relation(fields: [postId], references: [id])
     userId  String
     postId  String
