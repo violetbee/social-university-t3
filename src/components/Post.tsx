@@ -12,10 +12,10 @@ type PostType = {
   image: string | null;
   categoryId: string;
   userId: string;
+  publishedTimeAgo: string;
   type: "TEXT" | "DOC";
   user: User;
   category: Category;
-  like: Like[];
 };
 
 const Post = ({ post }: { post: PostType }) => {
@@ -30,6 +30,7 @@ const Post = ({ post }: { post: PostType }) => {
       ctx.like.invalidate();
     },
   });
+
   const getAllLikes = trpc.like.totalLikes.useQuery({
     postId: post.id,
   });
@@ -42,11 +43,7 @@ const Post = ({ post }: { post: PostType }) => {
     >
       <h3 className="text-md font-medium text-stone-900">{post.title}</h3>
       {post.type === "TEXT" ? (
-        <p className="text-sm ">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea asperiores
-          sint reiciendis eum quis delectus nihil quidem perspiciatis repellat
-          hic?
-        </p>
+        <p className="text-sm ">{post.content}</p>
       ) : (
         <div className="relative w-full rounded-md bg-green-600/40 px-4 py-2 md:w-2/3">
           <ImDownload
@@ -73,7 +70,7 @@ const Post = ({ post }: { post: PostType }) => {
       )}
       <div className="mt-2 flex flex-col gap-2 md:flex-row md:items-center md:justify-between md:gap-0">
         <div className="flex gap-2 text-gray-700">
-          <p>{post.user.name}</p> · <p>10 dakika önce</p>
+          <p>{post.user.name}</p> · <p>{post.publishedTimeAgo}</p>
         </div>
         <div className="flex items-center justify-end gap-2">
           <div className="flex items-center rounded-lg">

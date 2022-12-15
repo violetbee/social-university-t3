@@ -65,7 +65,7 @@ model Category {
 
 model Post {
     id         String    @id @default(cuid())
-    createdAt  DateTime  @default(now())
+    createdAt  DateTime  @default(now()) @db.Timestamp(6)
     title      String
     content    String
     image      String?

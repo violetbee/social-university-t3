@@ -5,12 +5,22 @@ export const likeRouter = router({
   totalLikes: publicProcedure
     .input(z.object({ postId: z.string() }))
     .query(async ({ ctx, input }) => {
-      const likes = await ctx.prisma.like.count({
+      //Get Total isLike column
+      const totalLikes = await ctx.prisma.like.count({
         where: {
           postId: input.postId,
+          isLike: true,
         },
       });
-      return likes;
+      const totalDislikes = await ctx.prisma.like.count({
+        where: {
+          postId: input.postId,
+          isLike: false,
+        },
+      });
+
+      const total = totalLikes - totalDislikes;
+      return total;
     }),
 
   like: publicProcedure
@@ -38,7 +48,7 @@ export const likeRouter = router({
           },
         });
       }
-      if (liked && !liked.isLike) {
+      if (liked) {
         await ctx.prisma.like.update({
           where: {
             postId_userId: {
@@ -47,7 +57,7 @@ export const likeRouter = router({
             },
           },
           data: {
-            isLike: false,
+            isLike: true,
           },
         });
       }
@@ -59,7 +69,8 @@ export const likeRouter = router({
       })
     )
     .mutation(async ({ ctx, input }) => {
-      const like = await ctx.prisma.like.findUnique({
+      // isLike
+      const liked = await ctx.prisma.like.findUnique({
         where: {
           postId_userId: {
             postId: input.postId,
@@ -67,13 +78,25 @@ export const likeRouter = router({
           },
         },
       });
-      if (like) {
-        await ctx.prisma.like.delete({
+      if (!liked) {
+        await ctx.prisma.like.create({
+          data: {
+            postId: input.postId,
+            userId: ctx?.session?.user?.id as string,
+            isLike: false,
+          },
+        });
+      }
+      if (liked) {
+        await ctx.prisma.like.update({
           where: {
             postId_userId: {
               postId: input.postId,
               userId: ctx?.session?.user?.id as string,
             },
+          },
+          data: {
+            isLike: false,
           },
         });
       }
