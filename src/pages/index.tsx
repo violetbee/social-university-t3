@@ -13,7 +13,7 @@ type Props = {
   user: User;
 };
 
-const Home: NextPage<Props> = ({ user }) => {
+const Home: NextPage<Props> = () => {
   const { data } = trpc.post.getAllPosts.useQuery();
 
   return (

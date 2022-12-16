@@ -9,7 +9,7 @@ import { CgListTree } from "react-icons/cg";
 import { FaUserAlt, FaSchool, FaAward } from "react-icons/fa";
 import { MdMood } from "react-icons/md";
 import React, { useState } from "react";
-import Image from "next/image";
+import { PostUserInfo } from "../../components/PostUserInfo";
 
 type Props = {
   purePost: Post & {
@@ -27,19 +27,6 @@ const PerPost: NextPage<Props> = ({ purePost }) => {
     e.preventDefault();
     setSelectedMenu(e.currentTarget.name);
     setIsMenuOpen(true);
-  };
-
-  const switchMenu = (menu: string) => {
-    switch (menu) {
-      case "profileInfo":
-        return <div>Profil Info</div>;
-      case "userMood":
-        return <div>User Mood</div>;
-      case "userEduInfo":
-        return <div>User Education Info</div>;
-      case "userAwards":
-        return <div>User Awards</div>;
-    }
   };
 
   return (
@@ -70,7 +57,8 @@ const PerPost: NextPage<Props> = ({ purePost }) => {
                 </div>
                 <div className="flex items-center gap-1">
                   <IoMdSchool />
-                  {`${purePost.user.department || "Yazılım Mühendisliği"}`}
+                  {/* {`${purePost.user.department || "Yazılım Mühendisliği"}`} */}
+                  Yazılım Mühendisliği
                 </div>
               </div>
               <div>Deneme</div>
@@ -99,7 +87,7 @@ const PerPost: NextPage<Props> = ({ purePost }) => {
             >
               {/* User Info */}
               {isMenuOpen ? (
-                switchMenu(selectedMenu)
+                <PostUserInfo menu={selectedMenu} />
               ) : (
                 <>
                   {/* Profile Info */}

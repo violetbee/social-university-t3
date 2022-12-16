@@ -2,15 +2,29 @@ import { ProfileInfos } from "./PostUserInfo/ProfileInfos";
 import { UserAwards } from "./PostUserInfo/UserAwards";
 import { UserEduInfos } from "./PostUserInfo/UserEduInfos";
 import { UserMood } from "./PostUserInfo/UserMood";
+import React, { FC } from "react";
 
-const lookupTable = {
-  profileInfos: ProfileInfos,
+type PostUserInfoRecords =
+  | "profileInfo"
+  | "userMood"
+  | "userEduInfo"
+  | "userAwards"
+  | string
+  | "";
+
+type Props = {
+  menu: PostUserInfoRecords;
+};
+
+const lookupTable: Record<PostUserInfoRecords, React.ComponentType> = {
+  profileInfo: ProfileInfos,
   userMood: UserMood,
-  userEduInfos: UserEduInfos,
+  userEduInfo: UserEduInfos,
   userAwards: UserAwards,
 } as const;
 
-const PostUserInfo = ({ menu }: { menu: JSX.Element }) => {
+export const PostUserInfo: FC<Props> = ({ menu }) => {
   const Component = lookupTable[menu];
+  if (Component === undefined) return null;
   return <Component />;
 };

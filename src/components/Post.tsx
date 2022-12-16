@@ -1,4 +1,4 @@
-import { Category, Like, User } from "@prisma/client";
+import { Category, User } from "@prisma/client";
 import { FcDislike, FcLike } from "react-icons/fc";
 import { GoCommentDiscussion } from "react-icons/go";
 import { ImDownload } from "react-icons/im";
