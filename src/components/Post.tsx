@@ -3,6 +3,7 @@ import { FcDislike, FcLike } from "react-icons/fc";
 import { GoCommentDiscussion } from "react-icons/go";
 import { ImDownload } from "react-icons/im";
 import { trpc } from "../utils/trpc";
+import Link from "next/link";
 
 type PostType = {
   id: string;
@@ -41,9 +42,14 @@ const Post = ({ post }: { post: PostType }) => {
         post.type === "TEXT" ? "border-l-green-700" : "border-l-red-700"
       } p-3`}
     >
-      <h3 className="text-md font-medium text-stone-900">{post.title}</h3>
+      <Link
+        href={`post/${post.id}`}
+        className="text-md font-medium text-stone-900"
+      >
+        {post.title}
+      </Link>
       {post.type === "TEXT" ? (
-        <p className="text-sm ">{post.content}</p>
+        <p className="break-all text-sm">{post.content}</p>
       ) : (
         <div className="relative w-full rounded-md bg-green-600/40 px-4 py-2 md:w-2/3">
           <ImDownload

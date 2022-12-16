@@ -17,7 +17,7 @@ const Home: NextPage<Props> = ({ user }) => {
   const { data } = trpc.post.getAllPosts.useQuery();
 
   return (
-    <div className="bg-[#F6F8FC]">
+    <>
       <Head>
         <title>Sosyal Üniversite</title>
         <meta name="description" content="Sosyal Üniversite" />
@@ -98,7 +98,7 @@ const Home: NextPage<Props> = ({ user }) => {
           </div>
         </div>
       </Layout>
-    </div>
+    </>
   );
 };
 
