@@ -1,3 +1,4 @@
+import { User } from "@prisma/client";
 import { z } from "zod";
 
 export interface UserSignInForm {
@@ -57,4 +58,9 @@ export interface SharePost {
   title: string;
   content: string;
   categoryId: string;
+}
+
+export interface PostUserBar {
+  setIsMenuOpen: Dispatch<SetStateAction<boolean>>;
+  user: User;
 }

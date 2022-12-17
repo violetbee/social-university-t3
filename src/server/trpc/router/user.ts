@@ -40,4 +40,18 @@ export const userRouter = router({
   deleteAllUsers: publicProcedure.mutation(async ({ ctx }) => {
     await ctx.prisma.user.deleteMany();
   }),
+  getUserById: publicProcedure
+    .input(
+      z.object({
+        id: z.string(),
+      })
+    )
+    .query(async ({ ctx, input }) => {
+      const user = ctx.prisma.post.findUnique({
+        where: {
+          id: input.id,
+        },
+      });
+      return user;
+    }),
 });

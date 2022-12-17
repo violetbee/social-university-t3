@@ -8,8 +8,9 @@ import { IoMdSchool } from "react-icons/io";
 import { CgListTree } from "react-icons/cg";
 import { FaUserAlt, FaSchool, FaAward } from "react-icons/fa";
 import { MdMood } from "react-icons/md";
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { PostUserInfo } from "../../components/PostUserInfo";
+import autoAnimate from "@formkit/auto-animate";
 
 type Props = {
   purePost: Post & {
@@ -22,6 +23,12 @@ type Props = {
 const PerPost: NextPage<Props> = ({ purePost }) => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const [selectedMenu, setSelectedMenu] = useState<string>("");
+
+  const parent = useRef(null);
+
+  useEffect(() => {
+    parent.current && autoAnimate(parent.current);
+  }, [parent]);
 
   const handleMenuOpen = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -81,19 +88,24 @@ const PerPost: NextPage<Props> = ({ purePost }) => {
                 </div>
               )} */}
             <div
+              ref={parent}
               className={`grid h-full w-full ${
                 isMenuOpen ? "grid-cols-1" : "grid-cols-2"
               } rounded-lg bg-white`}
             >
               {/* User Info */}
               {isMenuOpen ? (
-                <PostUserInfo menu={selectedMenu} />
+                <PostUserInfo
+                  setIsMenuOpen={setIsMenuOpen}
+                  menu={selectedMenu}
+                  user={purePost.user}
+                />
               ) : (
                 <>
                   {/* Profile Info */}
                   <button
                     onClick={handleMenuOpen}
-                    className="flex items-center justify-center rounded-tl-lg bg-orange-400 duration-150 hover:bg-orange-400/70"
+                    className="btn flex h-full items-center justify-center rounded-none rounded-tl-lg border-0 bg-orange-400 duration-150 hover:scale-95 hover:bg-orange-400/70"
                     name="profileInfo"
                   >
                     <FaUserAlt size={30} color="white" />
@@ -101,7 +113,7 @@ const PerPost: NextPage<Props> = ({ purePost }) => {
                   {/* User Mood */}
                   <button
                     onClick={handleMenuOpen}
-                    className="flex items-center justify-center rounded-tr-lg bg-red-400 duration-150 hover:bg-red-400/70"
+                    className="btn flex h-full items-center justify-center rounded-none rounded-tr-lg border-0 bg-red-400 duration-150 hover:scale-95 hover:bg-red-400/70"
                     name="userMood"
                   >
                     <MdMood size={38} color="white" />
@@ -109,7 +121,7 @@ const PerPost: NextPage<Props> = ({ purePost }) => {
                   {/* User Education Info */}
                   <button
                     onClick={handleMenuOpen}
-                    className="flex items-center justify-center rounded-bl-lg bg-indigo-400 duration-150 hover:bg-indigo-400/70"
+                    className="btn flex h-full items-center justify-center rounded-none rounded-bl-lg border-0 bg-indigo-400 duration-150 hover:scale-95 hover:bg-indigo-400/70"
                     name="userEduInfo"
                   >
                     <FaSchool size={34} color="white" />
@@ -117,7 +129,7 @@ const PerPost: NextPage<Props> = ({ purePost }) => {
                   {/* User Awards */}
                   <button
                     onClick={handleMenuOpen}
-                    className="flex items-center justify-center rounded-br-lg bg-purple-400 duration-150 hover:bg-purple-400/70"
+                    className="btn flex h-full items-center justify-center rounded-none rounded-br-lg border-0 bg-purple-400 duration-150 hover:scale-95 hover:bg-purple-400/70"
                     name="userAwards"
                   >
                     <FaAward size={34} color="white" />
