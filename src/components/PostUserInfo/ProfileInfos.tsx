@@ -8,11 +8,20 @@ import {
   AiFillInstagram,
 } from "react-icons/ai";
 import { FaLinkedin } from "react-icons/fa";
+import { MdKeyboardReturn } from "react-icons/md";
 
 export const ProfileInfos: FC<PostUserBar> = ({ setIsMenuOpen, user }) => {
   return (
-    <div className="flex flex-col justify-between rounded-lg shadow-md">
-      <div className="flex flex-col items-center">
+    <div className="relative flex flex-col justify-between rounded-lg shadow-md">
+      <button
+        onClick={() => {
+          setIsMenuOpen(false);
+        }}
+        className="absolute flex h-6 w-6 items-center justify-center rounded-tl-lg rounded-br-lg bg-indigo-400"
+      >
+        <MdKeyboardReturn size={22} color="white" />
+      </button>
+      <div className="flex flex-col items-center gap-2 py-2">
         <div className="avatar h-20 w-20 gap-2">
           {user.image ? (
             <Image
@@ -30,8 +39,15 @@ export const ProfileInfos: FC<PostUserBar> = ({ setIsMenuOpen, user }) => {
             </div>
           )}
         </div>
-        <h3>{`${user.name} ${user.surname || ""}`}</h3>
-        <h3>Software Engineer</h3>
+        <div className="flex flex-col items-center px-2">
+          <h3 className="break-words text-center font-medium">{`${user.name} ${
+            user.surname || ""
+          } ${
+            // user.age -> User age is not defined atm
+            "· 27"
+          }`}</h3>
+          <h3>Seul</h3>
+        </div>
       </div>
       <div className="flex w-full">
         <div className="flex w-1/4 items-center justify-center rounded-bl-md bg-[#30c2f2] p-1">

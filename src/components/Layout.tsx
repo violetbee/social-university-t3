@@ -22,7 +22,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             <Header />
           </div>
           <div className="flex space-x-4">
-            <div className="sm:px-none flex flex-1 flex-col gap-2">
+            <div className="sm:px-none flex flex-1 flex-col gap-2 px-2 sm:px-0">
               {children}
             </div>
           </div>

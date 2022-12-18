@@ -8,6 +8,7 @@ module.exports = {
         "xs-m": "320px",
         "sm-m": "375px",
         "md-m": "425px",
+        "lg-m": "490px",
       },
     },
   },
