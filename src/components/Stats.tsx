@@ -36,7 +36,7 @@ const Stats = () => {
         </div>
       </div>
       <div className="flex h-full w-1/3 justify-between rounded-r-lg bg-gradient-to-tr from-yellow-500/60 via-orange-500/60 to-yellow-500/60">
-        <div className="flex h-full w-full flex-col rounded-r-lg bg-white px-5 py-4 md:flex-row">
+        <div className="flex h-full w-full flex-col justify-between rounded-r-lg bg-white px-5 py-4 md:flex-row">
           <div className="flex flex-col justify-between gap-1">
             <p>Ayın Üyesi</p>
             <div className="space-y-1">
@@ -50,6 +50,7 @@ const Stats = () => {
           </div>
           <div className="hidden flex-shrink-0 items-center lg:flex">
             <img
+              alt="avatar"
               className="mask mask-heart h-20 w-20"
               src="https://placeimg.com/192/192/people"
             />
