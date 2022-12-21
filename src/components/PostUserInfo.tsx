@@ -27,8 +27,14 @@ const lookupTable: Record<
   userAwards: UserAwards,
 } as const;
 
-export const PostUserInfo: FC<Props> = ({ menu, setIsMenuOpen, user }) => {
-  const Component = lookupTable[menu];
+export const PostUserInfo: FC<Props> = (props) => {
+  const Component = lookupTable[props.menu];
   if (Component === undefined) return null;
-  return <Component user={user} setIsMenuOpen={setIsMenuOpen} />;
+  return <Component {...props} />;
 };
+
+// export const PostUserInfo: FC<Props> = ({ menu, setIsMenuOpen, user }) => {
+//   const Component = lookupTable[menu];
+//   if (Component === undefined) return null;
+//   return <Component user={user} setIsMenuOpen={setIsMenuOpen} />;
+// };
