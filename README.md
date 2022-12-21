@@ -6,7 +6,7 @@ The main purpose of this project is to gather university students together. It i
 
 ## Video
 
-[![Watch the video](https://i.hizliresim.com/og6zaih.jpg)](https://www.youtube.com/watch?v=dlXDx9zm2R0)
+https://user-images.githubusercontent.com/61601796/208540175-f1300b51-8173-4a7f-bb2f-4995daca2955.mp4
 
 ## Main
 
