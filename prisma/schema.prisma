@@ -60,6 +60,7 @@ model User {
 model Category {
     id    String @id @default(cuid())
     name  String
+    slug  String @unique
     posts Post[]
 }
 
@@ -69,13 +70,25 @@ model Post {
     title      String
     content    String
     image      String?
-    category   Category  @relation(fields: [categoryId], references: [id])
-    user       User      @relation(fields: [userId], references: [id])
+    category   Category  @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+    user       User      @relation(fields: [userId], references: [id], onDelete: Cascade)
     comments   Comment[]
     categoryId String
     userId     String
     like       Like[]
     type       POST_TYPE
+    File       File[]
+}
+
+model File {
+    id        String   @id @default(cuid())
+    name      String
+    type      String
+    size      Int
+    url       String
+    createdAt DateTime @default(now())
+    post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+    postId    String
 }
 
 model Like {

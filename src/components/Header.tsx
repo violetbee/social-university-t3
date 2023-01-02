@@ -1,6 +1,6 @@
 import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
-import { FC, useState, useEffect } from "react";
+import { FC, useState } from "react";
 import { BiSearchAlt } from "react-icons/bi";
 import { HiOutlineUserCircle } from "react-icons/hi";
 import {
@@ -57,7 +57,8 @@ const Header: FC = () => {
         className="mr-10"
         onClick={() => {
           createCategory.mutateAsync({
-            name: "Dökümanlar",
+            name: "Etkinlikler",
+            slug: "etkinlikler",
           });
         }}
       >

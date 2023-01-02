@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { FC } from "react";
 import { Abel } from "@next/font/google";
+import { trpc } from "../utils/trpc";
+import { useRouter } from "next/router";
 
 const abel = Abel({
   weight: ["400"],
@@ -9,6 +11,9 @@ const abel = Abel({
 });
 
 const LeftSideBar: FC = () => {
+  const { data } = trpc.category.getAll.useQuery();
+  const { query } = useRouter();
+
   return (
     <div className="flex w-48 gap-6 xxs-m:flex-col sm-m:w-80 sm-m:flex-row sm-m:justify-center sm-m:gap-4 sm:w-48 sm:flex-col sm:justify-start lg:w-60">
       <Link href="/">
@@ -26,26 +31,28 @@ const LeftSideBar: FC = () => {
         </div>
       </Link>
       <div
-        className={`w-full space-y-2 rounded-lg bg-white p-4 text-slate-900 shadow-sm ${abel.className}`}
+        className={`w-full space-y-2 rounded-lg bg-white text-slate-900 shadow-sm ${abel.className}`}
       >
-        <h1 className="text-xl text-slate-900/70">Kategoriler</h1>
-        <ul className="inline-flex flex-wrap gap-2">
-          <button className="rounded-lg bg-[#F0D4C5] px-2  py-1">
-            Üni. Yorumları
-          </button>
-          <button className="rounded-lg bg-[#F5C5D6] px-2 py-1">
-            Dökümanlar
-          </button>
-          <button className="rounded-lg bg-[#DBD8F1]  px-2 py-1">Notlar</button>
-          <button className="rounded-lg bg-[#D1E2EA] px-2 py-1">
-            Bölüm Paylaşımları
-          </button>
-          <button className="rounded-lg bg-[#ceefd5] px-2 py-1">
-            Okul Kulüpleri
-          </button>
-          <button className="rounded-lg bg-[#efefce] px-2 py-1">
-            Serbest Alan
-          </button>
+        <h1 className="flex items-center rounded-t-lg bg-[#B21EED] ">
+          <p className="py-2 px-3 text-lg font-medium tracking-wider text-white">
+            Kategoriler
+          </p>
+        </h1>
+        <ul className="inline-flex flex-wrap gap-2 px-2 pb-2">
+          {data &&
+            data.map((category) => (
+              <Link
+                href={`/category/${category.slug}`}
+                key={category.id}
+                className={`rounded-lg border-[1px] px-2 py-1 duration-150 hover:border-[#B21EED] hover:bg-[#B21EED] ${
+                  query.category && query.category[0] === category.slug
+                    ? "bg-[#B21EED] text-white"
+                    : "text-slate-700"
+                } hover:text-white`}
+              >
+                {category.name}
+              </Link>
+            ))}
         </ul>
       </div>
       <div

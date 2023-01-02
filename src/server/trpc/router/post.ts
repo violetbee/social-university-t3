@@ -9,6 +9,7 @@ export const postRouter = router({
         title: z.string(),
         content: z.string(),
         categoryId: z.string(),
+        files: z.array(z.string()).optional(),
       })
     )
     .mutation(async ({ ctx, input }) => {

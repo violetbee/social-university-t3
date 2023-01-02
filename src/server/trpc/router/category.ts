@@ -4,18 +4,21 @@ import { z } from "zod";
 export const categoryRouter = router({
   getAll: publicProcedure.query(async ({ ctx }) => {
     const categories = await ctx.prisma.category.findMany();
+
     return categories;
   }),
   create: publicProcedure
     .input(
       z.object({
         name: z.string(),
+        slug: z.string(),
       })
     )
     .mutation(async ({ ctx, input }) => {
       await ctx.prisma.category.create({
         data: {
           name: input.name,
+          slug: input.slug,
         },
       });
     }),
