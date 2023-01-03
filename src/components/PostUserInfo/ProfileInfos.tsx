@@ -12,7 +12,7 @@ import { MdKeyboardReturn } from "react-icons/md";
 
 export const ProfileInfos: FC<PostUserBar> = ({ setIsMenuOpen, user }) => {
   return (
-    <div className="relative flex flex-col justify-between rounded-lg shadow-md">
+    <div className="relative flex flex-col justify-between rounded-lg bg-box shadow-md">
       <button
         onClick={() => {
           setIsMenuOpen(false);

@@ -78,10 +78,11 @@ const Header: FC = () => {
               type="text"
               className={`${
                 !session && "md:w-80"
-              } w-full rounded-2xl bg-white px-8 py-2 pl-4 pr-10 text-stone-700 shadow-sm outline-none lg:w-96`}
+              } w-full rounded-2xl bg-box px-8 py-2 pl-4 pr-10 text-white shadow-sm outline-none lg:w-96`}
               id="searchBar"
+              placeholder="Ara"
             />
-            <BiSearchAlt className="absolute top-1/2 right-2 h-full -translate-y-1/2 transform text-2xl text-slate-900/70" />
+            <BiSearchAlt className="absolute top-1/2 right-2 h-full -translate-y-1/2 transform text-2xl text-white" />
           </label>
           {session && (
             <Popup
@@ -148,7 +149,7 @@ const Header: FC = () => {
           ) : (
             <Link
               href="/auth"
-              className="h-full rounded-lg bg-[#383F68] py-2 px-4"
+              className="h-full rounded-lg bg-[#ef476f] py-2 px-4"
             >
               Giriş Yap
             </Link>

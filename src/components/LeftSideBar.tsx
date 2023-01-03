@@ -31,10 +31,10 @@ const LeftSideBar: FC = () => {
         </div>
       </Link>
       <div
-        className={`w-full space-y-2 rounded-lg bg-white text-slate-900 shadow-sm ${abel.className}`}
+        className={`w-full space-y-2 rounded-lg bg-primary text-white shadow-sm ${abel.className}`}
       >
-        <h1 className="flex items-center rounded-t-lg bg-[#B21EED] ">
-          <p className="py-2 px-3 text-lg font-medium tracking-wider text-white">
+        <h1 className="flex items-center rounded-t-lg bg-accent">
+          <p className="py-2 px-3 text-lg font-medium text-white">
             Kategoriler
           </p>
         </h1>
@@ -42,12 +42,12 @@ const LeftSideBar: FC = () => {
           {data &&
             data.map((category) => (
               <Link
-                href={`/category/${category.slug}`}
+                href={`/${category.slug}`}
                 key={category.id}
                 className={`rounded-lg border-[1px] px-2 py-1 duration-150 hover:border-[#B21EED] hover:bg-[#B21EED] ${
-                  query.category && query.category[0] === category.slug
-                    ? "bg-[#B21EED] text-white"
-                    : "text-slate-700"
+                  query.category &&
+                  query.category === category.slug &&
+                  "bg-[#B21EED]"
                 } hover:text-white`}
               >
                 {category.name}
@@ -56,9 +56,9 @@ const LeftSideBar: FC = () => {
         </ul>
       </div>
       <div
-        className={`${abel.className} w-full rounded-lg bg-white p-4 shadow-sm`}
+        className={`${abel.className} w-full rounded-lg bg-primary p-4 shadow-sm`}
       >
-        <ul className="space-y-3 font-thin  text-stone-700">
+        <ul className="space-y-3 font-thin text-white">
           <li className="flex items-center gap-2">
             <div className=" h-2 w-2 animate-pulse rounded-full bg-blue-500" />
             Üniversite hakkında

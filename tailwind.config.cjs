@@ -10,6 +10,13 @@ module.exports = {
         "md-m": "425px",
         "lg-m": "490px",
       },
+      colors: {
+        background: "#001219",
+        primary: "#19212e",
+        secondary: "#334756",
+        accent: "#295270",
+        box: "#1d2d44",
+      },
     },
   },
   daisyui: {

@@ -70,10 +70,10 @@ const PerPost: NextPage<Props> = ({ purePost }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Layout>
-        <div className="flex flex-col justify-between gap-4 lg:flex-row ">
+        <div className="flex flex-col justify-between gap-4 text-white lg:flex-row">
           <div className="order-2 flex flex-col gap-2 lg:order-1 lg:w-10/12">
             <div className="flex w-full flex-col">
-              <div className="flex w-full flex-col divide-y-[1px] divide-slate-900/10 rounded-t-lg bg-white px-5 py-4 shadow-sm">
+              <div className="flex w-full flex-col divide-y-[1px] divide-slate-900/10 rounded-t-lg bg-box px-5 py-4 shadow-sm">
                 <h1 className="px-2 pt-1 pb-2 text-xl">
                   {purePost.title.toUpperCase()}
                 </h1>
@@ -129,7 +129,7 @@ const PerPost: NextPage<Props> = ({ purePost }) => {
                 {/* Post Like Area End */}
               </div>
             </div>
-            <div className="w-full space-y-2 rounded-lg bg-white px-5 py-4 shadow-sm">
+            <div className="w-full space-y-2 rounded-lg bg-box px-5 py-4 shadow-sm">
               <p>
                 Bu gönder için henüz bir yorum mevcut değildir. İlk yorumu
                 yazmak ister misin?{" "}
@@ -252,6 +252,7 @@ export default PerPost;
 export const getServerSideProps: GetServerSideProps = async (context) => {
   if (context.params) {
     const slug = context.params.slug;
+
     const post = await prisma.post.findUnique({
       where: {
         id: String(slug),
