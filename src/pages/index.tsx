@@ -6,7 +6,6 @@ import { prisma } from "../server/db/client";
 import { User } from "@prisma/client";
 import {
   FcAdvertising,
-  FcCalendar,
   FcCloseUpMode,
   FcDocument,
   FcOpenedFolder,
@@ -14,10 +13,6 @@ import {
 import { TfiAngleLeft, TfiAngleRight } from "react-icons/tfi";
 import Stats from "../components/Stats";
 import { useState } from "react";
-import { trpc } from "../utils/trpc";
-import { BiArrowFromLeft, BiArrowFromRight } from "react-icons/bi";
-import Post from "../components/Post";
-import { MdOutlineKeyboardArrowDown, MdSort } from "react-icons/md";
 import Link from "next/link";
 
 type Props = {
