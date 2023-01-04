@@ -77,18 +77,17 @@ model Post {
     userId     String
     like       Like[]
     type       POST_TYPE
-    File       File[]
+    files      File[]
 }
 
 model File {
-    id        String   @id @default(cuid())
-    name      String
-    type      String
-    size      Int
-    url       String
-    createdAt DateTime @default(now())
-    post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
-    postId    String
+    id     String @id @default(cuid())
+    name   String
+    url    String
+    size   Int
+    type   String
+    post   Post   @relation(fields: [postId], references: [id], onDelete: Cascade)
+    postId String
 }
 
 model Like {

@@ -9,7 +9,6 @@ export const postRouter = router({
         title: z.string(),
         content: z.string(),
         categoryId: z.string(),
-        files: z.array(z.string()).optional(),
       })
     )
     .mutation(async ({ ctx, input }) => {
@@ -20,6 +19,44 @@ export const postRouter = router({
           categoryId: input.categoryId,
           userId: ctx.session?.user?.id as string,
           type: input.type,
+        },
+      });
+    }),
+  createDoc: publicProcedure
+    .input(
+      z.object({
+        type: z.enum(["TEXT", "DOC"]),
+        title: z.string(),
+        content: z.string(),
+        categoryId: z.string(),
+        files: z.array(
+          z.object({
+            name: z.string(),
+            size: z.number(),
+            type: z.string(),
+            url: z.string(),
+          })
+        ),
+      })
+    )
+    .mutation(async ({ ctx, input }) => {
+      await ctx.prisma.post.create({
+        data: {
+          title: input.title,
+          content: input.content,
+          categoryId: input.categoryId,
+          userId: ctx.session?.user?.id as string,
+          type: input.type,
+          files: {
+            createMany: {
+              data: input.files.map((file) => ({
+                name: file.name,
+                size: file.size,
+                type: file.type,
+                url: file.name,
+              })),
+            },
+          },
         },
       });
     }),

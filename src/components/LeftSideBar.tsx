@@ -3,7 +3,6 @@ import { FC } from "react";
 import { Abel } from "@next/font/google";
 import { trpc } from "../utils/trpc";
 import { useRouter } from "next/router";
-import { AiFillTwitterCircle } from "react-icons/ai";
 import { FaFacebook, FaGithub, FaInstagram, FaTwitter } from "react-icons/fa";
 
 const abel = Abel({

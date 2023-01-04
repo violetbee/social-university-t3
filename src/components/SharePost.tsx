@@ -8,8 +8,17 @@ const SharePost = () => {
     TEXT = "TEXT",
     DOC = "DOC",
   }
+
+  type FileInput = {
+    name: string;
+    url: string;
+    size: number;
+    type: string;
+  };
+
   const { data } = trpc.category.getAll.useQuery();
   const createPost = trpc.post.create.useMutation();
+  const createDocPost = trpc.post.createDoc.useMutation();
   const ctx = trpc.useContext();
 
   const [form, setForm] = useState<SharePost>({
@@ -19,12 +28,13 @@ const SharePost = () => {
     type: POST_TYPE.TEXT,
   });
 
-  const [files, setFiles] = useState<FileList>();
+  const [baseFiles, setBaseFiles] = useState<FileList>();
+  const [files, setFiles] = useState<FileInput[]>([]);
 
-  const handleForm = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleForm = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (form.type === POST_TYPE.TEXT) {
-      createPost.mutateAsync(form, {
+      await createPost.mutateAsync(form, {
         onSuccess: () => {
           setForm({
             title: "",
@@ -37,16 +47,30 @@ const SharePost = () => {
       });
     } else {
       const formData = new FormData();
-      if (!files) return;
-      Object.values(files).forEach((file) => {
-        formData.append("theFiles", file);
+      if (!baseFiles) return;
+      Object.values(baseFiles).forEach((baseFile) => {
+        formData.append("theFiles", baseFile);
       });
-
       axios.post("/api/fileUpload", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       });
+      if (!files) return;
+      await createDocPost.mutateAsync(
+        { ...form, files },
+        {
+          onSuccess: () => {
+            setForm({
+              title: "",
+              content: "",
+              categoryId: "clbhwqhlm00bqvxhcot7bq95r",
+              type: POST_TYPE.TEXT,
+            });
+            ctx.invalidate();
+          },
+        }
+      );
     }
   };
 
@@ -107,44 +131,44 @@ const SharePost = () => {
                     </select>
                   </div>
                 </div>
-                {form.type === POST_TYPE.TEXT ? (
-                  <>
-                    <div className="relative z-0 col-span-2">
-                      <input
-                        type="text"
-                        name="name"
-                        className="peer block w-full appearance-none border-0 border-b border-gray-500 bg-transparent py-2.5 px-0 text-sm text-gray-900 focus:border-blue-600 focus:outline-none focus:ring-0"
-                        placeholder=" "
-                        value={form.title}
-                        onChange={(e) => {
-                          setForm((prev) => {
-                            return { ...prev, title: e.target.value };
-                          });
-                        }}
-                      />
-                      <label className="absolute top-3 -z-10 origin-[0] -translate-y-6 scale-75 transform text-sm text-gray-500 duration-300 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:left-0 peer-focus:-translate-y-6 peer-focus:scale-75 peer-focus:text-blue-600 peer-focus:dark:text-blue-500">
-                        Başlık
-                      </label>
-                    </div>
-                    <div className="relative z-0 col-span-2">
-                      <textarea
-                        name="message"
-                        rows={5}
-                        className="peer block w-full appearance-none border-0 border-b border-gray-500 bg-transparent py-2.5 px-0 text-sm text-gray-900 focus:border-blue-600 focus:outline-none focus:ring-0"
-                        placeholder=" "
-                        value={form.content}
-                        onChange={(e) => {
-                          setForm((prev) => {
-                            return { ...prev, content: e.target.value };
-                          });
-                        }}
-                      ></textarea>
-                      <label className="absolute top-3 -z-10 origin-[0] -translate-y-6 scale-75 transform text-sm text-gray-500 duration-300 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:left-0 peer-focus:-translate-y-6 peer-focus:scale-75 peer-focus:text-blue-600 peer-focus:dark:text-blue-500">
-                        Mesajın
-                      </label>
-                    </div>
-                  </>
-                ) : (
+
+                <>
+                  <div className="relative z-0 col-span-2">
+                    <input
+                      type="text"
+                      name="name"
+                      className="peer block w-full appearance-none border-0 border-b border-gray-500 bg-transparent py-2.5 px-0 text-sm text-gray-900 focus:border-blue-600 focus:outline-none focus:ring-0"
+                      placeholder=" "
+                      value={form.title}
+                      onChange={(e) => {
+                        setForm((prev) => {
+                          return { ...prev, title: e.target.value };
+                        });
+                      }}
+                    />
+                    <label className="absolute top-3 -z-10 origin-[0] -translate-y-6 scale-75 transform text-sm text-gray-500 duration-300 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:left-0 peer-focus:-translate-y-6 peer-focus:scale-75 peer-focus:text-blue-600 peer-focus:dark:text-blue-500">
+                      Başlık
+                    </label>
+                  </div>
+                  <div className="relative z-0 col-span-2">
+                    <textarea
+                      name="message"
+                      rows={5}
+                      className="peer block w-full appearance-none border-0 border-b border-gray-500 bg-transparent py-2.5 px-0 text-sm text-gray-900 focus:border-blue-600 focus:outline-none focus:ring-0"
+                      placeholder=" "
+                      value={form.content}
+                      onChange={(e) => {
+                        setForm((prev) => {
+                          return { ...prev, content: e.target.value };
+                        });
+                      }}
+                    ></textarea>
+                    <label className="absolute top-3 -z-10 origin-[0] -translate-y-6 scale-75 transform text-sm text-gray-500 duration-300 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:left-0 peer-focus:-translate-y-6 peer-focus:scale-75 peer-focus:text-blue-600 peer-focus:dark:text-blue-500">
+                      Mesajın
+                    </label>
+                  </div>
+                </>
+                {form.type === POST_TYPE.DOC && (
                   <>
                     <div className="relative z-0 col-span-2">
                       <div className="flex w-full items-center justify-center">
@@ -169,14 +193,14 @@ const SharePost = () => {
                               ></path>
                             </svg>
 
-                            {files ? (
-                              Object.keys(files).map((file, index) => {
+                            {files && files.length > 0 ? (
+                              files.map((file, index) => {
                                 return (
                                   <p
                                     key={index}
                                     className="text-sm text-gray-600"
                                   >
-                                    {files[file].name}
+                                    {file.name}
                                   </p>
                                 );
                               })
@@ -201,7 +225,19 @@ const SharePost = () => {
                                 return alert(
                                   "En fazla 5 dosya yükleyebilirsiniz."
                                 );
-                              setFiles(e.target.files);
+                              setBaseFiles(e.target.files);
+                              const newFiles = Object.values(e.target.files);
+                              newFiles.forEach((file) => {
+                                setFiles((prev) => [
+                                  ...prev,
+                                  {
+                                    name: file.name,
+                                    size: file.size,
+                                    type: file.type,
+                                    url: URL.createObjectURL(file),
+                                  },
+                                ]);
+                              });
                             }}
                             id="dropzone-file"
                             type="file"
