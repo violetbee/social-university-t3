@@ -81,13 +81,14 @@ model Post {
 }
 
 model File {
-    id     String @id @default(cuid())
-    name   String
-    url    String
-    size   Int
-    type   String
-    post   Post   @relation(fields: [postId], references: [id], onDelete: Cascade)
-    postId String
+    id        String   @id @default(cuid())
+    createdAt DateTime @default(now()) @db.Timestamp(6)
+    name      String
+    url       String
+    size      Int
+    type      String
+    post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+    postId    String
 }
 
 model Like {

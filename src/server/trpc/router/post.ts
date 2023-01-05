@@ -53,7 +53,7 @@ export const postRouter = router({
                 name: file.name,
                 size: file.size,
                 type: file.type,
-                url: file.name,
+                url: file.url,
               })),
             },
           },
@@ -65,54 +65,68 @@ export const postRouter = router({
     await ctx.prisma.post.deleteMany();
   }),
 
-  getAllPosts: publicProcedure.query(async ({ ctx }) => {
-    const publishedTimeAgo = (date: Date) => {
-      const seconds = Math.floor(
-        (new Date().getTime() - date.getTime()) / 1000
-      );
+  getAllPosts: publicProcedure
+    .input(
+      z.object({
+        query: z.string().nullable(),
+      })
+    )
+    .query(async ({ ctx, input }) => {
+      const publishedTimeAgo = (date: Date) => {
+        const seconds = Math.floor(
+          (new Date().getTime() - date.getTime()) / 1000
+        );
 
-      let interval = Math.floor(seconds / 31536000);
+        let interval = Math.floor(seconds / 31536000);
 
-      if (interval >= 1) {
-        return interval + " yıl önce";
-      }
-      interval = Math.floor(seconds / 2592000);
-      if (interval >= 1) {
-        return interval + " ay önce";
-      }
-      interval = Math.floor(seconds / 86400);
-      if (interval >= 1) {
-        return interval + " gün önce";
-      }
-      interval = Math.floor(seconds / 3600);
-      if (interval >= 1) {
-        return interval + " saat önce";
-      }
-      interval = Math.floor(seconds / 60);
-      if (interval >= 1) {
-        return interval + " dakika önce";
-      }
-      return Math.floor(seconds) + " saniye önce";
-    };
-
-    const posts = await ctx.prisma.post.findMany({
-      orderBy: {
-        createdAt: "desc",
-      },
-      include: {
-        user: true,
-        category: true,
-        like: true,
-      },
-    });
-
-    const postsWithTimeAgo = posts.map((post) => {
-      return {
-        ...post,
-        publishedTimeAgo: publishedTimeAgo(post.createdAt),
+        if (interval >= 1) {
+          return interval + " yıl önce";
+        }
+        interval = Math.floor(seconds / 2592000);
+        if (interval >= 1) {
+          return interval + " ay önce";
+        }
+        interval = Math.floor(seconds / 86400);
+        if (interval >= 1) {
+          return interval + " gün önce";
+        }
+        interval = Math.floor(seconds / 3600);
+        if (interval >= 1) {
+          return interval + " saat önce";
+        }
+        interval = Math.floor(seconds / 60);
+        if (interval >= 1) {
+          return interval + " dakika önce";
+        }
+        return Math.floor(seconds) + " saniye önce";
       };
-    });
 
-    return postsWithTimeAgo;
-  }),
+      const posts = await ctx.prisma.post.findMany({
+        orderBy: {
+          createdAt: "desc",
+        },
+        where: {
+          type:
+            input.query === ""
+              ? undefined
+              : input.query === "dokumanlar"
+              ? "DOC"
+              : "TEXT",
+        },
+        include: {
+          user: true,
+          category: true,
+          like: true,
+        },
+      });
+
+      const postsWithTimeAgo = posts.map((post) => {
+        return {
+          ...post,
+          publishedTimeAgo: publishedTimeAgo(post.createdAt),
+        };
+      });
+
+      return postsWithTimeAgo;
+    }),
 });

@@ -32,9 +32,9 @@ const Auth = () => {
 
   return (
     <div
-      className={`flex min-h-screen w-full  items-center ${dosis.className} justify-center bg-[#F6F8FC]`}
+      className={`flex min-h-screen w-full  items-center ${dosis.className} justify-center bg-primary text-white`}
     >
-      <div className="flex flex-col items-center justify-center rounded-md border-2 bg-white p-2">
+      <div className="flex flex-col items-center justify-center rounded-md border-2 border-accent bg-box p-2">
         <Image src={KeyImage} height={52} width={52} alt="auth" />
         {auth === AUTH.SIGN_IN ? (
           <SignIn

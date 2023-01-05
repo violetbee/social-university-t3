@@ -14,6 +14,7 @@ import { TfiAngleLeft, TfiAngleRight } from "react-icons/tfi";
 import Stats from "../components/Stats";
 import { useState } from "react";
 import Link from "next/link";
+import { trpc } from "../utils/trpc";
 
 type Props = {
   user: User;
@@ -104,6 +105,8 @@ const Home: NextPage<Props> = () => {
     },
   } as const;
 
+  const { data: posts } = trpc.post.getAllPosts.useQuery({ query: "" });
+
   return (
     <>
       <Head>
@@ -119,17 +122,29 @@ const Home: NextPage<Props> = () => {
 
           <div className="flex flex-col justify-between gap-2 rounded-lg border-t-4 border-violet-700 bg-box px-5 py-4 text-white shadow-sm">
             <div className="space-y-2">
-              <h1 className="text-lg font-medium">Dokümanlar</h1>
+              <Link href="/dokumanlar" className="text-lg font-medium">
+                Dokümanlar
+              </Link>
               <p className="text-sm">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam,
-                optio?
+                Dokümanlar sayfasından derslerinize ait dökümanları
+                inceleyebilir ve indirebilirsiniz.
               </p>
             </div>
             <div className="flex justify-between">
               <div className="flex items-center gap-1">
                 <div className="animate-pulse rounded-full bg-green-600 p-[3px]" />
                 <p className="cursor-pointer leading-tight tracking-tight">
-                  Yazılım Gerçekleme ve Test Örnek Sorular
+                  {posts
+                    ?.filter((item) => item.type === "DOC")
+                    .slice(0, 1)
+                    .map((post) => (
+                      <Link
+                        href={`/gonderiler/${post.category.slug}/${post.id}`}
+                        key={post.id}
+                      >
+                        {post.title}
+                      </Link>
+                    ))}
                 </p>
               </div>
               <FcOpenedFolder size={48} />
@@ -137,19 +152,29 @@ const Home: NextPage<Props> = () => {
           </div>
           <div className="flex w-full flex-col gap-2 rounded-lg border-t-4 border-orange-400 bg-box px-5 py-4 text-white shadow-sm">
             <div className="space-y-2">
-              <Link href="/all" className="text-lg font-medium">
+              <Link href="/paylasimlar" className="text-lg font-medium">
                 Paylaşımlar
               </Link>
               <p className="text-sm">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam,
-                optio?
+                Paylaşımlar sayfasından doküman haricindeki tüm paylaşımları ve
+                etkinlikleri görebilirsiniz.
               </p>
             </div>
             <div className="flex justify-between">
               <div className="flex items-center gap-1">
                 <div className="animate-pulse rounded-full bg-green-600 p-[3px]" />
                 <p className="cursor-pointer leading-tight tracking-tight">
-                  Okulda yeniyim, hangi kulübü tercih etmeliyim?
+                  {posts
+                    ?.filter((item) => item.type === "TEXT")
+                    .slice(0, 1)
+                    .map((post) => (
+                      <Link
+                        href={`/gonderiler/${post.category.slug}/${post.id}`}
+                        key={post.id}
+                      >
+                        {post.title}
+                      </Link>
+                    ))}
                 </p>
               </div>
               <FcDocument size={48} />

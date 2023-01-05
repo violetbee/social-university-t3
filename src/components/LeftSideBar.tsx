@@ -43,7 +43,7 @@ const LeftSideBar: FC = () => {
           {data &&
             data.map((category) => (
               <Link
-                href={`/${category.slug}`}
+                href={`/gonderiler/${category.slug}`}
                 key={category.id}
                 className={`rounded-lg border-[1px] px-2 py-1 duration-150 hover:border-[#B21EED] hover:bg-[#B21EED] ${
                   query.category &&

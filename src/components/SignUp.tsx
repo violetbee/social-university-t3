@@ -63,7 +63,7 @@ const SignUp = ({ signUpForm, setSignUpForm, setAuth }: SignUpProps) => {
       <div className="flex w-full items-center justify-between gap-8">
         <label htmlFor="email">Email</label>
         <input
-          className="w-full rounded-md border-2 px-2 py-1"
+          className="w-full rounded-md border-2 px-2 py-1 text-primary"
           type="email"
           name="email"
           id="email"
@@ -76,7 +76,7 @@ const SignUp = ({ signUpForm, setSignUpForm, setAuth }: SignUpProps) => {
       <div className="flex w-full items-center justify-between">
         <label htmlFor="name">İsim</label>
         <input
-          className=" rounded-md border-2 px-2 py-1"
+          className=" rounded-md border-2 px-2 py-1 text-primary"
           type="text"
           name="name"
           id="name"
@@ -89,7 +89,7 @@ const SignUp = ({ signUpForm, setSignUpForm, setAuth }: SignUpProps) => {
       <div className="flex w-full items-center justify-between">
         <label htmlFor="surname">Soy isim</label>
         <input
-          className="rounded-md border-2 px-2 py-1"
+          className="rounded-md border-2 px-2 py-1 text-primary"
           type="text"
           name="surname"
           id="surname"
@@ -103,7 +103,7 @@ const SignUp = ({ signUpForm, setSignUpForm, setAuth }: SignUpProps) => {
       <div className="flex w-full items-center justify-between">
         <label htmlFor="password">Şifre</label>
         <input
-          className="rounded-md border-2 px-2 py-1"
+          className="rounded-md border-2 px-2 py-1 text-primary"
           type="password"
           name="password"
           id="password"

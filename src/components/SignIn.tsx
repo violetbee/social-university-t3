@@ -36,12 +36,12 @@ const SignIn = ({ signInForm, setSignInForm, setAuth }: SignInProps) => {
                 }, 1000);
           });
         }}
-        className="flex w-full flex-col items-center gap-2 px-4 py-3"
+        className="flex w-full flex-col items-center gap-2 px-4 py-3 "
       >
         <div className="flex w-full items-center justify-between gap-4">
           <label htmlFor="email">Email</label>
           <input
-            className="rounded-md border-2 px-2 py-1"
+            className="rounded-md border-2 px-2 py-1 text-primary"
             type="email"
             name="email"
             id="email"
@@ -54,7 +54,7 @@ const SignIn = ({ signInForm, setSignInForm, setAuth }: SignInProps) => {
         <div className="flex w-full items-center justify-between gap-4">
           <label htmlFor="password">Şifre</label>
           <input
-            className="rounded-md border-2 px-2 py-1"
+            className="rounded-md border-2 px-2 py-1 text-primary"
             type="password"
             name="password"
             id="password"

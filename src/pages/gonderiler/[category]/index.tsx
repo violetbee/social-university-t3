@@ -1,8 +1,8 @@
 import { GetServerSideProps, NextPage } from "next";
-import Layout from "../../components/Layout";
-import { prisma } from "../../server/db/client";
+import Layout from "../../../components/Layout";
+import { prisma } from "../../../server/db/client";
 import { Category, Post as PostType, User } from "@prisma/client";
-import Post from "../../components/Post";
+import Post from "../../../components/Post";
 import { MdOutlineKeyboardArrowDown, MdSort } from "react-icons/md";
 
 type Props = {
@@ -38,6 +38,7 @@ const Category: NextPage<Props> = ({ posts }) => {
             <p className="text-lg font-[500]">Henüz bir gönderi yok.</p>
           </div>
         )}
+        <div className="py-4" />
       </div>
     </Layout>
   );

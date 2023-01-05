@@ -1,25 +1,33 @@
 import { GetServerSideProps, NextPage } from "next";
-import Layout from "../../components/Layout";
-import { prisma } from "../../server/db/client";
+import Layout from "../../../components/Layout";
+import { prisma } from "../../../server/db/client";
 import Head from "next/head";
-import { Category, Like, Post, User } from "@prisma/client";
+import { Category, File, Like, Post, User } from "@prisma/client";
 import { IoMdSchool } from "react-icons/io";
 import { CgListTree } from "react-icons/cg";
-import { FaUserAlt, FaSchool, FaAward } from "react-icons/fa";
+import {
+  FaUserAlt,
+  FaSchool,
+  FaAward,
+  FaRegCalendarAlt,
+  FaDownload,
+} from "react-icons/fa";
 import { MdMood } from "react-icons/md";
 import React, { useState, useEffect, useRef } from "react";
-import { PostUserInfo } from "../../components/PostUserInfo";
+import { PostUserInfo } from "../../../components/PostUserInfo";
 import autoAnimate from "@formkit/auto-animate";
 import { GoCommentDiscussion } from "react-icons/go";
-import { trpc } from "../../utils/trpc";
+import { trpc } from "../../../utils/trpc";
 import { AiFillDislike, AiFillLike } from "react-icons/ai";
 import { useSession } from "next-auth/react";
+import Link from "next/link";
 
 type Props = {
   purePost: Post & {
     user: User;
     like: Like;
     category: Category;
+    files: File[];
   };
 };
 
@@ -78,6 +86,69 @@ const PerPost: NextPage<Props> = ({ purePost }) => {
                   {purePost.title.toUpperCase()}
                 </h1>
                 <p className="break-all p-4 pb-0">{purePost.content}</p>
+                {purePost.files.length > 0 && (
+                  <>
+                    <div className="mt-3 h-[1px] w-full border-t-[2px] border-dashed border-accent/50" />
+                    <div className="p-4 pb-0">
+                      <div className="grid grid-cols-2 gap-3 lg:grid-cols-3">
+                        {purePost.files
+                          .filter((item) => item.postId === purePost.id)
+                          .map((file) => (
+                            // file.type.includes("image") && "resim"
+                            <div
+                              key={file.id}
+                              className="w-full rounded-xl bg-primary"
+                            >
+                              <div className="flex w-full items-center justify-between rounded-t-xl bg-emerald-900 px-2 py-1">
+                                <h1>
+                                  {file.name.length > 12
+                                    ? file.name.slice(0, 12) + "..."
+                                    : file.name}
+                                </h1>
+                                <h3 className="font-thin tracking-tight">
+                                  {(file.size / 1000000).toFixed(3)} MB
+                                </h3>
+                              </div>
+                              <div className="flex w-full flex-col p-2">
+                                <ul className="flex flex-col gap-2">
+                                  <li className="flex items-center gap-2">
+                                    <FaUserAlt />
+                                    <span>Yazılım Mühendisliği</span>
+                                  </li>
+                                  <li className="flex items-center gap-2">
+                                    <FaSchool />
+                                    <span>3. Sınıf</span>
+                                  </li>
+                                  <li className="flex items-center gap-2">
+                                    <FaAward />
+                                    <span>
+                                      Yazılım Gerçekleme ve Test Dersi
+                                    </span>
+                                  </li>
+                                  <li className="flex items-center gap-2">
+                                    <FaRegCalendarAlt />
+                                    <span>11. Hafta PDF</span>
+                                    {/* {new Date(file.createdAt).toLocaleDateString(
+                                    "tr-TR"
+                                  )} */}
+                                  </li>
+                                </ul>
+
+                                <div className="mt-2 flex w-full justify-center">
+                                  <Link
+                                    href={`/file/${file.id}`}
+                                    className="flex h-10 w-full items-center justify-center rounded-xl bg-emerald-900 hover:bg-emerald-800"
+                                  >
+                                    <FaDownload />
+                                  </Link>
+                                </div>
+                              </div>
+                            </div>
+                          ))}
+                      </div>
+                    </div>
+                  </>
+                )}
               </div>
               <div className="flex w-full flex-col justify-between gap-2 rounded-b-lg bg-accent px-5 py-2 text-white shadow-inner shadow-black/20 lg-m:flex-row md:flex-row md:items-center md:justify-between md:gap-0">
                 <div className="flex items-center gap-6">
@@ -139,11 +210,14 @@ const PerPost: NextPage<Props> = ({ purePost }) => {
               {session.data?.user && (
                 <div className="form-control">
                   <label className="label">
-                    <span className="label-text">
-                      {session.data?.user?.name} kullanıcı adıyla yazıyorsunuz.
+                    <span className="label-text text-white">
+                      <span className="text-green-600">
+                        {session.data?.user?.name}
+                      </span>{" "}
+                      kullanıcı adıyla yazıyorsunuz.
                     </span>
                     <span
-                      className={`label-text-alt ${
+                      className={`label-text-alt text-white ${
                         comment.length > 244 && "text-red-500"
                       }`}
                     >
@@ -151,8 +225,8 @@ const PerPost: NextPage<Props> = ({ purePost }) => {
                     </span>
                   </label>
                   <textarea
-                    className="textarea-bordered textarea h-24"
-                    placeholder="Bio"
+                    className="textarea-bordered textarea h-24 bg-accent"
+                    placeholder="Yorumunuzu buraya yazın..."
                     value={comment}
                     onChange={(e) => {
                       setComment(e.target.value);
@@ -161,7 +235,7 @@ const PerPost: NextPage<Props> = ({ purePost }) => {
                   />
                   <label className="label">
                     <span className="label-text-alt"></span>
-                    <span className="label-text-alt text-gray-900/50">
+                    <span className="label-text-alt text-white">
                       Yazılan yorumlardan kullanıcılar sorumludur
                     </span>
                   </label>
@@ -240,6 +314,7 @@ const PerPost: NextPage<Props> = ({ purePost }) => {
               )}
             </div>
             {/* Per Post User Info Area End */}
+            <div className="w-full rounded-b-xl p-4"></div>
           </div>
         </div>
       </Layout>
@@ -261,6 +336,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         user: true,
         like: true,
         category: true,
+        files: true,
       },
     });
 

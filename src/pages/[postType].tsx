@@ -1,13 +1,17 @@
 import { ImDownload } from "react-icons/im";
 import { trpc } from "../utils/trpc";
 import Link from "next/link";
-
 import { TbPencil } from "react-icons/tb";
 import Layout from "../components/Layout";
 import { MdOutlineKeyboardArrowDown, MdSort } from "react-icons/md";
+import { useRouter } from "next/router";
 
 const Post = () => {
-  const { data: posts } = trpc.post.getAllPosts.useQuery();
+  const { query } = useRouter();
+
+  const { data: posts } = trpc.post.getAllPosts.useQuery({
+    query: query.postType as string,
+  });
 
   return (
     <Layout>
@@ -114,7 +118,7 @@ const Post = () => {
                     </dd>
                   </div>
                   <Link
-                    href={post.category.slug + "/" + post.id}
+                    href={"gonderiler/" + post.category.slug + "/" + post.id}
                     className="flex items-center justify-center space-x-1 rounded-full border-2 border-black bg-white px-4 py-1 text-xs font-medium text-black hover:bg-black hover:text-white dark:border-white dark:bg-slate-800 dark:text-white dark:hover:bg-white dark:hover:text-black"
                   >
                     <span>Devamını Gör</span>
@@ -141,6 +145,7 @@ const Post = () => {
             <p className="text-lg font-[500]">Henüz bir gönderi yok.</p>
           </div>
         )}
+        <div className="py-4" />
       </div>
     </Layout>
   );

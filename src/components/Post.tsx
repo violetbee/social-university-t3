@@ -2,7 +2,6 @@ import { Category, User } from "@prisma/client";
 import { ImDownload } from "react-icons/im";
 import { trpc } from "../utils/trpc";
 import Link from "next/link";
-import Image from "next/image";
 
 import { TbPencil } from "react-icons/tb";
 
@@ -25,27 +24,32 @@ const Post = ({ post }: { post: PostType }) => {
 
   return (
     <div className="break-inside relative flex w-full flex-col justify-between space-y-3 overflow-hidden rounded-xl bg-white p-4 text-sm text-black dark:bg-slate-800 dark:text-white">
-      <div className="flex items-center justify-between font-medium">
-        <span className="text-xs uppercase text-green-400">
-          {post.user.name} {post.user.surname && post.user.surname}
-        </span>
-        <span className="text-xs text-slate-500">{post.publishedTimeAgo}</span>
-      </div>
-      <div className="flex flex-row items-center space-x-3">
-        {post.type === "TEXT" ? (
-          <div className="flex h-10 w-10 flex-none items-center justify-center rounded-full bg-green-500 text-white">
-            <TbPencil size={22} />
-          </div>
-        ) : (
-          <div className="flex h-10 w-10 flex-none items-center justify-center rounded-full bg-violet-700 text-white">
-            <ImDownload size={22} />
-          </div>
-        )}
-        <span className="text-base font-medium">
-          {post.title.length > 50
-            ? post.title.slice(0, 50) + "..."
-            : post.title}
-        </span>
+      <div className="flex flex-col gap-3">
+        {" "}
+        <div className="flex items-center justify-between font-medium">
+          <span className="text-xs uppercase text-green-400">
+            {post.user.name} {post.user.surname && post.user.surname}
+          </span>
+          <span className="text-xs text-slate-500">
+            {post.publishedTimeAgo}
+          </span>
+        </div>
+        <div className="flex flex-row items-center space-x-3">
+          {post.type === "TEXT" ? (
+            <div className="flex h-10 w-10 flex-none items-center justify-center rounded-full bg-green-500 text-white">
+              <TbPencil size={22} />
+            </div>
+          ) : (
+            <div className="flex h-10 w-10 flex-none items-center justify-center rounded-full bg-violet-700 text-white">
+              <ImDownload size={22} />
+            </div>
+          )}
+          <span className="text-base font-medium">
+            {post.title.length > 50
+              ? post.title.slice(0, 50) + "..."
+              : post.title}
+          </span>
+        </div>
       </div>
       <div>
         {" "}
