@@ -10,12 +10,12 @@ https://user-images.githubusercontent.com/61601796/208540175-f1300b51-8173-4a7f-
 
 ## Main
 
-![Social University](https://i.hizliresim.com/og6zaih.jpg)
+![Social University](https://i.hizliresim.com/osxe531.jpg)
 
-## Post Page
+## Category Page
 
-![Social University](https://i.hizliresim.com/fgydfuc.jpg)
+![Social University](https://i.hizliresim.com/4sr4e54.jpg)
 
-## Mobile Responsive
+## Post Responsive
 
-![Social University](https://i.hizliresim.com/gxfut59.jpg)
+![Social University](https://i.hizliresim.com/tupr2u1.jpg)

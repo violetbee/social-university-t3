@@ -61,7 +61,7 @@ const Home: NextPage<Props> = () => {
     }
   };
 
-  type Events = "kahvalti" | "konser" | "sinema" | "gezi";
+  type Events = "kahvalti" | "konser" | "sinema" | "gezi" | string;
   type EventInfo = {
     title: string;
     time: string;
@@ -103,7 +103,7 @@ const Home: NextPage<Props> = () => {
       image:
         "https://c4.wallpaperflare.com/wallpaper/727/456/27/breakfast-4k-windows-for-desktop-wallpaper-preview.jpg",
     },
-  } as const;
+  };
 
   const { data: posts } = trpc.post.getAllPosts.useQuery({ query: "" });
 
@@ -191,9 +191,7 @@ const Home: NextPage<Props> = () => {
                 return (
                   <div
                     style={{
-                      backgroundImage: `url(${
-                        events[event as keyof typeof events].image
-                      })`,
+                      backgroundImage: `url(${events[event]?.image})`,
                     }}
                     key={index}
                     className={`cursor-pointer rounded-md bg-cover bg-center bg-no-repeat shadow-md transition-all duration-200 hover:scale-105 hover:shadow-lg`}
@@ -205,12 +203,10 @@ const Home: NextPage<Props> = () => {
                           textShadow: "-0.5px -0.5px #000, 0.5px 0.5px #000",
                         }}
                       >
-                        {events[event as keyof typeof events].title}
+                        {events[event]?.title}
                       </h1>
-                      <p> {events[event as keyof typeof events].yer}</p>
-                      <p className="text-sm">
-                        {events[event as keyof typeof events].body}
-                      </p>
+                      <p> {events[event]?.yer}</p>
+                      <p className="text-sm">{events[event]?.body}</p>
                     </div>
                   </div>
                 );
