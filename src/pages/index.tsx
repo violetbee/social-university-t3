@@ -70,6 +70,8 @@ const Home: NextPage<Props> = () => {
     yer: string;
   };
 
+  //Fixed types
+
   const events: Record<Events, EventInfo> = {
     kahvalti: {
       title: "Kahvaltı",
