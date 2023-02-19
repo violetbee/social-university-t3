@@ -8,11 +8,9 @@ import { useRouter } from "next/router";
 
 const Post = () => {
   const { query } = useRouter();
-
   const { data: posts } = trpc.post.getAllPosts.useQuery({
     query: query.postType as string,
   });
-
   return (
     <Layout>
       <div className="flex w-full flex-col items-center rounded-lg border-t-4 border-teal-600 bg-box text-white shadow-sm">
