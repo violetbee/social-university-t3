@@ -11,11 +11,11 @@ module.exports = {
         "lg-m": "490px",
       },
       colors: {
-        background: "#001219",
-        primary: "#19212e",
-        secondary: "#334756",
+        background: "white", //#001219 dark
+        primary: "#32445a", //#19212e dark
+        secondary: "#334756", //#334756 dark
         accent: "#295270",
-        box: "#1d2d44",
+        box: "#FDFCFD",
       },
     },
   },

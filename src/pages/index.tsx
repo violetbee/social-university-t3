@@ -11,7 +11,7 @@ import {
   FcOpenedFolder,
 } from "react-icons/fc";
 import { TfiAngleLeft, TfiAngleRight } from "react-icons/tfi";
-import Stats from "../components/Stats";
+import Stats from "../inactiveComponents/Stats";
 import { useState } from "react";
 import Link from "next/link";
 import { trpc } from "../utils/trpc";
@@ -114,204 +114,42 @@ const Home: NextPage<Props> = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Layout>
-        <div className="grid grid-cols-1 gap-2 md:grid-cols-2">
-          <div className="col-span-1 md:col-span-2">
-            <Stats />
-          </div>
+        <div className="mx-auto flex w-9/12">
+          <div className="mt-2 ml-1 grid w-full grid-cols-1 gap-2 overflow-y-auto md:grid-cols-2">
+            <div className="col-span-2">
+              <p className="text-2xl">Yaklaşan Etkinlikler</p>
+              <div className="rounded-md border-[1px] p-4">
+                {/* Boxes for events horizontal */}
+                <div className="flex flex-row justify-between">
+                  {Object.keys(events).map((event, index) => (
+                    <div
+                      key={index}
+                      className="flex h-[16rem] w-[13rem] cursor-pointer flex-col items-center justify-between rounded-md border-[1px] hover:shadow-lg"
+                    >
+                      <div className="h-24 overflow-hidden rounded-t-md">
+                        <Image
+                          src={events[event].image}
+                          alt="Event Image"
+                          width={800}
+                          height={600}
+                          className="h-full object-cover"
+                        />
+                      </div>
+                      <div>
+                        <p className="text-sm">{events[event].title}</p>
+                        <p className="text-sm">{events[event].time}</p>
 
-          <div className="flex flex-col justify-between gap-2 rounded-lg border-t-4 border-violet-700 bg-box px-5 py-4 text-white shadow-sm">
-            <div className="space-y-2">
-              <Link href="/dokumanlar" className="text-lg font-medium">
-                Dokümanlar
-              </Link>
-              <p className="text-sm">
-                Dokümanlar sayfasından derslerinize ait dökümanları
-                inceleyebilir ve indirebilirsiniz.
-              </p>
-            </div>
-            <div className="flex justify-between">
-              <div className="flex items-center gap-1">
-                <div className="animate-pulse rounded-full bg-green-600 p-[3px]" />
-                <p className="cursor-pointer leading-tight tracking-tight">
-                  {posts
-                    ?.filter((item) => item.type === "DOC")
-                    .slice(0, 1)
-                    .map((post) => (
-                      <Link
-                        href={`/gonderiler/${post.category.slug}/${post.id}`}
-                        key={post.id}
-                      >
-                        {post.title}
-                      </Link>
-                    ))}
-                </p>
-              </div>
-              <FcOpenedFolder size={48} />
-            </div>
-          </div>
-          <div className="flex w-full flex-col gap-2 rounded-lg border-t-4 border-orange-400 bg-box px-5 py-4 text-white shadow-sm">
-            <div className="space-y-2">
-              <Link href="/paylasimlar" className="text-lg font-medium">
-                Paylaşımlar
-              </Link>
-              <p className="text-sm">
-                Paylaşımlar sayfasından doküman haricindeki tüm paylaşımları ve
-                etkinlikleri görebilirsiniz.
-              </p>
-            </div>
-            <div className="flex justify-between">
-              <div className="flex items-center gap-1">
-                <div className="animate-pulse rounded-full bg-green-600 p-[3px]" />
-                <p className="cursor-pointer leading-tight tracking-tight">
-                  {posts
-                    ?.filter((item) => item.type === "TEXT")
-                    .slice(0, 1)
-                    .map((post) => (
-                      <Link
-                        href={`/gonderiler/${post.category.slug}/${post.id}`}
-                        key={post.id}
-                      >
-                        {post.title}
-                      </Link>
-                    ))}
-                </p>
-              </div>
-              <FcDocument size={48} />
-            </div>
-          </div>
+                        <p className="text-sm">{events[event].yer}</p>
 
-          {/* Events Area */}
-          <div className="flex w-full flex-col gap-2 rounded-lg border-t-4 border-blue-700 bg-box px-5 py-4 text-white shadow-sm">
-            <div className="space-y-2">
-              <h1 className="text-lg font-medium">Etkinlikler</h1>
-            </div>
-            <div className="flex h-full flex-col gap-2 overflow-y-hidden overflow-x-scroll rounded-md px-2 py-4 md:h-60 md:w-full md:flex-row">
-              {Object.keys(events).map((event, index) => {
-                return (
-                  <div
-                    style={{
-                      backgroundImage: `url(${events[event]?.image})`,
-                    }}
-                    key={index}
-                    className={`cursor-pointer rounded-md bg-cover bg-center bg-no-repeat shadow-md transition-all duration-200 hover:scale-105 hover:shadow-lg`}
-                  >
-                    <div className="flex h-full flex-col justify-around bg-gradient-to-t from-black to-white/5 p-2 text-white md:w-40">
-                      <h1
-                        className="text-md font-bold drop-shadow-md"
-                        style={{
-                          textShadow: "-0.5px -0.5px #000, 0.5px 0.5px #000",
-                        }}
-                      >
-                        {events[event]?.title}
-                      </h1>
-                      <p> {events[event]?.yer}</p>
-                      <p className="text-sm">{events[event]?.body}</p>
+                        <a className="text-sm text-blue-500">Detaylar</a>
+                      </div>
                     </div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-
-          {/* Announcements Area */}
-          <div className="flex w-full flex-col gap-2 rounded-lg border-t-4 border-yellow-400 bg-box px-5 py-4 text-white shadow-sm">
-            <div className="space-y-2">
-              <h1 className="text-lg font-medium ">Duyurular</h1>
-              <p className="text-sm text-white">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam,
-                optio?
-              </p>
-            </div>
-            <div className="flex flex-col gap-2">
-              <div className="flex justify-between">
-                <div className="flex items-center gap-1">
-                  <div className="animate-pulse rounded-full bg-green-600 p-[3px]" />
-                  <p className="cursor-pointer leading-tight tracking-tight">
-                    Yazılım Gerçekleme ve Test Örnek Sorular
-                  </p>
-                </div>
-                <FcAdvertising size={48} />
-              </div>
-              <div className="flex justify-between">
-                <div className="flex items-center gap-1">
-                  <div className="animate-pulse rounded-full bg-green-600 p-[3px]" />
-                  <p className="cursor-pointer leading-tight tracking-tight">
-                    Yazılım Gerçekleme ve Test Örnek Sorular
-                  </p>
+                  ))}
                 </div>
               </div>
-            </div>
-          </div>
-          <div className="flex w-full flex-col gap-3 rounded-lg border-t-4 border-pink-700 bg-box px-5 py-4 text-white shadow-sm">
-            <h1 className="text-lg font-medium">Okul Kulüpleri</h1>
-            <div className="flex flex-1 items-center justify-between gap-8 md:gap-4 lg:gap-3">
-              <button name="previous" onClick={handleSelect}>
-                <TfiAngleLeft size={25} />
-              </button>
-              <div className="flex justify-around gap-6 md:gap-1 lg:gap-6">
-                <div className="avatar flex items-center">
-                  <div className="h-12 w-12 rounded-xl lg:h-20 lg:w-20">
-                    <Image
-                      src="/images/tech.jpeg"
-                      alt="tech"
-                      width={100}
-                      height={100}
-                    />
-                  </div>
-                </div>
-                <div key={hardClubs[selected]?.id} className="flex flex-col">
-                  <h2 className="text-center text-lg">
-                    {hardClubs[selected]?.title}
-                  </h2>
-                  <p className="hidden text-sm font-light sm-m:block md:hidden lg:block">
-                    {hardClubs[selected]?.body.slice(0, 80) + "..."}
-                  </p>
-                </div>
-              </div>
-              <button name="next" onClick={handleSelect}>
-                <TfiAngleRight size={25} />
-              </button>
-            </div>
-          </div>
-          <div className="flex w-full flex-col gap-2 rounded-lg border-t-4 border-cyan-600 bg-box px-5 py-4 text-white shadow-sm">
-            <h1 className="text-lg font-medium">Yemekhane</h1>
-            <div className="flex justify-between">
-              <div className="flex w-full flex-wrap gap-2 lg:w-5/6">
-                {days.map((item) => (
-                  <div
-                    className={`group relative cursor-help text-center ${
-                      item === 5 && "bg-green-700 text-white"
-                    } w-6 rounded-full border-[1px]`}
-                    key={item}
-                  >
-                    {item}
-                    <div className="absolute -left-[235px] -top-[280px] z-50 hidden w-60 rounded-lg border-[1px] bg-white p-4 text-black shadow-md group-hover:block">
-                      {/* TODO Günün Yemeği Eklenecek */}
-                      <h2 className="font-bold">Günün Yemeği (19.12.2022)</h2>
-                      <ul>
-                        <li>Şehriye Çorbası </li>
-                        <li>Etli Nohut</li>
-                        <li>Yemeği Pirinç Pilavı Yoğurt</li>
-                      </ul>
-                      <Image
-                        src="/images/yemek.jpeg"
-                        alt="yemek"
-                        width={300}
-                        height={300}
-                      />
-                    </div>
-                  </div>
-                ))}
-              </div>
-              <FcCloseUpMode
-                size={48}
-                className="hidden self-center justify-self-end lg:block"
-              />
             </div>
           </div>
         </div>
-
-        {/* Experimental */}
       </Layout>
     </>
   );

@@ -13,6 +13,14 @@ import { trpc } from "../utils/trpc";
 import Image from "next/image";
 import Popup from "reactjs-popup";
 import SharePost from "./SharePost";
+import { Fira_Sans_Condensed } from "@next/font/google";
+
+const dosis = Fira_Sans_Condensed({
+  weight: ["200", "300", "400", "500", "600", "700", "800"],
+  preload: true,
+  display: "block",
+  subsets: ["latin"],
+});
 
 const Header: FC = () => {
   // If there is session
@@ -38,9 +46,32 @@ const Header: FC = () => {
   //   .useMutation()
   //   .mutateAsync({ name: "Üni. Yorumları" });
 
-  const createCategory = trpc.category.create.useMutation();
-  const deleteAllCategories = trpc.category.deleteAll.useMutation();
-  const deleteAllPosts = trpc.post.removePosts.useMutation();
+  // const createCategory = trpc.category.create.useMutation();
+  // const deleteAllCategories = trpc.category.deleteAll.useMutation();
+  // const deleteAllPosts = trpc.post.removePosts.useMutation();
+
+  const menuItems = [
+    {
+      id: 0,
+      name: "Anasayfa",
+      url: "/",
+    },
+    {
+      id: 1,
+      name: "Hakkımızda",
+      url: "/about",
+    },
+    {
+      id: 2,
+      name: "İletişim",
+      url: "/contact",
+    },
+    {
+      id: 3,
+      name: "Deneme",
+      url: "/contact",
+    },
+  ];
 
   return (
     <>
@@ -71,20 +102,13 @@ const Header: FC = () => {
       >
         Postları Sil
       </button> */}
-      <div className="hidden w-full items-center justify-between gap-2 text-white sm:flex">
-        <div className="flex flex-1 justify-between gap-4 sm:flex-none md:gap-10 ">
-          <label htmlFor="searchBar" className="relative">
-            <input
-              type="text"
-              className={`${
-                !session && "md:w-80"
-              } w-full rounded-2xl bg-box px-8 py-2 pl-4 pr-10 text-white shadow-sm outline-none lg:w-96`}
-              id="searchBar"
-              placeholder="Ara"
-            />
-            <BiSearchAlt className="absolute top-1/2 right-2 h-full -translate-y-1/2 transform text-2xl text-white" />
-          </label>
-          {session && (
+      <header
+        className={`flex ${dosis.className} h-16 items-center border-b-[1px] px-6 text-primary`}
+      >
+        <div className="flex h-full items-center text-3xl font-medium">
+          Sosyal Üniversite
+        </div>
+        {/* {session && (
             <Popup
               trigger={
                 <button
@@ -103,9 +127,33 @@ const Header: FC = () => {
             >
               <SharePost />
             </Popup>
-          )}
+          )} */}
+        {/* Menu elemanları; Anasayfa Hakkımızda İletişim */}
+        <div className="flex flex-1 items-center justify-evenly">
+          <ul className="flex">
+            {menuItems.map((item) => (
+              <a
+                key={item.id}
+                className="flex h-16 w-32 cursor-pointer items-center justify-center border-r-[1px] tracking-wider duration-100 first:border-l-[1px] last:border-r-[1px] hover:bg-zinc-50"
+              >
+                {item.name}
+              </a>
+            ))}
+          </ul>
+
+          <label htmlFor="searchBar" className="relative h-full">
+            <input
+              type="text"
+              className={`${
+                !session && "md:w-80"
+              } w-full rounded-md bg-[#f3f6f9] px-8 py-2 pl-4 pr-10 text-black  outline-none placeholder:text-slate-400 lg:w-96`}
+              id="searchBar"
+              placeholder="Ara"
+            />
+            <BiSearchAlt className="absolute top-1/2 right-2 h-full -translate-y-1/2 transform text-2xl text-slate-400" />
+          </label>
         </div>
-        <div className="hidden justify-end sm:flex md:flex-1">
+        <div className="hidden h-full items-center text-white sm:flex">
           {session ? (
             <div className="group relative rounded-full bg-slate-800">
               {session?.user?.image ? (
@@ -147,17 +195,16 @@ const Header: FC = () => {
               </div>
             </div>
           ) : (
-            <Link
-              href="/auth"
-              className="h-full rounded-lg bg-[#ef476f] py-2 px-4"
-            >
-              Giriş Yap
+            <Link href="/auth">
+              <button className="rounded-lg bg-[#ef476f] py-2 px-4">
+                Giriş Yap
+              </button>
             </Link>
           )}
         </div>
-      </div>
+      </header>
       {/* SmallScreen */}
-      <div className="sticky top-0 flex h-14 w-full items-center justify-between bg-slate-200 px-2 shadow-sm shadow-slate-500 sm:hidden">
+      {/* <div className="sticky top-0 flex h-14 w-full items-center justify-between bg-slate-200 px-2 shadow-sm shadow-slate-500 sm:hidden">
         <div className="flex h-full items-center justify-between">
           <Link href="/">
             <div className="rounded-full bg-gradient-to-tr from-blue-700 via-purple-500 to-orange-700 px-4 py-2">
@@ -170,7 +217,6 @@ const Header: FC = () => {
           </Link>
         </div>
         <>
-          {/* Burger Menu */}
           <div
             onClick={menuHandler}
             className="relative z-50 flex cursor-pointer flex-col items-center justify-center gap-2"
@@ -195,7 +241,6 @@ const Header: FC = () => {
           >
             {isMobileMenuContentOpen && (
               <div className="flex h-full w-full flex-col items-center justify-evenly">
-                {/* Register and Login */}
                 <div className="flex gap-4 pt-14 font-bold text-white">
                   <Link href="/auth">
                     <button className="rounded-lg bg-[#B21EED] px-10 py-2">
@@ -213,7 +258,7 @@ const Header: FC = () => {
             )}
           </div>
         </>
-      </div>
+      </div> */}
     </>
   );
 };
