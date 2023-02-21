@@ -15,6 +15,7 @@ import Stats from "../components/Stats";
 import { useState } from "react";
 import Link from "next/link";
 import { trpc } from "../utils/trpc";
+import Image from "next/image";
 
 type Props = {
   user: User;
@@ -78,32 +79,28 @@ const Home: NextPage<Props> = () => {
       time: "09:00",
       yer: "Kantin",
       body: "Lorem Ipsum dolar apset sit amet consectetur adipisicing elit. Quisquam, quod.",
-      image:
-        "https://c4.wallpaperflare.com/wallpaper/727/456/27/breakfast-4k-windows-for-desktop-wallpaper-preview.jpg",
+      image: "/images/bfast.jpg",
     },
     konser: {
       title: "Pinhani Konseri",
       time: "10:00",
       yer: "Null AVM Merkezi",
       body: "Lorem Ipsum dolar apset sit amet consectetur adipisicing elit. Quisquam, quod.",
-      image:
-        "https://cdn.odatv4.com/images/2022_09/2022_09_30/odatv_image_88__0de4055ba77b45.jpg",
+      image: "/images/konser.webp",
     },
     sinema: {
       title: "Sinema",
       time: "11:00",
       yer: "Sinema Salonu",
       body: "Lorem Ipsum dolar apset sit amet consectetur adipisicing elit. Quisquam, quod.",
-      image:
-        "https://c4.wallpaperflare.com/wallpaper/727/456/27/breakfast-4k-windows-for-desktop-wallpaper-preview.jpg",
+      image: "/images/bfast.jpg",
     },
     gezi: {
       title: "Gezi",
       time: "12:00",
       yer: "Seul Parkı",
       body: "Lorem Ipsum dolar apset sit amet consectetur adipisicing elit. Quisquam, quod.",
-      image:
-        "https://c4.wallpaperflare.com/wallpaper/727/456/27/breakfast-4k-windows-for-desktop-wallpaper-preview.jpg",
+      image: "/images/bfast.jpg",
     },
   };
 
@@ -254,7 +251,12 @@ const Home: NextPage<Props> = () => {
               <div className="flex justify-around gap-6 md:gap-1 lg:gap-6">
                 <div className="avatar flex items-center">
                   <div className="h-12 w-12 rounded-xl lg:h-20 lg:w-20">
-                    <img src="https://placeimg.com/192/192/tech" />
+                    <Image
+                      src="/images/tech.jpeg"
+                      alt="tech"
+                      width={100}
+                      height={100}
+                    />
                   </div>
                 </div>
                 <div key={hardClubs[selected]?.id} className="flex flex-col">
@@ -291,9 +293,11 @@ const Home: NextPage<Props> = () => {
                         <li>Etli Nohut</li>
                         <li>Yemeği Pirinç Pilavı Yoğurt</li>
                       </ul>
-                      <img
-                        src="https://sks.samsun.edu.tr/wp-content/uploads/sites/6/2023/01/WhatsApp-Image-2023-01-02-at-10.02.51-768x576.jpeg"
+                      <Image
+                        src="/images/yemek.jpeg"
                         alt="yemek"
+                        width={300}
+                        height={300}
                       />
                     </div>
                   </div>

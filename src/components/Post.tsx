@@ -1,9 +1,9 @@
 import { Category, User } from "@prisma/client";
 import { ImDownload } from "react-icons/im";
-import { trpc } from "../utils/trpc";
 import Link from "next/link";
 
 import { TbPencil } from "react-icons/tb";
+import Image from "next/image";
 
 type PostType = {
   id: string;
@@ -20,8 +20,6 @@ type PostType = {
 };
 
 const Post = ({ post }: { post: PostType }) => {
-  const ctx = trpc.useContext();
-
   return (
     <div className="break-inside relative flex w-full flex-col justify-between space-y-3 overflow-hidden rounded-xl bg-white p-4 text-sm text-black dark:bg-slate-800 dark:text-white">
       <div className="flex flex-col gap-3">
@@ -66,24 +64,30 @@ const Post = ({ post }: { post: PostType }) => {
           <dt className="sr-only">Yorum Yapanlar</dt>
           <dd className="flex justify-start -space-x-1.5">
             <a href="#" className="-m-1 inline-block">
-              <img
+              <Image
                 className="h-7 w-7 rounded-full ring-2 ring-white dark:ring-slate-800"
-                src="https://randomuser.me/api/portraits/women/46.jpg"
+                src="/images/43.jpg"
                 alt="avatar"
+                width={28}
+                height={28}
               />
             </a>
             <a href="#" className="-m-1 inline-block">
-              <img
+              <Image
                 className="h-7 w-7 rounded-full ring-2 ring-white dark:ring-slate-800"
-                src="https://randomuser.me/api/portraits/men/45.jpg"
+                src="/images/45.jpg"
                 alt="avatar"
+                width={28}
+                height={28}
               />
             </a>
             <a href="#" className="-m-1 inline-block">
-              <img
+              <Image
                 className="h-7 w-7 rounded-full ring-2 ring-white dark:ring-slate-800"
-                src="https://randomuser.me/api/portraits/women/47.jpg"
+                src="/images/463.jpg"
                 alt="avatar"
+                width={28}
+                height={28}
               />
             </a>
             <span className="-m-1 inline-block rounded-full ring-2 ring-white dark:ring-slate-800">

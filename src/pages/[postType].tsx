@@ -5,6 +5,7 @@ import { TbPencil } from "react-icons/tb";
 import Layout from "../components/Layout";
 import { MdOutlineKeyboardArrowDown, MdSort } from "react-icons/md";
 import { useRouter } from "next/router";
+import Image from "next/image";
 
 const Post = () => {
   const { query } = useRouter();
@@ -74,24 +75,30 @@ const Post = () => {
                     <dt className="sr-only">Yorum Yapanlar</dt>
                     <dd className="flex justify-start -space-x-1.5">
                       <a href="#" className="-m-1 inline-block">
-                        <img
+                        <Image
                           className="h-7 w-7 rounded-full ring-2 ring-white dark:ring-slate-800"
-                          src="https://randomuser.me/api/portraits/women/46.jpg"
+                          src="/images/43.jpg"
                           alt="avatar"
+                          width={28}
+                          height={28}
                         />
                       </a>
                       <a href="#" className="-m-1 inline-block">
-                        <img
+                        <Image
                           className="h-7 w-7 rounded-full ring-2 ring-white dark:ring-slate-800"
-                          src="https://randomuser.me/api/portraits/men/45.jpg"
+                          src="/images/45.jpg"
                           alt="avatar"
+                          width={28}
+                          height={28}
                         />
                       </a>
                       <a href="#" className="-m-1 inline-block">
-                        <img
+                        <Image
                           className="h-7 w-7 rounded-full ring-2 ring-white dark:ring-slate-800"
-                          src="https://randomuser.me/api/portraits/women/47.jpg"
+                          src="/images/46.jpg"
                           alt="avatar"
+                          width={28}
+                          height={28}
                         />
                       </a>
                       <span className="-m-1 inline-block rounded-full ring-2 ring-white dark:ring-slate-800">

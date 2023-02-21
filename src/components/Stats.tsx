@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { AiOutlineFile, AiOutlineHeart } from "react-icons/ai";
 
 const Stats = () => {
@@ -49,10 +50,12 @@ const Stats = () => {
             </div>
           </div>
           <div className="hidden flex-shrink-0 items-center lg:flex">
-            <img
+            <Image
               alt="avatar"
               className="mask mask-heart h-20 w-20"
-              src="https://placeimg.com/192/192/people"
+              src="/images/43.jpg"
+              width={70}
+              height={70}
             />
           </div>
         </div>
