@@ -8,7 +8,6 @@ import {
   RiSettings3Line,
   RiLogoutCircleLine,
 } from "react-icons/ri";
-import LeftSideBar from "./LeftSideBar";
 import { trpc } from "../utils/trpc";
 import Image from "next/image";
 import Popup from "reactjs-popup";
@@ -105,7 +104,7 @@ const Header: FC = () => {
       <header
         className={`flex ${dosis.className} h-16 items-center border-b-[1px] px-6 text-primary`}
       >
-        <div className="flex h-full items-center text-3xl font-medium tracking-wider">
+        <div className="flex h-full items-center text-3xl font-light tracking-wider">
           Sosyal Üniversite
         </div>
         {/* {session && (
@@ -196,7 +195,7 @@ const Header: FC = () => {
             </div>
           ) : (
             <Link href="/auth">
-              <button className="rounded-lg bg-[#ef476f] py-2 px-4">
+              <button className="rounded-lg bg-orange-500 py-2 px-4">
                 Giriş Yap
               </button>
             </Link>
