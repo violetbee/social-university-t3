@@ -109,7 +109,7 @@ export const postRouter = router({
           type:
             input.query === ""
               ? undefined
-              : input.query === "dokumanlar"
+              : input.query === "DOC"
               ? "DOC"
               : "TEXT",
         },

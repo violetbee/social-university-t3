@@ -105,7 +105,7 @@ const Header: FC = () => {
       <header
         className={`flex ${dosis.className} h-16 items-center border-b-[1px] px-6 text-primary`}
       >
-        <div className="flex h-full items-center text-3xl font-medium">
+        <div className="flex h-full items-center text-3xl font-medium tracking-wider">
           Sosyal Üniversite
         </div>
         {/* {session && (
@@ -134,7 +134,7 @@ const Header: FC = () => {
             {menuItems.map((item) => (
               <a
                 key={item.id}
-                className="flex h-16 w-32 cursor-pointer items-center justify-center border-r-[1px] tracking-wider duration-100 first:border-l-[1px] last:border-r-[1px] hover:bg-zinc-50"
+                className="flex h-16 w-32 cursor-pointer items-center justify-center border-r-[1px] tracking-wider duration-100 first:border-l-[1px] last:border-r-[1px] hover:bg-[#F7F7F7]"
               >
                 {item.name}
               </a>

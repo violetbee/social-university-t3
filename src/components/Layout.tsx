@@ -14,7 +14,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     <>
       <Header />
       <main
-        className={`${dosis.className} flex h-[calc(100vh_-_64px)] gap-2 bg-background`}
+        className={`${dosis.className} flex h-[calc(100vh_-_64px)] bg-background`}
       >
         <LeftSideBar />
         {children}
