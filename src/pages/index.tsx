@@ -57,7 +57,7 @@ const Home: NextPage<Props> = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Layout>
-        <div className="mx-auto flex w-full overflow-y-auto bg-[#F7F7F7]">
+        <div className="flex w-full overflow-y-auto bg-[#F7F7F7]">
           <div className="w-full space-y-10 p-2">
             {/* <PostsAndFiles />
             <Events /> */}

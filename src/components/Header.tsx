@@ -12,9 +12,9 @@ import { trpc } from "../utils/trpc";
 import Image from "next/image";
 import Popup from "reactjs-popup";
 import SharePost from "./SharePost";
-import { Fira_Sans_Condensed } from "@next/font/google";
+import { Asap_Condensed } from "@next/font/google";
 
-const dosis = Fira_Sans_Condensed({
+const dosis = Asap_Condensed({
   weight: ["200", "300", "400", "500", "600", "700", "800"],
   preload: true,
   display: "block",
@@ -104,8 +104,9 @@ const Header: FC = () => {
       <header
         className={`flex ${dosis.className} h-16 items-center border-b-[1px] px-6 text-primary`}
       >
-        <div className="flex h-full items-center text-3xl font-light tracking-wider">
-          Sosyal Üniversite
+        <div className="flex h-full items-center text-3xl font-semibold tracking-widest">
+          <p className="bg-[#333] px-1 text-white">Sosyal</p>
+          <p className="text-[#333]">Üniversite</p>
         </div>
         {/* {session && (
             <Popup

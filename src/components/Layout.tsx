@@ -1,8 +1,8 @@
-import { Fira_Sans_Condensed } from "@next/font/google";
+import { Asap_Condensed } from "@next/font/google";
 import LeftSideBar from "./LeftSideBar";
 import Header from "./Header";
 
-const dosis = Fira_Sans_Condensed({
+const dosis = Asap_Condensed({
   weight: ["200", "300", "400", "500", "600", "700", "800"],
   preload: true,
   display: "block",
