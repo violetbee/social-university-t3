@@ -104,10 +104,13 @@ const Header: FC = () => {
       <header
         className={`flex ${dosis.className} h-16 items-center border-b-[1px] px-6 text-primary`}
       >
-        <div className="flex h-full items-center text-3xl font-semibold tracking-widest">
+        <Link
+          href={"/"}
+          className="flex h-full items-center text-3xl font-semibold tracking-widest"
+        >
           <p className="bg-[#333] px-1 text-white">Sosyal</p>
           <p className="text-[#333]">Üniversite</p>
-        </div>
+        </Link>
         {/* {session && (
             <Popup
               trigger={
@@ -132,12 +135,13 @@ const Header: FC = () => {
         <div className="flex flex-1 items-center justify-evenly">
           <ul className="flex">
             {menuItems.map((item) => (
-              <a
+              <Link
+                href={item.url}
                 key={item.id}
                 className="flex h-16 w-32 cursor-pointer items-center justify-center border-r-[1px] tracking-wider duration-100 first:border-l-[1px] last:border-r-[1px] hover:bg-[#F7F7F7]"
               >
                 {item.name}
-              </a>
+              </Link>
             ))}
           </ul>
 

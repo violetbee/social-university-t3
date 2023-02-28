@@ -84,7 +84,7 @@ const Post = ({ post }: { post: PostType }) => {
             <a href="#" className="-m-1 inline-block">
               <Image
                 className="h-7 w-7 rounded-full ring-2 ring-white dark:ring-slate-800"
-                src="/images/463.jpg"
+                src="/images/46.jpg"
                 alt="avatar"
                 width={28}
                 height={28}

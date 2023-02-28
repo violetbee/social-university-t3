@@ -57,8 +57,8 @@ const Home: NextPage<Props> = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Layout>
-        <div className="flex w-full overflow-y-auto bg-[#F7F7F7]">
-          <div className="w-full space-y-10 p-2">
+        <div className="flex w-full">
+          <div className="w-full space-y-10">
             {/* <PostsAndFiles />
             <Events /> */}
             <section className="relative h-56 bg-white shadow-sm">
@@ -450,6 +450,10 @@ export const getServerSideProps = async (
       },
     });
     return {
+      redirect: {
+        destination: "/dashboard",
+        permanent: false,
+      },
       props: {
         user,
       },

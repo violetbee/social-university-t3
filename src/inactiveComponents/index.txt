@@ -14,7 +14,7 @@ type Props = {
 };
 
 const Home: NextPage<Props> = () => {
-  const { data } = trpc.post.getAllPosts.useQuery();
+  // const { data } = trpc.post.getAllPosts.useQuery();
 
   return (
     <>
