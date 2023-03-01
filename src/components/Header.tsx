@@ -52,22 +52,22 @@ const Header: FC = () => {
   const menuItems = [
     {
       id: 0,
-      name: "Anasayfa",
+      name: "ANASAYFA",
       url: "/",
     },
     {
       id: 1,
-      name: "Hakkımızda",
+      name: "HAKKIMIZDA",
       url: "/about",
     },
     {
       id: 2,
-      name: "İletişim",
+      name: "İLETİŞİM",
       url: "/contact",
     },
     {
       id: 3,
-      name: "Deneme",
+      name: "ŞİKAYET",
       url: "/contact",
     },
   ];
@@ -102,14 +102,14 @@ const Header: FC = () => {
         Postları Sil
       </button> */}
       <header
-        className={`flex ${dosis.className} h-16 items-center border-b-2 border-black px-6 text-primary`}
+        className={`flex ${dosis.className} h-16 items-center border-b-2 border-black px-6 text-[#222]`}
       >
         <Link
           href={"/"}
           className="flex h-full items-center text-3xl font-semibold tracking-widest"
         >
-          <p className="bg-[#333] px-1 text-white">Sosyal</p>
-          <p className="text-[#333]">Üniversite</p>
+          <p className="bg-[#222] px-1 text-white">Sosyal</p>
+          <p className="text-[#222]">Üniversite</p>
         </Link>
         {/* {session && (
             <Popup
@@ -138,9 +138,9 @@ const Header: FC = () => {
               <Link
                 href={item.url}
                 key={item.id}
-                className="group hidden h-16 w-24 cursor-pointer items-center justify-center border-r-2 border-black duration-300 first:border-l-2 last:border-r-2 lg:flex xl:w-32"
+                className="group hidden h-16 w-24 cursor-pointer items-center justify-center  duration-300 lg:flex xl:w-32"
               >
-                <p className="font-medium tracking-wider duration-150 group-hover:translate-x-1 group-hover:-translate-y-1">
+                <p className="text-lg font-medium tracking-wider duration-150 group-hover:translate-x-[1px] group-hover:-translate-y-[1px]">
                   {item.name}
                 </p>
               </Link>

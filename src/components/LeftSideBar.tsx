@@ -25,7 +25,7 @@ const LeftSideBar: FC = () => {
                 <Link
                   href={`/gonderiler/${category.slug}`}
                   key={category.id}
-                  className={`font-light tracking-wide text-[#333] duration-150 hover:bg-[#333] ${
+                  className={`font-light tracking-wide text-[#222] duration-150 hover:bg-[#222] ${
                     query.category &&
                     query.category === category.slug &&
                     "bg-[#B21EED] !text-white"
@@ -37,18 +37,18 @@ const LeftSideBar: FC = () => {
           </ul>
         </div>
         <div className={`${abel.className} w-full tracking-wide`}>
-          <ul className="space-y-3 font-thin text-[#333]">
-            <li className="flex cursor-pointer items-center gap-2 p-2 duration-150 hover:bg-[#333] hover:text-white">
+          <ul className="space-y-3 font-thin text-[#222]">
+            <li className="flex cursor-pointer items-center gap-2 p-2 duration-150 hover:bg-[#222] hover:text-white">
               <div className="h-2 w-2 rounded-full bg-blue-700 " />
               <p className={`font-light tracking-wider `}>
                 Üniversite hakkında
               </p>
             </li>
-            <li className="flex cursor-pointer items-center gap-2 p-2 duration-150 hover:bg-[#333] hover:text-white">
+            <li className="flex cursor-pointer items-center gap-2 p-2 duration-150 hover:bg-[#222] hover:text-white">
               <div className=" h-2 w-2 rounded-full bg-red-700" />
               Üniversitem nerede?
             </li>
-            <li className="flex cursor-pointer items-center gap-2 p-2 duration-150 hover:bg-[#333] hover:text-white">
+            <li className="flex cursor-pointer items-center gap-2 p-2 duration-150 hover:bg-[#222] hover:text-white">
               <div className=" h-2 w-2 rounded-full bg-slate-700" />
               Nasıl ulaşırım?
             </li>

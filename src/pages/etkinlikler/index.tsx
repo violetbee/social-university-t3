@@ -8,7 +8,7 @@ const Portal = () => {
   return (
     <Layout>
       <div className="mx-auto h-full">
-        <h1 className="px-4 py-3 pb-2 text-3xl font-semibold text-[#333]">
+        <h1 className="px-4 py-3 pb-2 text-3xl font-semibold text-[#222]">
           Etkinlikler
         </h1>
         <div className="h-[2px] w-full bg-black" />
@@ -26,11 +26,11 @@ const Portal = () => {
           columnClassName="my-masonry-grid_column"
         >
           <div className="group relative mx-auto mb-5 h-44 w-72 cursor-pointer ">
-            <div className="absolute top-0 right-0 h-full w-full rounded-lg bg-[#333] shadow-sm " />
-            <div className="absolute -top-1 -right-1 h-full w-full rounded-lg border-[1px] border-[#333] bg-white shadow-sm duration-200 group-hover:top-0 group-hover:right-0">
+            <div className="absolute top-0 right-0 h-full w-full rounded-lg bg-[#222] shadow-sm " />
+            <div className="absolute -top-1 -right-1 h-full w-full rounded-lg border-[1px] border-[#222] bg-white shadow-sm duration-200 group-hover:top-0 group-hover:right-0">
               <div className="flex h-full w-full items-center justify-center">
                 <div className="flex flex-col items-center justify-center">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#333]">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#222]">
                     <svg
                       className="h-6 w-6 text-white"
                       xmlns="http://www.w3.org/2000/svg"
@@ -51,8 +51,8 @@ const Portal = () => {
             </div>
           </div>
           <div className="group mx-auto mb-5 w-72">
-            <div className=" rounded-lg bg-[#333] shadow-sm">
-              <div className="relative flex -translate-y-1 translate-x-1 flex-col rounded-lg border-[1px] border-[#333] bg-white shadow-sm duration-200 group-hover:translate-y-0 group-hover:translate-x-0">
+            <div className=" rounded-lg bg-[#222] shadow-sm">
+              <div className="relative flex -translate-y-1 translate-x-1 flex-col rounded-lg border-[1px] border-[#222] bg-white shadow-sm duration-200 group-hover:translate-y-0 group-hover:translate-x-0">
                 <Image
                   src="/images/konser.webp"
                   alt=""
@@ -127,8 +127,8 @@ const Portal = () => {
             </div>
           </div>
           <div className="group mx-auto mb-5 w-72">
-            <div className=" rounded-lg bg-[#333] shadow-sm">
-              <div className="relative flex -translate-y-1 translate-x-1 flex-col rounded-lg border-[1px] border-[#333] bg-white shadow-sm duration-200 group-hover:translate-y-0 group-hover:translate-x-0">
+            <div className=" rounded-lg bg-[#222] shadow-sm">
+              <div className="relative flex -translate-y-1 translate-x-1 flex-col rounded-lg border-[1px] border-[#222] bg-white shadow-sm duration-200 group-hover:translate-y-0 group-hover:translate-x-0">
                 <Image
                   src="/images/konser.webp"
                   alt=""
@@ -203,8 +203,8 @@ const Portal = () => {
             </div>
           </div>
           <div className="group mx-auto mb-5 w-72">
-            <div className=" rounded-lg bg-[#333] shadow-sm">
-              <div className="relative flex -translate-y-1 translate-x-1 flex-col rounded-lg border-[1px] border-[#333] bg-white shadow-sm duration-200 group-hover:translate-y-0 group-hover:translate-x-0">
+            <div className=" rounded-lg bg-[#222] shadow-sm">
+              <div className="relative flex -translate-y-1 translate-x-1 flex-col rounded-lg border-[1px] border-[#222] bg-white shadow-sm duration-200 group-hover:translate-y-0 group-hover:translate-x-0">
                 <Image
                   src="/images/konser.webp"
                   alt=""
@@ -280,8 +280,8 @@ const Portal = () => {
           </div>
 
           {/* <div className="group mb-5 w-72">
-            <div className="w-full rounded-lg bg-[#333] shadow-sm">
-              <div className="flex -translate-y-1 translate-x-1 flex-col rounded-lg border-[1px] border-[#333] bg-white shadow-sm duration-200 group-hover:translate-y-0 group-hover:translate-x-0">
+            <div className="w-full rounded-lg bg-[#222] shadow-sm">
+              <div className="flex -translate-y-1 translate-x-1 flex-col rounded-lg border-[1px] border-[#222] bg-white shadow-sm duration-200 group-hover:translate-y-0 group-hover:translate-x-0">
                 <h1 className="px-3 py-2 text-lg font-medium leading-6 tracking-wider">
                   Harika bir gönderi!
                 </h1>
