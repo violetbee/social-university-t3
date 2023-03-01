@@ -16,7 +16,7 @@ const LeftSideBar: FC = () => {
   const { query } = useRouter();
 
   return (
-    <div className="flex w-80 flex-col justify-between gap-6 overflow-y-auto border-r-[1px]">
+    <div className="hidden w-80 flex-col justify-between gap-6 overflow-y-auto border-r-2 border-black lg:flex">
       <div className="flex w-full flex-col gap-6">
         <div className={`w-full ${abel.className} mt-2`}>
           <ul className="flex flex-col gap-2">

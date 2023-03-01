@@ -102,7 +102,7 @@ const Header: FC = () => {
         Postları Sil
       </button> */}
       <header
-        className={`flex ${dosis.className} h-16 items-center border-b-[1px] px-6 text-primary`}
+        className={`flex ${dosis.className} h-16 items-center border-b-2 border-black px-6 text-primary`}
       >
         <Link
           href={"/"}
@@ -138,9 +138,11 @@ const Header: FC = () => {
               <Link
                 href={item.url}
                 key={item.id}
-                className="flex h-16 w-32 cursor-pointer items-center justify-center border-r-[1px] tracking-wider duration-100 first:border-l-[1px] last:border-r-[1px] hover:bg-[#F7F7F7]"
+                className="group hidden h-16 w-24 cursor-pointer items-center justify-center border-r-2 border-black duration-300 first:border-l-2 last:border-r-2 lg:flex xl:w-32"
               >
-                {item.name}
+                <p className="font-medium tracking-wider duration-150 group-hover:translate-x-1 group-hover:-translate-y-1">
+                  {item.name}
+                </p>
               </Link>
             ))}
           </ul>
@@ -148,9 +150,7 @@ const Header: FC = () => {
           <label htmlFor="searchBar" className="relative h-full">
             <input
               type="text"
-              className={`${
-                !session && "md:w-80"
-              } w-full rounded-md bg-[#f3f6f9] px-8 py-2 pl-4 pr-10 text-black  outline-none placeholder:text-slate-400 lg:w-96`}
+              className={`w-full rounded-md border-2 border-black bg-[#f3f6f9] px-8 py-2 pl-4 pr-10 text-black  outline-none placeholder:text-slate-400 md:w-80  xl:w-96`}
               id="searchBar"
               placeholder="Ara"
             />
