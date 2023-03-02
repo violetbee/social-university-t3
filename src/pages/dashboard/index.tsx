@@ -12,7 +12,6 @@ const Dashboard = () => {
         <CategorySearch />
         <Announcements />
         <Events itemPiece={5} />
-        <Events itemPiece={5} />
       </div>
     </Layout>
   );

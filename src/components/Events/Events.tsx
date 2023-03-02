@@ -1,11 +1,14 @@
 import Masonry from "react-masonry-css";
 import Event from "./Event";
+import { useState } from "react";
 
 interface Props {
   itemPiece?: number;
 }
 
 const Events = ({ itemPiece }: Props) => {
+  const [isEventOpen, setisEventOpen] = useState<boolean>(true);
+
   return (
     <div className="h-full">
       <div className="flex items-center pb-5">
@@ -22,11 +25,25 @@ const Events = ({ itemPiece }: Props) => {
             fill="currentColor"
           >
             <path
-              fill-rule="evenodd"
+              fillRule="evenodd"
               d="M3 3a1 1 0 011 1v12a1 1 0 11-2 0V4a1 1 0 011-1zm4 0a1 1 0 011 1v12a1 1 0 11-2 0V4a1 1 0 011-1zm4 0a1 1 0 011 1v12a1 1 0 11-2 0V4a1 1 0 011-1zm4 0a1 1 0 011 1v12a1 1 0 11-2 0V4a1 1 0 011-1z"
-              clip-rule="evenodd"
+              clipRule="evenodd"
             />
           </svg>
+        </button>
+        <div className="w-2 border-t-[1px] border-black"></div>
+
+        <button className="mx-4 flex-shrink border-2 border-black bg-black py-[1px] px-8 text-lg font-medium text-white ">
+          Daha Fazlasını Gör
+        </button>
+        <div className="w-2 border-t-[1px] border-black"></div>
+        <button
+          onClick={() => {
+            setisEventOpen(!isEventOpen);
+          }}
+          className="mx-4 w-20 flex-shrink border-2 border-black bg-white py-[1px] text-lg font-medium text-black "
+        >
+          {isEventOpen ? "Gizle" : "Göster"}
         </button>
         <div className="w-2 border-t-[1px] border-black"></div>
       </div>
@@ -34,16 +51,18 @@ const Events = ({ itemPiece }: Props) => {
         breakpointCols={{
           default: 5,
           2450: 5,
-          1800: 4,
-          1500: 3,
-          1180: 2,
+          1854: 4,
+          1565: 3,
+          1223: 2,
           700: 1,
         }}
         className="my-masonry-grid"
         columnClassName="my-masonry-grid_column"
       >
         {itemPiece
-          ? [...Array(itemPiece)].map((_, i) => <Event key={i} />)
+          ? [...Array(itemPiece)].map((_, i) => (
+              <Event isOpen={isEventOpen} key={i} />
+            ))
           : [...Array(12)].map((_, i) => <Event key={i} />)}
 
         {/* <div className="group mb-5 w-72">
