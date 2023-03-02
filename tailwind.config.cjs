@@ -11,7 +11,7 @@ module.exports = {
         "lg-m": "490px",
       },
       colors: {
-        background: "white", //#001219 dark
+        background: "#f4f4f0", //#001219 dark
         primary: "#32445a", //#19212e dark
         secondary: "#334756", //#334756 dark
         accent: "#295270",

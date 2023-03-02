@@ -52,22 +52,22 @@ const Header: FC = () => {
   const menuItems = [
     {
       id: 0,
-      name: "ANASAYFA",
+      name: "Özellikler",
       url: "/",
     },
     {
       id: 1,
-      name: "HAKKIMIZDA",
+      name: "Hakkımızda",
       url: "/about",
     },
     {
       id: 2,
-      name: "İLETİŞİM",
+      name: "İletişim",
       url: "/contact",
     },
     {
       id: 3,
-      name: "ŞİKAYET",
+      name: "Şikayet",
       url: "/contact",
     },
   ];
@@ -102,11 +102,11 @@ const Header: FC = () => {
         Postları Sil
       </button> */}
       <header
-        className={`flex ${dosis.className} h-16 items-center border-b-2 border-black px-6 text-[#222]`}
+        className={`flex ${dosis.className} h-20 items-center border-b-2 border-black px-6 text-[#222]`}
       >
         <Link
           href={"/"}
-          className="flex h-full items-center text-3xl font-semibold tracking-widest"
+          className="flex h-full items-center text-4xl font-semibold tracking-widest"
         >
           <p className="bg-[#222] px-1 text-white">Sosyal</p>
           <p className="text-[#222]">Üniversite</p>
@@ -133,29 +133,19 @@ const Header: FC = () => {
           )} */}
         {/* Menu elemanları; Anasayfa Hakkımızda İletişim */}
         <div className="flex flex-1 items-center justify-evenly">
-          <ul className="flex">
+          <ul className="flex items-center">
             {menuItems.map((item) => (
               <Link
                 href={item.url}
                 key={item.id}
-                className="group hidden h-16 w-24 cursor-pointer items-center justify-center  duration-300 lg:flex xl:w-32"
+                className="group hidden h-20 w-24 cursor-default items-center justify-center duration-300 lg:flex xl:w-32"
               >
-                <p className="text-lg font-medium tracking-wider duration-150 group-hover:translate-x-[1px] group-hover:-translate-y-[1px]">
+                <p className="cursor-pointer pt-1 text-lg tracking-wider after:block after:scale-x-0 after:border-b-[1px] after:border-black after:transition-transform after:content-[''] hover:after:origin-[0%_100%] hover:after:scale-x-105">
                   {item.name}
                 </p>
               </Link>
             ))}
           </ul>
-
-          <label htmlFor="searchBar" className="relative h-full">
-            <input
-              type="text"
-              className={`w-full rounded-md border-2 border-black bg-[#f3f6f9] px-8 py-2 pl-4 pr-10 text-black  outline-none placeholder:text-slate-400 md:w-80  xl:w-96`}
-              id="searchBar"
-              placeholder="Ara"
-            />
-            <BiSearchAlt className="absolute top-1/2 right-2 h-full -translate-y-1/2 transform text-2xl text-slate-400" />
-          </label>
         </div>
         <div className="hidden h-full items-center text-white sm:flex">
           {session ? (

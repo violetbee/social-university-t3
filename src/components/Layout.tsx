@@ -17,13 +17,13 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <>
       <Header />
-      <main
-        className={`${dosis.className} flex h-[calc(100vh_-_64px)] bg-background`}
-      >
-        {data && <LeftSideBar />}
-        <div className="flex w-full flex-col">
-          {data && <University />}
-          <div className="mainCt h-full w-full overflow-y-auto">{children}</div>
+      <main className={`${dosis.className} h-[calc(100vh_-_120px)] `}>
+        {data && <University />}
+        <div className="flex h-full w-full bg-background">
+          {data && <LeftSideBar />}
+          <div className="mainCt mx-auto w-full overflow-y-auto">
+            {children}
+          </div>
         </div>
       </main>
     </>

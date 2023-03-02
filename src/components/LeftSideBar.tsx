@@ -16,9 +16,9 @@ const LeftSideBar: FC = () => {
   const { query } = useRouter();
 
   return (
-    <div className="hidden w-80 flex-col justify-between gap-6 overflow-y-auto border-r-2 border-black lg:flex">
+    <div className="hidden w-80 flex-col justify-between gap-6 overflow-y-auto border-r-[1px] border-black lg:flex">
       <div className="flex w-full flex-col gap-6">
-        <div className={`w-full ${abel.className} mt-2`}>
+        {/* <div className={`w-full ${abel.className}`}>
           <ul className="flex flex-col gap-2">
             {data &&
               data.map((category) => (
@@ -35,7 +35,7 @@ const LeftSideBar: FC = () => {
                 </Link>
               ))}
           </ul>
-        </div>
+        </div> */}
         <div className={`${abel.className} w-full tracking-wide`}>
           <ul className="space-y-3 font-thin text-[#222]">
             <li className="flex cursor-pointer items-center gap-2 p-2 duration-150 hover:bg-[#222] hover:text-white">

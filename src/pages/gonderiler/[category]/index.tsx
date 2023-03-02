@@ -4,6 +4,7 @@ import { prisma } from "../../../server/db/client";
 import { Category, Post as PostType, User } from "@prisma/client";
 import Post from "../../../components/Post";
 import { MdOutlineKeyboardArrowDown, MdSort } from "react-icons/md";
+import CategorySearch from "../../../components/CategorySearch";
 
 type Props = {
   posts: (PostType & {
@@ -16,29 +17,9 @@ type Props = {
 const Category: NextPage<Props> = ({ posts }) => {
   return (
     <Layout>
-      <div className="flex w-full flex-col items-center rounded-lg border-t-4 border-lime-600 bg-box text-white shadow-sm">
-        <div className="flex w-full items-center justify-between px-5 py-4">
-          <p className="text-lg font-[500]">Kullanıcılar neler diyor?</p>
-          <div className="flex items-center gap-1 rounded-md border-[1px]  px-3 py-1 shadow-sm sm-m:px-10 ">
-            <MdSort />
-            <p className="mb-[1px]">Sırala</p>
-            <MdOutlineKeyboardArrowDown />
-          </div>
-        </div>
-        {posts.length > 0 ? (
-          <div className="grid w-full grid-cols-1 gap-3 bg-primary px-4 py-3 lg:grid-cols-2">
-            {posts.slice(0, 4).map(
-              (post): JSX.Element => (
-                <Post post={post} key={post.id} />
-              )
-            )}
-          </div>
-        ) : (
-          <div className="flex w-full items-center justify-center bg-primary py-10">
-            <p className="text-lg font-[500]">Henüz bir gönderi yok.</p>
-          </div>
-        )}
-        <div className="py-4" />
+      <div className="container mx-auto w-full space-y-6 pb-4">
+        <CategorySearch />
+        {/* Gönderileri */}
       </div>
     </Layout>
   );
@@ -109,3 +90,22 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     },
   };
 };
+
+{
+  /* <div className="flex items-center justify-between">
+          <div className="flex items-center space-x-2">
+            <MdSort className="text-2xl" />
+            <p className="text-lg">Sırala</p>
+
+            <div className="flex items-center space-x-2">
+              <MdOutlineKeyboardArrowDown className="text-2xl" />
+              <p className="text-lg">Tarihe Göre</p>
+            </div>
+
+            <div className="flex items-center space-x-2">
+              <MdOutlineKeyboardArrowDown className="text-2xl" />
+              <p className="text-lg">Popülerlik</p>
+            </div>
+          </div>
+        </div> */
+}

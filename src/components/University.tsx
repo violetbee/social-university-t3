@@ -1,10 +1,10 @@
 const University = () => {
   return (
-    <div className="uniSelect flex justify-evenly border-b-2 border-black py-1">
+    <div className="uniSelect flex h-10 items-center justify-evenly border-b-[1px] border-black">
       <p className="text-lg tracking-widest text-white">Samsun Üniversitesi</p>
-      <button className="hidden text-lg tracking-widest text-white md:block">
+      <p className="hidden text-lg tracking-widest text-white md:block">
         Üniversite Değiştirmek İçin Tıklayınız
-      </button>
+      </p>
     </div>
   );
 };
