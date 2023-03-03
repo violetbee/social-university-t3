@@ -43,9 +43,9 @@ html {
 
 .seeMore:hover {
   color: var(--hover-text);
-  transform: translate(-0.25rem, -0.25rem);
+  transform: translate(0.25rem, -0.25rem);
   background: var(--hover-bg);
-  box-shadow: 0.25rem 0.25rem var(--bg);
+  box-shadow: -0.25rem 0.25rem var(--bg);
 }
 
 .seeMore:active {
@@ -54,15 +54,13 @@ html {
 }
 
 .bgFile {
-  background-image: repeating-linear-gradient(
-    45deg,
-    #333333 0,
-    #333333 2px,
-    transparent 0,
-    transparent 50%
-  );
-  background-size: 10px 10px;
   background-color: #0f0f0f;
+  opacity: 1;
+  background: linear-gradient(135deg, #33333355 25%, transparent 25%) -17px 0/
+      34px 34px,
+    linear-gradient(225deg, #333333 25%, transparent 25%) -17px 0/ 34px 34px,
+    linear-gradient(315deg, #33333355 25%, transparent 25%) 0px 0/ 34px 34px,
+    linear-gradient(45deg, #333333 25%, #0f0f0f 25%) 0px 0/ 34px 34px;
 }
 
 .leftCity {

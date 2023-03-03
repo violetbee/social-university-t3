@@ -8,7 +8,7 @@ const Event = ({ isOpen }: Props) => {
   return (
     <div
       className={`mx-auto w-[300px] ${
-        isOpen ? "mb-5 h-[310px] pr-2 pt-2" : "h-0"
+        isOpen ? "mb-5 h-[350px] pr-2 pt-2" : "h-0"
       } overflow-hidden duration-200`}
     >
       <div
@@ -22,15 +22,23 @@ const Event = ({ isOpen }: Props) => {
           className={`h-24 w-full rounded-t-md object-cover`}
         />
         <h1 className="px-3 py-2 text-lg font-semibold leading-6 tracking-wider">
-          Apex Legends Turnuvası
+          Mor ve Ötesi Konseri
         </h1>
         <div className="flex justify-between">
-          <span className="px-3 font-medium">Etkinlik Tarihi:</span>
+          <span className="px-3 font-medium">Başlangıç Tarihi:</span>
           <span className="px-3">21.04.2023</span>
         </div>
         <div className="flex justify-between">
-          <span className="px-3 font-medium">Etkinlik Bitiş Tarihi:</span>
+          <span className="px-3 font-medium">Bitiş Tarihi:</span>
           <span className="px-3">21.04.2023</span>
+        </div>
+        <div className="flex justify-between">
+          <span className="px-3 font-medium">Etkinlik Türü:</span>
+          <span className="px-3">Tiyatro</span>
+        </div>
+        <div className="flex justify-between">
+          <span className="px-3 font-medium">Konum:</span>
+          <span className="px-3">AKM Atatürk Kültür Merkezi</span>
         </div>
 
         <div
@@ -38,29 +46,13 @@ const Event = ({ isOpen }: Props) => {
             "file" === "file" ? "bgFile" : "bgNormal"
           }`}
         >
-          <p className="text-lg font-medium text-white">
-            Bu gönderi 3 adet dosya içermektedir
+          <p className="text-xl font-medium text-white">
+            Ücret: <span className="text-red-400">45 ₺</span>
           </p>
         </div>
         <div className="flex items-center justify-between px-3 pt-2 pb-2">
-          <div className="flex items-center gap-2">
-            <div className="h-12 w-12 lg:mb-0">
-              <Image
-                src="/images/43.jpg"
-                className="h-full w-full overflow-hidden rounded-full shadow"
-                alt=""
-                width={200}
-                height={200}
-              />
-            </div>
-            <div className="flex flex-col">
-              <h1 className="text-sm font-medium">Çağlar Karahüseyin</h1>
-              <p className="text-xs text-gray-500">Yazılım Mühendisliği</p>
-              <p className="text-xs text-gray-500">1 saat önce oluşturuldu</p>
-            </div>
-          </div>
-          <button className="seeMore flex items-center justify-center">
-            <svg
+          <button className="seeMore flex w-full items-center justify-center">
+            {/* <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-6 w-6"
               fill="none"
@@ -73,7 +65,8 @@ const Event = ({ isOpen }: Props) => {
                 strokeWidth="2"
                 d="M9 5l7 7-7 7"
               />
-            </svg>
+            </svg> */}
+            Etkinliği İncele
           </button>
         </div>
       </div>
