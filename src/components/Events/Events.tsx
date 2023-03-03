@@ -11,13 +11,13 @@ const Events = ({ itemPiece }: Props) => {
 
   return (
     <div className="h-full">
-      <div className="flex items-center pb-5">
+      <div className="flex items-center pb-3">
         <div className="w-2 border-t-[1px] border-black"></div>
         <span className="mx-4 flex-shrink text-2xl font-medium text-[#222]">
           Etkinlikler
         </span>
         <div className="flex-grow border-t-[1px] border-black"></div>
-        <button className="mx-4 flex-shrink border-2 border-black bg-black py-[1px] px-8 text-lg font-medium text-white ">
+        <button className="mx-1 flex-shrink border-2 border-black bg-black py-[1px] px-4 text-lg font-medium text-white md:mx-4 md:px-8 ">
           {/* Sort Events SVG */}
           <svg
             className="h-6 w-6 text-white"
@@ -33,15 +33,13 @@ const Events = ({ itemPiece }: Props) => {
         </button>
         <div className="w-2 border-t-[1px] border-black"></div>
 
-        <button className="mx-4 flex-shrink border-2 border-black bg-black py-[1px] px-8 text-lg font-medium text-white ">
-          Daha Fazlasını Gör
-        </button>
+        <button className="mx-1 flex-shrink border-2 border-black bg-black py-[1px] px-4 text-lg font-medium text-white after:content-['>'] md:mx-4 md:px-8 md:after:content-['Daha_Fazlasını_Gör'] "></button>
         <div className="w-2 border-t-[1px] border-black"></div>
         <button
           onClick={() => {
             setisEventOpen(!isEventOpen);
           }}
-          className="mx-4 w-20 flex-shrink border-2 border-black bg-white py-[1px] text-lg font-medium text-black "
+          className="mx-1 w-16 flex-shrink border-2 border-black bg-white py-[1px] text-lg font-medium text-black md:mx-4 md:w-20"
         >
           {isEventOpen ? "Gizle" : "Göster"}
         </button>

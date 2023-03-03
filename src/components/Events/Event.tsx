@@ -7,11 +7,13 @@ interface Props {
 const Event = ({ isOpen }: Props) => {
   return (
     <div
-      className={`mx-auto mb-5 w-[300px] pr-2 pt-2 ${
-        isOpen ? "h-full" : "h-0"
+      className={`mx-auto w-[300px] ${
+        isOpen ? "mb-5 h-[310px] pr-2 pt-2" : "h-0"
       } overflow-hidden duration-200`}
     >
-      <div className="flex flex-col rounded-lg border-[1px] border-[#222] bg-white duration-200 hover:-translate-y-1 hover:translate-x-1 hover:shadow-[-0.25rem_0.25rem_#333]">
+      <div
+        className={`flex flex-col rounded-lg border-[1px]  border-[#222] bg-white duration-200 hover:-translate-y-1 hover:translate-x-1 hover:shadow-[-0.25rem_0.25rem_#333]`}
+      >
         <Image
           src="/images/konser.webp"
           alt=""

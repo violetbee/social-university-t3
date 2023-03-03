@@ -102,7 +102,7 @@ const Header: FC = () => {
         Postları Sil
       </button> */}
       <header
-        className={`flex ${dosis.className} h-20 items-center border-b-2 border-black px-6 text-[#222]`}
+        className={`flex ${dosis.className} h-[70px] items-center border-b-2 border-black pl-6 text-[#222]`}
       >
         <Link
           href={"/"}
@@ -147,54 +147,76 @@ const Header: FC = () => {
             ))}
           </ul>
         </div>
-        <div className="hidden h-full items-center text-white sm:flex">
-          {session ? (
-            <div className="group relative rounded-full bg-slate-800">
-              {session?.user?.image ? (
-                <Image
-                  src={session.user.image as string}
-                  alt="User Image"
-                  width={40}
-                  height={40}
-                  className="rounded-full"
-                />
-              ) : (
-                <HiOutlineUserCircle className="group relative h-[38px] w-[38px] text-2xl" />
-              )}
-              <div className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-[#B21EED] text-xs text-white">
-                1
-              </div>
-              <div className="absolute -bottom-[140px] right-0 hidden w-36 py-2 group-hover:flex">
-                <div className="h-full w-full rounded-md bg-white p-[2px]">
-                  <div className="h-full w-full divide-y-2 rounded-md border-2 bg-white text-black">
-                    <div className="flex cursor-pointer items-center justify-center gap-2 p-2">
-                      <RiUser5Line color="black" />
-                      <p>Profil</p>
+        <div className="flex h-full">
+          {
+            session ? (
+              <div className="flex items-center">
+                <div className="flex h-full items-center">
+                  <Popup
+                    trigger={
+                      <button className="hidden h-full items-center justify-center md:flex">
+                        <div className="flex h-full items-center justify-center border-l-2 border-black px-10">
+                          {session.user?.name}{" "}
+                        </div>
+                        {session.user?.image ? (
+                          <Image
+                            src={session.user?.image}
+                            alt="User Image"
+                            width={100}
+                            height={100}
+                            className="h-full w-full border-l-2 border-black"
+                          />
+                        ) : (
+                          <div className="flex h-full items-center justify-center border-l-2 border-black bg-black px-4">
+                            <HiOutlineUserCircle className=" text-5xl text-white" />
+                          </div>
+                        )}
+                      </button>
+                    }
+                    modal
+                  >
+                    <div className="flex flex-col items-center justify-between rounded-md border-2 border-black bg-white p-4 md:h-[400px] md:w-[550px] lg:h-[550px] lg:w-[700px]">
+                      <div className="flex flex-1"></div>
+                      <div className="space-x-2 self-end">
+                        <button className="rounded-lg border-2 border-black bg-white px-4 py-2 font-medium text-black md:px-9">
+                          Kaydet
+                        </button>
+                        <button
+                          onClick={() => {
+                            signOut();
+                          }}
+                          className="rounded-lg border-2 border-black bg-black px-4 py-2 font-medium text-white md:px-9"
+                        >
+                          Çıkış Yap
+                        </button>
+                      </div>
                     </div>
-                    <div className="flex cursor-pointer items-center justify-center gap-2 p-2">
-                      <RiSettings3Line color="black" />
-                      <p>Ayarlar</p>
-                    </div>
-                    <div
-                      onClick={() => {
-                        signOut();
-                      }}
-                      className="flex cursor-pointer items-center justify-center gap-2 p-2"
-                    >
-                      <RiLogoutCircleLine color="black" />
-                      <p>Çıkış Yap</p>
-                    </div>
-                  </div>
+                  </Popup>
                 </div>
               </div>
-            </div>
-          ) : (
-            <Link href="/auth">
-              <button className="rounded-lg bg-orange-500 py-2 px-4">
-                Giriş Yap
-              </button>
-            </Link>
-          )}
+            ) : (
+              <div className="flex h-full">
+                <Link
+                  href={"/auth"}
+                  className="flex h-full items-center justify-center border-l-2 border-black bg-white px-10 text-black hover:bg-[#FF90E8]"
+                >
+                  Giriş Yap
+                </Link>
+                <Link
+                  href={"/auth"}
+                  className="flex h-full items-center justify-center border-l-2 border-black bg-black px-16 text-white hover:bg-[#FF90E8] hover:text-black"
+                >
+                  Üye Ol
+                </Link>
+              </div>
+            )
+            // <div className="flex items-center">
+            //   <Link href="/login">
+            //     <button className="flex items-center justify-center h-12 w-12 rounded-full bg-gradient-to-tr from-blue-700 via-purple-500 to-orange-700">
+            //       <HiOutlineUserCircle className="text-2xl text-slate-50" />
+            //     </button>
+            //   </Link
+          }
         </div>
       </header>
       {/* SmallScreen */}

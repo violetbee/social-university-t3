@@ -17,10 +17,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <>
       <Header />
-      <main className={`${dosis.className} h-[calc(100vh_-_120px)] `}>
-        {data && <University />}
+      <main className={`${dosis.className} h-[calc(100vh_-_70px)] `}>
+        {/* {data && <University />} */}
         <div className="flex h-full w-full bg-background">
-          {data && <LeftSideBar />}
+          <LeftSideBar />
           <div className="mainCt mx-auto w-full overflow-y-auto">
             {children}
           </div>

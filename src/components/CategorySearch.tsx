@@ -40,7 +40,8 @@ const CategorySearch = () => {
               : "border-transparent"
           }`}
         >
-          Her Şey
+          <p className="hidden md:block">Her Şey</p>
+          <p className="block md:hidden">+</p>
         </Link>
         {data &&
           data.map((category) => (
@@ -57,7 +58,8 @@ const CategorySearch = () => {
                   : "border-transparent"
               }`}
             >
-              {category.name}
+              <p className="hidden md:block">{category.name}</p>
+              <p className="block md:hidden">A</p>
             </Link>
           ))}
       </div>
