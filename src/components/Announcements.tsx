@@ -52,7 +52,7 @@ const Announcements = () => {
           onClick={() => {
             scrollHandler("left");
           }}
-          className="flex h-full w-10 items-center bg-[#111] lg:w-24"
+          className="flex h-full w-10 items-center lg:w-20"
         >
           {/* Left Side Arrow SVG */}
           <svg
@@ -63,7 +63,7 @@ const Announcements = () => {
             strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
-            className="m-2 h-full w-20 cursor-pointer text-white hover:text-[#c461f2]"
+            className="m-2 h-full w-20 cursor-pointer text-black hover:text-[#c461f2]"
           >
             <line x1="19" y1="12" x2="5" y2="12"></line>
             <polyline points="12 19 5 12 12 5"></polyline>
@@ -82,7 +82,7 @@ const Announcements = () => {
           onClick={() => {
             scrollHandler("right");
           }}
-          className="flex h-full w-10 items-center bg-[#111] lg:w-24"
+          className="flex h-full w-10 items-center lg:w-20"
         >
           {/* Right Side Arrow SVG */}
           <svg
@@ -93,7 +93,7 @@ const Announcements = () => {
             strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
-            className="m-2 h-full w-20 cursor-pointer text-white hover:text-[#c461f2]"
+            className="m-2 h-full w-20 cursor-pointer text-black duration-200 hover:-translate-y-2 hover:translate-x-2 hover:shadow-[-0.25rem_0.25rem_#333]"
           >
             <line x1="5" y1="12" x2="19" y2="12"></line>
             <polyline points="12 5 19 12 12 19"></polyline>

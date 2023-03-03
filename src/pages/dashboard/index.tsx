@@ -8,7 +8,7 @@ import CategorySearch from "../../components/CategorySearch";
 const Dashboard = () => {
   return (
     <Layout>
-      <div className="container mx-auto w-full pb-4">
+      <div className="container mx-auto w-full pb-4 md:px-4">
         <CategorySearch />
         <Announcements />
         <Events itemPiece={5} />
