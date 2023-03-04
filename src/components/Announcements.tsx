@@ -2,11 +2,7 @@ import { useRef } from "react";
 import Article from "./Article";
 import { useMediaQuery } from "../hooks/useMediaQuery";
 
-interface Props {
-  isExpanded: boolean;
-}
-
-const Announcements = ({ isExpanded }: Props) => {
+const Announcements = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const isMobile = useMediaQuery("(max-width: 768px)");
@@ -29,9 +25,8 @@ const Announcements = ({ isExpanded }: Props) => {
 
   return (
     <div
-      className={`flex ${
-        isExpanded ? "mb-5 h-44 pb-2 pt-1" : "h-0 p-0"
-      } w-full justify-between border-black duration-200`}
+      className="mb-5 flex h-44 w-full justify-between
+       border-black pb-2 pt-1"
     >
       <button
         onClick={() => {

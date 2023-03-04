@@ -1,14 +1,7 @@
 import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
-import { FC, useState } from "react";
-import { BiSearchAlt } from "react-icons/bi";
+import { FC } from "react";
 import { HiOutlineUserCircle } from "react-icons/hi";
-import {
-  RiUser5Line,
-  RiSettings3Line,
-  RiLogoutCircleLine,
-} from "react-icons/ri";
-import { trpc } from "../utils/trpc";
 import Image from "next/image";
 import Popup from "reactjs-popup";
 import SharePost from "./SharePost";
@@ -25,21 +18,7 @@ const Header: FC = () => {
   // If there is session
   const { data: session } = useSession();
 
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isMobileMenuContentOpen, setIsMobileMenuContentOpen] = useState(false);
-
-  const removeUsers = trpc.user.deleteAllUsers.useMutation();
-
-  const menuHandler = () => {
-    setIsMenuOpen(!isMenuOpen);
-    if (!isMobileMenuContentOpen) {
-      setTimeout(() => {
-        setIsMobileMenuContentOpen(!isMobileMenuContentOpen);
-      }, 90);
-    } else {
-      setIsMobileMenuContentOpen(!isMobileMenuContentOpen);
-    }
-  };
+  // const removeUsers = trpc.user.deleteAllUsers.useMutation();
 
   // const category = trpc.category.create
   //   .useMutation()

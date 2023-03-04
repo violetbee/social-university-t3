@@ -1,11 +1,17 @@
 import { useState, FC } from "react";
 
+type Props = {
+  isExpanded: boolean;
+  toggleExpanded: () => void;
+  itemPiece?: number;
+};
+
 export function withDashboardSection(
-  WrappedComponent: FC<any>,
+  WrappedComponent: FC<Props>,
   title: string,
   itemPiece?: number
 ) {
-  const DashboardSection: FC<any> = (props: any) => {
+  const DashboardSection: FC<any> = (props: Props) => {
     const [isExpanded, setIsExpanded] = useState<boolean>(true);
     const toggleExpanded = () => {
       setIsExpanded(!isExpanded);
@@ -46,12 +52,20 @@ export function withDashboardSection(
           </button>
           <div className="w-2 border-t-[1px] border-black"></div>
         </div>
-        <WrappedComponent
-          {...props}
-          isExpanded={isExpanded}
-          toggleExpanded={toggleExpanded}
-          itemPiece={itemPiece}
-        />
+        <div className="pb-5">
+          <div
+            className={`${
+              isExpanded ? "max-h-[1000px]" : "max-h-0"
+            } overflow-hidden duration-200`}
+          >
+            <WrappedComponent
+              {...props}
+              toggleExpanded={toggleExpanded}
+              isExpanded={isExpanded}
+              itemPiece={itemPiece}
+            />
+          </div>
+        </div>
       </div>
     );
   };

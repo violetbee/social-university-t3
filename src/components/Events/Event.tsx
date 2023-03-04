@@ -1,18 +1,10 @@
 import Image from "next/image";
 
-interface Props {
-  isOpen?: boolean;
-}
-
-const Event = ({ isOpen }: Props) => {
+const Event = () => {
   return (
-    <div
-      className={`mx-auto w-[300px] ${
-        isOpen ? "mb-5 h-[350px] pr-2 pt-2" : "h-0"
-      } overflow-hidden duration-200`}
-    >
+    <div className={`mx-auto mb-3 h-[350px] px-2 pt-1 duration-200 md:mb-5`}>
       <div
-        className={`flex flex-col rounded-lg border-[1px]  border-[#222] bg-white duration-200 hover:-translate-y-1 hover:translate-x-1 hover:shadow-[-0.25rem_0.25rem_#333]`}
+        className={`flex flex-col rounded-lg border-[1px] border-[#222] bg-white duration-200 hover:-translate-y-1 hover:translate-x-1 hover:shadow-[-0.25rem_0.25rem_#333]`}
       >
         <Image
           src="/images/konser.webp"
@@ -38,7 +30,7 @@ const Event = ({ isOpen }: Props) => {
         </div>
         <div className="flex justify-between">
           <span className="px-3 font-medium">Konum:</span>
-          <span className="px-3">AKM Atatürk Kültür Merkezi</span>
+          <span className="px-3 text-end">AKM Atatürk Kültür Merkezi</span>
         </div>
 
         <div

@@ -5,12 +5,14 @@ import Events from "../../components/Events/Events";
 import Announcements from "../../components/Announcements";
 import CategorySearch from "../../components/CategorySearch";
 import withDashboardSection from "../../components/HoC/withDashboardSection";
+import Posts from "../../components/Posts/Posts";
 
 const AnnouncementsWithExpanded = withDashboardSection(
   Announcements,
   "Duyurular"
 );
 const EventsWithExpanded = withDashboardSection(Events, "Etkinlikler", 5);
+const PostsWithExpanded = withDashboardSection(Posts, "Son Gönderiler");
 
 const Dashboard = () => {
   return (
@@ -18,6 +20,7 @@ const Dashboard = () => {
       <div className="container mx-auto w-full pb-4 md:px-4">
         <CategorySearch />
         <AnnouncementsWithExpanded />
+        <PostsWithExpanded />
         <EventsWithExpanded />
       </div>
     </Layout>

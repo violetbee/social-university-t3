@@ -1,13 +1,6 @@
 import { FC } from "react";
-import { Overpass } from "@next/font/google";
 import { FaFacebook, FaGithub, FaInstagram, FaTwitter } from "react-icons/fa";
 import Image from "next/image";
-
-const abel = Overpass({
-  weight: ["400", "500", "600", "700", "800", "900"],
-  preload: true,
-  subsets: ["latin"],
-});
 
 const LeftSideBar: FC = () => {
   return (
@@ -23,7 +16,7 @@ const LeftSideBar: FC = () => {
             <p className="h-full py-3 text-center text-2xl font-medium tracking-wide text-white">
               Şehrini Keşfet
             </p>
-            <div className="relative h-20 w-full">
+            <div className="group relative h-20 w-full cursor-pointer">
               <Image
                 src="/images/pecko.jpg"
                 width={400}
@@ -31,12 +24,14 @@ const LeftSideBar: FC = () => {
                 className="h-20 object-cover"
                 alt="deneme"
               />
-              <div className="absolute bottom-0 left-0 h-20 w-full bg-black bg-opacity-80"></div>
+              <div className="absolute bottom-0 left-0 h-20 w-full bg-black bg-opacity-80 duration-200 group-hover:opacity-0"></div>
               <div className="absolute bottom-0 left-0 flex h-20 w-full items-center justify-center">
-                <p className="text-lg font-medium text-white">Peçko Fırın</p>
+                <p className="text-lg font-medium text-white duration-200 group-hover:rounded-full group-hover:bg-violet-800 group-hover:px-4 group-hover:py-1 ">
+                  Peçko Fırın
+                </p>
               </div>
             </div>
-            <div className="relative h-20 w-full">
+            <div className="group relative h-20 w-full cursor-pointer">
               <Image
                 src="/images/passage.jpg"
                 width={400}
@@ -44,12 +39,14 @@ const LeftSideBar: FC = () => {
                 className="h-20 object-cover object-top"
                 alt="deneme"
               />
-              <div className="absolute bottom-0 left-0 h-20 w-full bg-black bg-opacity-80"></div>
+              <div className="absolute bottom-0 left-0 h-20 w-full bg-black bg-opacity-80 duration-200 group-hover:opacity-0"></div>
               <div className="absolute bottom-0 left-0 flex h-20 w-full items-center justify-center">
-                <p className="text-lg font-medium text-white">No:75 Passage</p>
+                <p className="text-lg font-medium text-white duration-200 group-hover:rounded-full group-hover:bg-violet-800 group-hover:px-4 group-hover:py-1 ">
+                  No:75 Passage
+                </p>
               </div>
             </div>
-            <div className="relative h-20 w-full">
+            <div className="group relative h-20 w-full cursor-pointer">
               <Image
                 src="/images/tren.jpg"
                 width={400}
@@ -57,9 +54,11 @@ const LeftSideBar: FC = () => {
                 className="h-20 object-cover "
                 alt="deneme"
               />
-              <div className="absolute bottom-0 left-0 h-20 w-full bg-black bg-opacity-80"></div>
+              <div className="absolute bottom-0 left-0 h-20 w-full bg-black bg-opacity-80 duration-200 group-hover:opacity-0"></div>
               <div className="absolute bottom-0 left-0 flex h-20 w-full items-center justify-center">
-                <p className="text-lg font-medium text-white">Tren Samsun</p>
+                <p className="text-lg font-medium text-white duration-200 group-hover:rounded-full group-hover:bg-violet-800 group-hover:px-4 group-hover:py-1 ">
+                  Tren Samsun
+                </p>
               </div>
             </div>
           </div>
@@ -75,7 +74,7 @@ const LeftSideBar: FC = () => {
       </div>
       <div>
         <div className="relative flex w-full flex-col gap-6 overflow-hidden">
-          <div className="w-full self-center bg-[#111] p-4 text-white shadow-sm">
+          <div className="w-full self-center bg-violet-800 p-4 text-white shadow-sm">
             <h1 className="text-lg font-medium text-white">Sosyal Medya</h1>
             <ul className="mt-2 flex gap-2">
               <li className="flex h-8 w-8 items-center justify-center">

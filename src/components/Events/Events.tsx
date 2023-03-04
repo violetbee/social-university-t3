@@ -7,7 +7,7 @@ interface Props {
   toggleExpanded: () => void;
 }
 
-const Events = ({ itemPiece, isExpanded }: Props) => {
+const Events = ({ itemPiece }: Props) => {
   return (
     <Masonry
       breakpointCols={{
@@ -22,9 +22,7 @@ const Events = ({ itemPiece, isExpanded }: Props) => {
       columnClassName="my-masonry-grid_column"
     >
       {itemPiece
-        ? [...Array(itemPiece)].map((_, i) => (
-            <Event isOpen={isExpanded} key={i} />
-          ))
+        ? [...Array(itemPiece)].map((_, i) => <Event key={i} />)
         : [...Array(12)].map((_, i) => <Event key={i} />)}
 
       {/* <div className="group mb-5 w-72">
