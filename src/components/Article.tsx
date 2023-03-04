@@ -1,6 +1,6 @@
 const Article = () => {
   return (
-    <article className="relative flex h-full w-[300px] flex-shrink-0 bg-white transition hover:shadow-md lg:w-[500px]">
+    <article className="relative flex h-full w-[300px] flex-shrink-0 bg-white transition hover:shadow-md md:w-[500px]">
       <div className="rotate-180 p-2 [writing-mode:_vertical-lr]">
         <time className="flex items-center justify-between gap-4 text-xs font-bold uppercase text-gray-900">
           <span>Çağlar</span>
@@ -30,7 +30,7 @@ const Article = () => {
           </p>
         </div>
 
-        <button className="seeMore absolute bottom-2 right-2 flex w-10 items-center justify-center self-end">
+        <button className="seeMore absolute bottom-2 right-5 flex w-10 items-center justify-center md-m:right-2 md:right-2">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-6 w-6"

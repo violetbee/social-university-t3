@@ -11,7 +11,7 @@ const abel = Overpass({
 
 const LeftSideBar: FC = () => {
   return (
-    <div className="hidden w-80 flex-col justify-between overflow-y-auto border-r-[1px] border-black lg:flex">
+    <div className="hidden flex-col justify-between overflow-y-auto border-r-[1px] border-black lg:flex lg:w-64 xl:w-80">
       {/* <div className="w-full flex-1 overflow-y-auto">
         <div className="h-32 w-full flex-shrink-0 "></div>
       </div> */}

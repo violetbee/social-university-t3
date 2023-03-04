@@ -4,14 +4,21 @@ import { getServerAuthSession } from "../../server/common/get-server-auth-sessio
 import Events from "../../components/Events/Events";
 import Announcements from "../../components/Announcements";
 import CategorySearch from "../../components/CategorySearch";
+import withDashboardSection from "../../components/HoC/withDashboardSection";
+
+const AnnouncementsWithExpanded = withDashboardSection(
+  Announcements,
+  "Duyurular"
+);
+const EventsWithExpanded = withDashboardSection(Events, "Etkinlikler", 5);
 
 const Dashboard = () => {
   return (
     <Layout>
       <div className="container mx-auto w-full pb-4 md:px-4">
         <CategorySearch />
-        <Announcements />
-        <Events itemPiece={5} />
+        <AnnouncementsWithExpanded />
+        <EventsWithExpanded />
       </div>
     </Layout>
   );
