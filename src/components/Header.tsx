@@ -81,7 +81,7 @@ const Header: FC = () => {
         Postları Sil
       </button> */}
       <header
-        className={`flex ${dosis.className} h-[70px] items-center border-b-2 border-black pl-6 text-[#222]`}
+        className={`flex ${dosis.className} h-[70px] items-center border-b-[1px] border-black/10 pl-6 text-[#222]`}
       >
         <Link
           href={"/"}
@@ -126,7 +126,7 @@ const Header: FC = () => {
             ))}
           </ul>
         </div>
-        <div className="flex h-full">
+        <div className="flex">
           {
             session ? (
               <div className="flex items-center">
@@ -174,19 +174,23 @@ const Header: FC = () => {
                 </div>
               </div>
             ) : (
-              <div className="flex h-full">
-                <Link
-                  href={"/auth"}
-                  className="flex h-full items-center justify-center border-l-2 border-black bg-white px-10 text-black hover:bg-[#FF90E8]"
-                >
-                  Giriş Yap
-                </Link>
-                <Link
-                  href={"/auth"}
-                  className="flex h-full items-center justify-center border-l-2 border-black bg-black px-16 text-white hover:bg-[#FF90E8] hover:text-black"
-                >
-                  Üye Ol
-                </Link>
+              <div className="flex">
+                <div className="m-3">
+                  <Link
+                    href={"/auth"}
+                    className="inline-flex w-32 items-center rounded border-b-2 border-blue-500 bg-white py-2 px-6 font-bold tracking-wide text-gray-800 shadow-md hover:border-blue-600 hover:bg-blue-500 hover:text-white"
+                  >
+                    <span className="mx-auto">Giriş Yap</span>
+                  </Link>
+                </div>
+                <div className="m-3">
+                  <Link
+                    href={"/auth"}
+                    className="inline-flex w-32 items-center rounded border-b-2 border-red-500 bg-white py-2 px-6 font-bold tracking-wide text-gray-800 shadow-md hover:border-red-600 hover:bg-red-500 hover:text-white"
+                  >
+                    <span className="mx-auto">Üye Ol</span>
+                  </Link>
+                </div>
               </div>
             )
             // <div className="flex items-center">

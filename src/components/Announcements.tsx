@@ -25,8 +25,8 @@ const Announcements = () => {
 
   return (
     <div
-      className="mb-5 flex h-44 w-full justify-between
-       border-black pb-2 pt-1"
+      className="mb-10 flex h-44 w-full
+       justify-between border-black pb-2 pt-1"
     >
       <button
         onClick={() => {
