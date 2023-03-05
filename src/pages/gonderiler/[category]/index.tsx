@@ -17,7 +17,7 @@ type Props = {
 const Category: NextPage<Props> = ({ posts }) => {
   return (
     <Layout>
-      <div className="container mx-auto w-full space-y-6 pb-4">
+      <div className="container mx-auto w-full pb-4 lg:px-14 xl:px-16">
         <CategorySearch />
         {/* Gönderileri */}
       </div>
