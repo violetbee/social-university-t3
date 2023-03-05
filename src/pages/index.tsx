@@ -109,7 +109,7 @@ const Home: NextPage<Props> = () => {
                       />
                     </svg>
                   </div>
-                  <h3 className="mt-8 text-lg font-semibold text-black">
+                  <h3 className="mt-8 text-lg font-semibold text-[#333]">
                     Secured Payments
                   </h3>
                   <p className="mt-4 text-base text-gray-600">
@@ -146,7 +146,7 @@ const Home: NextPage<Props> = () => {
                       />
                     </svg>
                   </div>
-                  <h3 className="mt-8 text-lg font-semibold text-black">
+                  <h3 className="mt-8 text-lg font-semibold text-[#333]">
                     Fast & Easy to Load
                   </h3>
                   <p className="mt-4 text-base text-gray-600">
@@ -183,7 +183,7 @@ const Home: NextPage<Props> = () => {
                       />
                     </svg>
                   </div>
-                  <h3 className="mt-8 text-lg font-semibold text-black">
+                  <h3 className="mt-8 text-lg font-semibold text-[#333]">
                     Light & Dark Version
                   </h3>
                   <p className="mt-4 text-base text-gray-600">
@@ -220,7 +220,7 @@ const Home: NextPage<Props> = () => {
                       />
                     </svg>
                   </div>
-                  <h3 className="mt-8 text-lg font-semibold text-black">
+                  <h3 className="mt-8 text-lg font-semibold text-[#333]">
                     Light & Dark Version
                   </h3>
                   <p className="mt-4 text-base text-gray-600">
@@ -257,7 +257,7 @@ const Home: NextPage<Props> = () => {
                       />
                     </svg>
                   </div>
-                  <h3 className="mt-8 text-lg font-semibold text-black">
+                  <h3 className="mt-8 text-lg font-semibold text-[#333]">
                     Fast & Easy to Load
                   </h3>
                   <p className="mt-4 text-base text-gray-600">
@@ -294,7 +294,7 @@ const Home: NextPage<Props> = () => {
                       />
                     </svg>
                   </div>
-                  <h3 className="mt-8 text-lg font-semibold text-black">
+                  <h3 className="mt-8 text-lg font-semibold text-[#333]">
                     Secured Payments
                   </h3>
                   <p className="mt-4 text-base text-gray-600">
@@ -331,7 +331,7 @@ const Home: NextPage<Props> = () => {
                       />
                     </svg>
                   </div>
-                  <h3 className="mt-8 text-lg font-semibold text-black">
+                  <h3 className="mt-8 text-lg font-semibold text-[#333]">
                     Light & Dark Version
                   </h3>
                   <p className="mt-4 text-base text-gray-600">
@@ -368,7 +368,7 @@ const Home: NextPage<Props> = () => {
                       />
                     </svg>
                   </div>
-                  <h3 className="mt-8 text-lg font-semibold text-black">
+                  <h3 className="mt-8 text-lg font-semibold text-[#333]">
                     Secured Payments
                   </h3>
                   <p className="mt-4 text-base text-gray-600">
@@ -406,7 +406,7 @@ const Home: NextPage<Props> = () => {
                       />
                     </svg>
                   </div>
-                  <h3 className="mt-8 text-lg font-semibold text-black">
+                  <h3 className="mt-8 text-lg font-semibold text-[#333]">
                     Fast & Easy to Load
                   </h3>
                   <p className="mt-4 text-base text-gray-600">

@@ -4,7 +4,7 @@ import Image from "next/image";
 
 const LeftSideBar: FC = () => {
   return (
-    <div className="hidden flex-col justify-between overflow-y-auto border-r-[1px] border-black lg:flex lg:w-64 xl:w-80">
+    <div className="hidden flex-col justify-between overflow-y-auto border-r-[1px] border-[#444]/10 lg:flex lg:w-64 xl:w-80">
       {/* <div className="w-full flex-1 overflow-y-auto">
         <div className="h-32 w-full flex-shrink-0 "></div>
       </div> */}
@@ -68,7 +68,7 @@ const LeftSideBar: FC = () => {
       </div>
 
       <div className="h-40 w-full">
-        <div className="flex h-full items-center justify-center border-y-[1px] border-black bg-white text-[#111]">
+        <div className="flex h-full items-center justify-center border-y-[1px] border-[#444]/10 bg-white text-[#111]">
           Bu alan reklam için ayrılmıştır.
         </div>
       </div>

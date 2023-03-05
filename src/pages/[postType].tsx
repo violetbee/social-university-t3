@@ -28,7 +28,7 @@ const Post = () => {
             {posts?.map((post) => (
               <div
                 key={post.id}
-                className="break-inside relative flex w-full flex-col justify-between space-y-3 overflow-hidden rounded-xl bg-white p-4 text-sm text-black dark:bg-slate-800 dark:text-white"
+                className="break-inside relative flex w-full flex-col justify-between space-y-3 overflow-hidden rounded-xl bg-white p-4 text-sm text-[#333] dark:bg-slate-800 dark:text-white"
               >
                 <div className="flex items-center justify-between font-medium">
                   <div className="space-x-2">
@@ -124,7 +124,7 @@ const Post = () => {
                   </div>
                   <Link
                     href={"gonderiler/" + post.category.slug + "/" + post.id}
-                    className="flex items-center justify-center space-x-1 rounded-full border-2 border-black bg-white px-4 py-1 text-xs font-medium text-black hover:bg-black hover:text-white dark:border-white dark:bg-slate-800 dark:text-white dark:hover:bg-white dark:hover:text-black"
+                    className="flex items-center justify-center space-x-1 rounded-full border-2 border-[#888] bg-white px-4 py-1 text-xs font-medium text-[#333] hover:bg-black hover:text-white dark:border-white dark:bg-slate-800 dark:text-white dark:hover:bg-white dark:hover:text-[#333]"
                   >
                     <span>Devamını Gör</span>
                     <svg

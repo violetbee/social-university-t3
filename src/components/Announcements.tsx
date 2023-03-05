@@ -26,7 +26,7 @@ const Announcements = () => {
   return (
     <div
       className="mb-10 flex h-44 w-full
-       justify-between border-black pb-2 pt-1"
+       justify-between border-[#888] pb-2 pt-1"
     >
       <button
         onClick={() => {
@@ -43,7 +43,7 @@ const Announcements = () => {
           strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"
-          className="m-2 h-full w-20 cursor-pointer text-black"
+          className="m-2 h-full w-20 cursor-pointer text-[#333]"
         >
           <line x1="19" y1="12" x2="5" y2="12"></line>
           <polyline points="12 19 5 12 12 5"></polyline>
@@ -73,7 +73,7 @@ const Announcements = () => {
           strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"
-          className="m-2 h-full w-20 cursor-pointer text-black duration-200"
+          className="m-2 h-full w-20 cursor-pointer text-[#333] duration-200"
         >
           <line x1="5" y1="12" x2="19" y2="12"></line>
           <polyline points="12 5 19 12 12 19"></polyline>

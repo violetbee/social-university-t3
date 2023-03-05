@@ -137,7 +137,7 @@ const SharePost = () => {
                     <input
                       type="text"
                       name="name"
-                      className="peer block w-full appearance-none border-0 border-b border-gray-500 bg-transparent py-2.5 px-0 text-sm text-gray-900 focus:border-blue-600 focus:outline-none focus:ring-0"
+                      className="peer block w-full appearance-none border-0 border-b border-gray-500 bg-transparent py-2.5 px-0 text-sm text-[#333] focus:border-blue-600 focus:outline-none focus:ring-0"
                       placeholder=" "
                       value={form.title}
                       onChange={(e) => {
@@ -154,7 +154,7 @@ const SharePost = () => {
                     <textarea
                       name="message"
                       rows={5}
-                      className="peer block w-full appearance-none border-0 border-b border-gray-500 bg-transparent py-2.5 px-0 text-sm text-gray-900 focus:border-blue-600 focus:outline-none focus:ring-0"
+                      className="peer block w-full appearance-none border-0 border-b border-gray-500 bg-transparent py-2.5 px-0 text-sm text-[#333] focus:border-blue-600 focus:outline-none focus:ring-0"
                       placeholder=" "
                       value={form.content}
                       onChange={(e) => {
@@ -206,7 +206,7 @@ const SharePost = () => {
                               })
                             ) : (
                               <>
-                                <p className="mb-2 text-xs text-black">
+                                <p className="mb-2 text-xs text-[#333]">
                                   <span className="font-semibold">
                                     Yüklemek için tıklayın
                                   </span>{" "}

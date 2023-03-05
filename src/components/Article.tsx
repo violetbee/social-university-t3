@@ -2,7 +2,7 @@ const Article = () => {
   return (
     <article className="relative flex h-full w-[300px] flex-shrink-0 bg-white transition hover:shadow-md md:w-[500px]">
       <div className="rotate-180 p-2 [writing-mode:_vertical-lr]">
-        <time className="flex items-center justify-between gap-4 text-xs font-bold uppercase text-gray-900">
+        <time className="flex items-center justify-between gap-4 text-xs font-bold uppercase text-[#333]">
           <span>Çağlar</span>
           <span className="w-px flex-1 bg-gray-900/10"></span>
           <span>Oct 10</span>
@@ -20,7 +20,7 @@ const Article = () => {
       <div className="flex flex-1 flex-col justify-between">
         <div className="border-l border-gray-900/10 p-4 sm:border-l-transparent sm:p-6">
           <a href="#">
-            <h3 className="font-bold uppercase text-gray-900">
+            <h3 className="font-bold uppercase text-[#333]">
               Finding the right guitar for your style - 5 tips
             </h3>
           </a>

@@ -17,7 +17,7 @@ const PostsWithExpanded = withDashboardSection(Posts, "Son Gönderiler");
 const Dashboard = () => {
   return (
     <Layout>
-      <div className="container mx-auto w-full pb-4 md:px-4">
+      <div className="container mx-auto w-full px-2 pb-4 lg:px-14 xl:px-16">
         <CategorySearch />
         <AnnouncementsWithExpanded />
         <PostsWithExpanded />

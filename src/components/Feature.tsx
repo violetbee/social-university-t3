@@ -15,7 +15,7 @@ export const Features = () => {
                 height={48}
               />
               <div className="ml-5 mr-auto">
-                <p className="text-xl font-semibold text-black">
+                <p className="text-xl font-semibold text-[#333]">
                   Özgürce Paylaş
                 </p>
                 <p className="mt-px text-sm text-gray-600">Lorem Ipsum</p>
@@ -53,7 +53,7 @@ export const Features = () => {
                 height={48}
               />
               <div className="ml-5 mr-auto">
-                <p className="text-xl font-semibold text-black">
+                <p className="text-xl font-semibold text-[#333]">
                   Aradığın Not Burada!
                 </p>
                 <p className="mt-px text-sm text-gray-600">Lorem Ipsum</p>
@@ -91,7 +91,7 @@ export const Features = () => {
                 height={48}
               />
               <div className="ml-5 mr-auto">
-                <p className="text-xl font-semibold text-black">
+                <p className="text-xl font-semibold text-[#333]">
                   Hayallerini Keşfet
                 </p>
                 <p className="mt-px text-sm text-gray-600">Lorem Ipsum</p>
@@ -129,7 +129,7 @@ export const Features = () => {
                 height={48}
               />
               <div className="ml-5 mr-auto">
-                <p className="text-xl font-semibold text-black">
+                <p className="text-xl font-semibold text-[#333]">
                   Evet, Okul Kulüpleri de Var!
                 </p>
                 <p className="mt-px text-sm text-gray-600">Lorem Ipsum</p>
@@ -167,7 +167,7 @@ export const Features = () => {
                 height={48}
               />
               <div className="ml-5 mr-auto">
-                <p className="text-xl font-semibold text-black">
+                <p className="text-xl font-semibold text-[#333]">
                   Etkinliklere Katıl
                 </p>
                 <p className="mt-px text-sm text-gray-600">Lorem Ipsum</p>
@@ -206,7 +206,7 @@ export const Features = () => {
               />
               <div className="ml-5 mr-auto">
                 <div className="flex items-center space-x-4">
-                  <p className="text-xl font-semibold text-black">
+                  <p className="text-xl font-semibold text-[#333]">
                     Ödev Robotu?
                   </p>
                   <div className="rounded-full border-[1px] bg-orange-500 px-2 py-1 font-thin tracking-wider text-white">

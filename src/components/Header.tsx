@@ -5,10 +5,10 @@ import { HiOutlineUserCircle } from "react-icons/hi";
 import Image from "next/image";
 import Popup from "reactjs-popup";
 import SharePost from "./SharePost";
-import { Asap_Condensed } from "@next/font/google";
+import { Asap_Condensed, Josefin_Sans } from "@next/font/google";
 
-const dosis = Asap_Condensed({
-  weight: ["200", "300", "400", "500", "600", "700", "800"],
+const dosis = Josefin_Sans({
+  weight: ["200", "300", "400", "500", "600", "700"],
   preload: true,
   display: "block",
   subsets: ["latin"],
@@ -81,14 +81,16 @@ const Header: FC = () => {
         Postları Sil
       </button> */}
       <header
-        className={`flex ${dosis.className} h-[70px] items-center border-b-[1px] border-black/10 pl-6 text-[#222]`}
+        className={`flex ${dosis.className} h-[70px] items-center border-b-[1px] border-[#444]/40 pl-6 text-[#222] lg:border-[#444]/10`}
       >
-        <Link
-          href={"/"}
-          className="flex h-full items-center text-4xl font-semibold tracking-widest"
-        >
-          <p className="bg-[#222] px-1 text-white">Sosyal</p>
-          <p className="text-[#222]">Üniversite</p>
+        <Link href={"/"} className="relative flex items-center">
+          <Image
+            src={"/images/logo.png"}
+            alt="logo"
+            width={500}
+            height={200}
+            className="w-80"
+          />
         </Link>
         {/* {session && (
             <Popup
@@ -112,30 +114,31 @@ const Header: FC = () => {
           )} */}
         {/* Menu elemanları; Anasayfa Hakkımızda İletişim */}
         <div className="flex flex-1 items-center justify-evenly">
-          <ul className="flex items-center">
+          <ul className="flex items-center gap-6">
             {menuItems.map((item) => (
               <Link
                 href={item.url}
                 key={item.id}
-                className="group hidden h-20 w-24 cursor-default items-center justify-center duration-300 lg:flex xl:w-32"
+                className="group hidden h-20 cursor-default items-center justify-center duration-300 lg:flex"
               >
-                <p className="cursor-pointer pt-1 text-lg tracking-wider after:block after:scale-x-0 after:border-b-[1px] after:border-black after:transition-transform after:content-[''] hover:after:origin-[0%_100%] hover:after:scale-x-105">
+                <p className="text-md cursor-pointer pt-1 font-medium tracking-tighter text-[#666] after:block after:scale-x-0 after:border-b-[2px] after:border-[#333] after:transition-transform after:content-[''] hover:text-[#333] hover:after:origin-[0%_100%] hover:after:scale-x-100">
                   {item.name}
                 </p>
               </Link>
             ))}
           </ul>
         </div>
-        <div className="flex">
+        <div className="flex h-full">
           {
             session ? (
               <div className="flex items-center">
                 <div className="flex h-full items-center">
                   <Popup
                     trigger={
-                      <button className="hidden h-full items-center justify-center md:flex">
-                        <div className="flex h-full items-center justify-center border-l-2 border-black px-10">
-                          {session.user?.name}{" "}
+                      <button className="hidden h-full items-center justify-center border-l-[1px] border-[#333]/10 pl-2 md:flex">
+                        <div className="flex h-full w-44 items-center justify-center ">
+                          {session.user?.name}
+                          {" karahüseyin"}
                         </div>
                         {session.user?.image ? (
                           <Image
@@ -143,28 +146,28 @@ const Header: FC = () => {
                             alt="User Image"
                             width={100}
                             height={100}
-                            className="h-full w-full border-l-2 border-black"
+                            className="h-full w-full"
                           />
                         ) : (
-                          <div className="flex h-full items-center justify-center border-l-2 border-black bg-black px-4">
-                            <HiOutlineUserCircle className=" text-5xl text-white" />
+                          <div className="flex h-full items-center justify-center px-4">
+                            <HiOutlineUserCircle className=" text-5xl text-[#333]" />
                           </div>
                         )}
                       </button>
                     }
                     modal
                   >
-                    <div className="flex flex-col items-center justify-between rounded-md border-2 border-black bg-white p-4 md:h-[400px] md:w-[550px] lg:h-[550px] lg:w-[700px]">
+                    <div className="flex flex-col items-center justify-between rounded-md border-2 border-[#888] bg-white p-4 md:h-[400px] md:w-[550px] lg:h-[550px] lg:w-[700px]">
                       <div className="flex flex-1"></div>
                       <div className="space-x-2 self-end">
-                        <button className="rounded-lg border-2 border-black bg-white px-4 py-2 font-medium text-black md:px-9">
+                        <button className="rounded-lg border-2 border-[#888] bg-white px-4 py-2 font-medium text-[#333] md:px-9">
                           Kaydet
                         </button>
                         <button
                           onClick={() => {
                             signOut();
                           }}
-                          className="rounded-lg border-2 border-black bg-black px-4 py-2 font-medium text-white md:px-9"
+                          className="rounded-lg border-2 border-[#888] bg-black px-4 py-2 font-medium text-white md:px-9"
                         >
                           Çıkış Yap
                         </button>
