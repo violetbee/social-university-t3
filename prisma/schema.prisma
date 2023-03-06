@@ -70,7 +70,10 @@ model Post {
     title      String
     content    String
     image      String?
-    category   Category  @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+    department String?
+    class      String?
+    classLevel String?
+    category   Category? @relation(fields: [categoryId], references: [id], onDelete: Cascade)
     user       User      @relation(fields: [userId], references: [id], onDelete: Cascade)
     comments   Comment[]
     categoryId String

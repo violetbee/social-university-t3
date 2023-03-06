@@ -6,15 +6,20 @@ import Announcements from "../../components/Announcements";
 import CategorySearch from "../../components/CategorySearch";
 import withDashboardSection from "../../components/HoC/withDashboardSection";
 import Posts from "../../components/Posts/Posts";
-
-const AnnouncementsWithExpanded = withDashboardSection(
-  Announcements,
-  "Duyurular"
-);
-const EventsWithExpanded = withDashboardSection(Events, "Etkinlikler", 5);
-const PostsWithExpanded = withDashboardSection(Posts, "Son Gönderiler");
+import { useMediaQuery } from "../../hooks/useMediaQuery";
 
 const Dashboard = () => {
+  const media1225 = useMediaQuery("(min-width: 1225px)");
+  const media768 = useMediaQuery("(min-width: 768px)");
+
+  const media = media1225 ? 5 : media768 ? 3 : 2;
+
+  const AnnouncementsWithExpanded = withDashboardSection(
+    Announcements,
+    "Duyurular"
+  );
+  const EventsWithExpanded = withDashboardSection(Events, "Etkinlikler", media);
+  const PostsWithExpanded = withDashboardSection(Posts, "Son Gönderiler");
   return (
     <Layout>
       <div className="container mx-auto w-full pb-4 lg:px-14 xl:px-16">

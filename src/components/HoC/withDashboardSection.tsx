@@ -26,7 +26,7 @@ export function withDashboardSection(
           </span>
           <div className="flex-grow border-t-[1px] border-[#888]/20"></div>
 
-          <button className="mx-1 flex-shrink rounded-md bg-[#181823] py-[2px] px-4 text-lg font-medium text-white after:content-['>'] md:mx-4 md:px-8 md:after:content-['Daha_Fazlasını_Gör'] "></button>
+          <button className="mx-1 flex-shrink rounded-md bg-[#181823] py-[2px] px-4 text-lg font-medium text-white after:content-['>>'] md:mx-4 md:px-8 md:after:content-['Daha_Fazlasını_Gör'] "></button>
           <div className="w-2 border-t-[1px] border-[#888]/20"></div>
           <button
             onClick={() => {

@@ -48,11 +48,6 @@ export interface TRPCError {
   inclusive?: boolean;
 }
 
-enum POST_TYPE {
-  TEXT = "TEXT",
-  DOC = "DOC",
-}
-
 export interface SharePost {
   type: POST_TYPE;
   title: string;
