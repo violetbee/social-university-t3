@@ -9,7 +9,7 @@ type Props = Post & {
 
 const Post = (props: Props) => {
   return (
-    <div className="relative flex h-[382px] w-full flex-col justify-between overflow-hidden rounded-md border-[#888]/30 bg-white shadow-sm">
+    <div className="relative flex h-[350px] w-full flex-col justify-between overflow-hidden rounded-md border-[#888]/30 bg-white shadow-sm">
       {props.type === "DOC" && (
         <div className="stateOfPost absolute -right-10 top-3 flex h-8 w-32 rotate-45 items-center justify-center bg-center text-lg text-white">
           Dosya
@@ -28,7 +28,11 @@ const Post = (props: Props) => {
       )}
 
       <div className={`space-y-2 px-3 ${props.type === "DOC" && "pt-4"}`}>
-        <h3 className="break-words pr-10 font-semibold uppercase text-[#333]">
+        <h3
+          className={`break-words ${
+            props.type === "DOC" && "pr-10"
+          } font-semibold uppercase text-[#333]`}
+        >
           {props.title.slice(0, 40) + "..."}
         </h3>
         <p className="break-words pr-7 text-[#333]">

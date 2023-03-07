@@ -28,6 +28,9 @@ const CategorySearch = () => {
           />
           <BiSearchAlt className="absolute top-[23px] left-2 h-full -translate-y-1/2 transform text-2xl text-slate-400" />
         </label>
+        <button className="h-[48px] w-44 rounded-md border-[2px] border-white bg-[#dd4e63] text-xl text-white">
+          Sen de Paylaş!
+        </button>
       </div>
       <div className="flex items-center">
         <Link
