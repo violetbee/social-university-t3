@@ -1,12 +1,20 @@
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { HiOutlineUserCircle } from "react-icons/hi";
+import type { Dispatch, SetStateAction } from "react";
 
-export const AfterAuthHeaderSection = () => {
+type Props = {
+  setOpen: Dispatch<SetStateAction<boolean>>;
+};
+
+export const AfterAuthHeaderSection = ({ setOpen }: Props) => {
   const { data: session } = useSession();
 
   return (
-    <div className="hidden h-full items-center justify-center border-l-[1px] border-[#333]/10 pl-2 md:flex">
+    <button
+      onClick={() => setOpen((prev) => !prev)}
+      className="flex h-full items-center justify-center border-l-[1px] border-[#333]/10 pl-2"
+    >
       <div className="flex h-full w-44 items-center justify-center ">
         {session?.user?.name}
         {" karahüseyin"}
@@ -24,6 +32,6 @@ export const AfterAuthHeaderSection = () => {
           <HiOutlineUserCircle className=" text-5xl text-[#333]" />
         </div>
       )}
-    </div>
+    </button>
   );
 };

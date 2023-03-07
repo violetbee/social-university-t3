@@ -3,8 +3,6 @@ import Event from "./Event";
 
 interface Props {
   itemPiece?: number;
-  isExpanded: boolean;
-  toggleExpanded: () => void;
 }
 
 const Events = ({ itemPiece }: Props) => {
@@ -16,7 +14,7 @@ const Events = ({ itemPiece }: Props) => {
         1854: 4,
         1565: 3,
         1223: 2,
-        700: 1,
+        640: 1,
       }}
       className="my-masonry-grid"
       columnClassName="my-masonry-grid_column"

@@ -19,7 +19,11 @@ const Dashboard = () => {
     "Duyurular"
   );
   const EventsWithExpanded = withDashboardSection(Events, "Etkinlikler", media);
-  const PostsWithExpanded = withDashboardSection(Posts, "Son Gönderiler");
+  const PostsWithExpanded = withDashboardSection(
+    Posts,
+    "Son Gönderiler",
+    media
+  );
   return (
     <Layout>
       <div className="container mx-auto w-full pb-4 lg:px-14 xl:px-16">

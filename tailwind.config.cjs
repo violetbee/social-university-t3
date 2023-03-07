@@ -10,6 +10,11 @@ module.exports = {
         "md-m": "425px",
         "lg-m": "490px",
         "3xl": "1854px",
+        "grid-sm": "640px",
+        "grid-md": "1225px",
+        "grid-lg": "1566px",
+        "grid-xl": "1854px",
+        "grid-xxl": "2450px",
       },
       colors: {
         background: "#f4f4f0", //#001219 dark

@@ -75,7 +75,7 @@ const SharePost = () => {
   };
 
   return (
-    <div className="rounded-md border-2 bg-white p-6 shadow-lg">
+    <div className="rounded-md border-2 border-black bg-white p-6 shadow-lg">
       <div className="flex flex-col gap-2">
         <div className="flex items-center gap-2">
           <div className="flex flex-col gap-4">
@@ -252,7 +252,7 @@ const SharePost = () => {
               </div>
               <button
                 type="submit"
-                className="mt-5 rounded-md bg-black px-10 py-2 text-white"
+                className="mt-5 rounded-md bg-[#333] px-10 py-2 text-white"
               >
                 Gönder
               </button>

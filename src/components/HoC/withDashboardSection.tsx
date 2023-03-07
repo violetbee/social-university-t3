@@ -14,9 +14,7 @@ export function withDashboardSection(
 ) {
   const DashboardSection: FC<any> = (props: Props) => {
     const [isExpanded, setIsExpanded] = useState<boolean>(true);
-    const toggleExpanded = () => {
-      setIsExpanded(!isExpanded);
-    };
+
     return (
       <div className="h-full">
         <div className="flex items-center pb-3">
@@ -44,12 +42,7 @@ export function withDashboardSection(
               isExpanded ? "max-h-[1000px]" : "max-h-0"
             } overflow-hidden duration-200`}
           >
-            <WrappedComponent
-              {...props}
-              toggleExpanded={toggleExpanded}
-              isExpanded={isExpanded}
-              itemPiece={itemPiece}
-            />
+            <WrappedComponent {...props} itemPiece={itemPiece} />
           </div>
         </div>
       </div>

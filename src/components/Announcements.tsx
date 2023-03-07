@@ -26,13 +26,13 @@ const Announcements = () => {
   return (
     <div
       className="mb-10 flex h-44 w-full
-       justify-between border-[#888] pb-2 pt-1"
+       justify-between border-[#888] px-2 pb-2 pt-1"
     >
       <button
         onClick={() => {
           scrollHandler("left");
         }}
-        className="flex h-full w-10 items-center lg:w-20"
+        className="flex h-full w-10 items-center rounded-l-md  bg-white shadow-md lg:w-20"
       >
         {/* Left Side Arrow SVG */}
         <svg
@@ -43,13 +43,16 @@ const Announcements = () => {
           strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"
-          className="m-2 h-full w-20 cursor-pointer text-[#333]"
+          className="m-2 h-full w-20 cursor-pointer border-r-[1px] border-dashed border-gray-300 pr-2 text-[#333]"
         >
           <line x1="19" y1="12" x2="5" y2="12"></line>
           <polyline points="12 19 5 12 12 5"></polyline>
         </svg>
       </button>
-      <div ref={scrollRef} className="flex w-[10px] flex-1 overflow-hidden">
+      <div
+        ref={scrollRef}
+        className="relative flex w-[10px] flex-1 overflow-hidden"
+      >
         <Article />
         <Article />
         <Article />
@@ -58,11 +61,12 @@ const Announcements = () => {
         <Article />
         <Article />
       </div>
+
       <button
         onClick={() => {
           scrollHandler("right");
         }}
-        className="flex h-full w-10 items-center lg:w-20"
+        className="flex h-full w-10 items-center rounded-r-md bg-white shadow-md lg:w-20"
       >
         {/* Right Side Arrow SVG */}
         <svg
@@ -73,7 +77,7 @@ const Announcements = () => {
           strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"
-          className="m-2 h-full w-20 cursor-pointer text-[#333] duration-200"
+          className="m-2 h-full w-20 cursor-pointer border-l-[1px] border-dashed border-gray-300 pl-2 text-[#333]"
         >
           <line x1="5" y1="12" x2="19" y2="12"></line>
           <polyline points="12 5 19 12 12 19"></polyline>

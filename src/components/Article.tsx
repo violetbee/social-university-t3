@@ -1,6 +1,6 @@
 const Article = () => {
   return (
-    <article className="relative flex h-full w-[300px] flex-shrink-0 bg-white transition hover:shadow-md md:w-[500px]">
+    <article className="relative flex h-full w-[300px] flex-shrink-0 bg-white transition md:w-[500px]">
       <div className="rotate-180 p-2 [writing-mode:_vertical-lr]">
         <time className="flex items-center justify-between gap-4 text-xs font-bold uppercase text-[#333]">
           <span>Çağlar</span>
@@ -17,8 +17,8 @@ const Article = () => {
         />
       </div>
 
-      <div className="flex flex-1 flex-col justify-between">
-        <div className="border-l border-gray-900/10 p-4 sm:border-l-transparent sm:p-6">
+      <div className="flex flex-1 flex-col justify-between pr-2 sm:pr-0">
+        <div className=" border-gray-900/10 p-4 sm:p-6">
           <a href="#">
             <h3 className="font-bold uppercase text-[#333]">
               Finding the right guitar for your style - 5 tips
@@ -30,7 +30,7 @@ const Article = () => {
           </p>
         </div>
 
-        <button className="seeMore absolute bottom-2 right-5 flex w-10 items-center justify-center md-m:right-2 md:right-2">
+        <button className="seeMore absolute bottom-2 right-9 flex w-10 items-center justify-center md-m:right-2 md:right-2">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-6 w-6"

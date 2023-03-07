@@ -47,7 +47,7 @@ export const userRouter = router({
       })
     )
     .query(async ({ ctx, input }) => {
-      const user = ctx.prisma.post.findUnique({
+      const user = ctx.prisma.user.findUnique({
         where: {
           id: input.id,
         },
