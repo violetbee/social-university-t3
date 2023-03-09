@@ -59,7 +59,6 @@ const Announcements = () => {
         <Article />
         <Article />
         <Article />
-        <Article />
       </div>
 
       <button
