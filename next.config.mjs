@@ -27,6 +27,11 @@ export default defineNextConfig({
         protocol: "https",
         hostname: "cdn.discordapp.com",
       },
+      {
+        // Amazon S3
+        protocol: "https",
+        hostname: "sosyal-uni.s3.amazonaws.com",
+      },
     ],
   },
 });

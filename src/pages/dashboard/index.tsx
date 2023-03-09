@@ -12,7 +12,7 @@ const Dashboard = () => {
   const media1225 = useMediaQuery("(min-width: 1225px)");
   const media768 = useMediaQuery("(min-width: 768px)");
 
-  const media = media1225 ? 5 : media768 ? 3 : 2;
+  const media = media1225 ? 5 : media768 ? 4 : 2;
 
   const AnnouncementsWithExpanded = withDashboardSection(
     Announcements,

@@ -1,6 +1,10 @@
+import { Event, EventType } from "@prisma/client";
 import Image from "next/image";
 
-const Event = () => {
+const Event = ({ event }: { event: Event & { EventType: EventType } }) => {
+  const startDate = new Date(event.startDate);
+  const endDate = new Date(event.endDate);
+
   return (
     <div className={`mx-auto mb-3 h-[350px] px-2 pt-1 duration-200 md:mb-5`}>
       <div
@@ -14,23 +18,23 @@ const Event = () => {
           className={`h-24 w-full rounded-t-md object-cover`}
         />
         <h1 className="px-3 py-2 text-lg font-semibold leading-6 tracking-wider">
-          Mor ve Ötesi Konseri
+          {event.title}
         </h1>
         <div className="flex justify-between">
           <span className="px-3 font-medium">Başlangıç Tarihi:</span>
-          <span className="px-3">21.04.2023</span>
+          <span className="px-3">{startDate.toLocaleDateString()}</span>
         </div>
         <div className="flex justify-between">
           <span className="px-3 font-medium">Bitiş Tarihi:</span>
-          <span className="px-3">21.04.2023</span>
+          <span className="px-3">{endDate.toLocaleDateString()}</span>
         </div>
         <div className="flex justify-between">
           <span className="px-3 font-medium">Etkinlik Türü:</span>
-          <span className="px-3">Tiyatro</span>
+          <span className="px-3">{event.EventType.name}</span>
         </div>
         <div className="flex justify-between">
           <span className="px-3 font-medium">Konum:</span>
-          <span className="px-3 text-end">AKM Atatürk Kültür Merkezi</span>
+          <span className="px-3 text-end">{event.location}</span>
         </div>
 
         <div
@@ -38,9 +42,14 @@ const Event = () => {
             "file" === "file" ? "bgFile" : "bgNormal"
           }`}
         >
-          <p className="text-xl font-medium text-white">
-            Ücret: <span className="text-red-400">45 ₺</span>
-          </p>
+          <div className="text-xl font-bold text-white">
+            Ücret:{" "}
+            {event.price ? (
+              <span className="text-red-400">{event.price} ₺</span>
+            ) : (
+              <span className="text-green-400">YOK</span>
+            )}
+          </div>
         </div>
         <div className="flex items-center justify-between px-3 pt-2 pb-2">
           <button className="seeMore flex w-full items-center justify-center">

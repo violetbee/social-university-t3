@@ -127,6 +127,6 @@ export const postRouter = router({
         };
       });
 
-      return postsWithTimeAgo;
+      return { posts: postsWithTimeAgo };
     }),
 });

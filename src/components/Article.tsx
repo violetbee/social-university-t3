@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 const Article = () => {
   return (
     <article className="relative flex h-full w-[300px] flex-shrink-0 bg-white transition md:w-[500px]">
@@ -10,10 +12,12 @@ const Article = () => {
       </div>
 
       <div className="hidden sm:basis-56 md:block">
-        <img
+        <Image
           alt="Guitar"
-          src="https://images.unsplash.com/photo-1609557927087-f9cf8e88de18?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80"
+          src={`${process.env.NEXT_PUBLIC_BUCKET_URL}cpz00vxv2mj-fullstack.jpg`}
           className="aspect-square h-full w-full object-cover"
+          width={300}
+          height={300}
         />
       </div>
 

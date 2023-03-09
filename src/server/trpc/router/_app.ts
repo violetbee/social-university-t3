@@ -5,6 +5,7 @@ import { userRouter } from "./user";
 import { likeRouter } from "./like";
 import { postRouter } from "./post";
 import { categoryRouter } from "./category";
+import { eventRouter } from "./event";
 
 export const appRouter = router({
   auth: authRouter,
@@ -12,6 +13,7 @@ export const appRouter = router({
   like: likeRouter,
   post: postRouter,
   category: categoryRouter,
+  event: eventRouter,
 });
 
 // export type definition of API

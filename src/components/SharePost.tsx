@@ -24,12 +24,13 @@ const SharePost = () => {
   const [form, setForm] = useState<SharePost>({
     title: "",
     content: "",
-    categoryId: "clbhwqhlm00bqvxhcot7bq95r",
+    categoryId: data && data[0] && data[0].id ? data[0].id : "",
     type: POST_TYPE.TEXT,
   });
 
   const [baseFiles, setBaseFiles] = useState<FileList>();
   const [files, setFiles] = useState<FileInput[]>([]);
+  const [progress, setProgress] = useState<number>();
 
   const handleForm = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -39,7 +40,7 @@ const SharePost = () => {
           setForm({
             title: "",
             content: "",
-            categoryId: "clbhwqhlm00bqvxhcot7bq95r",
+            categoryId: data && data[0] && data[0].id ? data[0].id : "",
             type: POST_TYPE.TEXT,
           });
           ctx.invalidate();
@@ -49,13 +50,31 @@ const SharePost = () => {
       const formData = new FormData();
       if (!baseFiles) return;
       Object.values(baseFiles).forEach((baseFile) => {
+        const fileName = `${Math.random().toString(36).substring(2, 15)}-${
+          baseFile.name
+        }`;
+
         formData.append("theFiles", baseFile);
+        formData.append("fileName", fileName);
       });
-      axios.post("/api/fileUpload", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      try {
+        axios
+          .post("/api/awsUpload", formData, {
+            headers: {
+              "content-type": "multipart/form-data",
+            },
+            onUploadProgress: (progress) => {
+              const percentComplete =
+                Math.round(progress.loaded * 100) / (progress.total as number);
+              setProgress(percentComplete);
+            },
+          })
+          .then((res) => {
+            console.log(res);
+          });
+      } catch (e) {
+        console.log(e);
+      }
       if (!files) return;
       await createDocPost.mutateAsync(
         { ...form, files },
@@ -64,7 +83,7 @@ const SharePost = () => {
             setForm({
               title: "",
               content: "",
-              categoryId: "clbhwqhlm00bqvxhcot7bq95r",
+              categoryId: "",
               type: POST_TYPE.TEXT,
             });
             ctx.invalidate();
@@ -256,6 +275,7 @@ const SharePost = () => {
               >
                 Gönder
               </button>
+              {progress}
             </form>
           </div>
         </div>

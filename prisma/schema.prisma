@@ -55,6 +55,7 @@ model User {
     post          Post[]
     Comment       Comment[]
     like          Like[]
+    Event         Event[]
 }
 
 model Category {
@@ -81,6 +82,29 @@ model Post {
     like       Like[]
     type       POST_TYPE
     files      File[]
+}
+
+model Event {
+    id          String    @id @default(cuid())
+    createdAt   DateTime  @default(now()) @db.Timestamp(6)
+    startDate   DateTime  @db.Timestamp(6)
+    endDate     DateTime  @db.Timestamp(6)
+    title       String
+    price       Float?
+    description String
+    image       String?
+    date        DateTime
+    location    String
+    user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+    userId      String
+    EventType   EventType @relation(fields: [eventTypeId], references: [id], onDelete: Cascade)
+    eventTypeId String
+}
+
+model EventType {
+    id    String  @id @default(cuid())
+    name  String
+    Event Event[]
 }
 
 model File {

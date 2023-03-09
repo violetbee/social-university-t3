@@ -112,7 +112,7 @@ const Post = ({ post }: { post: PostType }) => {
           </dd>
         </div>
         <Link
-          href={post.category.slug + "/" + post.id}
+          href={post?.category.slug + "/" + post.id}
           className="flex items-center justify-center space-x-1 rounded-full border-2 border-[#888] bg-white px-4 py-1 text-xs font-medium text-[#333] hover:bg-black hover:text-white dark:border-white dark:bg-slate-800 dark:text-white dark:hover:bg-white dark:hover:text-[#333]"
         >
           <span>Devamını Gör</span>
