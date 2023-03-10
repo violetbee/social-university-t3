@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useCallback, useMemo } from "react";
 import Popup from "reactjs-popup";
 import { useState } from "react";
 import type { Dispatch, SetStateAction } from "react";
@@ -18,14 +18,19 @@ export function withPopup(Trigger: FC<TriggerProps>, WrappedComponent: FC) {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const PopupComponent = (props: any) => {
     const [open, setOpen] = useState(false);
+
+    const toggle = useCallback(() => setOpen((prev) => !prev), []);
+
+    const value = useMemo(() => ({ toggle, open }), [toggle, open]);
+
     return (
       <>
-        <Trigger setOpen={setOpen} />
+        <Trigger setOpen={value.toggle} />
         <Popup
-          open={open}
+          open={value.open}
           modal
           closeOnDocumentClick
-          onClose={() => setOpen(false)}
+          onClose={value.toggle}
         >
           <WrappedComponent {...props} />
         </Popup>

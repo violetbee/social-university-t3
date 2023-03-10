@@ -6,7 +6,7 @@ import { trpc } from "../../utils/trpc";
 interface Props {
   itemPiece?: number;
   events?: (TypeOfEvent & {
-    EventType: EventType;
+    eventType: EventType;
   })[];
 }
 

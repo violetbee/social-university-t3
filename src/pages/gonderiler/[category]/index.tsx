@@ -23,7 +23,7 @@ type Props = {
     [key: string]: string | string[] | ParsedUrlQuery;
   };
   events?: (TypeOfEvent & {
-    EventType: EventType;
+    eventType: EventType;
   })[];
 };
 
@@ -76,7 +76,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
           },
           include: {
             user: true,
-            EventType: true,
+            eventType: true,
           },
         })
       : null;

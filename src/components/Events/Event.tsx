@@ -1,7 +1,7 @@
 import { Event, EventType } from "@prisma/client";
 import Image from "next/image";
 
-const Event = ({ event }: { event: Event & { EventType: EventType } }) => {
+const Event = ({ event }: { event: Event & { eventType: EventType } }) => {
   const startDate = new Date(event.startDate);
   const endDate = new Date(event.endDate);
 
@@ -30,7 +30,7 @@ const Event = ({ event }: { event: Event & { EventType: EventType } }) => {
         </div>
         <div className="flex justify-between">
           <span className="px-3 font-medium">Etkinlik Türü:</span>
-          <span className="px-3">{event.EventType.name}</span>
+          <span className="px-3">{event.eventType.name}</span>
         </div>
         <div className="flex justify-between">
           <span className="px-3 font-medium">Konum:</span>

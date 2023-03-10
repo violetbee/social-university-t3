@@ -8,7 +8,7 @@ export const eventRouter = router({
         createdAt: "desc",
       },
       include: {
-        EventType: true,
+        eventType: true,
         user: true,
       },
     });

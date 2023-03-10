@@ -33,6 +33,13 @@ model Account {
     @@unique([provider, providerAccountId])
 }
 
+model University {
+    id    String @id @default(cuid())
+    name  String
+    slug  String @unique
+    users User[]
+}
+
 model Session {
     id           String   @id @default(cuid())
     sessionToken String   @unique
@@ -42,11 +49,11 @@ model Session {
 }
 
 model User {
-    id            String    @id @default(cuid())
-    createdAt     DateTime  @default(now())
+    id            String      @id @default(cuid())
+    createdAt     DateTime    @default(now())
     name          String?
     surname       String?
-    email         String?   @unique
+    email         String?     @unique
     emailVerified DateTime?
     password      String?
     image         String?
@@ -55,7 +62,9 @@ model User {
     post          Post[]
     Comment       Comment[]
     like          Like[]
-    Event         Event[]
+    event         Event[]
+    university    University? @relation(fields: [universityId], references: [id])
+    universityId  String?
 }
 
 model Category {
@@ -97,14 +106,14 @@ model Event {
     location    String
     user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
     userId      String
-    EventType   EventType @relation(fields: [eventTypeId], references: [id], onDelete: Cascade)
+    eventType   EventType @relation(fields: [eventTypeId], references: [id], onDelete: Cascade)
     eventTypeId String
 }
 
 model EventType {
-    id    String  @id @default(cuid())
-    name  String
-    Event Event[]
+    id     String  @id @default(cuid())
+    name   String
+    events Event[]
 }
 
 model File {
