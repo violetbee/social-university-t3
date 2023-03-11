@@ -24,6 +24,7 @@ const Dashboard = () => {
     "Son Gönderiler",
     media
   );
+
   return (
     <Layout>
       <div className="container mx-auto w-full pb-4 lg:px-14 xl:px-16">

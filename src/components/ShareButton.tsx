@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { useMediaQuery } from "../hooks/useMediaQuery";
+import { trpc } from "../utils/trpc";
 
 type Props = {
   setOpen: () => void;
@@ -7,7 +8,7 @@ type Props = {
 
 export const ShareButton = ({ setOpen }: Props) => {
   const media = useMediaQuery("(max-width: 768px)");
-
+  const data = trpc.category.getAll.useQuery();
   return (
     <button
       onClick={setOpen}

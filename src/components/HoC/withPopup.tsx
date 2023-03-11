@@ -1,7 +1,6 @@
 import { FC, useCallback, useMemo } from "react";
 import Popup from "reactjs-popup";
 import { useState } from "react";
-import type { Dispatch, SetStateAction } from "react";
 
 /**
  *
@@ -11,7 +10,7 @@ import type { Dispatch, SetStateAction } from "react";
  */
 
 type TriggerProps = {
-  setOpen: Dispatch<SetStateAction<boolean>>;
+  setOpen: () => void;
 };
 
 export function withPopup(Trigger: FC<TriggerProps>, WrappedComponent: FC) {

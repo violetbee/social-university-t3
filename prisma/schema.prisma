@@ -33,13 +33,6 @@ model Account {
     @@unique([provider, providerAccountId])
 }
 
-model University {
-    id    String @id @default(cuid())
-    name  String
-    slug  String @unique
-    users User[]
-}
-
 model Session {
     id           String   @id @default(cuid())
     sessionToken String   @unique
@@ -57,14 +50,85 @@ model User {
     emailVerified DateTime?
     password      String?
     image         String?
+    userType      User_TYPE?  @default(STUDENT)
     accounts      Account[]
     sessions      Session[]
     post          Post[]
     Comment       Comment[]
     like          Like[]
     event         Event[]
-    university    University? @relation(fields: [universityId], references: [id])
+    university    University? @relation(fields: [universityId], references: [id], onDelete: Cascade)
     universityId  String?
+    department    Department? @relation(fields: [departmentId], references: [id], onDelete: Cascade)
+    departmentId  String?
+    schoolClub    SchoolClub? @relation(fields: [schoolClubId], references: [id], onDelete: Cascade)
+    schoolClubId  String?
+    class         Class?      @relation(fields: [classId], references: [id], onDelete: Cascade)
+    classId       String?
+    classLevel    ClassLevel? @relation(fields: [classLevelId], references: [id], onDelete: Cascade)
+    classLevelId  String?
+}
+
+enum User_TYPE {
+    STUDENT
+    TEACHER
+    ADMIN
+    MODERATOR
+    SCHOOL_CLUB_MEMBER
+    SCHOOL_CLUB_REPRESENTETIVE
+    EVENT_ORGANIZER
+}
+
+model University {
+    id          String                   @id @default(cuid())
+    name        String
+    slug        String                   @unique
+    users       User[]
+    posts       Post[]
+    events      Event[]
+    departments UniversityOnDepartment[]
+}
+
+model Department {
+    id           String                   @id @default(cuid())
+    createdAt    DateTime                 @default(now()) @db.Timestamp(6)
+    name         String
+    slug         String                   @unique
+    users        User[]
+    posts        Post[]
+    classes      Class[]
+    classLevels  ClassLevel[]
+    universities UniversityOnDepartment[]
+}
+
+model UniversityOnDepartment {
+    createdAt    DateTime   @default(now()) @db.Timestamp(6)
+    university   University @relation(fields: [universityId], references: [id], onDelete: Cascade)
+    universityId String
+    department   Department @relation(fields: [departmentId], references: [id], onDelete: Cascade)
+    departmentId String
+
+    @@id([universityId, departmentId])
+}
+
+model Class {
+    id           String     @id @default(cuid())
+    name         String
+    slug         String     @unique
+    department   Department @relation(fields: [departmentId], references: [id], onDelete: Cascade)
+    departmentId String
+    posts        Post[]
+    users        User[]
+}
+
+model ClassLevel {
+    id           String     @id @default(cuid())
+    name         String
+    slug         String     @unique
+    department   Department @relation(fields: [departmentId], references: [id], onDelete: Cascade)
+    departmentId String
+    posts        Post[]
+    user         User[]
 }
 
 model Category {
@@ -74,40 +138,58 @@ model Category {
     posts Post[]
 }
 
+model SchoolClub {
+    id        String   @id @default(cuid())
+    createdAt DateTime @default(now()) @db.Timestamp(6)
+    name      String
+    slug      String   @unique
+    users     User[]
+    events    Event[]
+}
+
 model Post {
-    id         String    @id @default(cuid())
-    createdAt  DateTime  @default(now()) @db.Timestamp(6)
-    title      String
-    content    String
-    image      String?
-    department String?
-    class      String?
-    classLevel String?
-    category   Category? @relation(fields: [categoryId], references: [id], onDelete: Cascade)
-    user       User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-    comments   Comment[]
-    categoryId String
-    userId     String
-    like       Like[]
-    type       POST_TYPE
-    files      File[]
+    id           String      @id @default(cuid())
+    createdAt    DateTime    @default(now()) @db.Timestamp(6)
+    title        String
+    content      String
+    image        String?
+    category     Category?   @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+    user         User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+    comments     Comment[]
+    categoryId   String
+    userId       String
+    like         Like[]
+    type         POST_TYPE
+    files        File[]
+    university   University? @relation(fields: [universityId], references: [id])
+    universityId String?
+    department   Department? @relation(fields: [departmentId], references: [id])
+    departmentId String?
+    class        Class?      @relation(fields: [classId], references: [id])
+    classId      String?
+    classLevel   ClassLevel? @relation(fields: [classLevelId], references: [id])
+    classLevelId String?
 }
 
 model Event {
-    id          String    @id @default(cuid())
-    createdAt   DateTime  @default(now()) @db.Timestamp(6)
-    startDate   DateTime  @db.Timestamp(6)
-    endDate     DateTime  @db.Timestamp(6)
-    title       String
-    price       Float?
-    description String
-    image       String?
-    date        DateTime
-    location    String
-    user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-    userId      String
-    eventType   EventType @relation(fields: [eventTypeId], references: [id], onDelete: Cascade)
-    eventTypeId String
+    id           String      @id @default(cuid())
+    createdAt    DateTime    @default(now()) @db.Timestamp(6)
+    startDate    DateTime    @db.Timestamp(6)
+    endDate      DateTime    @db.Timestamp(6)
+    title        String
+    price        Float?
+    description  String
+    image        String?
+    date         DateTime
+    location     String
+    user         User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+    userId       String
+    eventType    EventType   @relation(fields: [eventTypeId], references: [id], onDelete: Cascade)
+    eventTypeId  String
+    university   University? @relation(fields: [universityId], references: [id])
+    universityId String?
+    schoolClub   SchoolClub? @relation(fields: [schoolClubId], references: [id])
+    schoolClubId String?
 }
 
 model EventType {

@@ -5,10 +5,10 @@ import Link from "next/link";
 import { BiSearchAlt } from "react-icons/bi";
 import withPopup from "./HoC/withPopup";
 import { ShareButton } from "./ShareButton";
-import SharePost from "./SharePost";
+import ShareFormMain from "./Form/ShareFormMain";
 
 const CategorySearch = () => {
-  const ShareBt = withPopup(ShareButton, SharePost);
+  const ShareBt = withPopup(ShareButton, ShareFormMain);
 
   const { query } = useRouter();
   const [active, setActive] = useState<string>(
