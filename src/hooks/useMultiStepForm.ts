@@ -1,14 +1,26 @@
 import { useState } from "react";
+import { SharePost } from "../types/app";
 
 type Options = {
   postType: string;
   skip: string;
 };
 
-export const useMultiStepForm = (steps: JSX.Element[], options: Options) => {
-  const [currentStepIndex, setCurrentStepIndex] = useState(0);
+type SetForm = React.Dispatch<React.SetStateAction<SharePost>>;
 
-  console.log(currentStepIndex);
+export const useMultiStepForm = (
+  steps: JSX.Element[],
+  options: Options,
+  setForm: SetForm,
+  setOptions: React.Dispatch<
+    React.SetStateAction<{
+      postType: string;
+      skip: string;
+      disabledIfNotSelected: boolean;
+    }>
+  >
+) => {
+  const [currentStepIndex, setCurrentStepIndex] = useState(0);
 
   const next = () => {
     setCurrentStepIndex((i) => {
@@ -23,6 +35,16 @@ export const useMultiStepForm = (steps: JSX.Element[], options: Options) => {
       if (i == 0) return i;
       return i - 1;
     });
+    if (currentStepIndex === 1) {
+      setOptions((prev) => ({ ...prev, disabledIfNotSelected: false }));
+      setForm({
+        type: "",
+        title: "",
+        content: "",
+        categoryId: "",
+        departmentId: "",
+      });
+    }
   };
 
   const reset = () => {
@@ -31,12 +53,6 @@ export const useMultiStepForm = (steps: JSX.Element[], options: Options) => {
 
   if (options.skip === "on") {
     steps.splice(1, 1);
-  }
-
-  if (options.postType === "TEXT") {
-    steps.splice(options.skip === "on" ? 2 : 3, 1);
-  } else {
-    steps.splice(options.skip === "on" ? 1 : 2, 1);
   }
 
   const currentStep = steps[currentStepIndex];

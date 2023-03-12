@@ -7,6 +7,9 @@ import {
   EventType,
   Post as PostType,
   User,
+  Department,
+  Class,
+  ClassLevel,
 } from "@prisma/client";
 import Post from "../../../components/Posts/Post";
 import CategorySearch from "../../../components/CategorySearch";
@@ -18,6 +21,9 @@ type Props = {
     user: User;
     category: Category | null;
     publishedTimeAgo: string;
+    department: Department | null;
+    class: Class | null;
+    classLevel: ClassLevel | null;
   })[];
   params: {
     [key: string]: string | string[] | ParsedUrlQuery;

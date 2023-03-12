@@ -9,6 +9,7 @@ export const postRouter = router({
         title: z.string(),
         content: z.string(),
         categoryId: z.string(),
+        departmentId: z.string(),
       })
     )
     .mutation(async ({ ctx, input }) => {
@@ -17,6 +18,7 @@ export const postRouter = router({
           title: input.title,
           content: input.content,
           categoryId: input.categoryId,
+          departmentId: input.departmentId,
           userId: ctx.session?.user?.id as string,
           type: input.type,
         },
@@ -29,6 +31,7 @@ export const postRouter = router({
         title: z.string(),
         content: z.string(),
         categoryId: z.string(),
+        departmentId: z.string(),
         files: z.array(
           z.object({
             name: z.string(),
@@ -45,6 +48,7 @@ export const postRouter = router({
           title: input.title,
           content: input.content,
           categoryId: input.categoryId,
+          departmentId: input.departmentId,
           userId: ctx.session?.user?.id as string,
           type: input.type,
           files: {
@@ -117,6 +121,9 @@ export const postRouter = router({
           user: true,
           category: true,
           like: true,
+          department: true,
+          class: true,
+          classLevel: true,
         },
       });
 

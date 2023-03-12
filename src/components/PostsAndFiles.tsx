@@ -32,7 +32,7 @@ const PostsAndFiles = () => {
         </button>
       </div>
       <div className="rounded-b-md shadow-sm">
-        {posts?.slice(0, 5).map((post) => (
+        {posts?.posts.slice(0, 5).map((post) => (
           <div
             key={post.id}
             className="flex items-center justify-between px-1 py-2 even:bg-gray-100"

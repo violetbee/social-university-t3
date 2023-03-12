@@ -90,14 +90,14 @@ model University {
 }
 
 model Department {
-    id           String                   @id @default(cuid())
-    createdAt    DateTime                 @default(now()) @db.Timestamp(6)
+    id           String                    @id @default(cuid())
+    createdAt    DateTime                  @default(now()) @db.Timestamp(6)
     name         String
-    slug         String                   @unique
+    slug         String                    @unique
     users        User[]
     posts        Post[]
     classes      Class[]
-    classLevels  ClassLevel[]
+    classLevels  DepartmentsOnClassLevel[]
     universities UniversityOnDepartment[]
 }
 
@@ -122,13 +122,22 @@ model Class {
 }
 
 model ClassLevel {
-    id           String     @id @default(cuid())
-    name         String
-    slug         String     @unique
+    id          String                    @id @default(cuid())
+    name        String
+    slug        String                    @unique
+    posts       Post[]
+    user        User[]
+    departments DepartmentsOnClassLevel[]
+}
+
+model DepartmentsOnClassLevel {
+    createdAt    DateTime   @default(now()) @db.Timestamp(6)
     department   Department @relation(fields: [departmentId], references: [id], onDelete: Cascade)
     departmentId String
-    posts        Post[]
-    user         User[]
+    classLevel   ClassLevel @relation(fields: [classLevelId], references: [id], onDelete: Cascade)
+    classLevelId String
+
+    @@id([departmentId, classLevelId])
 }
 
 model Category {

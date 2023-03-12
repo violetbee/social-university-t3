@@ -1,4 +1,11 @@
-import { Category, Post as PostType, User } from "@prisma/client";
+import {
+  Category,
+  Class,
+  ClassLevel,
+  Department,
+  Post as PostType,
+  User,
+} from "@prisma/client";
 import Image from "next/image";
 
 type Props = {
@@ -6,6 +13,9 @@ type Props = {
     user: User;
     category: Category | null;
     publishedTimeAgo: string;
+    department: Department | null;
+    class: Class | null;
+    classLevel: ClassLevel | null;
   };
 };
 
@@ -51,15 +61,15 @@ const Post = ({ post }: Props) => {
           <div className="px-3 py-4">
             <div className="flex justify-between">
               <span className="font-medium">Bölüm:</span>
-              <span>{post.department}</span>
+              <span>{post.department?.name}</span>
             </div>
             <div className="flex justify-between">
               <span className="font-medium">Sınıf:</span>
-              <span>{post.classLevel}</span>
+              <span>{post.classLevel?.name}</span>
             </div>
             <div className="flex justify-between">
               <span className="font-medium">Ders:</span>
-              <span>{post.class}</span>
+              <span>{post.class?.name}</span>
             </div>
           </div>
         </>

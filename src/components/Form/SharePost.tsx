@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { SharePost } from "../../../types/app";
-import { trpc } from "../../../utils/trpc";
+import { SharePost } from "../../types/app";
+import { trpc } from "../../utils/trpc";
 import axios from "axios";
 import { Dispatch, SetStateAction } from "react";
-import ShareFormMain from "../ShareFormMain";
+import ShareFormMain from "./ShareFormMain";
 
 interface Props {
   options: {
@@ -41,6 +41,7 @@ const SharePost = ({ options, form, setForm }: Props) => {
             content: "",
             categoryId: data && data[0] && data[0].id ? data[0].id : "",
             type: "TEXT",
+            departmentId: "",
           });
           ctx.invalidate();
         },
@@ -84,6 +85,7 @@ const SharePost = ({ options, form, setForm }: Props) => {
               content: "",
               categoryId: "",
               type: "TEXT",
+              departmentId: "",
             });
             ctx.invalidate();
           },
