@@ -1,0 +1,61 @@
+const clamp = (n, min, max) => Math.min(Math.max(n, min), max);
+
+const TEXT = 'TEXT';
+const FILE = 'FILE';
+
+const TheComponent = () => {
+  const [can_go_next, set_can_go_next] = useState(false);
+  const [upload_type, set_upload_type] = useState(null);
+  const [step, set_step] = useState(0);
+  // maybe more state to for each steps
+  
+  const get_remaining_steps = () => {
+    switch(upload_type) {
+      case TEXT:
+        return [
+          () => <TextInfo set_can_go_next={set_can_go_next} maybe_more_setters={...} />,
+          () => <TextInput  set_can_go_next={set_can_go_next} maybe_more_setters={...} />,
+        ]
+      case FILE:
+        return [
+          () => <FileInfo  set_can_go_next={set_can_go_next} maybe_more_setters={...} />,
+          () => <FileUpload  set_can_go_next={set_can_go_next} maybe_more_setters={...} />,
+        ]
+      case null:
+        return [] 
+      default:
+        throw new Error(`invalid value for ${upload_type}`);
+    }
+  }
+
+  const steps = [
+    () => <ChooseType set_upload_type={set_upload_type}  />,
+    ...get_remaining_steps(),
+  ];
+
+
+  const previous = () => {
+    set_step(s => Math.max(s-1, 0));
+  }
+  const next = () => {
+    set_step(s => Math.min(s+1, steps.length-1));
+  }
+  const send =() => {
+    //upload logic
+  }
+
+  const current_step = steps[clamp(step, 0, steps.length-1)];
+  
+  const is_first = step === 0;
+  const is_last = !is_first && step >= steps.length - 1;
+
+  return (
+    <dialog>
+      {current_step()} 
+      {is_first && <button onClick={previous}>Previous</button>}
+      <button onClick={is_last ? send : next} disabled={!can_go_next}>
+        {is_last ? 'Send' : 'Next'}
+      </button>
+    </dialog>
+  )
+}

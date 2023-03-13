@@ -165,7 +165,7 @@ model Post {
     category     Category?   @relation(fields: [categoryId], references: [id], onDelete: Cascade)
     user         User        @relation(fields: [userId], references: [id], onDelete: Cascade)
     comments     Comment[]
-    categoryId   String
+    categoryId   String?
     userId       String
     like         Like[]
     type         POST_TYPE
@@ -189,7 +189,6 @@ model Event {
     price        Float?
     description  String
     image        String?
-    date         DateTime
     location     String
     user         User        @relation(fields: [userId], references: [id], onDelete: Cascade)
     userId       String

@@ -9,7 +9,6 @@ export const postRouter = router({
         title: z.string(),
         content: z.string(),
         categoryId: z.string(),
-        departmentId: z.string(),
       })
     )
     .mutation(async ({ ctx, input }) => {
@@ -18,7 +17,6 @@ export const postRouter = router({
           title: input.title,
           content: input.content,
           categoryId: input.categoryId,
-          departmentId: input.departmentId,
           userId: ctx.session?.user?.id as string,
           type: input.type,
         },
@@ -64,11 +62,9 @@ export const postRouter = router({
         },
       });
     }),
-
   removePosts: publicProcedure.mutation(async ({ ctx }) => {
     await ctx.prisma.post.deleteMany();
   }),
-
   getAllPosts: publicProcedure
     .input(
       z.object({
