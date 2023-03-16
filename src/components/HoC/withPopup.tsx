@@ -1,4 +1,4 @@
-import { FC, useCallback, useMemo } from "react";
+import { FC } from "react";
 import Popup from "reactjs-popup";
 import { useState } from "react";
 
@@ -18,9 +18,9 @@ export function withPopup(Trigger: FC<TriggerProps>, WrappedComponent: FC) {
   const PopupComponent = (props: any) => {
     const [open, setOpen] = useState(false);
 
-    const toggle = useCallback(() => setOpen((prev) => !prev), []);
+    const toggle = () => setOpen((prev) => !prev);
 
-    const value = useMemo(() => ({ toggle, open }), [toggle, open]);
+    const value = { toggle, open };
 
     return (
       <>

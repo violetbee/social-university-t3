@@ -4,6 +4,12 @@ import { SharePost } from "../types/app";
 type Options = {
   postType: string;
   skip: string;
+  disabledIfNotSelected: {
+    category: boolean;
+    department: boolean;
+    classLevel: boolean;
+    class: boolean;
+  };
 };
 
 type SetForm = React.Dispatch<React.SetStateAction<SharePost>>;
@@ -16,7 +22,12 @@ export const useMultiStepForm = (
     React.SetStateAction<{
       postType: string;
       skip: string;
-      disabledIfNotSelected: boolean;
+      disabledIfNotSelected: {
+        category: boolean;
+        department: boolean;
+        classLevel: boolean;
+        class: boolean;
+      };
     }>
   >
 ) => {
@@ -36,13 +47,23 @@ export const useMultiStepForm = (
       return i - 1;
     });
     if (currentStepIndex === 1) {
-      setOptions((prev) => ({ ...prev, disabledIfNotSelected: false }));
+      setOptions((prev) => ({
+        ...prev,
+        disabledIfNotSelected: {
+          category: false,
+          department: false,
+          classLevel: false,
+          class: false,
+        },
+      }));
       setForm({
         type: "",
         title: "",
         content: "",
         categoryId: "",
         departmentId: "",
+        classLevelId: "",
+        classId: "",
       });
     }
   };

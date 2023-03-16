@@ -3,8 +3,11 @@ import { z } from "zod";
 
 export const categoryRouter = router({
   getAll: publicProcedure.query(async ({ ctx }) => {
-    const categories = await ctx.prisma.category.findMany();
-
+    const categories = await ctx.prisma.category.findMany({
+      orderBy: {
+        createdAt: "asc",
+      },
+    });
     return categories;
   }),
   create: publicProcedure

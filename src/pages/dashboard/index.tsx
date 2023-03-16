@@ -3,7 +3,7 @@ import Layout from "../../components/Layout";
 import { getServerAuthSession } from "../../server/common/get-server-auth-session";
 import Events from "../../components/Events/Events";
 import Announcements from "../../components/Announcements";
-import CategorySearch from "../../components/CategorySearch";
+import CategoryAndMenuSection from "../../components/CategoryAndMenuSection";
 import withDashboardSection from "../../components/HoC/withDashboardSection";
 import Posts from "../../components/Posts/Posts";
 import { useMediaQuery } from "../../hooks/useMediaQuery";
@@ -28,7 +28,7 @@ const Dashboard = () => {
   return (
     <Layout>
       <div className="container mx-auto w-full pb-4 lg:px-14 xl:px-16">
-        <CategorySearch />
+        <CategoryAndMenuSection />
         <AnnouncementsWithExpanded />
         <PostsWithExpanded />
         <EventsWithExpanded />

@@ -4,9 +4,18 @@ type Props = {
   id: string;
   className: string;
   onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  innerRef?: React.RefObject<HTMLSelectElement>;
+  disabled?: boolean;
 };
 
-const Select = ({ children, label, id, className, onChange }: Props) => {
+const Select = ({
+  children,
+  label,
+  id,
+  className,
+  onChange,
+  disabled,
+}: Props) => {
   return (
     <div>
       <label
@@ -15,7 +24,13 @@ const Select = ({ children, label, id, className, onChange }: Props) => {
       >
         {label}
       </label>
-      <select onChange={onChange} id={id} className={className}>
+      <select
+        disabled={disabled}
+        required={true}
+        onChange={onChange}
+        id={id}
+        className={className}
+      >
         {children}
       </select>
     </div>

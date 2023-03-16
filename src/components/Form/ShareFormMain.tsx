@@ -10,7 +10,12 @@ const ShareForm = () => {
   const [options, setOptions] = useState({
     postType: "",
     skip: localStorage.getItem("skip") || "false",
-    disabledIfNotSelected: false,
+    disabledIfNotSelected: {
+      category: false,
+      department: false,
+      classLevel: false,
+      class: false,
+    },
   });
 
   const [form, setForm] = useState<SharePostType>({
@@ -19,6 +24,8 @@ const ShareForm = () => {
     categoryId: "",
     type: "",
     departmentId: "",
+    classLevelId: "",
+    classId: "",
   });
 
   const handlePostType = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -56,7 +63,8 @@ const ShareForm = () => {
 
   const checkIfDisabled =
     currentStepIndex === (options.skip === "on" ? 1 : 2) &&
-    !options.disabledIfNotSelected
+    (!form.categoryId || !form.departmentId) &&
+    (!form.classLevelId || !form.classId)
       ? true
       : false;
 
@@ -80,7 +88,6 @@ const ShareForm = () => {
             disabled={checkIfDisabled}
             onClick={(e) => {
               e.preventDefault();
-
               next();
             }}
             className={`h-10 w-full rounded-md bg-blue-400 text-white ${

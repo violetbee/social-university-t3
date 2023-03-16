@@ -83,6 +83,7 @@ model University {
     id          String                   @id @default(cuid())
     name        String
     slug        String                   @unique
+    location    String
     users       User[]
     posts       Post[]
     events      Event[]
@@ -112,13 +113,15 @@ model UniversityOnDepartment {
 }
 
 model Class {
-    id           String     @id @default(cuid())
+    id           String      @id @default(cuid())
     name         String
-    slug         String     @unique
-    department   Department @relation(fields: [departmentId], references: [id], onDelete: Cascade)
+    slug         String      @unique
+    department   Department  @relation(fields: [departmentId], references: [id], onDelete: Cascade)
     departmentId String
     posts        Post[]
     users        User[]
+    classLevel   ClassLevel? @relation(fields: [classLevelId], references: [id])
+    classLevelId String?
 }
 
 model ClassLevel {
@@ -128,6 +131,7 @@ model ClassLevel {
     posts       Post[]
     user        User[]
     departments DepartmentsOnClassLevel[]
+    class       Class[]
 }
 
 model DepartmentsOnClassLevel {
@@ -141,10 +145,11 @@ model DepartmentsOnClassLevel {
 }
 
 model Category {
-    id    String @id @default(cuid())
-    name  String
-    slug  String @unique
-    posts Post[]
+    id        String   @id @default(cuid())
+    createdAt DateTime @default(now()) @db.Timestamp(6)
+    name      String
+    slug      String   @unique
+    posts     Post[]
 }
 
 model SchoolClub {
@@ -208,7 +213,7 @@ model EventType {
 
 model File {
     id        String   @id @default(cuid())
-    createdAt DateTime @default(now()) @db.Timestamp(6)
+    createdAt DateTime @default(now())
     name      String
     url       String
     size      Int

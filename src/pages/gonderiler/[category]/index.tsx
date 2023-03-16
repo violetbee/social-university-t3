@@ -12,7 +12,7 @@ import {
   ClassLevel,
 } from "@prisma/client";
 import Post from "../../../components/Posts/Post";
-import CategorySearch from "../../../components/CategorySearch";
+import CategoryAndMenuSection from "../../../components/CategoryAndMenuSection";
 import { ParsedUrlQuery } from "querystring";
 import Events from "../../../components/Events/Events";
 
@@ -37,7 +37,7 @@ const Category: NextPage<Props> = ({ posts, params, events }) => {
   return (
     <Layout>
       <div className="container mx-auto w-full pb-4 lg:px-14 xl:px-16">
-        <CategorySearch />
+        <CategoryAndMenuSection />
         {params?.category === "etkinlikler" ? (
           <Events events={events} />
         ) : (

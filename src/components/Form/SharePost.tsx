@@ -22,7 +22,6 @@ const SharePost = ({ options, form, setForm }: Props) => {
     type: string;
   };
 
-  const { data } = trpc.category.getAll.useQuery();
   const createPost = trpc.post.create.useMutation();
   const createDocPost = trpc.post.createDoc.useMutation();
   const ctx = trpc.useContext();
@@ -39,9 +38,11 @@ const SharePost = ({ options, form, setForm }: Props) => {
           setForm({
             title: "",
             content: "",
-            categoryId: data && data[0] && data[0].id ? data[0].id : "",
+            categoryId: "",
             type: "TEXT",
             departmentId: "",
+            classLevelId: "",
+            classId: "",
           });
           ctx.invalidate();
         },
@@ -86,6 +87,8 @@ const SharePost = ({ options, form, setForm }: Props) => {
               categoryId: "",
               type: "TEXT",
               departmentId: "",
+              classLevelId: "",
+              classId: "",
             });
             ctx.invalidate();
           },

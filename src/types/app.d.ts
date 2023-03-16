@@ -54,6 +54,8 @@ export interface SharePost {
   content: string;
   categoryId: string;
   departmentId: string;
+  classLevelId: string;
+  classId: string;
 }
 
 export interface PostUserBar {
