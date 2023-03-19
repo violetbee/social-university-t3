@@ -13,7 +13,7 @@ type TriggerProps = {
   setOpen: () => void;
 };
 
-export function withPopup(Trigger: FC<TriggerProps>, WrappedComponent: FC) {
+function withPopup(Trigger: FC<TriggerProps>, WrappedComponent: FC) {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const PopupComponent = (props: any) => {
     const [open, setOpen] = useState(false);

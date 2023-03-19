@@ -84,8 +84,6 @@ const SelectCategoryOrDepartment = ({
     }
   };
 
-  console.log(form);
-
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
 

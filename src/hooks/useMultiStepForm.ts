@@ -56,15 +56,16 @@ export const useMultiStepForm = (
           class: false,
         },
       }));
-      setForm({
-        type: "",
+      setForm((prev) => ({
+        ...prev,
         title: "",
         content: "",
         categoryId: "",
+        type: "",
         departmentId: "",
         classLevelId: "",
         classId: "",
-      });
+      }));
     }
   };
 

@@ -6,16 +6,20 @@ import type { AppType } from "next/app";
 import { trpc } from "../utils/trpc";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Provider } from "react-redux";
+import store from "../store/store";
 
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
   pageProps: { session, ...pageProps },
 }) => {
   return (
-    <SessionProvider session={session}>
-      <Component {...pageProps} />
-      <ToastContainer closeOnClick />
-    </SessionProvider>
+    <Provider store={store}>
+      <SessionProvider session={session}>
+        <Component {...pageProps} />
+        <ToastContainer closeOnClick />
+      </SessionProvider>
+    </Provider>
   );
 };
 

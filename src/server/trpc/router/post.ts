@@ -9,6 +9,7 @@ export const postRouter = router({
         title: z.string(),
         content: z.string(),
         categoryId: z.string(),
+        universityId: z.string(),
       })
     )
     .mutation(async ({ ctx, input }) => {
@@ -19,6 +20,7 @@ export const postRouter = router({
           categoryId: input.categoryId,
           userId: ctx.session?.user?.id as string,
           type: input.type,
+          universityId: input.universityId,
         },
       });
     }),
@@ -28,8 +30,10 @@ export const postRouter = router({
         type: z.enum(["TEXT", "DOC"]),
         title: z.string(),
         content: z.string(),
-        categoryId: z.string(),
         departmentId: z.string(),
+        classId: z.string(),
+        classLevelId: z.string(),
+        universityId: z.string(),
         files: z.array(
           z.object({
             name: z.string(),
@@ -45,7 +49,9 @@ export const postRouter = router({
         data: {
           title: input.title,
           content: input.content,
-          categoryId: input.categoryId,
+          classId: input.classId,
+          classLevelId: input.classLevelId,
+          universityId: input.universityId,
           departmentId: input.departmentId,
           userId: ctx.session?.user?.id as string,
           type: input.type,
@@ -106,12 +112,7 @@ export const postRouter = router({
           createdAt: "desc",
         },
         where: {
-          type:
-            input.query === ""
-              ? undefined
-              : input.query === "DOC"
-              ? "DOC"
-              : "TEXT",
+          universityId: input.query,
         },
         include: {
           user: true,

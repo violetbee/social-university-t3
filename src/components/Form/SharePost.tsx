@@ -3,7 +3,6 @@ import { SharePost } from "../../types/app";
 import { trpc } from "../../utils/trpc";
 import axios from "axios";
 import { Dispatch, SetStateAction } from "react";
-import ShareFormMain from "./ShareFormMain";
 
 interface Props {
   options: {
@@ -14,7 +13,7 @@ interface Props {
   setForm: Dispatch<SetStateAction<SharePost>>;
 }
 
-const SharePost = ({ options, form, setForm }: Props) => {
+const SharePost = ({ form, setForm }: Props) => {
   type FileInput = {
     name: string;
     url: string;
@@ -35,7 +34,8 @@ const SharePost = ({ options, form, setForm }: Props) => {
     if (form.type === "TEXT") {
       await createPost.mutateAsync(form, {
         onSuccess: () => {
-          setForm({
+          setForm((prev) => ({
+            ...prev,
             title: "",
             content: "",
             categoryId: "",
@@ -43,7 +43,7 @@ const SharePost = ({ options, form, setForm }: Props) => {
             departmentId: "",
             classLevelId: "",
             classId: "",
-          });
+          }));
           ctx.invalidate();
         },
       });
@@ -81,7 +81,8 @@ const SharePost = ({ options, form, setForm }: Props) => {
         { ...form, files },
         {
           onSuccess: () => {
-            setForm({
+            setForm((prev) => ({
+              ...prev,
               title: "",
               content: "",
               categoryId: "",
@@ -89,7 +90,7 @@ const SharePost = ({ options, form, setForm }: Props) => {
               departmentId: "",
               classLevelId: "",
               classId: "",
-            });
+            }));
             ctx.invalidate();
           },
         }

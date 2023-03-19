@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export const Features = () => {
   return (
-    <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <section className="mx-auto flex max-w-7xl flex-1 items-center px-4 sm:px-6 lg:px-8">
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:gap-10">
         <div className="overflow-hidden rounded bg-white shadow">
           <div className="p-8">
@@ -236,17 +236,6 @@ export const Features = () => {
             </p>
           </div>
         </div>
-      </div>
-
-      <div className="mt-12 text-center">
-        <a
-          href="#"
-          title=""
-          className="inline-flex p-3 font-medium text-blue-600 transition-all duration-200 hover:text-blue-700 hover:underline focus:text-blue-700"
-        >
-          {" "}
-          Online Kullanıcı Sayısı NaN{" "}
-        </a>
       </div>
     </section>
   );

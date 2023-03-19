@@ -20,6 +20,8 @@ type Props = {
 };
 
 const Post = ({ post }: Props) => {
+  console.log(post);
+
   return (
     <div className="relative flex h-[350px] w-full flex-col justify-between overflow-hidden rounded-md border-[#888]/30 bg-white shadow-sm">
       {post.type === "DOC" && (
@@ -52,7 +54,7 @@ const Post = ({ post }: Props) => {
           {post.title.slice(0, 40) + "..."}
         </h3>
         <p className="break-words pr-7 text-[#333]">
-          {post.content.slice(0, 100) + "..."}
+          {post.content.slice(0, 57) + "..."}
         </p>
       </div>
       {post.type === "DOC" && (

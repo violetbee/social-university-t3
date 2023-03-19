@@ -5,9 +5,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 
 export const config = {
   api: {
-    bodyParser: {
-      sizeLimit: "10mb",
-    },
+    bodyParser: false,
   },
 };
 
@@ -35,7 +33,8 @@ const uploadFile = (req: NextApiRequest, res: NextApiResponse) => {
           Body: file,
         },
       });
-      await parallelUploads.done();
+      const data = await parallelUploads.done();
+      console.log(data);
     } catch (err) {
       console.log(err);
     }

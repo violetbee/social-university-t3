@@ -40,18 +40,20 @@ export const userRouter = router({
   deleteAllUsers: publicProcedure.mutation(async ({ ctx }) => {
     await ctx.prisma.user.deleteMany();
   }),
-  getUserById: publicProcedure
-    .input(
-      z.object({
-        id: z.string(),
-      })
-    )
-    .query(async ({ ctx, input }) => {
-      const user = ctx.prisma.user.findUnique({
-        where: {
-          id: input.id,
+  getUserUniversityById: publicProcedure.query(async ({ ctx }) => {
+    const userUniversityName = ctx.prisma.user.findUnique({
+      where: {
+        id: ctx.session?.user?.id,
+      },
+      select: {
+        university: {
+          select: {
+            id: true,
+            name: true,
+          },
         },
-      });
-      return user;
-    }),
+      },
+    });
+    return userUniversityName;
+  }),
 });

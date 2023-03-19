@@ -7,9 +7,10 @@ type Props = {
 };
 
 const Posts = ({ itemPiece }: Props) => {
-  const [query, setQuery] = useState<string | null>("");
-
-  const { data } = trpc.post.getAllPosts.useQuery({ query: "" });
+  const { data: universityId } = trpc.user.getUserUniversityById.useQuery();
+  const { data } = trpc.post.getAllPosts.useQuery({
+    query: universityId?.university?.id || "",
+  });
 
   return (
     <div className="grid grid-cols-1 justify-between gap-8 px-2 pb-10 grid-sm:grid-cols-2 grid-md:grid-cols-3 grid-lg:grid-cols-4 grid-xl:grid-cols-5">

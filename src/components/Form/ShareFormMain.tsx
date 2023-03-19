@@ -5,8 +5,11 @@ import { useState } from "react";
 import SharePost from "./SharePost";
 import type { SharePost as SharePostType } from "../../types/app";
 import SelectCategoryOrDepartment from "./SelectCategoryOrDepartment";
+import { trpc } from "../../utils/trpc";
 
 const ShareForm = () => {
+  const getUserUniversityById = trpc.user.getUserUniversityById.useQuery();
+
   const [options, setOptions] = useState({
     postType: "",
     skip: localStorage.getItem("skip") || "false",
@@ -26,6 +29,7 @@ const ShareForm = () => {
     departmentId: "",
     classLevelId: "",
     classId: "",
+    universityId: getUserUniversityById.data?.university?.id || "",
   });
 
   const handlePostType = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -62,9 +66,13 @@ const ShareForm = () => {
   );
 
   const checkIfDisabled =
-    currentStepIndex === (options.skip === "on" ? 1 : 2) &&
-    (!form.categoryId || !form.departmentId) &&
-    (!form.classLevelId || !form.classId)
+    (options.postType === "DOC" &&
+      currentStepIndex === (options.skip === "on" ? 1 : 2) &&
+      (!form.categoryId || !form.departmentId) &&
+      (!form.classLevelId || !form.classId)) ||
+    (options.postType === "TEXT" &&
+      currentStepIndex === (options.skip === "on" ? 1 : 2) &&
+      !form.categoryId)
       ? true
       : false;
 
