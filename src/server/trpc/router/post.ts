@@ -75,6 +75,7 @@ export const postRouter = router({
     .input(
       z.object({
         query: z.string().nullable(),
+        slug: z.string().nullable(),
       })
     )
     .query(async ({ ctx, input }) => {
@@ -113,6 +114,9 @@ export const postRouter = router({
         },
         where: {
           universityId: input.query,
+          category: {
+            slug: input.slug || undefined,
+          },
         },
         include: {
           user: true,

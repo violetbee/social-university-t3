@@ -5,8 +5,6 @@ import { getServerAuthSession } from "../server/common/get-server-auth-session";
 import { prisma } from "../server/db/client";
 import { User } from "@prisma/client";
 import Features from "../components/Feature";
-import Events from "../components/Events/Events";
-import PostsAndFiles from "../components/PostsAndFiles";
 
 type Props = {
   user: User;

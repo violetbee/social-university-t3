@@ -63,3 +63,9 @@ export interface PostUserBar {
   setIsMenuOpen: Dispatch<SetStateAction<boolean>>;
   user: User;
 }
+
+export interface IDashboardProps {
+  params?: {
+    [key: string]: string | string[] | ParsedUrlQuery;
+  };
+}

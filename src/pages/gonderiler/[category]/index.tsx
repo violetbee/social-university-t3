@@ -1,20 +1,17 @@
 import { GetServerSideProps, NextPage } from "next";
 import Layout from "../../../components/Layout";
-import { prisma } from "../../../server/db/client";
 import {
   Category,
-  Event as TypeOfEvent,
-  EventType,
   Post as PostType,
   User,
   Department,
   Class,
   ClassLevel,
 } from "@prisma/client";
-import Post from "../../../components/Posts/Post";
 import CategoryAndMenuSection from "../../../components/CategoryAndMenuSection";
 import { ParsedUrlQuery } from "querystring";
 import Events from "../../../components/Events/Events";
+import Posts from "../../../components/Posts/Posts";
 
 type Props = {
   posts: (PostType & {
@@ -28,24 +25,17 @@ type Props = {
   params: {
     [key: string]: string | string[] | ParsedUrlQuery;
   };
-  events?: (TypeOfEvent & {
-    eventType: EventType;
-  })[];
 };
 
-const Category: NextPage<Props> = ({ posts, params, events }) => {
+const Category: NextPage<Props> = ({ params }) => {
   return (
     <Layout>
       <div className="container mx-auto w-full pb-4 lg:px-14 xl:px-16">
-        <CategoryAndMenuSection />
+        <CategoryAndMenuSection params={params} />
         {params?.category === "etkinlikler" ? (
-          <Events events={events} />
+          <Events />
         ) : (
-          <div className="grid grid-cols-4 gap-10 px-5 pt-3 pb-3">
-            {posts.map((post) => (
-              <Post key={post.id} post={post} />
-            ))}
-          </div>
+          <Posts slug={params?.category as string} />
         )}
       </div>
     </Layout>
@@ -56,81 +46,15 @@ export default Category;
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { params } = context;
-  const { category } = params as { category: string };
-
-  const getPosts = await prisma.post.findMany({
-    orderBy: {
-      createdAt: "desc",
-    },
-    where: {
-      category: {
-        slug: category,
+  if (params) {
+    return {
+      props: {
+        params,
       },
-    },
-    include: {
-      user: true,
-      category: true,
-      like: true,
-    },
-  });
-
-  const events =
-    params?.category === "etkinlikler"
-      ? await prisma.event.findMany({
-          orderBy: {
-            createdAt: "desc",
-          },
-          include: {
-            user: true,
-            eventType: true,
-          },
-        })
-      : null;
-
-  const publishedTimeAgo = (date: Date) => {
-    const seconds = Math.floor((new Date().getTime() - date.getTime()) / 1000);
-
-    let interval = Math.floor(seconds / 31536000);
-
-    if (interval >= 1) {
-      return interval + " yıl önce";
-    }
-    interval = Math.floor(seconds / 2592000);
-    if (interval >= 1) {
-      return interval + " ay önce";
-    }
-    interval = Math.floor(seconds / 86400);
-    if (interval >= 1) {
-      return interval + " gün önce";
-    }
-    interval = Math.floor(seconds / 3600);
-    if (interval >= 1) {
-      return interval + " saat önce";
-    }
-    interval = Math.floor(seconds / 60);
-    if (interval >= 1) {
-      return interval + " dakika önce";
-    }
-    return Math.floor(seconds) + " saniye önce";
-  };
-
-  const postsWithTimeAgo = getPosts.map((post) => {
-    return {
-      ...post,
-      publishedTimeAgo: publishedTimeAgo(post.createdAt),
     };
-  });
-
-  if (!getPosts) {
+  } else {
     return {
-      notFound: true,
+      props: {},
     };
   }
-  return {
-    props: {
-      posts: JSON.parse(JSON.stringify(postsWithTimeAgo)),
-      params,
-      events: JSON.parse(JSON.stringify(events)),
-    },
-  };
 };

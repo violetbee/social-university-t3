@@ -20,8 +20,6 @@ type Props = {
 };
 
 const Post = ({ post }: Props) => {
-  console.log(post);
-
   return (
     <div className="relative flex h-[350px] w-full flex-col justify-between overflow-hidden rounded-md border-[#888]/30 bg-white shadow-sm">
       {post.type === "DOC" && (

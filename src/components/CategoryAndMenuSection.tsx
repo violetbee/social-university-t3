@@ -3,8 +3,9 @@ import { ShareButton } from "./ShareButton";
 import ShareFormMain from "./Form/ShareFormMain";
 import Categories from "./Categories";
 import SearchInput from "./SearchInput";
+import { IDashboardProps } from "../types/app";
 
-const CategoryAndMenuSection = () => {
+const CategoryAndMenuSection = ({ params }: IDashboardProps) => {
   const ShareBt = withPopup(ShareButton, ShareFormMain);
 
   return (
@@ -13,7 +14,7 @@ const CategoryAndMenuSection = () => {
         <SearchInput />
         <ShareBt />
       </div>
-      <Categories />
+      <Categories params={params} />
     </div>
   );
 };

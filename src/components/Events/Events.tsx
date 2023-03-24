@@ -10,8 +10,11 @@ interface Props {
   })[];
 }
 
-const Events = ({ itemPiece, events }: Props) => {
-  const { data: eventsByQuery } = trpc.event.getAllEvents.useQuery();
+const Events = ({ itemPiece }: Props) => {
+  const { data: universityId } = trpc.user.getUserUniversityById.useQuery();
+  const { data: eventsByQuery } = trpc.event.getAllEvents.useQuery({
+    query: universityId?.university?.id || "",
+  });
 
   return (
     <Masonry
@@ -30,7 +33,7 @@ const Events = ({ itemPiece, events }: Props) => {
         ? eventsByQuery
             ?.slice(0, itemPiece)
             .map((event, i) => <Event event={event} key={i} />)
-        : events?.map((event, i) => <Event event={event} key={i} />)}
+        : eventsByQuery?.map((event, i) => <Event event={event} key={i} />)}
     </Masonry>
   );
 };

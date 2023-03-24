@@ -1,15 +1,16 @@
 import Post from "./Post";
 import { trpc } from "../../utils/trpc";
-import { useState } from "react";
 
 type Props = {
   itemPiece?: number;
+  slug?: string;
 };
 
-const Posts = ({ itemPiece }: Props) => {
+const Posts = ({ itemPiece, slug }: Props) => {
   const { data: universityId } = trpc.user.getUserUniversityById.useQuery();
   const { data } = trpc.post.getAllPosts.useQuery({
     query: universityId?.university?.id || "",
+    slug: slug || "",
   });
 
   return (
