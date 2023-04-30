@@ -34,7 +34,13 @@ const ShareForm = () => {
 
   const handlePostType = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    setOptions({ ...options, postType: e.currentTarget.value });
+    !options.postType
+      ? setOptions({ ...options, postType: e.currentTarget.value })
+      : options.postType === "TEXT" && e.currentTarget.value === "DOC"
+      ? setOptions({ ...options, postType: e.currentTarget.value })
+      : options.postType === "DOC" && e.currentTarget.value === "TEXT"
+      ? setOptions({ ...options, postType: e.currentTarget.value })
+      : setOptions({ ...options, postType: "" });
     setForm({ ...form, type: e.currentTarget.value });
   };
 
@@ -77,34 +83,51 @@ const ShareForm = () => {
       : false;
 
   return (
-    <div className="w-96 space-y-1 rounded-md border-2 border-black bg-white p-2 shadow-lg">
-      <div>{currentStep}</div>
-      <div className="flex justify-between gap-4 p-1">
-        {currentStepIndex > 0 && (
-          <button
-            onClick={(e) => {
-              e.preventDefault();
-              prev();
-            }}
-            className="h-10 w-full rounded-md bg-red-400 text-white"
-          >
-            GERİ
-          </button>
-        )}
-        {currentStepIndex < steps.length - 1 && (
-          <button
-            disabled={checkIfDisabled}
-            onClick={(e) => {
-              e.preventDefault();
-              next();
-            }}
-            className={`h-10 w-full rounded-md bg-blue-400 text-white ${
-              !options.postType && "cursor-not-allowed bg-gray-600"
-            }`}
-          >
-            {!options.postType || checkIfDisabled ? "SEÇİM YAPINIZ!" : "İLERİ"}
-          </button>
-        )}
+    <div className="w-96 rounded-md bg-[url('/images/edu.jpg')] bg-[length:500px_500px] bg-no-repeat shadow-lg">
+      <div className="flex items-center justify-center rounded-t-md bg-[#181823] bg-opacity-95 py-3">
+        <h1 className="text-2xl font-bold tracking-wide text-white drop-shadow-md">
+          {currentStepIndex === 0
+            ? "Gönderi Türünü Seçiniz"
+            : currentStepIndex === 1
+            ? "Üniversitenizi Seçiniz"
+            : currentStepIndex === 2 && options.postType === "DOC"
+            ? "Okul Bilgilerini Seçiniz"
+            : "Gönderinizi Paylaşın"}
+        </h1>
+      </div>
+      <div className="h-full w-full rounded-md bg-white bg-opacity-80 p-4">
+        {/* Components step by step */}
+        {currentStep}
+        {/* Step end */}
+        <div className="flex justify-between gap-4 p-1">
+          {currentStepIndex > 0 && (
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                prev();
+              }}
+              className="h-10 w-full rounded-md bg-red-400 text-white"
+            >
+              GERİ
+            </button>
+          )}
+          {currentStepIndex < steps.length - 1 && (
+            <button
+              disabled={checkIfDisabled}
+              onClick={(e) => {
+                e.preventDefault();
+                next();
+              }}
+              className={`h-10 w-full rounded-md bg-blue-400 text-white ${
+                !options.postType && "cursor-not-allowed bg-gray-600"
+              }`}
+            >
+              {!options.postType || checkIfDisabled
+                ? "SEÇİM YAPINIZ!"
+                : "İLERİ"}
+            </button>
+          )}
+        </div>
       </div>
     </div>
   );
