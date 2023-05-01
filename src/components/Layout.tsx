@@ -2,7 +2,6 @@ import { League_Spartan } from "@next/font/google";
 import LeftSideBar from "./LeftSideBar";
 import Header from "./Header";
 import { useSession } from "next-auth/react";
-import University from "./University";
 
 const dosis = League_Spartan({
   weight: ["200", "300", "400", "500", "600", "700", "800"],
@@ -17,12 +16,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <>
       <Header />
-      <main
-        className={`${dosis.className} ${
-          data ? "h-[calc(100vh_-_110px)]" : "h-[calc(100vh_-_70px)]"
-        } `}
-      >
-        {data && <University />}
+      <main className={`${dosis.className} h-[calc(100vh_-_60px)]`}>
         <div className="flex h-full w-full bg-background">
           {data && <LeftSideBar />}
           <div

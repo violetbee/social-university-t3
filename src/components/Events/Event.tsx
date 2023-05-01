@@ -51,7 +51,7 @@ const Event = ({ event }: { event: Event & { eventType: EventType } }) => {
             )}
           </div>
         </div>
-        <div className="flex items-center justify-between px-3 pt-2 pb-2">
+        <div className="flex items-center justify-between px-3 pb-2 pt-2">
           <button className="seeMore flex w-full items-center justify-center">
             {/* <svg
               xmlns="http://www.w3.org/2000/svg"

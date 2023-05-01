@@ -27,9 +27,8 @@ const Dashboard = () => {
 
   return (
     <Layout>
-      <div className="container mx-auto w-full pb-4 lg:px-14 xl:px-16">
+      <div className="container mx-auto w-full lg:px-14 xl:px-16">
         <CategoryAndMenuSection />
-        <AnnouncementsWithExpanded />
         <PostsWithExpanded />
         <EventsWithExpanded />
       </div>

@@ -77,6 +77,10 @@ export const useMultiStepForm = (
     steps.splice(1, 1);
   }
 
+  if (options.postType === "POLL") {
+    steps.splice(2, 1);
+  }
+
   const currentStep = steps[currentStepIndex];
 
   return { currentStepIndex, currentStep, next, prev, reset, steps };

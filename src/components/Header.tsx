@@ -2,7 +2,6 @@ import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { FC } from "react";
 import Image from "next/image";
-import SharePost from "./Form/SharePost";
 import { Josefin_Sans } from "@next/font/google";
 import withPopup from "./HoC/withPopup";
 import { AfterAuthHeaderSection } from "./User/AfterAuthHeaderSection";
@@ -48,7 +47,7 @@ const Header: FC = () => {
   return (
     <>
       <header
-        className={`flex ${dosis.className} h-[70px] items-center justify-between border-b-[1px] border-[#444]/40 pl-6 text-[#222] lg:border-[#444]/10`}
+        className={`flex ${dosis.className} h-[60px] items-center justify-between border-b-[1px] border-[#444]/40 pl-6 text-[#222] lg:border-[#444]/10`}
       >
         <Link href={"/"} className="relative flex items-center">
           <Image
@@ -56,29 +55,9 @@ const Header: FC = () => {
             alt="logo"
             width={500}
             height={200}
-            className="w-64 md:w-80"
+            className="w-64 md:w-72"
           />
         </Link>
-        {/* {session && (
-            <Popup
-              trigger={
-                <button
-                  onClick={
-                    // This button removes users for a while
-                    async () => {
-                      await removeUsers.mutateAsync();
-                    }
-                  }
-                  className="rounded-lg bg-[#B21EED] px-4 py-2 md:px-9"
-                >
-                  Gönderi Paylaş
-                </button>
-              }
-              modal
-            >
-              <SharePost />
-            </Popup>
-          )} */}
         {/* Menu elemanları; Anasayfa Hakkımızda İletişim */}
         <div className="hidden flex-1 items-center justify-evenly lg:flex">
           <ul className="flex items-center gap-6">
@@ -107,7 +86,7 @@ const Header: FC = () => {
               <div className="m-3">
                 <Link
                   href={"/auth"}
-                  className="inline-flex w-32 items-center rounded border-b-2 border-blue-500 bg-white py-2 px-6 font-bold tracking-wide text-gray-800 shadow-md hover:border-blue-600 hover:bg-blue-500 hover:text-white"
+                  className="inline-flex w-32 items-center rounded border-b-2 border-blue-500 bg-white px-6 py-2 font-bold tracking-wide text-gray-800 shadow-md hover:border-blue-600 hover:bg-blue-500 hover:text-white"
                 >
                   <span className="mx-auto">Giriş Yap</span>
                 </Link>
@@ -115,7 +94,7 @@ const Header: FC = () => {
               <div className="m-3">
                 <Link
                   href={"/auth"}
-                  className="inline-flex w-32 items-center rounded border-b-2 border-red-500 bg-white py-2 px-6 font-bold tracking-wide text-gray-800 shadow-md hover:border-red-600 hover:bg-red-500 hover:text-white"
+                  className="inline-flex w-32 items-center rounded border-b-2 border-red-500 bg-white px-6 py-2 font-bold tracking-wide text-gray-800 shadow-md hover:border-red-600 hover:bg-red-500 hover:text-white"
                 >
                   <span className="mx-auto">Üye Ol</span>
                 </Link>

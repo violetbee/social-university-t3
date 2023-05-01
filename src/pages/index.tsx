@@ -25,7 +25,7 @@ const Home: NextPage<Props> = () => {
           {/* <PostsAndFiles /> */}
           <section className="relative h-56 bg-white shadow-sm">
             <div className="heroBg h-full w-full"></div>
-            <div className="absolute top-1/2 left-1/2 flex w-9/12 -translate-x-1/2 -translate-y-1/2 transform flex-col items-center justify-center gap-4">
+            <div className="absolute left-1/2 top-1/2 flex w-9/12 -translate-x-1/2 -translate-y-1/2 transform flex-col items-center justify-center gap-4">
               <p className="heroTextShadow text-center text-4xl font-bold tracking-wider text-violet-700">
                 Öğrencilerin Akademik ve Sosyal Hayatını Birleştiriyoruz
                 <br />

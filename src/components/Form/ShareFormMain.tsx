@@ -1,11 +1,13 @@
 import SelectPostType from "./SelectPostType";
 import SelectUni from "./SelectUni";
 import { useMultiStepForm } from "../../hooks/useMultiStepForm";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SharePost from "./SharePost";
 import type { SharePost as SharePostType } from "../../types/app";
 import SelectCategoryOrDepartment from "./SelectCategoryOrDepartment";
 import { trpc } from "../../utils/trpc";
+import SelectEvent from "./SelectEvent";
+import SelectPoll from "./SelectPoll";
 
 const ShareForm = () => {
   const getUserUniversityById = trpc.user.getUserUniversityById.useQuery();
@@ -34,13 +36,10 @@ const ShareForm = () => {
 
   const handlePostType = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    !options.postType
-      ? setOptions({ ...options, postType: e.currentTarget.value })
-      : options.postType === "TEXT" && e.currentTarget.value === "DOC"
-      ? setOptions({ ...options, postType: e.currentTarget.value })
-      : options.postType === "DOC" && e.currentTarget.value === "TEXT"
-      ? setOptions({ ...options, postType: e.currentTarget.value })
-      : setOptions({ ...options, postType: "" });
+    setOptions({ ...options, postType: e.currentTarget.value });
+    options.postType && // if postType is already selected, then deselect it
+      e.currentTarget.value === options.postType &&
+      setOptions({ ...options, postType: "" });
     setForm({ ...form, type: e.currentTarget.value });
   };
 
@@ -48,6 +47,8 @@ const ShareForm = () => {
     setOptions({ ...options, skip: e.currentTarget.value });
     localStorage.setItem("skip", e.currentTarget.value);
   };
+
+  // this function is handling which component will be rendered due to post type
 
   const { currentStep, steps, currentStepIndex, next, prev } = useMultiStepForm(
     [
@@ -57,19 +58,29 @@ const ShareForm = () => {
         key={0}
       />,
       <SelectUni handleSkip={handleSkip} key={1} />,
-      <SelectCategoryOrDepartment
-        key={3}
-        form={form}
-        setForm={setForm}
-        options={options}
-        setOptions={setOptions}
-      />,
+      handleComponentDueToType(options.postType),
       <SharePost form={form} setForm={setForm} options={options} key={4} />,
     ],
     options,
     setForm,
     setOptions
   );
+
+  function handleComponentDueToType(type: string) {
+    if (type === "DOC" || type === "TEXT") {
+      return (
+        <SelectCategoryOrDepartment
+          key={3}
+          form={form}
+          setForm={setForm}
+          options={options}
+          setOptions={setOptions}
+        />
+      );
+    } else {
+      return <SelectEvent />;
+    }
+  }
 
   const checkIfDisabled =
     (options.postType === "DOC" &&

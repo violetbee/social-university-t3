@@ -25,8 +25,8 @@ const Announcements = () => {
 
   return (
     <div
-      className="mb-10 flex h-44 w-full
-       justify-between border-[#888] px-2 pb-2 pt-1"
+      className="mb-3 flex h-44 w-full
+       justify-between border-[#888] px-2 pb-2 pt-1 "
     >
       <button
         onClick={() => {
@@ -51,14 +51,8 @@ const Announcements = () => {
       </button>
       <div
         ref={scrollRef}
-        className="relative flex w-[10px] flex-1 overflow-hidden"
+        className="relative flex w-[10px] flex-1 overflow-hidden bg-white"
       >
-        <Article />
-        <Article />
-        <Article />
-        <Article />
-        <Article />
-        <Article />
         <Article />
         <Article />
       </div>

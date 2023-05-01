@@ -29,7 +29,7 @@ const Article = () => {
             </h3>
           </a>
 
-          <p className="line-clamp-3 mt-2 text-sm leading-relaxed text-gray-700">
+          <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-gray-700">
             Yazılım Mühendisliği
           </p>
         </div>
