@@ -21,6 +21,9 @@ import { trpc } from "../../../utils/trpc";
 import { AiFillDislike, AiFillLike } from "react-icons/ai";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
+import CategoryAndMenuSection from "../../../components/CategoryAndMenuSection";
+import { ParsedUrlQuery } from "querystring";
+import Image from "next/image";
 
 type Props = {
   purePost: Post & {
@@ -29,19 +32,20 @@ type Props = {
     category: Category;
     files: File[];
   };
+  params: {
+    [key: string]: string | string[] | ParsedUrlQuery;
+  };
 };
 
-const PerPost: NextPage<Props> = ({ purePost }) => {
+const PerPost: NextPage<Props> = ({ purePost, params }) => {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(true);
   const [selectedMenu, setSelectedMenu] = useState<string>("profileInfo");
   const [comment, setComment] = useState<string>("");
 
-  // Animation Area Start
   const parent = useRef(null);
   useEffect(() => {
     parent.current && autoAnimate(parent.current);
   }, [parent]);
-  // Animation Area End
 
   const handleMenuOpen = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -49,7 +53,6 @@ const PerPost: NextPage<Props> = ({ purePost }) => {
     setIsMenuOpen(true);
   };
 
-  // tRPC Area Start
   const ctx = trpc.useContext();
   const like = trpc.like.like.useMutation({
     onSuccess: () => {
@@ -64,11 +67,10 @@ const PerPost: NextPage<Props> = ({ purePost }) => {
   const getAllLikes = trpc.like.totalLikes.useQuery({
     postId: purePost.id,
   });
-  // tRPC Area End
 
-  // Session Area Start
   const session = useSession();
-  // Session Area End
+
+  console.log(purePost);
 
   return (
     <>
@@ -78,244 +80,57 @@ const PerPost: NextPage<Props> = ({ purePost }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Layout>
-        <div className="flex flex-col justify-between gap-4 text-white lg:flex-row">
-          <div className="order-2 flex flex-col gap-2 lg:order-1 lg:w-10/12">
-            <div className="flex w-full flex-col">
-              <div className="flex w-full flex-col rounded-t-lg bg-box pb-4 shadow-sm">
-                <h1 className="rounded-t-lg border-b-[1px] border-slate-900/50 bg-primary px-4 pt-2 pb-2 text-xl">
-                  {purePost.title.toUpperCase()}
-                </h1>
-                <p className="break-all p-4 pb-0">{purePost.content}</p>
-                {purePost.files.length > 0 && (
-                  <>
-                    <div className="mt-3 h-[1px] w-full border-t-[2px] border-dashed border-accent/50" />
-                    <div className="p-4 pb-0">
-                      <div className="grid grid-cols-2 gap-3 lg:grid-cols-3">
-                        {purePost.files
-                          .filter((item) => item.postId === purePost.id)
-                          .map((file) => (
-                            // file.type.includes("image") && "resim"
-                            <div
-                              key={file.id}
-                              className="w-full rounded-xl bg-primary"
-                            >
-                              <div className="flex w-full items-center justify-between rounded-t-xl bg-emerald-900 px-2 py-1">
-                                <h1>
-                                  {file.name.length > 12
-                                    ? file.name.slice(0, 12) + "..."
-                                    : file.name}
-                                </h1>
-                                <h3 className="font-thin tracking-tight">
-                                  {(file.size / 1000000).toFixed(3)} MB
-                                </h3>
-                              </div>
-                              <div className="flex w-full flex-col p-2">
-                                <ul className="flex flex-col gap-2">
-                                  <li className="flex items-center gap-2">
-                                    <FaUserAlt />
-                                    <span>Yazılım Mühendisliği</span>
-                                  </li>
-                                  <li className="flex items-center gap-2">
-                                    <FaSchool />
-                                    <span>3. Sınıf</span>
-                                  </li>
-                                  <li className="flex items-center gap-2">
-                                    <FaAward />
-                                    <span>
-                                      Yazılım Gerçekleme ve Test Dersi
-                                    </span>
-                                  </li>
-                                  <li className="flex items-center gap-2">
-                                    <FaRegCalendarAlt />
-                                    <span>11. Hafta PDF</span>
-                                    {/* {new Date(file.createdAt).toLocaleDateString(
-                                    "tr-TR"
-                                  )} */}
-                                  </li>
-                                </ul>
-
-                                <div className="mt-2 flex w-full justify-center">
-                                  <Link
-                                    href={`/file/${file.id}`}
-                                    className="flex h-10 w-full items-center justify-center rounded-xl bg-emerald-900 hover:bg-emerald-800"
-                                  >
-                                    <FaDownload />
-                                  </Link>
-                                </div>
-                              </div>
-                            </div>
-                          ))}
-                      </div>
-                    </div>
-                  </>
+        <div className="container mx-auto w-full space-y-4 pb-4 lg:px-14 xl:px-16">
+          <CategoryAndMenuSection params={params} />
+          <span className="mx-3 text-3xl font-semibold text-[#444]">
+            {purePost.title}
+          </span>
+          <ul className="flex flex-col space-y-1.5 text-left">
+            <li className="relative flex gap-x-4 overflow-hidden pb-5">
+              <div className="relative">
+                <div className="absolute bottom-0 left-6 top-14 -ml-px h-full w-px border-r  border-gray-300"></div>
+                {purePost.user.image ? (
+                  <Image
+                    src={purePost.user.image as string}
+                    width={100}
+                    height={100}
+                    className="h-12 w-14 rounded-md object-fill"
+                    alt="deneme"
+                  />
+                ) : (
+                  <p className="flex h-12 w-12 items-center justify-center rounded-full border-[1px] border-zinc-200 bg-white text-black">
+                    {purePost.user.name?.at(0)}
+                  </p>
                 )}
               </div>
-              <div className="flex w-full flex-col justify-between gap-2 rounded-b-lg bg-accent px-5 py-2 text-white shadow-inner shadow-black/20 lg-m:flex-row md:flex-row md:items-center md:justify-between md:gap-0">
-                <div className="flex items-center gap-6">
-                  <div className="flex items-center gap-2">
-                    <CgListTree />
-                    {purePost.category.name}
-                  </div>
-                  {/* <div className="flex items-center gap-1">
-                  <RiPencilFill />
-                  {purePost.type === "TEXT" ? "Yazı" : "Doküman"}
-                </div> */}
-                  <div className="flex items-center gap-1">
-                    <IoMdSchool />
-                    {/* {`${purePost.user.department || "Yazılım Mühendisliği"}`} */}
-                    Yazılım Mühendisliği
-                  </div>
-                </div>
-                {/* Post Like Area Start */}
-                <div className="flex items-center justify-end gap-2">
-                  <div className="flex items-center justify-between rounded-lg">
-                    <button
-                      onClick={() => {
-                        like.mutateAsync({ postId: purePost.id.toString() });
-                      }}
-                      className="px-2 py-1"
-                    >
-                      <AiFillLike />
-                    </button>
-                    <div className="flex w-5 justify-center">
-                      {getAllLikes.data}
-                    </div>
-                    <button
-                      onClick={() => {
-                        dislike.mutateAsync({ postId: purePost.id.toString() });
-                      }}
-                      className="px-2 py-1"
-                    >
-                      <AiFillDislike />
-                    </button>
-                  </div>
-                  <p className="hidden lg:block">·</p>
-                  <div className="flex items-center rounded-lg">
-                    <button className="px-2 py-1">
-                      <GoCommentDiscussion />
-                    </button>
-                    <div className="px-2">0</div>
-                  </div>
-                </div>
-                {/* Post Like Area End */}
+              <div className="w-full">
+                <p className="text-md flex min-h-full w-full flex-col rounded-2xl bg-white px-6 py-4 font-medium text-gray-900 shadow-sm">
+                  {purePost.content}
+                </p>
               </div>
-            </div>
-            <div className="w-full space-y-2 rounded-lg bg-box px-5 py-4 shadow-sm">
-              <p>
-                Bu gönder için henüz bir yorum mevcut değildir. İlk yorumu
-                yazmak ister misin?{" "}
-                {!session.data?.user &&
-                  "Hemen üye girişi yap ve sen de aramıza katıl!"}
-              </p>
-              {session.data?.user && (
-                <div className="form-control">
-                  <label className="label">
-                    <span className="label-text text-white">
-                      <span className="text-green-600">
-                        {session.data?.user?.name}
-                      </span>{" "}
-                      kullanıcı adıyla yazıyorsunuz.
-                    </span>
-                    <span
-                      className={`label-text-alt text-white ${
-                        comment.length > 244 && "text-red-500"
-                      }`}
-                    >
-                      {comment.length}/250
-                    </span>
-                  </label>
-                  <textarea
-                    className="textarea-bordered textarea h-24 bg-accent"
-                    placeholder="Yorumunuzu buraya yazın..."
-                    value={comment}
-                    onChange={(e) => {
-                      setComment(e.target.value);
-                    }}
-                    maxLength={250}
+            </li>
+            <li className="relative flex gap-x-4 overflow-hidden pb-5">
+              <div className="relative">
+                <div className="absolute bottom-0 left-6 top-14 -ml-px h-full w-px border-r  border-gray-300"></div>
+                {purePost.user.image ? (
+                  <Image
+                    src={purePost.user.image as string}
+                    width={100}
+                    height={100}
+                    className="h-12 w-14 rounded-md object-fill"
+                    alt="deneme"
                   />
-                  <label className="label">
-                    <span className="label-text-alt"></span>
-                    <span className="label-text-alt text-white">
-                      Yazılan yorumlardan kullanıcılar sorumludur
-                    </span>
-                  </label>
-                </div>
-              )}
-            </div>
-          </div>
-          <div className="order-1 h-full w-full rounded-lg bg-gradient-to-tr lg:order-2 lg:h-44 lg:w-2/12">
-            {/* {purePost.user.image ? (
-                <Image
-                  className="h-20 w-20 rounded-full"
-                  src={purePost.user.image as string}
-                  alt={purePost.user.name as string}
-                  width={150}
-                  height={150}
-                />
-              ) : (
-                <div className="h-20 w-20 rounded-full bg-slate-900 p-3">
-                  <div className="flex h-full w-full items-center justify-center rounded-md border-2 border-white text-3xl font-black leading-none text-white">
-                    <CgUserlane />
-                  </div>
-                </div>
-              )} */}
-
-            {/* Per Post User Info Area Start */}
-            <div
-              ref={parent}
-              className={`grid h-full w-full ${
-                isMenuOpen
-                  ? "grid-cols-1 lg:grid-cols-1"
-                  : "grid-cols-4 lg:grid-cols-2"
-              } rounded-lg bg-box`}
-            >
-              {/* User Info */}
-              {isMenuOpen ? (
-                <PostUserInfo
-                  setIsMenuOpen={setIsMenuOpen}
-                  menu={selectedMenu}
-                  user={purePost.user}
-                />
-              ) : (
-                <>
-                  {/* Profile Info */}
-                  <button
-                    onClick={handleMenuOpen}
-                    className="btn flex h-2/3 items-center justify-center rounded-none rounded-l-lg border-0 bg-orange-400 duration-150 hover:scale-95 hover:bg-orange-400/70 lg:h-full lg:rounded-bl-none"
-                    name="profileInfo"
-                  >
-                    <FaUserAlt size={30} color="white" />
-                  </button>
-                  {/* User Mood */}
-                  <button
-                    onClick={handleMenuOpen}
-                    className="btn flex h-2/3 items-center justify-center rounded-none border-0 bg-red-400 duration-150 hover:scale-95 hover:bg-red-400/70 lg:h-full lg:rounded-tr-lg"
-                    name="userMood"
-                  >
-                    <MdMood size={38} color="white" />
-                  </button>
-                  {/* User Education Info */}
-                  <button
-                    onClick={handleMenuOpen}
-                    className="btn flex h-2/3 items-center justify-center rounded-none border-0 bg-indigo-400 duration-150 hover:scale-95 hover:bg-indigo-400/70 lg:h-full lg:rounded-bl-lg"
-                    name="userEduInfo"
-                  >
-                    <FaSchool size={34} color="white" />
-                  </button>
-                  {/* User Awards */}
-                  <button
-                    onClick={handleMenuOpen}
-                    className="btn flex h-2/3 items-center justify-center rounded-none rounded-r-lg border-0 bg-purple-400 duration-150 hover:scale-95 hover:bg-purple-400/70 lg:h-full lg:rounded-br-lg lg:rounded-tr-none"
-                    name="userAwards"
-                  >
-                    <FaAward size={34} color="white" />
-                  </button>
-                </>
-              )}
-            </div>
-            {/* Per Post User Info Area End */}
-            <div className="w-full rounded-b-xl p-4"></div>
-          </div>
+                ) : (
+                  <p className="flex h-12 w-12 items-center justify-center rounded-full border-[1px] border-zinc-200 bg-white text-black">
+                    {purePost.user.name?.at(0)}
+                  </p>
+                )}
+              </div>
+              <p className="text-md flex min-h-full w-full flex-col items-center rounded-2xl bg-white px-6 py-4 font-medium text-gray-900 shadow-sm">
+                {purePost.content}
+              </p>
+            </li>
+          </ul>
         </div>
       </Layout>
     </>
@@ -343,7 +158,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     if (post) {
       const purePost = JSON.parse(JSON.stringify(post));
       return {
-        props: { purePost },
+        props: { purePost, params: context.params },
       };
     } else {
       return {

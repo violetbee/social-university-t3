@@ -1,13 +1,12 @@
 import SelectPostType from "./SelectPostType";
 import SelectUni from "./SelectUni";
 import { useMultiStepForm } from "../../hooks/useMultiStepForm";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import SharePost from "./SharePost";
 import type { SharePost as SharePostType } from "../../types/app";
 import SelectCategoryOrDepartment from "./SelectCategoryOrDepartment";
 import { trpc } from "../../utils/trpc";
 import SelectEvent from "./SelectEvent";
-import SelectPoll from "./SelectPoll";
 
 const ShareForm = () => {
   const getUserUniversityById = trpc.user.getUserUniversityById.useQuery();

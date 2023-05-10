@@ -75,7 +75,7 @@ const Post = ({ post }: Props) => {
         </>
       )}
       <div className="mb-4 px-3">
-        <button className="h-12 w-full bg-[#dd4e63] text-white">
+        <button className="h-12 w-full rounded-lg bg-[#dd4e63] text-white">
           Gönderiyi İncele
         </button>
       </div>
