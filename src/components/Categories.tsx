@@ -16,9 +16,7 @@ const Categories = ({ params }: IDashboardProps) => {
           <Link
             id={category.slug}
             href={
-              category.slug === "her-sey"
-                ? "/dashboard"
-                : `/gonderiler/${category.slug}`
+              category.slug === "her-sey" ? "/dashboard" : `/${category.slug}`
             }
             onMouseEnter={() => setSelectedCategory(category.slug)}
             onMouseLeave={() =>

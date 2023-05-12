@@ -7,6 +7,7 @@ import {
   User,
 } from "@prisma/client";
 import Image from "next/image";
+import Link from "next/link";
 
 type Props = {
   post: PostType & {
@@ -74,10 +75,13 @@ const Post = ({ post }: Props) => {
           </div>
         </>
       )}
-      <div className="mb-4 px-3">
-        <button className="h-12 w-full rounded-lg bg-[#dd4e63] text-white">
+      <div className="w-full px-2">
+        <Link
+          className="mb-4 flex h-12 items-center justify-center rounded-lg bg-[#dd4e63] text-white"
+          href={`/gonderiler/${post.id}`}
+        >
           Gönderiyi İncele
-        </button>
+        </Link>
       </div>
 
       <div className="space-y-4">

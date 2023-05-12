@@ -17,14 +17,16 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     <>
       <Header />
       <main className={`${dosis.className} h-[calc(100vh_-_60px)]`}>
-        <div className="flex h-full w-full bg-background">
+        <div className="flex h-full w-full bg-background ">
           {data && <LeftSideBar />}
           <div
             className={`${
-              data ? "mainCt  overflow-y-auto" : "h-full"
-            } mx-auto w-full`}
+              data ? "mainCt mx-auto overflow-y-auto " : "h-full"
+            } w-full `}
           >
-            {children}
+            <div className="container mx-auto 2xl:max-w-[1700px]">
+              {children}
+            </div>
           </div>
         </div>
       </main>

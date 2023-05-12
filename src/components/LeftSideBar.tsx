@@ -29,7 +29,7 @@ const discoverCity = [
 
 const LeftSideBar: FC = () => {
   return (
-    <div className="hidden flex-col justify-between overflow-y-auto border-r-[1px] border-[#444]/10 bg-[#EFEFF1] lg:flex lg:w-64 xl:w-80">
+    <div className="hidden flex-col justify-between overflow-y-auto border-r-[1px] border-[#444]/10 bg-[#EFEFF1] lg:w-64 xl:flex xl:w-80">
       <div className="w-full flex-1">
         <div className="flex w-full flex-col">
           {/* Üniversite Gez Başlangıç */}
