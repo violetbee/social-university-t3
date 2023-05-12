@@ -19,9 +19,9 @@ export const AfterAuthHeaderSection = ({ setOpen }: Props) => {
         <Image
           src={session.user?.image}
           alt="User Image"
-          width={100}
-          height={100}
-          className="w-full"
+          width={40}
+          height={40}
+          className="mr-2 h-10 w-10 rounded-full"
         />
       ) : (
         <button

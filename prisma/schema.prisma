@@ -164,6 +164,7 @@ model SchoolClub {
 model Post {
     id           String      @id @default(cuid())
     createdAt    DateTime    @default(now()) @db.Timestamp(6)
+    slug         String      @unique
     title        String
     content      String
     image        String?
@@ -183,6 +184,13 @@ model Post {
     classId      String?
     classLevel   ClassLevel? @relation(fields: [classLevelId], references: [id])
     classLevelId String?
+    tags         Tag[]
+}
+
+model Tag {
+    id    String @id @default(cuid())
+    name  String
+    posts Post[]
 }
 
 model Event {

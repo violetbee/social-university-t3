@@ -78,7 +78,7 @@ const Post = ({ post }: Props) => {
       <div className="w-full px-2">
         <Link
           className="mb-4 flex h-12 items-center justify-center rounded-lg bg-[#dd4e63] text-white"
-          href={`/gonderiler/${post.id}`}
+          href={`/gonderiler/${post.slug}`}
         >
           Gönderiyi İncele
         </Link>

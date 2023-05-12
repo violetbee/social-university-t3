@@ -89,8 +89,8 @@ const PerPost: NextPage<Props> = ({ purePost }) => {
                       <Image
                         src={purePost.user.image as string}
                         alt={purePost.user.name as string}
-                        width={150}
-                        height={150}
+                        width={44}
+                        height={44}
                         className="rounded-full"
                       />
                     ) : (
@@ -208,7 +208,7 @@ const PerPost: NextPage<Props> = ({ purePost }) => {
                     alt={purePost.user.name as string}
                     width={200}
                     height={200}
-                    className="rounded-full"
+                    className="h-[130px] w-[130px] rounded-full"
                   />
                 ) : (
                   <div className="flex h-[130px] w-[130px] items-center justify-center rounded-full bg-[#333] text-2xl text-white">
@@ -264,7 +264,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
     const post = await prisma.post.findUnique({
       where: {
-        id: String(slug),
+        slug: String(slug),
       },
       include: {
         user: {
@@ -278,7 +278,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         files: true,
       },
     });
-    console.log(post);
 
     if (post) {
       const purePost = JSON.parse(JSON.stringify(post));

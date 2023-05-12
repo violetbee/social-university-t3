@@ -1,3 +1,4 @@
+import { slugify } from "../../../utils/func";
 import { router, publicProcedure } from "../trpc";
 import { z } from "zod";
 
@@ -17,6 +18,7 @@ export const postRouter = router({
         data: {
           title: input.title,
           content: input.content,
+          slug: slugify(input.title),
           categoryId: input.categoryId,
           userId: ctx.session?.user?.id as string,
           type: input.type,
@@ -48,6 +50,7 @@ export const postRouter = router({
       await ctx.prisma.post.create({
         data: {
           title: input.title,
+          slug: slugify(input.title),
           content: input.content,
           classId: input.classId,
           classLevelId: input.classLevelId,
