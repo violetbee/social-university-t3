@@ -2,14 +2,17 @@ import { GetServerSideProps, NextPage } from "next";
 import Layout from "../../components/Layout";
 import { prisma } from "../../server/db/client";
 import Head from "next/head";
-import { Category, File, Like, Post, User } from "@prisma/client";
-import { IoMdSchool } from "react-icons/io";
-import { CgListTree } from "react-icons/cg";
 import {
-  FaUserAlt,
-  FaSchool,
-  FaAward,
-  FaRegCalendarAlt,
+  Category,
+  Department,
+  File,
+  Like,
+  Post,
+  University,
+  User,
+} from "@prisma/client";
+
+import {
   FaDownload,
   FaHashtag,
   FaCoins,
@@ -19,22 +22,20 @@ import {
   FaTwitter,
   FaTwitch,
 } from "react-icons/fa";
-import { MdMood } from "react-icons/md";
 import React, { useState, useEffect, useRef } from "react";
-import { PostUserInfo } from "../../components/PostUserInfo";
 import autoAnimate from "@formkit/auto-animate";
 import { GoCommentDiscussion } from "react-icons/go";
 import { trpc } from "../../utils/trpc";
-import { AiFillDislike, AiFillLike } from "react-icons/ai";
-import { useSession } from "next-auth/react";
-import Link from "next/link";
-import CategoryAndMenuSection from "../../components/CategoryAndMenuSection";
+import { AiFillLike } from "react-icons/ai";
 import { ParsedUrlQuery } from "querystring";
 import Image from "next/image";
 
 type Props = {
   purePost: Post & {
-    user: User;
+    user: User & {
+      department: Department;
+      university: University;
+    };
     like: Like;
     category: Category;
     files: File[];
@@ -44,21 +45,13 @@ type Props = {
   };
 };
 
-const PerPost: NextPage<Props> = ({ purePost, params }) => {
-  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(true);
-  const [selectedMenu, setSelectedMenu] = useState<string>("profileInfo");
+const PerPost: NextPage<Props> = ({ purePost }) => {
   const [comment, setComment] = useState<string>("");
 
   const parent = useRef(null);
   useEffect(() => {
     parent.current && autoAnimate(parent.current);
   }, [parent]);
-
-  const handleMenuOpen = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-    setSelectedMenu(e.currentTarget.name);
-    setIsMenuOpen(true);
-  };
 
   const ctx = trpc.useContext();
   const like = trpc.like.like.useMutation({
@@ -74,8 +67,6 @@ const PerPost: NextPage<Props> = ({ purePost, params }) => {
   const getAllLikes = trpc.like.totalLikes.useQuery({
     postId: purePost.id,
   });
-
-  const session = useSession();
 
   const date = new Date(purePost.createdAt);
 
@@ -193,8 +184,7 @@ const PerPost: NextPage<Props> = ({ purePost, params }) => {
                 </div>
               </li>
               <div className="flex w-full flex-col gap-3 rounded-md bg-white p-7 shadow-sm">
-                <input
-                  type="text"
+                <textarea
                   placeholder="Yorum yap"
                   className="w-full rounded-md border-none bg-[#F5F5F5] p-2 outline-none focus:border-transparent focus:ring-2 focus:ring-[#E46D80] focus:ring-opacity-50 focus:ring-offset-2 focus:ring-offset-[#F5F5F5]  "
                 />
@@ -236,9 +226,15 @@ const PerPost: NextPage<Props> = ({ purePost, params }) => {
                       5<FaCoins className="h-5 w-5 self-center pb-1" />
                     </p>
                   </div>
-                  <p className="text-sm font-light text-[#333]">
+                  <p className="max-w-[220px] text-center text-sm font-light text-[#333]">
                     {/* {purePost.user.departmentId} */}
-                    Samsun Üniversitesi - Yazılım Müh.
+                    {purePost.user.university.name} -{" "}
+                    {purePost.user.department?.name.includes(" ")
+                      ? purePost.user.department.name
+                          .split("")
+                          .splice(0, purePost.user.department?.name.length - 9)
+                          .join("") + "."
+                      : purePost.user.department?.name}
                   </p>
                 </div>
 
@@ -271,12 +267,18 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         id: String(slug),
       },
       include: {
-        user: true,
+        user: {
+          include: {
+            department: true,
+            university: true,
+          },
+        },
         like: true,
         category: true,
         files: true,
       },
     });
+    console.log(post);
 
     if (post) {
       const purePost = JSON.parse(JSON.stringify(post));
