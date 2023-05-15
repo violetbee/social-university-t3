@@ -4,9 +4,9 @@ import Image from "next/image";
 import { signIn } from "next-auth/react";
 import { useState } from "react";
 import type { UserSignInForm, UserSignUpForm } from "../../types/app";
-import SignIn from "../../components/SignIn";
-import SignUp from "../../components/SignUp";
-import { unstable_getServerSession } from "next-auth";
+import SignIn from "../../components/SignIn/SignIn";
+import SignUp from "../../components/SignUp/SignUp";
+import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]";
 import { GetServerSideProps } from "next";
 
@@ -58,11 +58,7 @@ const Auth = () => {
 export default Auth;
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const session = await unstable_getServerSession(
-    context.req,
-    context.res,
-    authOptions
-  );
+  const session = await getServerSession(context.req, context.res, authOptions);
   if (session) {
     return {
       redirect: {

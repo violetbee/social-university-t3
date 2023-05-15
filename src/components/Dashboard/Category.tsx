@@ -1,9 +1,9 @@
 import Link from "next/link";
 import { useState } from "react";
-import { trpc } from "../utils/trpc";
-import { IDashboardProps } from "../types/app";
+import { trpc } from "../../utils/trpc";
+import { IDashboardProps } from "../../types/app";
 
-const Categories = ({ params }: IDashboardProps) => {
+const Category = ({ params }: IDashboardProps) => {
   const { data } = trpc.category.getAll.useQuery();
   const [selectedCategory, setSelectedCategory] = useState<string>(
     params?.category || "her-sey"
@@ -37,4 +37,4 @@ const Categories = ({ params }: IDashboardProps) => {
   );
 };
 
-export default Categories;
+export default Category;

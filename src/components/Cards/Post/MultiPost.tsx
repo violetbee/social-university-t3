@@ -1,5 +1,5 @@
-import Post from "./Post";
-import { trpc } from "../../utils/trpc";
+import Post from "./SinglePost";
+import { trpc } from "../../../utils/trpc";
 
 type Props = {
   itemPiece?: number;

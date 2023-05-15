@@ -1,7 +1,7 @@
-import { Event, EventType } from "@prisma/client";
 import Image from "next/image";
+import { EventIncludedTypeOfEvent } from "../../../types/event";
 
-const Event = ({ event }: { event: Event & { eventType: EventType } }) => {
+const Event = ({ event }: { event: EventIncludedTypeOfEvent }) => {
   const startDate = new Date(event.startDate);
   const endDate = new Date(event.endDate);
 

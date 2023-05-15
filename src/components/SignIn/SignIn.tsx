@@ -1,4 +1,4 @@
-import type { SignInProps } from "../types/app";
+import type { SignInProps } from "../../types/app";
 import { signIn, useSession } from "next-auth/react";
 import { toast } from "react-toastify";
 import { FaDiscord, FaTwitter } from "react-icons/fa";

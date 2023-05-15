@@ -4,7 +4,8 @@ import Layout from "../components/Layout";
 import { getServerAuthSession } from "../server/common/get-server-auth-session";
 import { prisma } from "../server/db/client";
 import { User } from "@prisma/client";
-import Features from "../components/Feature";
+import Features from "../components/Landing/Feature";
+// import PostsAndFiles from "../inactiveComponents/PostsAndFiles";
 
 type Props = {
   user: User;

@@ -8,10 +8,10 @@ import {
   Class,
   ClassLevel,
 } from "@prisma/client";
-import CategoryAndMenuSection from "../../components/CategoryAndMenuSection";
+import CategoryAndMenuSection from "../../components/Dashboard/CategoryAndMenuSection";
 import { ParsedUrlQuery } from "querystring";
-import Events from "../../components/Events/Events";
-import Posts from "../../components/Posts/Posts";
+import Events from "../../components/Cards/Event/MultiEvent";
+import Posts from "../../components/Cards/Post/MultiPost";
 
 type Props = {
   posts: (PostType & {

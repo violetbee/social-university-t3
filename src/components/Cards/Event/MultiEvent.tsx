@@ -1,16 +1,9 @@
 import Masonry from "react-masonry-css";
-import Event from "./Event";
-import { EventType, Event as TypeOfEvent } from "@prisma/client";
-import { trpc } from "../../utils/trpc";
+import Event from "./SingleEvent";
+import { trpc } from "../../../utils/trpc";
+import { MultiEventProps } from "../../../types/event";
 
-interface Props {
-  itemPiece?: number;
-  events?: (TypeOfEvent & {
-    eventType: EventType;
-  })[];
-}
-
-const Events = ({ itemPiece }: Props) => {
+const Events = ({ itemPiece }: MultiEventProps) => {
   const { data: universityId } = trpc.user.getUserUniversityById.useQuery();
   const { data: eventsByQuery } = trpc.event.getAllEvents.useQuery({
     query: universityId?.university?.id || "",

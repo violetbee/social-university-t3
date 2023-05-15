@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import Article from "./Article";
-import { useMediaQuery } from "../hooks/useMediaQuery";
+import { useMediaQuery } from "../../hooks/useMediaQuery";
 
 const Announcements = () => {
   const scrollRef = useRef<HTMLDivElement>(null);

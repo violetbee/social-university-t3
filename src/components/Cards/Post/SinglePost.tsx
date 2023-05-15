@@ -1,26 +1,8 @@
-import {
-  Category,
-  Class,
-  ClassLevel,
-  Department,
-  Post as PostType,
-  User,
-} from "@prisma/client";
 import Image from "next/image";
 import Link from "next/link";
+import { IPost } from "../../../types/post";
 
-type Props = {
-  post: PostType & {
-    user: User;
-    category: Category | null;
-    publishedTimeAgo: string;
-    department: Department | null;
-    class: Class | null;
-    classLevel: ClassLevel | null;
-  };
-};
-
-const Post = ({ post }: Props) => {
+const Post = ({ post }: IPost) => {
   return (
     <div className="relative flex h-[350px] w-full flex-col justify-between overflow-hidden rounded-md border-[#888]/30 bg-white shadow-sm">
       {post.type === "DOC" && (

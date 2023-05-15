@@ -31,7 +31,7 @@ import { ParsedUrlQuery } from "querystring";
 import Image from "next/image";
 
 type Props = {
-  purePost: Post & {
+  post: Post & {
     user: User & {
       department: Department;
       university: University;
@@ -45,7 +45,7 @@ type Props = {
   };
 };
 
-const PerPost: NextPage<Props> = ({ purePost }) => {
+const PerPost: NextPage<Props> = ({ post }) => {
   const [comment, setComment] = useState<string>("");
 
   const parent = useRef(null);
@@ -65,10 +65,10 @@ const PerPost: NextPage<Props> = ({ purePost }) => {
     },
   });
   const getAllLikes = trpc.like.totalLikes.useQuery({
-    postId: purePost.id,
+    postId: post.id,
   });
 
-  const date = new Date(purePost.createdAt);
+  const date = new Date(post.createdAt);
 
   return (
     <>
@@ -85,23 +85,23 @@ const PerPost: NextPage<Props> = ({ purePost }) => {
               <li className="flex flex-col gap-6 rounded-md bg-white p-7 shadow-sm">
                 <div className="flex justify-between">
                   <div className="flex gap-3">
-                    {purePost.user.image ? (
+                    {post.user.image ? (
                       <Image
-                        src={purePost.user.image as string}
-                        alt={purePost.user.name as string}
+                        src={post.user.image as string}
+                        alt={post.user.name as string}
                         width={44}
                         height={44}
                         className="rounded-full"
                       />
                     ) : (
                       <div className="flex h-11 w-11 items-center justify-center rounded-full bg-[#333] text-white">
-                        {purePost.user.name?.at(0)}
+                        {post.user.name?.at(0)}
                       </div>
                     )}
                     <div className="flex flex-col justify-center">
                       <p className="text-md flex leading-snug">
                         <span className="self-stretch leading-[24px]">@</span>
-                        {purePost.user.name}
+                        {post.user.name}
                       </p>
                       <p className="text-xs font-light leading-4 tracking-wide text-gray-400">
                         {date.toLocaleDateString() +
@@ -139,13 +139,13 @@ const PerPost: NextPage<Props> = ({ purePost }) => {
                   </div>
                 </div>
                 <h1 className="text-lg font-semibold text-[#333]">
-                  {purePost.title}
+                  {post.title}
                 </h1>
-                <p>{purePost.content}</p>
+                <p>{post.content}</p>
                 <div className="space-y-3">
-                  {purePost.files.length > 0 && (
+                  {post.files.length > 0 && (
                     <div className="flex gap-2">
-                      {purePost.files.map((file) => (
+                      {post.files.map((file) => (
                         <div
                           key={file.id}
                           className="flex items-center gap-2 rounded-md bg-[#F5F5F5] p-2"
@@ -168,7 +168,7 @@ const PerPost: NextPage<Props> = ({ purePost }) => {
                       <button
                         onClick={() => {
                           like.mutate({
-                            postId: purePost.id,
+                            postId: post.id,
                           });
                         }}
                         className="flex rounded-md bg-[#1682FD] px-3 py-2 text-white"
@@ -202,24 +202,24 @@ const PerPost: NextPage<Props> = ({ purePost }) => {
             </ul>
             <div className="h-full w-2/12">
               <div className="flex h-full flex-col items-center gap-3 rounded-md bg-white py-[30px] shadow-sm">
-                {purePost.user.image ? (
+                {post.user.image ? (
                   <Image
-                    src={purePost.user.image as string}
-                    alt={purePost.user.name as string}
+                    src={post.user.image as string}
+                    alt={post.user.name as string}
                     width={200}
                     height={200}
                     className="h-[130px] w-[130px] rounded-full"
                   />
                 ) : (
                   <div className="flex h-[130px] w-[130px] items-center justify-center rounded-full bg-[#333] text-2xl text-white">
-                    {purePost.user.name?.at(0)}
+                    {post.user.name?.at(0)}
                   </div>
                 )}
                 <div className="w-2/3 rounded-full border-b-[1px] border-[#333]/10" />
                 <div className="flex flex-col items-center gap-1">
                   <div className="flex gap-1">
                     <p className="text-lg font-semibold text-[#333]">
-                      {purePost.user.name}
+                      {post.user.name}
                     </p>
                     -
                     <p className="flex gap-1 text-lg font-semibold text-[#E46D80]">
@@ -227,14 +227,14 @@ const PerPost: NextPage<Props> = ({ purePost }) => {
                     </p>
                   </div>
                   <p className="max-w-[220px] text-center text-sm font-light text-[#333]">
-                    {/* {purePost.user.departmentId} */}
-                    {purePost.user.university.name} -{" "}
-                    {purePost.user.department?.name.includes(" ")
-                      ? purePost.user.department.name
+                    {/* {post.user.departmentId} */}
+                    {post.user.university.name} -{" "}
+                    {post.user.department?.name.includes(" ")
+                      ? post.user.department.name
                           .split("")
-                          .splice(0, purePost.user.department?.name.length - 9)
+                          .splice(0, post.user.department?.name.length - 9)
                           .join("") + "."
-                      : purePost.user.department?.name}
+                      : post.user.department?.name}
                   </p>
                 </div>
 
@@ -280,9 +280,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     });
 
     if (post) {
-      const purePost = JSON.parse(JSON.stringify(post));
+      const parsedPost = JSON.parse(JSON.stringify(post));
       return {
-        props: { purePost, params: context.params },
+        props: { parsedPost, params: context.params },
       };
     } else {
       return {

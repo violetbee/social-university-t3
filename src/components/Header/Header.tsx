@@ -3,10 +3,9 @@ import Link from "next/link";
 import { FC } from "react";
 import Image from "next/image";
 import { Josefin_Sans } from "@next/font/google";
-import withPopup from "./HoC/withPopup";
-import { AfterAuthHeaderSection } from "./User/AfterAuthHeaderSection";
-import { UserProfile } from "./User/UserProfile";
-import { useId } from "react";
+import withPopup from "../HoC/withPopup";
+import { AfterAuthHeaderSection } from "./AuthedUser/TriggerUserPopupProfile";
+import { UserProfile } from "./AuthedUser/PoppedUpUserProfile";
 
 const dosis = Josefin_Sans({
   weight: ["200", "300", "400", "500", "600", "700"],
@@ -16,7 +15,6 @@ const dosis = Josefin_Sans({
 });
 
 const Header: FC = () => {
-  const id = useId();
   const { data: session } = useSession();
 
   const UserPopup = withPopup(AfterAuthHeaderSection, UserProfile);
@@ -77,7 +75,7 @@ const Header: FC = () => {
         <div className="hidden h-full lg:flex">
           {session ? (
             <div className="flex items-center">
-              <div className="flex h-full items-center" id={id}>
+              <div className="flex h-full items-center">
                 <UserPopup />
               </div>
             </div>

@@ -1,6 +1,6 @@
 import React from "react";
-import { SignUpProps, TRPCError } from "../types/app";
-import { trpc } from "../utils/trpc";
+import { SignUpProps, TRPCError } from "../../types/app";
+import { trpc } from "../../utils/trpc";
 import { toast } from "react-toastify";
 import { signIn } from "next-auth/react";
 

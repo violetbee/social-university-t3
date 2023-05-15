@@ -1,6 +1,6 @@
 import { League_Spartan } from "@next/font/google";
-import LeftSideBar from "./LeftSideBar";
-import Header from "./Header";
+import LeftSideBar from "./SideBar/LeftSideBar";
+import Header from "./Header/Header";
 import { useSession } from "next-auth/react";
 
 const dosis = League_Spartan({

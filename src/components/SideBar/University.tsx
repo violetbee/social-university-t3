@@ -1,5 +1,5 @@
-import { trpc } from "../utils/trpc";
-import withPopup from "./HoC/withPopup";
+import { trpc } from "../../utils/trpc";
+import withPopup from "../HoC/withPopup";
 import Image from "next/dist/client/image";
 
 const University = () => {
