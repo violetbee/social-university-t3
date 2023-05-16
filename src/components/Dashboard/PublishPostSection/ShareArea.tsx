@@ -14,8 +14,8 @@ const Share = () => {
       <div className="mb-3 grid w-full grid-cols-4 justify-between rounded-md bg-white  shadow-sm">
         {/* I want to build a multi step form, first step will be post type. Post types are basic, file included, event type.  Post type step will be horizontal and select input.
         Options will be horizontal */}
-        <div className="group flex cursor-pointer items-center justify-evenly gap-3 rounded-l-md p-4 hover:bg-[#333]">
-          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#525252] group-hover:bg-[#555]">
+        <div className="group flex cursor-pointer items-center justify-evenly gap-3 rounded-l-md p-4 ">
+          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#525252] group-hover:bg-[#DD4E63]">
             <Image
               src={"/svg/plus.svg"}
               alt="newPost"
@@ -25,16 +25,14 @@ const Share = () => {
             ></Image>
           </div>
           <div className="flex flex-col">
-            <h1 className="text-lg font-semibold group-hover:text-white">
-              Gönderi Paylaş
-            </h1>
-            <p className="text-sm text-gray-500 group-hover:text-[#777]">
+            <h1 className="text-lg font-semibold ">Gönderi Paylaş</h1>
+            <p className="text-sm text-gray-500">
               Bir gönderi paylaşmak için buraya tıklayın.
             </p>
           </div>
         </div>
-        <div className="group flex cursor-pointer items-center justify-evenly gap-3 p-4 hover:bg-[#333]">
-          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#525252] group-hover:bg-[#555]">
+        <div className="group flex cursor-pointer items-center justify-evenly gap-3 rounded-l-md p-4 ">
+          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#525252] group-hover:bg-[#DD4E63]">
             <Image
               src={"/svg/fileD.svg"}
               alt="newPost"
@@ -44,16 +42,14 @@ const Share = () => {
             ></Image>
           </div>
           <div className="flex flex-col">
-            <h1 className="text-lg font-semibold group-hover:text-white">
-              Dosya Paylaş
-            </h1>
-            <p className="text-sm text-gray-500 group-hover:text-[#777]">
+            <h1 className="text-lg font-semibold">Dosya Paylaş</h1>
+            <p className="text-sm text-gray-500">
               Bir gönderi paylaşmak için buraya tıklayın.
             </p>
           </div>
         </div>
-        <div className="group flex cursor-pointer items-center justify-evenly gap-3 p-4 hover:bg-[#333]">
-          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#525252] group-hover:bg-[#555]">
+        <div className="group flex cursor-pointer items-center justify-evenly gap-3 rounded-l-md p-4 ">
+          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#525252] group-hover:bg-[#DD4E63]">
             <Image
               src={"/svg/plus.svg"}
               alt="newPost"
@@ -63,16 +59,14 @@ const Share = () => {
             ></Image>
           </div>
           <div className="flex flex-col">
-            <h1 className="text-lg font-semibold group-hover:text-white">
-              Etkinlik Oluştur
-            </h1>
-            <p className="text-sm text-gray-500 group-hover:text-[#777]">
+            <h1 className="text-lg font-semibold">Etkinlik Oluştur</h1>
+            <p className="text-sm text-gray-500">
               Bir gönderi paylaşmak için buraya tıklayın.
             </p>
           </div>
         </div>
-        <div className="group flex cursor-pointer items-center justify-evenly gap-3 rounded-r-md p-4 hover:bg-[#333]">
-          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#525252] group-hover:bg-[#555]">
+        <div className="group flex cursor-pointer items-center justify-evenly gap-3 rounded-l-md p-4 ">
+          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#525252] group-hover:bg-[#DD4E63]">
             <Image
               src={"/svg/plus.svg"}
               alt="newPost"
@@ -82,10 +76,8 @@ const Share = () => {
             ></Image>
           </div>
           <div className="flex flex-col">
-            <h1 className="text-lg font-semibold group-hover:text-white">
-              Anket Oluştur
-            </h1>
-            <p className="text-sm text-gray-500 group-hover:text-[#777]">
+            <h1 className="text-lg font-semibold">Anket Oluştur</h1>
+            <p className="text-sm text-gray-500">
               Bir gönderi paylaşmak için buraya tıklayın.
             </p>
           </div>

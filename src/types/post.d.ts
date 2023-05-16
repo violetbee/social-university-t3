@@ -3,7 +3,9 @@ import {
   Class,
   ClassLevel,
   Department,
-  Post,
+  DocTypePost,
+  Like,
+  TextTypePost,
   User,
 } from "@prisma/client";
 
@@ -13,13 +15,19 @@ export interface IPostSlicer {
   };
 }
 
-export interface IPost {
-  post: Post & {
-    user: User;
-    category: Category | null;
-    publishedTimeAgo: string;
-    department: Department | null;
-    class: Class | null;
-    classLevel: ClassLevel | null;
-  };
-}
+export type ITextPost = TextTypePost & {
+  category: Category | null;
+};
+
+export type IDocPost = DocTypePost & {
+  department: Department | null;
+  class: Class | null;
+  classLevel: ClassLevel | null;
+  files: File[];
+};
+
+export type IPost = {
+  user: User;
+  likes: Like[];
+  timeAgo: string;
+} & (ITextPost & IDocPost);

@@ -1,17 +1,17 @@
 import Image from "next/image";
 import Link from "next/link";
-import { IPost } from "../../../types/post";
+import { IDocPost, IPost, ITextPost } from "../../../types/post";
 
-const Post = ({ post }: IPost) => {
+const Post = ({ post }: { post: IPost }) => {
   return (
     <div className="relative flex h-[350px] w-full flex-col justify-between overflow-hidden rounded-md border-[#888]/30 bg-white shadow-sm">
-      {post.type === "DOC" && (
+      {post.files && (
         <div className="stateOfPost absolute -right-10 top-3 flex h-8 w-32 rotate-45 items-center justify-center bg-center text-lg text-white">
           Dosya
         </div>
       )}
 
-      {post.type === "TEXT" && (
+      {!post.files && (
         // IMAGE
         <Image
           src="/images/passage.jpg"
@@ -24,12 +24,12 @@ const Post = ({ post }: IPost) => {
 
       <div
         className={`flex flex-1 flex-col space-y-2 px-3 ${
-          post.type === "DOC" && "pt-4"
+          post.files && "pt-4"
         }`}
       >
         <h3
           className={`break-words ${
-            post.type === "DOC" && "pr-10"
+            post.files && "pr-10"
           } font-semibold uppercase text-[#333]`}
         >
           {post.title.slice(0, 40) + "..."}
@@ -38,7 +38,7 @@ const Post = ({ post }: IPost) => {
           {post.content.slice(0, 57) + "..."}
         </p>
       </div>
-      {post.type === "DOC" && (
+      {post.files && (
         <>
           <div className="h-px w-full border-t-[1px] border-dashed"></div>
           <div className="px-3 py-4">

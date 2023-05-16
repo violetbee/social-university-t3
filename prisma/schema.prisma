@@ -42,31 +42,32 @@ model Session {
 }
 
 model User {
-    id            String      @id @default(cuid())
-    createdAt     DateTime    @default(now())
+    id            String         @id @default(cuid())
+    createdAt     DateTime       @default(now())
     name          String?
     surname       String?
-    email         String?     @unique
+    email         String?        @unique
     emailVerified DateTime?
     password      String?
     image         String?
-    userType      User_TYPE?  @default(STUDENT)
+    userType      User_TYPE?     @default(STUDENT)
     accounts      Account[]
     sessions      Session[]
-    post          Post[]
-    Comment       Comment[]
-    like          Like[]
-    event         Event[]
-    university    University? @relation(fields: [universityId], references: [id], onDelete: Cascade)
+    posts         TextTypePost[]
+    comments      Comment[]
+    likes         Like[]
+    events        Event[]
+    university    University?    @relation(fields: [universityId], references: [id], onDelete: Cascade)
     universityId  String?
-    department    Department? @relation(fields: [departmentId], references: [id], onDelete: Cascade)
+    department    Department?    @relation(fields: [departmentId], references: [id], onDelete: Cascade)
     departmentId  String?
-    schoolClub    SchoolClub? @relation(fields: [schoolClubId], references: [id], onDelete: Cascade)
+    schoolClub    SchoolClub?    @relation(fields: [schoolClubId], references: [id], onDelete: Cascade)
     schoolClubId  String?
-    class         Class?      @relation(fields: [classId], references: [id], onDelete: Cascade)
+    class         Class?         @relation(fields: [classId], references: [id], onDelete: Cascade)
     classId       String?
-    classLevel    ClassLevel? @relation(fields: [classLevelId], references: [id], onDelete: Cascade)
+    classLevel    ClassLevel?    @relation(fields: [classLevelId], references: [id], onDelete: Cascade)
     classLevelId  String?
+    DocTypePost   DocTypePost[]
 }
 
 enum User_TYPE {
@@ -85,9 +86,10 @@ model University {
     slug        String                   @unique
     location    String
     users       User[]
-    posts       Post[]
+    posts       TextTypePost[]
     events      Event[]
     departments UniversityOnDepartment[]
+    DocTypePost DocTypePost[]
 }
 
 model Department {
@@ -96,10 +98,10 @@ model Department {
     name         String
     slug         String                    @unique
     users        User[]
-    posts        Post[]
     classes      Class[]
     classLevels  DepartmentsOnClassLevel[]
     universities UniversityOnDepartment[]
+    docTypePosts DocTypePost[]
 }
 
 model UniversityOnDepartment {
@@ -113,25 +115,25 @@ model UniversityOnDepartment {
 }
 
 model Class {
-    id           String      @id @default(cuid())
+    id           String        @id @default(cuid())
     name         String
-    slug         String      @unique
-    department   Department  @relation(fields: [departmentId], references: [id], onDelete: Cascade)
+    slug         String        @unique
+    department   Department    @relation(fields: [departmentId], references: [id], onDelete: Cascade)
     departmentId String
-    posts        Post[]
     users        User[]
-    classLevel   ClassLevel? @relation(fields: [classLevelId], references: [id])
+    classLevel   ClassLevel?   @relation(fields: [classLevelId], references: [id])
     classLevelId String?
+    docTypePosts DocTypePost[]
 }
 
 model ClassLevel {
-    id          String                    @id @default(cuid())
-    name        String
-    slug        String                    @unique
-    posts       Post[]
-    user        User[]
-    departments DepartmentsOnClassLevel[]
-    class       Class[]
+    id           String                    @id @default(cuid())
+    name         String
+    slug         String                    @unique
+    users        User[]
+    departments  DepartmentsOnClassLevel[]
+    classes      Class[]
+    docTypePosts DocTypePost[]
 }
 
 model DepartmentsOnClassLevel {
@@ -145,11 +147,11 @@ model DepartmentsOnClassLevel {
 }
 
 model Category {
-    id        String   @id @default(cuid())
-    createdAt DateTime @default(now()) @db.Timestamp(6)
+    id        String         @id @default(cuid())
+    createdAt DateTime       @default(now()) @db.Timestamp(6)
     name      String
-    slug      String   @unique
-    posts     Post[]
+    slug      String         @unique
+    posts     TextTypePost[]
 }
 
 model SchoolClub {
@@ -161,21 +163,34 @@ model SchoolClub {
     events    Event[]
 }
 
-model Post {
+model TextTypePost {
     id           String      @id @default(cuid())
     createdAt    DateTime    @default(now()) @db.Timestamp(6)
     slug         String      @unique
     title        String
     content      String
     image        String?
+    tags         Tag[]
     category     Category?   @relation(fields: [categoryId], references: [id], onDelete: Cascade)
     user         User        @relation(fields: [userId], references: [id], onDelete: Cascade)
     comments     Comment[]
     categoryId   String?
     userId       String
-    like         Like[]
-    type         POST_TYPE
-    files        File[]
+    likes        Like[]
+    university   University? @relation(fields: [universityId], references: [id])
+    universityId String?
+}
+
+model DocTypePost {
+    id           String      @id @default(cuid())
+    createdAt    DateTime    @default(now()) @db.Timestamp(6)
+    slug         String      @unique
+    title        String
+    content      String
+    tags         Tag[]
+    likes        Like[]
+    user         User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+    userId       String
     university   University? @relation(fields: [universityId], references: [id])
     universityId String?
     department   Department? @relation(fields: [departmentId], references: [id])
@@ -184,13 +199,14 @@ model Post {
     classId      String?
     classLevel   ClassLevel? @relation(fields: [classLevelId], references: [id])
     classLevelId String?
-    tags         Tag[]
+    files        File[]
 }
 
 model Tag {
-    id    String @id @default(cuid())
-    name  String
-    posts Post[]
+    id           String         @id @default(cuid())
+    name         String
+    posts        TextTypePost[]
+    docTypePosts DocTypePost[]
 }
 
 model Event {
@@ -220,32 +236,34 @@ model EventType {
 }
 
 model File {
-    id        String   @id @default(cuid())
-    createdAt DateTime @default(now())
-    name      String
-    url       String
-    size      Int
-    type      String
-    post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
-    postId    String
+    id            String       @id @default(cuid())
+    createdAt     DateTime     @default(now())
+    name          String
+    url           String
+    size          Int
+    type          String
+    docTypePost   DocTypePost? @relation(fields: [docTypePostId], references: [id], onDelete: Cascade)
+    docTypePostId String?
 }
 
 model Like {
-    id     String  @id @default(cuid())
-    isLike Boolean @default(true)
-    post   Post    @relation(fields: [postId], references: [id], onDelete: Cascade)
-    user   User    @relation(fields: [userId], references: [id], onDelete: Cascade)
-    postId String
-    userId String
+    id            String       @id @default(cuid())
+    isLike        Boolean      @default(true)
+    post          TextTypePost @relation(fields: [postId], references: [id], onDelete: Cascade)
+    user          User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+    postId        String
+    userId        String
+    DocTypePost   DocTypePost? @relation(fields: [docTypePostId], references: [id])
+    docTypePostId String?
 
     @@unique([postId, userId])
 }
 
 model Comment {
-    id      String @id @default(cuid())
+    id      String       @id @default(cuid())
     content String
-    user    User   @relation(fields: [userId], references: [id])
-    post    Post   @relation(fields: [postId], references: [id])
+    user    User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+    post    TextTypePost @relation(fields: [postId], references: [id], onDelete: Cascade)
     userId  String
     postId  String
 }
@@ -256,9 +274,4 @@ model VerificationToken {
     expires    DateTime
 
     @@unique([identifier, token])
-}
-
-enum POST_TYPE {
-    TEXT
-    DOC
 }

@@ -4,7 +4,7 @@ export const appSlice = createSlice({
   name: "app",
   initialState: {
     currentSlider: 0,
-    isShareOpen: true,
+    isShareOpen: false,
   },
   reducers: {
     setSlider: (state, action) => {

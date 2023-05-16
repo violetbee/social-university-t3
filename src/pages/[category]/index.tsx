@@ -11,7 +11,7 @@ import {
 import CategoryAndMenuSection from "../../components/Dashboard/CategoryAndMenuSection";
 import { ParsedUrlQuery } from "querystring";
 import Events from "../../components/Cards/Event/MultiEvent";
-import Posts from "../../components/Cards/Post/MultiPost";
+import MultiPost from "../../components/Cards/Post/MultiPost";
 
 type Props = {
   posts: (PostType & {
@@ -35,7 +35,7 @@ const Category: NextPage<Props> = ({ params }) => {
         {params?.category === "etkinlikler" ? (
           <Events />
         ) : (
-          <Posts slug={params?.category as string} />
+          <MultiPost slug={params?.category as string} />
         )}
       </div>
     </Layout>

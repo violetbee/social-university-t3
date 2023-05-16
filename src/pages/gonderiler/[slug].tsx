@@ -262,7 +262,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   if (context.params) {
     const slug = context.params.slug;
 
-    const post = await prisma.post.findUnique({
+    const basePost = await prisma.post.findUnique({
       where: {
         slug: String(slug),
       },
@@ -279,10 +279,10 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       },
     });
 
-    if (post) {
-      const parsedPost = JSON.parse(JSON.stringify(post));
+    if (basePost) {
+      const post = JSON.parse(JSON.stringify(basePost));
       return {
-        props: { parsedPost, params: context.params },
+        props: { post, params: context.params },
       };
     } else {
       return {
