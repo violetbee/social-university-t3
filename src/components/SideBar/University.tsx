@@ -1,19 +1,27 @@
+import { useMemo, useState } from "react";
 import { trpc } from "../../utils/trpc";
 import withPopup from "../HoC/withPopup";
 import Image from "next/dist/client/image";
 
 const University = () => {
-  const { data: university } = trpc.university.getAll.useQuery();
+  const [isFetch, setIsFetch] = useState(false);
+  const { data: university } = trpc.university.getAll.useQuery(undefined, {
+    enabled: isFetch,
+  });
   const { data: selectedUni } = trpc.user.getUserUniversityById.useQuery();
   const { mutateAsync: setUserUniversity } =
     trpc.university.changeUserUniversity.useMutation();
-
   const universityCtx = trpc.useContext();
+
+  const memoizedIsFetch = useMemo(() => {
+    setIsFetch(true);
+  }, []);
 
   const DisplaySelectUniversity = withPopup(
     ({ setOpen }: { setOpen: () => void }) => (
       <button
         onClick={() => {
+          memoizedIsFetch;
           setOpen();
         }}
         className="flex items-center border-x-2 border-dashed bg-[#222] bg-opacity-20 px-4 pb-1 pt-2 leading-none hover:bg-opacity-80 hover:text-white"
