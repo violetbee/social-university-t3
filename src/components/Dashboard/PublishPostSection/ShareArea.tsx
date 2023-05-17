@@ -12,8 +12,6 @@ const Share = () => {
       }`}
     >
       <div className="mb-3 grid w-full grid-cols-4 justify-between rounded-md bg-white  shadow-sm">
-        {/* I want to build a multi step form, first step will be post type. Post types are basic, file included, event type.  Post type step will be horizontal and select input.
-        Options will be horizontal */}
         <div className="group flex cursor-pointer items-center justify-evenly gap-3 rounded-l-md p-4 ">
           <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#525252] group-hover:bg-[#DD4E63]">
             <Image

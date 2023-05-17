@@ -1,16 +1,7 @@
 import { GetServerSideProps, NextPage } from "next";
-import Layout from "../../components/Layout";
-import { prisma } from "../../server/db/client";
+import Layout from "../../../components/Layout";
+import { prisma } from "../../../server/db/client";
 import Head from "next/head";
-import {
-  Category,
-  Department,
-  File,
-  Like,
-  Post,
-  University,
-  User,
-} from "@prisma/client";
 
 import {
   FaDownload,
@@ -25,27 +16,23 @@ import {
 import React, { useState, useEffect, useRef } from "react";
 import autoAnimate from "@formkit/auto-animate";
 import { GoCommentDiscussion } from "react-icons/go";
-import { trpc } from "../../utils/trpc";
+import { trpc } from "../../../utils/trpc";
 import { AiFillLike } from "react-icons/ai";
 import { ParsedUrlQuery } from "querystring";
 import Image from "next/image";
+import { ISinglePost } from "../../../types/post";
+import { DocTypePost, TextTypePost } from "@prisma/client";
 
 type Props = {
-  post: Post & {
-    user: User & {
-      department: Department;
-      university: University;
-    };
-    like: Like;
-    category: Category;
-    files: File[];
-  };
+  post: ISinglePost;
   params: {
     [key: string]: string | string[] | ParsedUrlQuery;
   };
 };
 
-const PerPost: NextPage<Props> = ({ post }) => {
+const PerPost: NextPage<Props> = ({ post, params }) => {
+  const { type } = params;
+
   const [comment, setComment] = useState<string>("");
 
   const parent = useRef(null);
@@ -143,9 +130,9 @@ const PerPost: NextPage<Props> = ({ post }) => {
                 </h1>
                 <p>{post.content}</p>
                 <div className="space-y-3">
-                  {post.files.length > 0 && (
+                  {type === "dokuman" && (
                     <div className="flex gap-2">
-                      {post.files.map((file) => (
+                      {post.files?.map((file) => (
                         <div
                           key={file.id}
                           className="flex items-center gap-2 rounded-md bg-[#F5F5F5] p-2"
@@ -228,7 +215,7 @@ const PerPost: NextPage<Props> = ({ post }) => {
                   </div>
                   <p className="max-w-[220px] text-center text-sm font-light text-[#333]">
                     {/* {post.user.departmentId} */}
-                    {post.user.university.name} -{" "}
+                    {post.user.university?.name} -{" "}
                     {post.user.department?.name.includes(" ")
                       ? post.user.department.name
                           .split("")
@@ -260,24 +247,47 @@ export default PerPost;
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   if (context.params) {
-    const slug = context.params.slug;
+    const { slug, type } = context.params;
 
-    const basePost = await prisma.post.findUnique({
-      where: {
-        slug: String(slug),
-      },
-      include: {
-        user: {
-          include: {
-            department: true,
-            university: true,
-          },
+    let basePost: TextTypePost | DocTypePost | null;
+
+    if (type === "yazi") {
+      basePost = await prisma.textTypePost.findUnique({
+        where: {
+          slug: String(slug),
         },
-        like: true,
-        category: true,
-        files: true,
-      },
-    });
+        include: {
+          user: {
+            include: {
+              department: true,
+              university: true,
+              class: true,
+              classLevel: true,
+            },
+          },
+          likes: true,
+          category: true,
+        },
+      });
+    } else {
+      basePost = await prisma.docTypePost.findUnique({
+        where: {
+          slug: String(slug),
+        },
+        include: {
+          user: {
+            include: {
+              department: true,
+              university: true,
+              class: true,
+              classLevel: true,
+            },
+          },
+          likes: true,
+          files: true,
+        },
+      });
+    }
 
     if (basePost) {
       const post = JSON.parse(JSON.stringify(basePost));

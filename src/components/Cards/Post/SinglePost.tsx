@@ -1,8 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
-import { IDocPost, IPost, ITextPost } from "../../../types/post";
+import type { ISinglePost } from "../../../types/post";
 
-const Post = ({ post }: { post: IPost }) => {
+const Post = ({ post }: { post: ISinglePost }) => {
   return (
     <div className="relative flex h-[350px] w-full flex-col justify-between overflow-hidden rounded-md border-[#888]/30 bg-white shadow-sm">
       {post.files && (
@@ -60,7 +60,7 @@ const Post = ({ post }: { post: IPost }) => {
       <div className="w-full px-2">
         <Link
           className="mb-4 flex h-12 items-center justify-center rounded-lg bg-[#dd4e63] text-white"
-          href={`/gonderiler/${post.slug}`}
+          href={`/gonderi/${post.files ? "dokuman" : "yazi"}/${post.slug}`}
         >
           Gönderiyi İncele
         </Link>
@@ -70,7 +70,7 @@ const Post = ({ post }: { post: IPost }) => {
         <div className="h-px w-full border-t-[1px] border-dashed"></div>
         <div className="flex items-center px-3 pb-3">
           <div className="flex w-full items-center justify-between">
-            {post.user?.image ? (
+            {post.user.image ? (
               <Image
                 src={post.user.image || "/images/avatar.png"}
                 alt="avatar"
@@ -81,7 +81,7 @@ const Post = ({ post }: { post: IPost }) => {
             ) : (
               <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[#333]">
                 <p className="text-md pt-1 font-bold text-white">
-                  {post.user?.name?.slice(0, 1)}
+                  {post.user.name?.slice(0, 1)}
                 </p>
               </div>
             )}{" "}

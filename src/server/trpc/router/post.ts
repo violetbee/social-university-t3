@@ -54,7 +54,6 @@ export const postRouter = router({
           universityId: input.universityId,
           departmentId: input.departmentId,
           userId: ctx.session?.user?.id as string,
-
           files: {
             createMany: {
               data: input.files.map((file) => ({
@@ -130,4 +129,55 @@ export const postRouter = router({
 
       return { posts: sortedPostsByCreatedAt };
     }),
+  getTextPostsByCategory: publicProcedure
+    .input(
+      z.object({
+        slug: z.string(),
+      })
+    )
+    .query(async ({ ctx, input }) => {
+      const textPosts = await ctx.prisma.textTypePost.findMany({
+        orderBy: {
+          createdAt: "desc",
+        },
+        where: {
+          category: {
+            slug: input.slug,
+          },
+        },
+        include: {
+          user: {
+            include: {
+              department: true,
+              university: true,
+              class: true,
+              classLevel: true,
+            },
+          },
+          category: true,
+          likes: true,
+        },
+      });
+      return { posts: textPosts };
+    }),
+  getDocPosts: publicProcedure.query(async ({ ctx }) => {
+    const textPosts = await ctx.prisma.docTypePost.findMany({
+      include: {
+        user: {
+          include: {
+            department: true,
+            university: true,
+            class: true,
+            classLevel: true,
+          },
+        },
+        likes: true,
+        files: true,
+        department: true,
+        class: true,
+        classLevel: true,
+      },
+    });
+    return { posts: textPosts };
+  }),
 });
