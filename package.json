@@ -37,6 +37,8 @@
     "nprogress": "^0.2.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-drag-drop-files": "^2.3.10",
+    "react-hook-form": "^7.43.9",
     "react-icons": "^4.7.1",
     "react-masonry-css": "^1.0.16",
     "react-redux": "^8.0.5",
