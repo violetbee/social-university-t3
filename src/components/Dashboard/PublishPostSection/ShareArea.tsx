@@ -6,20 +6,35 @@ import GonderiForm from "./PostTypeForms/GonderiForm";
 import DosyaForm from "./PostTypeForms/DosyaForm";
 import EtkinlikForm from "./PostTypeForms/EtkinlikForm";
 import AnketForm from "./PostTypeForms/AnketForm";
+import { trpc } from "../../../utils/trpc";
 
 const Share = () => {
   const isOpen = useSelector((state: IPostSlicer) => state.app.isShareOpen);
 
-  const { register, watch, handleSubmit, reset } = useForm();
+  const { register, watch, handleSubmit, reset, setValue } = useForm();
 
   const option = watch();
 
-  const submit = (data: any) => {
-    // delete data.formType;
-    console.log(data);
-  };
+  // TRPC QUERIES START
 
-  console.log(option);
+  const createTextPost = trpc.post.createTextPost.useMutation();
+  const getUserUniversityId = trpc.user.getUserUniversityById.useQuery();
+
+  // TRPC QUERIES END
+
+  const onSubmit = (data: any) => {
+    const fileName = `${Math.random().toString(36).substring(2, 15)}-${
+      data?.coverImage[0]?.name
+    }`;
+
+    delete data.formType;
+    // TODO: axios requests should be switch case due to formType
+    createTextPost.mutateAsync({
+      ...data,
+      universityId: getUserUniversityId.data?.university?.id,
+      image: fileName,
+    });
+  };
 
   return (
     <div
@@ -28,7 +43,7 @@ const Share = () => {
       }`}
     >
       <form
-        onSubmit={handleSubmit(submit)}
+        onSubmit={handleSubmit(onSubmit)}
         className="mb-3 rounded-md bg-white shadow-sm"
       >
         <div
@@ -122,7 +137,11 @@ const Share = () => {
           </label>
         </div>
         {option.formType === "gonderi" && (
-          <GonderiForm register={register} option={option} />
+          <GonderiForm
+            register={register}
+            setValue={setValue}
+            option={option}
+          />
         )}
         {option.formType === "dosya" && <DosyaForm />}
         {option.formType === "etkinlik" && <EtkinlikForm />}

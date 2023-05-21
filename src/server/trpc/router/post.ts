@@ -10,6 +10,7 @@ export const postRouter = router({
         content: z.string(),
         categoryId: z.string(),
         universityId: z.string(),
+        image: z.string().nullable(),
       })
     )
     .mutation(async ({ ctx, input }) => {
@@ -21,6 +22,7 @@ export const postRouter = router({
           categoryId: input.categoryId,
           userId: ctx.session?.user?.id as string,
           universityId: input.universityId,
+          image: input.image,
         },
       });
     }),
