@@ -14,11 +14,14 @@ const Post = ({ post }: { post: ISinglePost }) => {
       {!post.files && (
         // IMAGE
         <Image
-          src="/images/passage.jpg"
+          src={
+            `${process.env.NEXT_PUBLIC_BUCKET_URL}${post.image}` ||
+            "/images/coverImage.png"
+          }
           alt=""
           className="mb-3 h-20 w-full object-cover"
-          width={200}
-          height={200}
+          width={400}
+          height={400}
         />
       )}
 

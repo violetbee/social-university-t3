@@ -1,18 +1,10 @@
 import { trpc } from "../../../../utils/trpc";
-import { useFiles } from "../../../../hooks/useFiles";
-import { useEffect } from "react";
 
 function GonderiForm({ register, option, setValue }: any) {
-  const { handleFiles, refinedFiles } = useFiles();
-
   // TRPC QUERIES START
   const getCategories = trpc.category.getAll.useQuery();
   // TRPC QUERIES END
-
-  useEffect(() => {
-    setValue("coverImage", refinedFiles);
-  }, [refinedFiles, setValue]);
-
+  console.log(option);
   return (
     <div className="mx-auto flex max-w-[1200px] flex-col gap-4 p-4">
       <div className="flex justify-between gap-5">
@@ -116,9 +108,9 @@ function GonderiForm({ register, option, setValue }: any) {
             )}
             <input
               type="file"
-              className=" hidden "
+              className="hidden"
               onChange={(e) => {
-                handleFiles(e);
+                setValue("coverImage", e.target.files);
               }}
               disabled={option.coverImage?.length > 0 ? true : false}
             />

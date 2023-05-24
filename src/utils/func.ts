@@ -51,3 +51,8 @@ export const slugify = function (text: string) {
     .replace(/[-]+/gi, "-") // trim repeated dashes
     .toLowerCase();
 };
+
+export const uniqueFileName = (rawName: string) => {
+  const fileName = `${Math.random().toString(36).substring(2, 15)}-${rawName}`;
+  return fileName;
+};

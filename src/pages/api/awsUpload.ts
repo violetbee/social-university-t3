@@ -29,7 +29,7 @@ const uploadFile = (req: NextApiRequest, res: NextApiResponse) => {
         leavePartsOnError: false,
         params: {
           Bucket: process.env.BUCKET_NAME as string,
-          Key: `${Math.random().toString(36).substring(2, 15)}-${fileName}`,
+          Key: fileName,
           Body: file,
         },
       });

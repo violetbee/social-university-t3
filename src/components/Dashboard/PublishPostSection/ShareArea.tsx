@@ -7,6 +7,8 @@ import DosyaForm from "./PostTypeForms/DosyaForm";
 import EtkinlikForm from "./PostTypeForms/EtkinlikForm";
 import AnketForm from "./PostTypeForms/AnketForm";
 import { trpc } from "../../../utils/trpc";
+import { uniqueFileName } from "../../../utils/func";
+import instance from "../../../utils/axios";
 
 const Share = () => {
   const isOpen = useSelector((state: IPostSlicer) => state.app.isShareOpen);
@@ -17,23 +19,55 @@ const Share = () => {
 
   // TRPC QUERIES START
 
+  const ctx = trpc.useContext();
   const createTextPost = trpc.post.createTextPost.useMutation();
+  const createDocPost = trpc.post.createDocPost.useMutation();
   const getUserUniversityId = trpc.user.getUserUniversityById.useQuery();
 
   // TRPC QUERIES END
 
-  const onSubmit = (data: any) => {
-    const fileName = `${Math.random().toString(36).substring(2, 15)}-${
-      data?.coverImage[0]?.name
-    }`;
-
+  const onSubmit = async (data: any) => {
     delete data.formType;
     // TODO: axios requests should be switch case due to formType
-    createTextPost.mutateAsync({
-      ...data,
-      universityId: getUserUniversityId.data?.university?.id,
-      image: fileName,
-    });
+
+    switch (option.formType) {
+      case "gonderi":
+        const formData = new FormData();
+
+        const uniqueName = uniqueFileName(data.coverImage[0].name);
+
+        formData.append("uploadingFiles", data.coverImage[0], uniqueName);
+        try {
+          const res = await instance.post("/api/awsUpload", formData);
+          if (res.status === 200) {
+            setTimeout(async () => {
+              await createTextPost.mutateAsync(
+                {
+                  ...data,
+                  universityId: getUserUniversityId.data?.university?.id,
+                  image: uniqueName,
+                },
+                {
+                  onSuccess: () => {
+                    reset();
+                    ctx.invalidate();
+                  },
+                }
+              );
+            }, 2000);
+          }
+        } catch (e) {
+          console.log(e);
+        }
+        break;
+      case "dosya":
+        Object.values(data.coverImage).forEach((file: any) => {
+          const uniqueName = uniqueFileName(file.name);
+          formData.append("uploadingFiles", file);
+          formData.append("fileName", uniqueName);
+        });
+        break;
+    }
   };
 
   return (
