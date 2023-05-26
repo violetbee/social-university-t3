@@ -9,6 +9,7 @@ import AnketForm from "./PostTypeForms/AnketForm";
 import { trpc } from "../../../utils/trpc";
 import { uniqueFileName } from "../../../utils/func";
 import instance from "../../../utils/axios";
+import { memo } from "react";
 
 const Share = () => {
   const isOpen = useSelector((state: IPostSlicer) => state.app.isShareOpen);
@@ -205,4 +206,4 @@ const Share = () => {
   );
 };
 
-export default Share;
+export default memo(Share);
