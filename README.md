@@ -4,9 +4,12 @@ This project is developing on T3 Stack Technologies.
 
 The main purpose of this project is to gather university students together. It is to provide them with the opportunity to help them, share files, documents, lecture notes, or examine school clubs and apply to them.
 
+### Techs
+NextJS, tRPC, Next-Auth.js, PrismaORM, TailwindCSS, Amazon S3, OpenAI
+
 ## Video
 
-https://gcdn.bionluk.com/uploads/portfolio/encoded/a6243a30-982c-4ec1-87bc-94feda05cf84.mp4
+https://github.com/violetbee/social-university-t3/assets/61601796/a71338fe-f593-4557-ae69-82f86f0d6d75
 
 ## Main
 
