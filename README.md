@@ -6,16 +6,20 @@ The main purpose of this project is to gather university students together. It i
 
 ## Video
 
-https://user-images.githubusercontent.com/61601796/208540175-f1300b51-8173-4a7f-bb2f-4995daca2955.mp4
+https://gcdn.bionluk.com/uploads/portfolio/encoded/a6243a30-982c-4ec1-87bc-94feda05cf84.mp4
 
 ## Main
 
-![Social University](https://i.hizliresim.com/osxe531.jpg)
+![Social University](https://i.hizliresim.com/3f5f9xp.png)
 
-## Category Page
+## Share Area
 
-![Social University](https://i.hizliresim.com/4sr4e54.jpg)
+![Social University](https://i.hizliresim.com/pphv9lu.png)
 
 ## Post Responsive
 
-![Social University](https://i.hizliresim.com/tupr2u1.jpg)
+![Social University](https://i.hizliresim.com/pmy3afk.png)
+
+## University Change Area (UI is not completed)
+
+![Social University](https://i.hizliresim.com/ovesgw0.png)
