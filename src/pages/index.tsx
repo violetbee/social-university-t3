@@ -3,16 +3,9 @@ import Head from "next/head";
 import Layout from "../components/Layout";
 import { getServerAuthSession } from "../server/common/get-server-auth-session";
 import { prisma } from "../server/db/client";
-import { User } from "@prisma/client";
 import Features from "../components/Landing/Feature";
-// import PostsAndFiles from "../inactiveComponents/PostsAndFiles";
 
-type Props = {
-  user: User;
-};
-
-const Home: NextPage<Props> = () => {
-  //Fixed types
+const Home: NextPage = () => {
 
   return (
     <>
@@ -23,7 +16,6 @@ const Home: NextPage<Props> = () => {
       </Head>
       <Layout>
         <div className="flex h-full w-full flex-col">
-          {/* <PostsAndFiles /> */}
           <section className="relative h-56 bg-white shadow-sm">
             <div className="heroBg h-full w-full"></div>
             <div className="absolute left-1/2 top-1/2 flex w-9/12 -translate-x-1/2 -translate-y-1/2 transform flex-col items-center justify-center gap-4">

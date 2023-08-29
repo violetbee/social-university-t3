@@ -56,7 +56,7 @@ const Header: FC = () => {
             className="w-64 md:w-72"
           />
         </Link>
-        {/* Menu elemanları; Anasayfa Hakkımızda İletişim */}
+        {/* Menu elemanları; Ana sayfa Hakkımızda İletişim */}
         <div className="hidden flex-1 items-center justify-evenly lg:flex">
           <ul className="flex items-center gap-6">
             {menuItems.map((item) => (
@@ -100,7 +100,6 @@ const Header: FC = () => {
             </div>
           )}
         </div>
-        {/* Mobile menu with tailwind css */}
         <div className="flex items-center lg:hidden">
           <button className="mobile-menu-button outline-none">
             <svg

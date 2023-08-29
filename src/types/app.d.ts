@@ -65,7 +65,7 @@ export interface PostUserBar {
   user: User;
 }
 
-export interface IDashboardProps {
+export interface ICategoryProps {
   params?: {
     [key: string]: string | string[] | ParsedUrlQuery;
   };

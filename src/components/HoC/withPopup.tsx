@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, HTMLProps } from "react";
 import Popup from "reactjs-popup";
 import { useState } from "react";
 
@@ -14,8 +14,7 @@ type TriggerProps = {
 };
 
 function withPopup(Trigger: FC<TriggerProps>, WrappedComponent: FC) {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const PopupComponent = (props: any) => {
+  const PopupComponent = (props: HTMLProps<FC>) => {
     const [open, setOpen] = useState(false);
 
     const toggle = () => setOpen((prev) => !prev);

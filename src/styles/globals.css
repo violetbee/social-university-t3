@@ -109,8 +109,8 @@ nprogress {
 .bgFile {
   background-color: #0f0f0f;
   opacity: 1;
-  background: linear-gradient(135deg, #33333355 25%, transparent 25%) -17px 0/
-      34px 34px,
+  background:
+    linear-gradient(135deg, #33333355 25%, transparent 25%) -17px 0/ 34px 34px,
     linear-gradient(225deg, #333333 25%, transparent 25%) -17px 0/ 34px 34px,
     linear-gradient(315deg, #33333355 25%, transparent 25%) 0px 0/ 34px 34px,
     linear-gradient(45deg, #333333 25%, #0f0f0f 25%) 0px 0/ 34px 34px;
@@ -125,7 +125,9 @@ nprogress {
     ),
     radial-gradient(#333333 0.8500000000000001px, #0f0f0f 0.8500000000000001px);
   background-size: 34px 34px;
-  background-position: 0 0, 17px 17px;
+  background-position:
+    0 0,
+    17px 17px;
 }
 
 .my-masonry-grid {
@@ -151,18 +153,65 @@ nprogress {
 
 .barcode {
   left: 50%;
-  box-shadow: 1px 0 0 1px, 5px 0 0 1px, 10px 0 0 1px, 11px 0 0 1px, 15px 0 0 1px,
-    18px 0 0 1px, 22px 0 0 1px, 23px 0 0 1px, 26px 0 0 1px, 30px 0 0 1px,
-    35px 0 0 1px, 37px 0 0 1px, 41px 0 0 1px, 44px 0 0 1px, 47px 0 0 1px,
-    51px 0 0 1px, 56px 0 0 1px, 59px 0 0 1px, 64px 0 0 1px, 68px 0 0 1px,
-    72px 0 0 1px, 74px 0 0 1px, 77px 0 0 1px, 81px 0 0 1px, 85px 0 0 1px,
-    88px 0 0 1px, 92px 0 0 1px, 95px 0 0 1px, 96px 0 0 1px, 97px 0 0 1px,
-    101px 0 0 1px, 105px 0 0 1px, 109px 0 0 1px, 110px 0 0 1px, 113px 0 0 1px,
-    116px 0 0 1px, 120px 0 0 1px, 123px 0 0 1px, 127px 0 0 1px, 130px 0 0 1px,
-    131px 0 0 1px, 134px 0 0 1px, 135px 0 0 1px, 138px 0 0 1px, 141px 0 0 1px,
-    144px 0 0 1px, 147px 0 0 1px, 148px 0 0 1px, 151px 0 0 1px, 155px 0 0 1px,
-    158px 0 0 1px, 162px 0 0 1px, 165px 0 0 1px, 168px 0 0 1px, 173px 0 0 1px,
-    176px 0 0 1px, 177px 0 0 1px, 180px 0 0 1px;
+  box-shadow:
+    1px 0 0 1px,
+    5px 0 0 1px,
+    10px 0 0 1px,
+    11px 0 0 1px,
+    15px 0 0 1px,
+    18px 0 0 1px,
+    22px 0 0 1px,
+    23px 0 0 1px,
+    26px 0 0 1px,
+    30px 0 0 1px,
+    35px 0 0 1px,
+    37px 0 0 1px,
+    41px 0 0 1px,
+    44px 0 0 1px,
+    47px 0 0 1px,
+    51px 0 0 1px,
+    56px 0 0 1px,
+    59px 0 0 1px,
+    64px 0 0 1px,
+    68px 0 0 1px,
+    72px 0 0 1px,
+    74px 0 0 1px,
+    77px 0 0 1px,
+    81px 0 0 1px,
+    85px 0 0 1px,
+    88px 0 0 1px,
+    92px 0 0 1px,
+    95px 0 0 1px,
+    96px 0 0 1px,
+    97px 0 0 1px,
+    101px 0 0 1px,
+    105px 0 0 1px,
+    109px 0 0 1px,
+    110px 0 0 1px,
+    113px 0 0 1px,
+    116px 0 0 1px,
+    120px 0 0 1px,
+    123px 0 0 1px,
+    127px 0 0 1px,
+    130px 0 0 1px,
+    131px 0 0 1px,
+    134px 0 0 1px,
+    135px 0 0 1px,
+    138px 0 0 1px,
+    141px 0 0 1px,
+    144px 0 0 1px,
+    147px 0 0 1px,
+    148px 0 0 1px,
+    151px 0 0 1px,
+    155px 0 0 1px,
+    158px 0 0 1px,
+    162px 0 0 1px,
+    165px 0 0 1px,
+    168px 0 0 1px,
+    173px 0 0 1px,
+    176px 0 0 1px,
+    177px 0 0 1px,
+    180px 0 0 1px;
   display: inline-block;
   transform: translateX(-90px);
 }
@@ -186,4 +235,8 @@ nprogress {
 }
 .popup-content {
   -webkit-animation: anvil 0.3s cubic-bezier(0.38, 0.1, 0.36, 0.9) forwards;
+}
+
+.hoverButton {
+  @apply rounded-full border-[#888] bg-white hover:-translate-x-1 hover:-translate-y-1 hover:shadow-[0.25rem_0.25rem_#333];
 }

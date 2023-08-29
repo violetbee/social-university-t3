@@ -33,7 +33,7 @@ const LeftSideBar: FC = () => {
       <div className="w-full flex-1">
         <div className="flex w-full flex-col">
           {/* Üniversite Gez Başlangıç */}
-          <div className="mt-2 flex items-center justify-between pl-3 pr-2">
+          {/* <div className="mt-2 flex items-center justify-between pl-3 pr-2">
             <p className="text-lg/none font-medium text-[#222]">
               Üniversite Gez
             </p>
@@ -54,10 +54,10 @@ const LeftSideBar: FC = () => {
               </button>
             </div>
           </div>
-          <University />
+          <University /> */}
           {/* Üniversite Gez Son */}
           {/* Şehrini Keşfet Başlangıç */}
-          <div className="mt-2 flex space-x-1 border-t-[1px] pl-3 pr-2 pt-3">
+          <div className="mt-2 flex space-x-1 pl-3 pr-2 pt-3">
             <p className="text-lg/none font-semibold text-rose-900">Samsun</p>
             <p className="text-lg/none font-medium text-[#222]">
               Şehrini Keşfet

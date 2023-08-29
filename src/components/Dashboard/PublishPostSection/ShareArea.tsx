@@ -2,10 +2,7 @@ import { useSelector } from "react-redux";
 import Image from "next/image";
 import { IPostSlicer } from "../../../types/post";
 import { useForm } from "react-hook-form";
-import GonderiForm from "./PostTypeForms/GonderiForm";
-import DosyaForm from "./PostTypeForms/DosyaForm";
-import EtkinlikForm from "./PostTypeForms/EtkinlikForm";
-import AnketForm from "./PostTypeForms/AnketForm";
+import {AnketForm, GonderiForm, EtkinlikForm, DosyaForm} from './PostTypeForms'
 import { trpc } from "../../../utils/trpc";
 import { uniqueFileName } from "../../../utils/func";
 import instance from "../../../utils/axios";
@@ -27,26 +24,26 @@ const Share = () => {
 
   // TRPC QUERIES END
 
-  const onSubmit = async (data: any) => {
-    delete data.formType;
-    // TODO: axios requests should be switch case due to formType
 
-    switch (option.formType) {
+ async function handlePostType(data:any, formType: string) {
+  const formData = new FormData();
+    switch (formType) {
       case "gonderi":
-        const formData = new FormData();
-
-        const uniqueName = uniqueFileName(data.coverImage[0].name);
-
-        formData.append("uploadingFiles", data.coverImage[0], uniqueName);
         try {
-          const res = await instance.post("/api/awsUpload", formData);
-          if (res.status === 200) {
+          let isImageExist = false;
+          let uniqueName = ""
+          if(!!data.coverImage) {
+            uniqueName = uniqueFileName(data.coverImage[0].name);
+            formData.append("uploadingFiles", data.coverImage[0], uniqueName);
+            await instance.post("/api/awsUpload", formData);
+            isImageExist = true;
+          }
             setTimeout(async () => {
               await createTextPost.mutateAsync(
                 {
                   ...data,
                   universityId: getUserUniversityId.data?.university?.id,
-                  image: uniqueName,
+                  image: isImageExist ? uniqueName : null, 
                 },
                 {
                   onSuccess: () => {
@@ -56,7 +53,6 @@ const Share = () => {
                 }
               );
             }, 2000);
-          }
         } catch (e) {
           console.log(e);
         }
@@ -69,6 +65,11 @@ const Share = () => {
         });
         break;
     }
+  }
+
+  const onSubmit = async (data: any) => {
+    delete data.formType;
+    handlePostType(data, option.formType)
   };
 
   return (

@@ -13,7 +13,7 @@ import {
   FaTwitter,
   FaTwitch,
 } from "react-icons/fa";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import autoAnimate from "@formkit/auto-animate";
 import { GoCommentDiscussion } from "react-icons/go";
 import { trpc } from "../../../utils/trpc";
@@ -33,7 +33,7 @@ type Props = {
 const PerPost: NextPage<Props> = ({ post, params }) => {
   const { type } = params;
 
-  const [comment, setComment] = useState<string>("");
+  // const [comment, setComment] = useState<string>("");
 
   const parent = useRef(null);
   useEffect(() => {
@@ -46,11 +46,11 @@ const PerPost: NextPage<Props> = ({ post, params }) => {
       ctx.like.invalidate();
     },
   });
-  const dislike = trpc.like.dislike.useMutation({
-    onSuccess: () => {
-      ctx.like.invalidate();
-    },
-  });
+  // const dislike = trpc.like.dislike.useMutation({
+  //   onSuccess: () => {
+  //     ctx.like.invalidate();
+  //   },
+  // });
   const getAllLikes = trpc.like.totalLikes.useQuery({
     postId: post.id,
   });

@@ -1,13 +1,13 @@
 import Image from "next/image";
 import { useMediaQuery } from "../../hooks/useMediaQuery";
 // import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setIsShareOpen } from "../../store/slices/app";
-import { IPostSlicer } from "../../types/post";
+// import { IPostSlicer } from "../../types/post";
 
 export const ShareButton = () => {
   const dispatch = useDispatch();
-  const isOpen = useSelector((state: IPostSlicer) => state.app.isShareOpen);
+  // const isOpen = useSelector((state: IPostSlicer) => state.app.isShareOpen);
 
   const media = useMediaQuery("(max-width: 768px)");
   return (

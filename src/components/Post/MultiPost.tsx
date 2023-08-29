@@ -1,6 +1,6 @@
+import { ISinglePost } from "../../types/post";
+import { trpc } from "../../utils/trpc";
 import SinglePost from "./SinglePost";
-import { trpc } from "../../../utils/trpc";
-import type { ISinglePost } from "../../../types/post";
 
 type Props = {
   itemPiece?: number;
@@ -16,7 +16,7 @@ const MultiPost = ({ itemPiece, slug }: Props) => {
     },
     {
       enabled: slug !== "dokumanlar" && !slug,
-    }
+    },
   );
 
   const { data: docPosts } = trpc.post.getDocPosts.useQuery(undefined, {
@@ -28,14 +28,10 @@ const MultiPost = ({ itemPiece, slug }: Props) => {
     },
     {
       enabled: slug !== "dokumanlar" && !!slug,
-    }
+    },
   );
 
-  function handlePosts():
-    | typeof allTypePosts
-    | typeof docPosts
-    | typeof textPosts
-    | undefined {
+  function handlePosts() {
     if (slug === "dokumanlar") {
       return docPosts;
     } else if (slug !== "dokumanlar" && !slug) {
@@ -46,15 +42,18 @@ const MultiPost = ({ itemPiece, slug }: Props) => {
   }
 
   return (
-    <div className="grid grid-cols-1 justify-between gap-8 px-2 pb-3 grid-sm:grid-cols-2 grid-md:grid-cols-3 grid-lg:grid-cols-4 grid-xl:grid-cols-5">
+    <>
       {handlePosts()
         ?.posts?.slice(0, itemPiece)
         .map((post) => {
           return (
-            <SinglePost key={post.id} post={post as unknown as ISinglePost} />
+            <div
+              key={post.id}
+              className="mx-4 mb-4 h-[350px] w-[300px] flex-shrink-0 bg-red-400"
+            ></div>
           );
         })}
-    </div>
+    </>
   );
 };
 

@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import { trpc } from "../../utils/trpc";
 import withPopup from "../HoC/withPopup";
-import Image from "next/dist/client/image";
+import Image from "next/image";
 
 const University = () => {
   const [isFetch, setIsFetch] = useState(false);
