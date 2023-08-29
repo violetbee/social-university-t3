@@ -1,8 +1,14 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useSelector } from "react-redux";
 import Image from "next/image";
 import { IPostSlicer } from "../../../types/post";
 import { useForm } from "react-hook-form";
-import {AnketForm, GonderiForm, EtkinlikForm, DosyaForm} from './PostTypeForms'
+import {
+  AnketForm,
+  GonderiForm,
+  EtkinlikForm,
+  DosyaForm,
+} from "./PostTypeForms";
 import { trpc } from "../../../utils/trpc";
 import { uniqueFileName } from "../../../utils/func";
 import instance from "../../../utils/axios";
@@ -19,40 +25,39 @@ const Share = () => {
 
   const ctx = trpc.useContext();
   const createTextPost = trpc.post.createTextPost.useMutation();
-  const createDocPost = trpc.post.createDocPost.useMutation();
+  // const createDocPost = trpc.post.createDocPost.useMutation();
   const getUserUniversityId = trpc.user.getUserUniversityById.useQuery();
 
   // TRPC QUERIES END
 
-
- async function handlePostType(data:any, formType: string) {
-  const formData = new FormData();
+  async function handlePostType(data: any, formType: string) {
+    const formData = new FormData();
     switch (formType) {
       case "gonderi":
         try {
           let isImageExist = false;
-          let uniqueName = ""
-          if(!!data.coverImage) {
+          let uniqueName = "";
+          if (!!data.coverImage) {
             uniqueName = uniqueFileName(data.coverImage[0].name);
             formData.append("uploadingFiles", data.coverImage[0], uniqueName);
             await instance.post("/api/awsUpload", formData);
             isImageExist = true;
           }
-            setTimeout(async () => {
-              await createTextPost.mutateAsync(
-                {
-                  ...data,
-                  universityId: getUserUniversityId.data?.university?.id,
-                  image: isImageExist ? uniqueName : null, 
+          setTimeout(async () => {
+            await createTextPost.mutateAsync(
+              {
+                ...data,
+                universityId: getUserUniversityId.data?.university?.id,
+                image: isImageExist ? uniqueName : null,
+              },
+              {
+                onSuccess: () => {
+                  reset();
+                  ctx.invalidate();
                 },
-                {
-                  onSuccess: () => {
-                    reset();
-                    ctx.invalidate();
-                  },
-                }
-              );
-            }, 2000);
+              },
+            );
+          }, 2000);
         } catch (e) {
           console.log(e);
         }
@@ -69,12 +74,12 @@ const Share = () => {
 
   const onSubmit = async (data: any) => {
     delete data.formType;
-    handlePostType(data, option.formType)
+    handlePostType(data, option.formType);
   };
 
   return (
     <div
-      className={`w-full overflow-hidden duration-300 ${
+      className={`w-full overflow-hidden pt-7 duration-300 ${
         isOpen ? "max-h-[1000px]" : "max-h-0"
       }`}
     >

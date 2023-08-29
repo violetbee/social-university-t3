@@ -17,7 +17,7 @@ module.exports = {
         "grid-xxl": "2450px",
       },
       colors: {
-        background: "#f4f4f0", //#001219 dark
+        background: "#f3f3f0", //#001219 dark
         primary: "#32445a", //#19212e dark
         secondary: "#334756", //#334756 dark
         accent: "#295270",

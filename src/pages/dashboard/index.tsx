@@ -9,6 +9,7 @@ import Share from "../../components/Dashboard/PublishPostSection/ShareArea";
 import Category from "../../components/Dashboard/Category";
 import { ICategoryProps } from "../../types/app";
 import MultiPost from "../../components/Post/MultiPost";
+import { HiLightningBolt, HiOutlineLightningBolt } from "react-icons/hi";
 
 const Dashboard = ({ params }: ICategoryProps) => {
   // const AnnouncementsWithExpanded = withDashboardSection(
@@ -19,7 +20,7 @@ const Dashboard = ({ params }: ICategoryProps) => {
   const PostsWithExpanded = withDashboardSection(
     MultiPost,
     "Son Gönderiler",
-    5,
+    3,
   );
 
   return (
@@ -69,9 +70,68 @@ const Dashboard = ({ params }: ICategoryProps) => {
             <PostsWithExpanded />
             <EventsWithExpanded />
           </div>
-          <div className="col-span-4">
-            <div className="rounded-2xl bg-white p-5 shadow-sm">
+          <div className="col-span-4 flex flex-col gap-10">
+            <div className="flex w-full flex-col gap-4 rounded-2xl border border-gray-200 bg-white p-6 sm:flex-row sm:items-center">
               <Category params={params} />
+            </div>
+            <div className="flex w-full flex-col gap-4 rounded-2xl border border-gray-200 bg-[#11102D] p-6 text-white">
+              <div className="flex flex-col">
+                <span className="text-[28px] font-bold tracking-wide">
+                  Aktiflik Serisi - <span className="text-[#FCD55D]">6</span>
+                </span>
+                <p className="pt-1 text-sm text-slate-300">
+                  Yaşasın! Seriniz bugün için işaretlendi. 300XP daha fazla
+                  kazanmak için günlük hedefinizi tamamlayın.
+                </p>
+              </div>
+              <div className="flex gap-2">
+                <div className="flex flex-col items-center justify-center gap-4 rounded-lg bg-[#292430] p-3">
+                  <HiLightningBolt size={30} className="text-[#FCD55D]" />
+                  <span>Pzt</span>
+                </div>
+                <div className="flex flex-col items-center justify-center gap-4 rounded-lg bg-[#292430] p-3">
+                  <HiLightningBolt size={30} className="text-[#FCD55D]" />
+                  <span>Salı</span>
+                </div>
+                <div className="flex flex-col items-center justify-center gap-4 rounded-lg bg-[#292430] p-3">
+                  <HiLightningBolt size={30} className="text-[#FCD55D]" />
+                  <span>Çrş</span>
+                </div>
+                <div className="flex flex-col items-center justify-center gap-4 rounded-lg bg-[#292430] p-3">
+                  <HiLightningBolt size={30} className="text-[#FCD55D]" />
+                  <span>Prş</span>
+                </div>
+                <div className="flex flex-col items-center justify-center gap-4 rounded-lg bg-[#292430] p-3">
+                  <HiLightningBolt size={30} className="text-[#FCD55D]" />
+                  <span>Cuma</span>
+                </div>
+                <div className="flex flex-col items-center justify-center gap-4 rounded-lg bg-[#292430] p-3">
+                  <HiLightningBolt size={30} className="text-[#FCD55D]" />
+                  <span>Cmrt</span>
+                </div>
+                <div className="flex flex-col items-center justify-center gap-4 rounded-lg p-3">
+                  <HiOutlineLightningBolt size={30} className="text-white" />
+                  <span>Pzr</span>
+                </div>
+              </div>
+              <div className="h-[2px] w-full bg-gray-400/10" />
+              <div className="flex items-center justify-between">
+                <div className="flex flex-col">
+                  <span className="text-sm text-slate-300">
+                    300XP daha kazanmak için 1 gün daha kaldı.
+                  </span>
+                  <span className="text-[#FCD55D]">6/7</span>
+                </div>
+                <button className="group flex items-center gap-2 rounded-lg bg-[#292430] p-3 duration-150 hover:bg-[#FCD55D] ">
+                  <HiOutlineLightningBolt
+                    size={30}
+                    className="text-white group-hover:text-[#222]"
+                  />
+                  <span className="text-sm text-white group-hover:text-[#222]">
+                    Bugünü Topla
+                  </span>
+                </button>
+              </div>
             </div>
           </div>
         </div>

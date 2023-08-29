@@ -29,4 +29,5 @@ export type ISinglePost = {
   likes: Like[];
   category: Category | null;
   user: User & SchoolProps;
+  timeAgo: string;
 } & (TextTypePost & DocTypePost & SchoolProps);

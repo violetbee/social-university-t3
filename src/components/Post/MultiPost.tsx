@@ -46,12 +46,7 @@ const MultiPost = ({ itemPiece, slug }: Props) => {
       {handlePosts()
         ?.posts?.slice(0, itemPiece)
         .map((post) => {
-          return (
-            <div
-              key={post.id}
-              className="mx-4 mb-4 h-[350px] w-[300px] flex-shrink-0 bg-red-400"
-            ></div>
-          );
+          return <SinglePost key={post.id} post={post as ISinglePost} />;
         })}
     </>
   );
