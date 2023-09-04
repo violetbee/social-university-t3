@@ -38,8 +38,7 @@ export default function SinglePost({ post }: { post: ISinglePost }) {
           </p>
 
           <Link
-            target="_blank"
-            href="#"
+            href={`/gonderi/yazi/${post.slug}`}
             className="mt-4 block w-full transform rounded-[14px] bg-[#FFC933] px-4 py-3 text-center font-medium capitalize tracking-wide transition-colors duration-300 hover:bg-[#FFC933DD] focus:outline-none focus:ring focus:ring-teal-300 focus:ring-opacity-80"
           >
             Gönderiyi İncele

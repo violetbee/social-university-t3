@@ -99,7 +99,7 @@ const Share = () => {
                 alt="newPost"
                 width={100}
                 height={100}
-                className="h-10 w-10"
+                className="h-10 w-10 shrink-0"
               ></Image>
             </div>
             <div className="flex flex-col">
@@ -120,7 +120,7 @@ const Share = () => {
                 alt="newPost"
                 width={100}
                 height={100}
-                className="h-5 w-5"
+                className="h-5 w-5 shrink-0"
               ></Image>
             </div>
             <div className="flex flex-col">
@@ -141,7 +141,7 @@ const Share = () => {
                 alt="newPost"
                 width={100}
                 height={100}
-                className="h-10 w-10"
+                className="h-10 w-10 shrink-0"
               ></Image>
             </div>
             <div className="flex flex-col">
@@ -162,7 +162,7 @@ const Share = () => {
                 alt="newPost"
                 width={100}
                 height={100}
-                className="h-10 w-10"
+                className="h-10 w-10 shrink-0"
               ></Image>
             </div>
             <div className="flex flex-col">

@@ -24,9 +24,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               data ? "mainCt mx-auto overflow-y-auto " : "h-full"
             } w-full `}
           >
-            <div className="container mx-auto 2xl:max-w-[1700px]">
-              {children}
-            </div>
+            <div className=" mx-auto xl:max-w-[1700px]">{children}</div>
           </div>
         </div>
       </main>

@@ -17,18 +17,14 @@ function withPopup(Trigger: FC<TriggerProps>, WrappedComponent: FC) {
   const PopupComponent = (props: HTMLProps<FC>) => {
     const [open, setOpen] = useState(false);
 
-    const toggle = () => setOpen((prev) => !prev);
-
-    const value = { toggle, open };
-
     return (
       <>
-        <Trigger setOpen={value.toggle} />
+        <Trigger setOpen={() => setOpen(!open)} />
         <Popup
-          open={value.open}
+          open={open}
           modal
           closeOnDocumentClick
-          onClose={value.toggle}
+          onClose={() => setOpen(false)}
         >
           <WrappedComponent {...props} />
         </Popup>

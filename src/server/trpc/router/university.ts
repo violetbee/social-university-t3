@@ -2,16 +2,31 @@ import { publicProcedure, router } from "../trpc";
 import { z } from "zod";
 
 export const universityRouter = router({
-  getAll: publicProcedure.query(async ({ ctx }) => {
-    const data = await ctx.prisma.university.findMany();
-
-    return data;
-  }),
+  getAll: publicProcedure
+    .input(
+      z.object({
+        universityName: z.string().optional(),
+      }),
+    )
+    .query(async ({ ctx, input }) => {
+      if (input) {
+        const all = await ctx.prisma.university.findMany({
+          where: {
+            name: {
+              contains: input.universityName,
+            },
+          },
+        });
+        return all;
+      }
+      const all = await ctx.prisma.university.findMany();
+      return all;
+    }),
   changeUserUniversity: publicProcedure
     .input(
       z.object({
         universityId: z.string(),
-      })
+      }),
     )
     .mutation(async ({ input, ctx }) => {
       await ctx.prisma.user.update({

@@ -27,10 +27,9 @@ export const likeRouter = router({
     .input(
       z.object({
         postId: z.string(),
-      })
+      }),
     )
     .mutation(async ({ input, ctx }) => {
-      // isLike
       const liked = await ctx.prisma.like.findUnique({
         where: {
           postId_userId: {
@@ -49,54 +48,12 @@ export const likeRouter = router({
         });
       }
       if (liked) {
-        await ctx.prisma.like.update({
+        await ctx.prisma.like.delete({
           where: {
             postId_userId: {
               postId: input.postId,
               userId: ctx?.session?.user?.id as string,
             },
-          },
-          data: {
-            isLike: true,
-          },
-        });
-      }
-    }),
-  dislike: publicProcedure
-    .input(
-      z.object({
-        postId: z.string(),
-      })
-    )
-    .mutation(async ({ ctx, input }) => {
-      // isLike
-      const liked = await ctx.prisma.like.findUnique({
-        where: {
-          postId_userId: {
-            postId: input.postId,
-            userId: ctx?.session?.user?.id as string,
-          },
-        },
-      });
-      if (!liked) {
-        await ctx.prisma.like.create({
-          data: {
-            postId: input.postId,
-            userId: ctx?.session?.user?.id as string,
-            isLike: false,
-          },
-        });
-      }
-      if (liked) {
-        await ctx.prisma.like.update({
-          where: {
-            postId_userId: {
-              postId: input.postId,
-              userId: ctx?.session?.user?.id as string,
-            },
-          },
-          data: {
-            isLike: false,
           },
         });
       }

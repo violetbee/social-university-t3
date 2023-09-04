@@ -46,11 +46,7 @@ const PerPost: NextPage<Props> = ({ post, params }) => {
       ctx.like.invalidate();
     },
   });
-  // const dislike = trpc.like.dislike.useMutation({
-  //   onSuccess: () => {
-  //     ctx.like.invalidate();
-  //   },
-  // });
+
   const getAllLikes = trpc.like.totalLikes.useQuery({
     postId: post.id,
   });
@@ -161,9 +157,9 @@ const PerPost: NextPage<Props> = ({ post, params }) => {
                         className="flex rounded-md bg-[#1682FD] px-3 py-2 text-white"
                       >
                         <AiFillLike className="mx-1 h-5 w-5 rounded-full text-white" />
-                        Destekle
+                        +
                       </button>
-                      <p className="-ml-2 flex h-full items-center rounded-md border-y-[1px] border-r-[1px] border-[#1682FD] px-3 pb-1 pl-[18px] font-mono font-semibold text-[#444]">
+                      <p className="-ml-2 flex h-full items-center border-[#1682FD] px-3 pb-1 pl-[18px] font-mono font-semibold text-[#444]">
                         {getAllLikes.data}
                       </p>
                     </div>

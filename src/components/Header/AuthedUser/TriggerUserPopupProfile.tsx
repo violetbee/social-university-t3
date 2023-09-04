@@ -13,7 +13,6 @@ export const AfterAuthHeaderSection = ({ setOpen }: Props) => {
     <div className="flex items-center justify-center gap-3">
       <div className="flex items-center justify-center">
         {session?.user?.name}
-        {" Karahüseyin"}
       </div>
       {session?.user?.image ? (
         <Image

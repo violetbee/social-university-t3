@@ -10,6 +10,7 @@ import Category from "../../components/Dashboard/Category";
 import { ICategoryProps } from "../../types/app";
 import MultiPost from "../../components/Post/MultiPost";
 import { HiLightningBolt, HiOutlineLightningBolt } from "react-icons/hi";
+import University from "../../components/SideBar/University";
 
 const Dashboard = ({ params }: ICategoryProps) => {
   // const AnnouncementsWithExpanded = withDashboardSection(
@@ -25,12 +26,12 @@ const Dashboard = ({ params }: ICategoryProps) => {
 
   return (
     <Layout>
-      <div className="w-full lg:px-14 xl:px-16">
+      <div className="w-full px-8">
         <CategoryAndMenuSection />
         <Share />
 
         <div className="grid gap-6 py-4 lg:grid-cols-12">
-          <div className="container col-span-8 flex grow flex-col gap-10 lg:col-span-8">
+          <div className="col-span-8 flex grow flex-col gap-10 lg:col-span-8">
             <div className="flex w-full flex-col gap-4 rounded-2xl border border-gray-200 bg-white p-8 sm:flex-row sm:items-center sm:gap-8">
               <div className="relative h-16 w-16 drop-shadow-md">
                 <div className="absolute h-full w-full -rotate-[160deg] rounded-lg border-[1px] border-[#dd4e63]/50"></div>
@@ -74,6 +75,9 @@ const Dashboard = ({ params }: ICategoryProps) => {
             <div className="flex w-full flex-col gap-4 rounded-2xl border border-gray-200 bg-white p-6 sm:flex-row sm:items-center">
               <Category params={params} />
             </div>
+            <div className="flex w-full flex-col gap-4 rounded-2xl border border-gray-200 bg-white p-6 sm:flex-row sm:items-center">
+              <University />
+            </div>
             <div className="flex w-full flex-col gap-4 rounded-2xl border border-gray-200 bg-[#11102D] p-6 text-white">
               <div className="flex flex-col">
                 <span className="text-[28px] font-bold tracking-wide">
@@ -84,7 +88,7 @@ const Dashboard = ({ params }: ICategoryProps) => {
                   kazanmak için günlük hedefinizi tamamlayın.
                 </p>
               </div>
-              <div className="flex gap-2">
+              <div className="mx-auto mt-6 grid max-w-lg grid-cols-7 gap-2">
                 <div className="flex flex-col items-center justify-center gap-4 rounded-lg bg-[#292430] p-3">
                   <HiLightningBolt size={30} className="text-[#FCD55D]" />
                   <span>Pzt</span>

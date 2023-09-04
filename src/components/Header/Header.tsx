@@ -19,28 +19,28 @@ const Header: FC = () => {
 
   const UserPopup = withPopup(AfterAuthHeaderSection, UserProfile);
 
-  const menuItems = [
-    {
-      id: 0,
-      name: "Özellikler",
-      url: "/",
-    },
-    {
-      id: 1,
-      name: "Hakkımızda",
-      url: "/about",
-    },
-    {
-      id: 2,
-      name: "İletişim",
-      url: "/contact",
-    },
-    {
-      id: 3,
-      name: "Şikayet",
-      url: "/contact",
-    },
-  ];
+  // const menuItems = [
+  //   {
+  //     id: 0,
+  //     name: "Özellikler",
+  //     url: "/",
+  //   },
+  //   {
+  //     id: 1,
+  //     name: "Hakkımızda",
+  //     url: "/about",
+  //   },
+  //   {
+  //     id: 2,
+  //     name: "İletişim",
+  //     url: "/contact",
+  //   },
+  //   {
+  //     id: 3,
+  //     name: "Şikayet",
+  //     url: "/contact",
+  //   },
+  // ];
 
   return (
     <>
@@ -58,7 +58,7 @@ const Header: FC = () => {
         </Link>
         {/* Menu elemanları; Ana sayfa Hakkımızda İletişim */}
         <div className="hidden flex-1 items-center justify-evenly lg:flex">
-          <ul className="flex items-center gap-6">
+          {/* <ul className="flex items-center gap-6">
             {menuItems.map((item) => (
               <Link
                 href={item.url}
@@ -70,7 +70,7 @@ const Header: FC = () => {
                 </p>
               </Link>
             ))}
-          </ul>
+          </ul> */}
         </div>
         <div className="hidden h-full lg:flex">
           {session ? (
