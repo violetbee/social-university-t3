@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { FaFacebook, FaGithub, FaInstagram, FaTwitter } from "react-icons/fa";
 import Image from "next/image";
-import University from "./University";
+import University from "../UniversityArea/University";
 
 const discoverCity = [
   {

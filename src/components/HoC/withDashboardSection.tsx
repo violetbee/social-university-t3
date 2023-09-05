@@ -22,8 +22,10 @@ export function withDashboardSection(
 
     const value = useMemo(() => ({ toggle, isExpanded }), [toggle, isExpanded]);
 
+    const [refresh, setRefresh] = useState<boolean>(false);
+
     return (
-      <div className="h-auto rounded-2xl bg-white">
+      <div className="h-auto rounded-md bg-white">
         <div className="flex items-center p-3">
           <div className="w-2 border-t-[1px] border-[#888]/20"></div>
           <span className="mx-4 flex-shrink text-2xl font-medium text-[#333]">
@@ -31,8 +33,19 @@ export function withDashboardSection(
           </span>
           <div className="flex-grow border-t-[1px] border-[#888]/20"></div>
 
-          <button className="mx-1 flex-shrink rounded-md bg-[#333] px-4 py-[2px] text-lg font-medium text-white md:mx-4 md:px-8">
-            <BiRefresh size={30} />
+          <button
+            onClick={() => {
+              setRefresh(!refresh);
+              setTimeout(() => {
+                setRefresh(false);
+              }, 3000);
+            }}
+            className="mx-1 flex-shrink rounded-md bg-[#333] px-4 py-[2px] text-lg font-medium text-white md:mx-4 md:px-8"
+          >
+            <BiRefresh
+              className={`${refresh ? "animate-spin" : ""}`}
+              size={30}
+            />
           </button>
           <div className="w-2 border-t-[1px] border-[#888]/20"></div>
           <button
@@ -47,7 +60,7 @@ export function withDashboardSection(
         <div
           className={`${
             value.isExpanded ? "max-h-[1000px]" : "max-h-0"
-          } mx-3 grid grid-cols-3 gap-10 overflow-hidden px-5 duration-200`}
+          } mx-3 grid grid-cols-4 gap-5 overflow-hidden px-3 duration-200`}
         >
           <WrappedComponent {...props} itemPiece={itemPiece} />
         </div>

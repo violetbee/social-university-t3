@@ -6,7 +6,7 @@ const Event = ({ event }: { event: EventIncludedTypeOfEvent }) => {
   const endDate = new Date(event.endDate);
 
   return (
-    <div className={`mx-auto mb-3 h-[350px] px-2 pt-1 duration-200 md:mb-5`}>
+    <div className={`w-full max-w-[250px] pt-1 duration-200 md:mb-5`}>
       <div
         className={`flex flex-col rounded-lg border-[1px] border-[#333] bg-white duration-200 hover:-translate-y-1 hover:translate-x-1 hover:shadow-[-0.25rem_0.25rem_#333]`}
       >

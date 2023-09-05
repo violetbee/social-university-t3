@@ -16,6 +16,13 @@ export const universityRouter = router({
               contains: input.universityName,
             },
           },
+          include: {
+            _count: {
+              select: {
+                users: true,
+              },
+            },
+          },
         });
         return all;
       }

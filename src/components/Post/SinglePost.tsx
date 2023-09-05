@@ -4,33 +4,32 @@ import Link from "next/link";
 import { BiCategoryAlt } from "react-icons/bi";
 
 export default function SinglePost({ post }: { post: ISinglePost }) {
-  console.log(post);
   return (
-    <div className="mb-5 w-full max-w-xs overflow-hidden rounded-3xl bg-white shadow-lg">
-      <div className="w-full">
+    <div className="mb-5 w-full max-w-[250px] overflow-hidden rounded-xl bg-white shadow-lg">
+      <div className="relative w-full">
+        <span className="absolute right-0 top-5 flex items-center gap-1 bg-blue-900 px-2 font-medium text-white">
+          <BiCategoryAlt size={15} className="-mt-1" />
+          <p className="align-bottom text-[15px]"> {post.category?.name}</p>
+        </span>
         {post.image ? (
           <Image
             src={post.image}
             alt="post image"
-            width={500}
-            height={500}
+            width={180}
+            height={180}
             layout="responsive"
             objectFit="cover"
-            className="h-[250px] w-full"
+            className="h-[180px] w-full"
           />
         ) : (
-          <div className="h-[250px] w-full bg-gray-200"></div>
+          <div className="h-[180px] w-full bg-gray-200"></div>
         )}
         <div className="p-3 sm:p-5">
-          <p className="mb-1 text-[22px] font-bold leading-7 text-gray-700">
+          <p className="mb-1 text-[20px] font-bold leading-7 text-gray-700">
             {post.title}
           </p>
           <div className="flex justify-between">
-            <p className="mr-2 text-[17px] text-[#3C3C4399]">{post.timeAgo}</p>
-            <span className="flex items-center gap-1 font-bold text-[#0FB478]">
-              <BiCategoryAlt size={17} className="-mt-1" />
-              <p className="align-bottom text-[17px]"> {post.category?.name}</p>
-            </span>
+            <p className="mr-2 text-[15px] text-[#3C3C4399]">{post.timeAgo}</p>
           </div>
           <p className="mt-2 font-[15px] text-[#7C7C80]">
             {post.content.slice(0, 50) +

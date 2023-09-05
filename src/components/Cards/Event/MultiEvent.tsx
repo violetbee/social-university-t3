@@ -1,4 +1,3 @@
-import Masonry from "react-masonry-css";
 import Event from "./SingleEvent";
 import { trpc } from "../../../utils/trpc";
 import { MultiEventProps } from "../../../types/event";
@@ -10,24 +9,13 @@ const Events = ({ itemPiece }: MultiEventProps) => {
   });
 
   return (
-    <Masonry
-      breakpointCols={{
-        default: 5,
-        2450: 5,
-        1854: 4,
-        1565: 3,
-        1223: 2,
-        640: 1,
-      }}
-      className="my-masonry-grid"
-      columnClassName="my-masonry-grid_column"
-    >
+    <>
       {itemPiece
         ? eventsByQuery
             ?.slice(0, itemPiece)
             .map((event, i) => <Event event={event} key={i} />)
         : eventsByQuery?.map((event, i) => <Event event={event} key={i} />)}
-    </Masonry>
+    </>
   );
 };
 
