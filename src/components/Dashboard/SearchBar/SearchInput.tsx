@@ -7,7 +7,7 @@ const SearchInput = () => {
   const { data } = trpc.category.getAll.useQuery();
   return (
     <>
-      <h1 className="text-xl font-semibold leading-none text-[#333] md:text-3xl">
+      <h1 className="text-xl font-semibold leading-none text-[#333] dark:text-white md:text-3xl">
         {query.category
           ? data?.find((item) => item.slug === query.category)?.name
           : "Her Şey"}

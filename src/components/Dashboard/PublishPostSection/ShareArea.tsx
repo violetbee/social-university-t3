@@ -79,21 +79,23 @@ const Share = () => {
 
   return (
     <div
-      className={`w-full overflow-hidden pt-7 duration-300 ${
-        isOpen ? "max-h-[1000px]" : "max-h-0"
-      }`}
+      className={`${
+        isOpen
+          ? "mb-6 mt-4 grid-rows-[1fr] opacity-100"
+          : "grid-rows-[0fr] opacity-0"
+      }  grid transition-all duration-300 ease-in-out`}
     >
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="mb-3 rounded-md bg-white shadow-sm"
+        className="grid w-full grid-cols-1 overflow-hidden rounded-md bg-white shadow-md dark:border dark:border-darkHelper dark:bg-darkSecondary"
       >
         <div
           className={`${
             option.formType && "hidden"
-          } grid w-full grid-cols-4 justify-between `}
+          } grid w-full grid-cols-1 justify-between lg-m:grid-cols-2 lg:grid-cols-4`}
         >
-          <label className="group flex cursor-pointer items-center justify-evenly gap-3 rounded-l-md p-4 ">
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#525252] group-hover:bg-[#DD4E63]">
+          <label className="group flex cursor-pointer items-center justify-evenly gap-3 p-4 dark:hover:bg-darkBackground">
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#525252] duration-150 group-hover:bg-darkPrimary">
               <Image
                 src={"/svg/plus.svg"}
                 alt="newPost"
@@ -113,8 +115,8 @@ const Share = () => {
               Bir gönderi paylaşmak için buraya tıklayın.
             </div>
           </label>
-          <label className="group flex cursor-pointer items-center justify-evenly gap-3 rounded-l-md p-4 ">
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#525252] group-hover:bg-[#DD4E63]">
+          <label className="group flex cursor-pointer items-center justify-evenly gap-3 p-4 dark:hover:bg-darkBackground">
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#525252] duration-150 group-hover:bg-darkPrimary">
               <Image
                 src={"/svg/fileD.svg"}
                 alt="newPost"
@@ -134,14 +136,14 @@ const Share = () => {
               Bir gönderi paylaşmak için buraya tıklayın.
             </div>
           </label>
-          <label className="group flex cursor-pointer items-center justify-evenly gap-3 rounded-l-md p-4 ">
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#525252] group-hover:bg-[#DD4E63]">
+          <label className="group flex cursor-pointer items-center justify-evenly gap-3 p-4 dark:hover:bg-darkBackground">
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#525252] duration-150 group-hover:bg-darkPrimary">
               <Image
                 src={"/svg/plus.svg"}
                 alt="newPost"
                 width={100}
                 height={100}
-                className="h-10 w-10 shrink-0"
+                className="h-10 w-10"
               ></Image>
             </div>
             <div className="flex flex-col">
@@ -155,8 +157,8 @@ const Share = () => {
               Bir gönderi paylaşmak için buraya tıklayın.
             </div>
           </label>
-          <label className="group flex cursor-pointer items-center justify-evenly gap-3 rounded-l-md p-4 ">
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#525252] group-hover:bg-[#DD4E63]">
+          <label className="group flex cursor-pointer items-center justify-evenly gap-3 p-4 dark:hover:bg-darkBackground">
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#525252] duration-150 group-hover:bg-darkPrimary">
               <Image
                 src={"/svg/plus.svg"}
                 alt="newPost"
@@ -194,7 +196,7 @@ const Share = () => {
         >
           <button
             type="submit"
-            className="h-10 rounded-md border-[1px] border-[#777] px-10 font-medium text-[#333] duration-75 hover:bg-[#333] hover:text-white"
+            className="h-10 rounded-md border-[1px] border-[#777] px-10 font-medium text-[#333] duration-75 hover:bg-darkBackground hover:text-white dark:text-white"
           >
             Gönder
           </button>
@@ -202,9 +204,9 @@ const Share = () => {
             onClick={() => {
               reset();
             }}
-            className="h-10 font-medium text-[#333]"
+            className="h-10 font-medium text-[#555]"
           >
-            İptal Et
+            İşlemi İptal Et
           </button>
         </div>
       </form>

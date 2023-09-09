@@ -25,10 +25,9 @@ export function withDashboardSection(
     const [refresh, setRefresh] = useState<boolean>(false);
 
     return (
-      <div className="h-auto rounded-md bg-white">
-        <div className="flex items-center p-3">
-          <div className="w-2 border-t-[1px] border-[#888]/20"></div>
-          <span className="mx-4 flex-shrink text-2xl font-medium text-[#333]">
+      <div className="flex flex-col pt-4">
+        <div className="flex items-center py-3">
+          <span className="mr-4 flex-shrink text-2xl font-medium text-[#333] dark:text-white">
             {title}
           </span>
           <div className="flex-grow border-t-[1px] border-[#888]/20"></div>
@@ -59,8 +58,10 @@ export function withDashboardSection(
 
         <div
           className={`${
-            value.isExpanded ? "max-h-[1000px]" : "max-h-0"
-          } mx-3 grid grid-cols-4 gap-5 overflow-hidden px-3 duration-200`}
+            value.isExpanded
+              ? "grid-rows-[1fr] opacity-100"
+              : "grid-rows-[0fr] opacity-0"
+          } grid transition-all duration-300 ease-in-out`}
         >
           <WrappedComponent {...props} itemPiece={itemPiece} />
         </div>

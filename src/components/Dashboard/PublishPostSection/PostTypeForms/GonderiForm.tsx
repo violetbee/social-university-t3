@@ -1,26 +1,24 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { trpc } from "../../../../utils/trpc";
 
 function GonderiForm({ register, option, setValue }: any) {
-  // TRPC QUERIES START
   const getCategories = trpc.category.getAll.useQuery();
-  // TRPC QUERIES END
-  console.log(option);
   return (
-    <div className="mx-auto flex max-w-[1200px] flex-col gap-4 p-4">
-      <div className="flex justify-between gap-5">
-        <label className="flex w-1/4 flex-col">
+    <div className="mx-auto flex w-full flex-col gap-4 p-4">
+      <div className="flex flex-col justify-between gap-5 md:flex-row">
+        <label className="flex w-full flex-col md:w-1/4">
           <span className="text-lg font-semibold">Gönderi Başlığı</span>
           <input
             type="text"
             {...register("title")}
-            className="block w-full border-b-[1px] border-b-gray-800/20 py-1 pr-10 text-base focus:border-indigo-500 focus:outline-none sm:text-lg"
+            className="block w-full rounded-sm border-b-[1px] border-b-gray-800/20 bg-darkBackground px-2 py-1 pr-10 text-base focus:border-indigo-500 focus:outline-none sm:text-lg"
           />
         </label>
-        <label className="flex w-1/6 flex-col justify-between gap-2">
+        <label className="flex w-full flex-col justify-between gap-2 md:w-1/6">
           <span className="text-lg font-semibold">Kategori Seç</span>
           <select
             {...register("categoryId")}
-            className="block w-full border-b-[1px] border-b-gray-800/20 py-1 pr-10 text-base focus:border-indigo-500 focus:outline-none sm:text-lg"
+            className="block w-full rounded-sm border-b-[1px] border-b-gray-800/20 bg-darkBackground px-2 py-1 pr-10 text-base focus:border-indigo-500 focus:outline-none sm:text-lg"
           >
             {getCategories.data?.map((item: any, i: number) => (
               <option key={i} value={item.id}>
@@ -34,7 +32,7 @@ function GonderiForm({ register, option, setValue }: any) {
           <input
             type="text"
             {...register("tags")}
-            className="block w-full border-b-[1px] border-b-gray-800/20 py-1 pr-10 text-base focus:border-indigo-500 focus:outline-none  sm:text-sm"
+            className="block w-full rounded-sm border-b-[1px] border-b-gray-800/20 bg-darkBackground py-1 pr-10 text-base focus:border-indigo-500 focus:outline-none  sm:text-sm"
           />
         </label>
       </div>
@@ -43,13 +41,13 @@ function GonderiForm({ register, option, setValue }: any) {
         <span className="text-lg font-semibold">Gönderi İçeriği</span>
         <textarea
           {...register("content")}
-          className="block w-full border-b-[1px] border-b-gray-800/20 py-1 pr-10 text-base focus:border-indigo-500 focus:outline-none sm:text-lg"
+          className="block w-full rounded-sm border-b-[1px] border-b-gray-800/20 bg-darkBackground px-2 py-1 pr-10 text-base focus:border-indigo-500 focus:outline-none sm:text-lg"
         />
       </label>
 
       <div className="flex flex-col gap-2">
         <span className="text-lg font-semibold">Gönderi Fotoğrafı</span>
-        <div className="relative flex h-32 w-full border-2 border-dashed border-gray-300 hover:border-gray-600 hover:bg-gray-100">
+        <div className="relative flex h-32 w-full border-2 border-dashed border-gray-300 hover:border-darkHelper hover:bg-gray-100 dark:bg-darkBackground">
           {/* X Icon */}
           {option.coverImage?.length > 0 && (
             <button
@@ -74,7 +72,6 @@ function GonderiForm({ register, option, setValue }: any) {
               </svg>
             </button>
           )}
-          {/* X Icon */}
           <label className=" flex h-full w-full flex-col items-center justify-center">
             <svg
               className="h-10 w-10 text-gray-400 group-hover:text-gray-600"

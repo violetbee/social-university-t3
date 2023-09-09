@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  darkMode: "class",
   content: ["./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
@@ -17,9 +18,13 @@ module.exports = {
         "grid-xxl": "2450px",
       },
       colors: {
-        background: "#f3f3f0", //#001219 dark
-        primary: "#32445a", //#19212e dark
-        secondary: "#334756", //#334756 dark
+        background: "#f3f3f0",
+        darkBackground: "#111217",
+        primary: "#32445a",
+        darkPrimary: "#6C0FF7",
+        secondary: "#334756",
+        darkSecondary: "#17181F",
+        darkHelper: "#1d1d1d",
         accent: "#295270",
         box: "#FDFCFD",
       },

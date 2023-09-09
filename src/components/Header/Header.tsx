@@ -1,7 +1,7 @@
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { FC } from "react";
-import Image from "next/image";
+// import Image from "next/image";
 import { Josefin_Sans } from "@next/font/google";
 import withPopup from "../HoC/withPopup";
 import { AfterAuthHeaderSection } from "./AuthedUser/TriggerUserPopupProfile";
@@ -19,58 +19,61 @@ const Header: FC = () => {
 
   const UserPopup = withPopup(AfterAuthHeaderSection, UserProfile);
 
-  // const menuItems = [
-  //   {
-  //     id: 0,
-  //     name: "Özellikler",
-  //     url: "/",
-  //   },
-  //   {
-  //     id: 1,
-  //     name: "Hakkımızda",
-  //     url: "/about",
-  //   },
-  //   {
-  //     id: 2,
-  //     name: "İletişim",
-  //     url: "/contact",
-  //   },
-  //   {
-  //     id: 3,
-  //     name: "Şikayet",
-  //     url: "/contact",
-  //   },
-  // ];
+  const menuItems = [
+    {
+      id: 0,
+      name: "Özellikler",
+      url: "/",
+    },
+    {
+      id: 1,
+      name: "Hakkımızda",
+      url: "/about",
+    },
+    {
+      id: 2,
+      name: "İletişim",
+      url: "/contact",
+    },
+    {
+      id: 3,
+      name: "Şikayet",
+      url: "/contact",
+    },
+  ];
 
   return (
     <>
       <header
-        className={`flex ${dosis.className} h-[60px] items-center justify-between border-b-[1px] border-[#444]/40 pl-6 text-[#222] lg:border-[#444]/10`}
+        className={`flex ${dosis.className} h-[60px] items-center justify-between border-b-[1px] border-[#444]/40 px-6 text-[#222] dark:bg-darkSecondary lg:border-[#444]/10`}
       >
-        <Link href={"/"} className="relative flex items-center">
-          <Image
+        <Link
+          href={"/"}
+          className="relative flex cursor-pointer items-center pt-2 text-3xl/10 tracking-tighter text-darkSecondary dark:text-white"
+        >
+          {/* <Image
             src={"/images/logo.png"}
             alt="logo"
             width={500}
             height={200}
             className="w-64 md:w-72"
-          />
+          /> */}
+          SOSYAL<span className="font-bold">ÜNİVERSİTE</span>
         </Link>
-        {/* Menu elemanları; Ana sayfa Hakkımızda İletişim */}
         <div className="hidden flex-1 items-center justify-evenly lg:flex">
-          {/* <ul className="flex items-center gap-6">
+          <ul className="flex items-center gap-6">
             {menuItems.map((item) => (
               <Link
                 href={item.url}
                 key={item.id}
                 className="group flex h-20 cursor-default items-center justify-center duration-300"
               >
-                <p className="text-md cursor-pointer pt-1 font-medium tracking-tighter text-[#666] after:block after:scale-x-0 after:border-b-[2px] after:border-[#333] after:transition-transform after:content-[''] hover:text-[#333] hover:after:origin-[0%_100%] hover:after:scale-x-100">
+                <p className="text-md cursor-pointer pt-1 font-medium tracking-tighter text-[#666] after:block after:scale-x-0 after:border-b-[2px] after:border-white after:transition-transform after:content-[''] hover:text-white hover:after:origin-[0%_100%] hover:after:scale-x-100 dark:text-white">
                   {item.name}
                 </p>
               </Link>
             ))}
-          </ul> */}
+          </ul>
         </div>
         <div className="hidden h-full lg:flex">
           {session ? (
@@ -103,7 +106,7 @@ const Header: FC = () => {
         <div className="flex items-center lg:hidden">
           <button className="mobile-menu-button outline-none">
             <svg
-              className="h-6 w-6 text-gray-500 hover:text-gray-600"
+              className="h-6 w-6 text-gray-500 hover:text-gray-600 dark:text-white"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"

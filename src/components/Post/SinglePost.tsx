@@ -1,16 +1,20 @@
 import { ISinglePost } from "../../types/post";
 import Image from "next/image";
 import Link from "next/link";
+import { AiOutlineComment, AiOutlineLike } from "react-icons/ai";
 import { BiCategoryAlt } from "react-icons/bi";
 
 export default function SinglePost({ post }: { post: ISinglePost }) {
   return (
-    <div className="mb-5 w-full max-w-[250px] overflow-hidden rounded-xl bg-white shadow-lg">
-      <div className="relative w-full">
-        <span className="absolute right-0 top-5 flex items-center gap-1 bg-blue-900 px-2 font-medium text-white">
+    <div className="mb-5 w-full overflow-hidden rounded-xl border border-darkHelper bg-white shadow-md dark:bg-darkSecondary">
+      <div className="relative flex h-full w-full flex-col lg:flex-row">
+        <span className="absolute -top-3 right-0 flex items-center gap-1 rounded-l-md bg-white px-2 pt-4 font-medium text-[#111] shadow-[0_0.5px_3px,rgb(255,255,255)] ">
           <BiCategoryAlt size={15} className="-mt-1" />
-          <p className="align-bottom text-[15px]"> {post.category?.name}</p>
+          <span className="align-bottom text-[15px]">
+            {post.category?.name}
+          </span>
         </span>
+
         {post.image ? (
           <Image
             src={post.image}
@@ -22,33 +26,55 @@ export default function SinglePost({ post }: { post: ISinglePost }) {
             className="h-[180px] w-full"
           />
         ) : (
-          <div className="h-[180px] w-full bg-gray-200"></div>
+          <div
+            className={`h-[150px] w-full lg:h-full lg:w-[200px] ${
+              Math.ceil(Math.random() * 50) % 3 === 0
+                ? "bg-[url('/images/categories/cat.jpg')]"
+                : Math.ceil(Math.random() * 50) % 2 === 0
+                ? "bg-[url('/images/categories/wave.jpg')]"
+                : "bg-[url('/images/categories/sun.jpg')]"
+            } bg-cover`}
+          ></div>
         )}
-        <div className="p-3 sm:p-5">
-          <p className="mb-1 text-[20px] font-bold leading-7 text-gray-700">
+        <div className="flex flex-1 flex-col p-3 sm:p-4">
+          <span className="mb-1 text-lg font-bold leading-7 text-gray-700 dark:text-white">
             {post.title}
-          </p>
+          </span>
           <div className="flex justify-between">
-            <p className="mr-2 text-[15px] text-[#3C3C4399]">{post.timeAgo}</p>
+            <span className="mr-2 text-base text-[#3C3C4399]">
+              {post.user.name + " " + post.user.surname} · {post.timeAgo}
+            </span>
           </div>
-          <p className="mt-2 font-[15px] text-[#7C7C80]">
-            {post.content.slice(0, 50) +
-              (post.content.length > 50 ? "..." : "")}
-          </p>
+          <span className="font-base mt-2 h-full text-[#7C7C80]">
+            {post.content.slice(0, 140) +
+              (post.content.length > 140 ? "..." : "")}
+          </span>
 
+          <div className="mt-2 flex justify-end">
+            <div className="flex items-end gap-4 text-[#444444]">
+              <div className="flex h-10 items-end gap-1">
+                <AiOutlineComment size={18} />
+                <span className="text-[18px]/[16px]">15</span>
+              </div>
+              <span className="text-[18px]/[20px]">·</span>
+              <div className="flex h-10 items-end gap-1">
+                <AiOutlineLike size={18} />
+                <span className="text-[18px]/[16px]">4</span>
+              </div>
+              <span className="text-[18px]/[20px]">·</span>
+              <div className="flex h-10 items-end gap-1">
+                <span className="text-[15px]/[18px]">
+                  {!!post.category ? "Yazı" : "Dosya"}
+                </span>
+              </div>
+            </div>
+          </div>
           <Link
             href={`/gonderi/yazi/${post.slug}`}
-            className="mt-4 block w-full transform rounded-[14px] bg-[#FFC933] px-4 py-3 text-center font-medium capitalize tracking-wide transition-colors duration-300 hover:bg-[#FFC933DD] focus:outline-none focus:ring focus:ring-teal-300 focus:ring-opacity-80"
+            className="mt-4 rounded-md border border-darkHelper bg-darkPrimary px-4 py-3 text-center font-medium tracking-wide text-white shadow-md transition-colors duration-300 "
           >
             Gönderiyi İncele
           </Link>
-          {/* <Link
-            target="_blank"
-            href="#"
-            className="mt-1.5 block w-full transform rounded-[14px] px-4 py-3 text-center font-medium capitalize tracking-wide transition-colors duration-300 hover:bg-[#F2ECE7] hover:text-[#000000dd] focus:outline-none focus:ring focus:ring-teal-300 focus:ring-opacity-80"
-          >
-            Download app
-          </Link> */}
         </div>
       </div>
     </div>
