@@ -19,7 +19,7 @@
     "@prisma/client": "^5.2.0",
     "@reduxjs/toolkit": "^1.9.5",
     "@tanstack/react-query": "^4.33.0",
-    "@trpc/client": "10.38.0",
+    "@trpc/client": "10.0.0-proxy-beta.19",
     "@trpc/next": "10.38.0",
     "@trpc/react": "10.0.0-proxy-beta.19",
     "@trpc/server": "10.38.0",

@@ -1,5 +1,5 @@
-import { ShareButton } from "../Buttons/ShareButton";
-import SearchInput from "./SearchBar/SearchInput";
+import { ShareButton } from "./particles/ShareButton";
+import SearchInput from "./particles/SearchInput";
 
 const CategoryAndMenuSection = () => {
   return (

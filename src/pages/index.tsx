@@ -1,12 +1,11 @@
 import type { GetServerSidePropsContext, NextPage } from "next";
 import Head from "next/head";
-import Layout from "../components/Layout";
+import Layout from "../components/Layouts/RootLayout";
 import { getServerAuthSession } from "../server/common/get-server-auth-session";
 import { prisma } from "../server/db/client";
 import Features from "../components/Landing/Feature";
 
 const Home: NextPage = () => {
-
   return (
     <>
       <Head>
@@ -36,7 +35,7 @@ const Home: NextPage = () => {
 export default Home;
 
 export const getServerSideProps = async (
-  context: GetServerSidePropsContext
+  context: GetServerSidePropsContext,
 ) => {
   const session = await getServerAuthSession({
     req: context.req,

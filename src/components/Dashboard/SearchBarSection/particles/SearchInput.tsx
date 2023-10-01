@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { trpc } from "../../../utils/trpc";
+import { trpc } from "../../../../utils/trpc";
 import { BiSearchAlt } from "react-icons/bi";
 
 const SearchInput = () => {

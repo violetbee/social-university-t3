@@ -1,4 +1,4 @@
-import Layout from "../../components/Layout";
+import Layout from "../../components/Layouts/RootLayout";
 import Head from "next/head";
 
 const SharePost = () => {

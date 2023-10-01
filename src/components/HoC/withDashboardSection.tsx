@@ -10,7 +10,7 @@ type Props = {
 
 export function withDashboardSection(
   WrappedComponent: FC<Props>,
-  title: string,
+  title: string | JSX.Element,
   itemPiece?: number,
 ) {
   const DashboardSection: FC<any> = (props: Props) => {

@@ -42,7 +42,7 @@ const MultiPost = ({ itemPiece, slug }: Props) => {
   }
 
   return (
-    <div className="grid grid-cols-1 gap-5 overflow-hidden md:grid-cols-2 lg:grid-cols-1 2xl:grid-cols-2">
+    <div className="grid grid-cols-1 gap-5 overflow-hidden md:grid-cols-3">
       {handlePosts()
         ?.posts?.slice(0, itemPiece)
         .map((post) => {

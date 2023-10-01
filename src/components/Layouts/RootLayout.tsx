@@ -1,8 +1,8 @@
 import { League_Spartan } from "@next/font/google";
-import RightSideBar from "./SideBar/RightSideBar";
-import Header from "./Header/Header";
+// import RightSideBar from "./SideBar/RightSideBar";
+import Header from "../Header/Header";
 import { useSession } from "next-auth/react";
-import LeftSideBar from "./SideBar/LeftSideBar";
+import LeftSideBar from "../SideBar/LeftSideBar";
 
 const dosis = League_Spartan({
   weight: ["200", "300", "400", "500", "600", "700", "800"],
@@ -11,13 +11,7 @@ const dosis = League_Spartan({
   subsets: ["latin"],
 });
 
-export default function Layout({
-  children,
-  isPostPage,
-}: {
-  children: React.ReactNode;
-  isPostPage?: boolean;
-}) {
+export default function Layout({ children }: { children: React.ReactNode }) {
   const { data } = useSession();
 
   return (
@@ -35,7 +29,6 @@ export default function Layout({
               {children}
             </div>
           </div>
-          {data && !isPostPage && <RightSideBar />}
         </div>
       </main>
     </>

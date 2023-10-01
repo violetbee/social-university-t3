@@ -1,5 +1,5 @@
 import { GetServerSideProps } from "next";
-import Layout from "../../../components/Layout";
+import Layout from "../../../components/Layouts/RootLayout";
 import { prisma } from "../../../server/db/client";
 import Head from "next/head";
 

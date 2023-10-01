@@ -3,18 +3,13 @@ import { useSelector } from "react-redux";
 import Image from "next/image";
 import { IPostSlicer } from "../../../types/post";
 import { useForm } from "react-hook-form";
-import {
-  AnketForm,
-  GonderiForm,
-  EtkinlikForm,
-  DosyaForm,
-} from "./PostTypeForms";
+import { AnketForm, GonderiForm, EtkinlikForm, DosyaForm } from "./particles";
 import { trpc } from "../../../utils/trpc";
 import { uniqueFileName } from "../../../utils/func";
 import instance from "../../../utils/axios";
 import { memo } from "react";
 
-const Share = () => {
+const ShareAnyTypePost = () => {
   const isOpen = useSelector((state: IPostSlicer) => state.app.isShareOpen);
 
   const { register, watch, handleSubmit, reset, setValue } = useForm();
@@ -214,4 +209,4 @@ const Share = () => {
   );
 };
 
-export default memo(Share);
+export default memo(ShareAnyTypePost);

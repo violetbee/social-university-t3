@@ -151,6 +151,7 @@ model Category {
     createdAt DateTime       @default(now()) @db.Timestamp(6)
     name      String
     slug      String         @unique
+    image     String?
     posts     TextTypePost[]
 }
 

@@ -1,6 +1,6 @@
-import { useMediaQuery } from "../../hooks/useMediaQuery";
+import { useMediaQuery } from "../../../../hooks/useMediaQuery";
 import { useDispatch } from "react-redux";
-import { setIsShareOpen } from "../../store/slices/app";
+import { setIsShareOpen } from "../../../../store/slices/app";
 import { BiPlus } from "react-icons/bi";
 
 export const ShareButton = () => {

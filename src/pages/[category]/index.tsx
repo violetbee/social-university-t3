@@ -1,9 +1,8 @@
-import { GetServerSideProps, NextPage } from "next";
-import Layout from "../../components/Layout";
-import SearchSection from "../../components/Dashboard/SearchSection";
+import { GetServerSideProps } from "next";
+import RootLayout from "../../components/Layouts/RootLayout";
 import { ParsedUrlQuery } from "querystring";
 import { MultiEvent as Events } from "../../components/Cards/Event";
-import Category from "../../components/Dashboard/Category";
+import DashboardLayout from "../../components/Layouts/DashboardLayout";
 
 type Props = {
   params: {
@@ -11,19 +10,19 @@ type Props = {
   };
 };
 
-const CategoryPage: NextPage<Props> = ({ params }) => {
-  return (
-    <Layout>
-      <div className="w-full space-y-4 lg:px-14 xl:px-16">
-        <SearchSection />
-        <Category params={params} />
-        {params.category === "etkinlikler" ? <Events /> : ""}
-      </div>
-    </Layout>
-  );
+const CategoryPage = ({ params }: Props) => {
+  {
+    params.category === "etkinlikler" ? <Events /> : "";
+  }
 };
 
 export default CategoryPage;
+
+CategoryPage.getLayout = (page: React.ReactElement) => (
+  <RootLayout>
+    <DashboardLayout params={page.props.params}>{page}</DashboardLayout>
+  </RootLayout>
+);
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { params } = context;
