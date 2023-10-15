@@ -12,7 +12,7 @@ const University = () => {
         onClick={() => {
           setOpen();
         }}
-        className="rounded-xl border bg-gray-100 px-5 py-3 shadow-md duration-150 hover:bg-gray-200/80 dark:border-darkHelper dark:bg-darkSecondary dark:hover:bg-darkBackground"
+        className="mt-5 self-end rounded-md border border-darkHelper bg-darkBackground p-2 px-4 text-white duration-150 hover:bg-white hover:text-darkBackground"
       >
         Üniversitemi Değiştir
       </button>
@@ -21,18 +21,22 @@ const University = () => {
   );
 
   return (
-    <div className="flex w-full flex-col items-center justify-between gap-2 py-4 ">
+    <div className="relative flex h-full w-full flex-col items-center justify-between gap-2 overflow-hidden p-4">
       <Image
         src="/images/samu.png"
-        className="h-[100px] w-[100px] rounded-full object-cover"
+        className="absolute -bottom-10 -left-10 h-40 w-40 rounded-full object-cover opacity-20"
         alt=""
-        width={100}
-        height={100}
+        width={160}
+        height={160}
       />
 
-      <p className="text-center text-xl font-medium text-[#333] dark:text-white">
-        {selectedUni?.university?.name}
-      </p>
+      <div className="flex flex-1 flex-col items-center justify-center">
+        <span className="text-2xl font-semibold text-whitish">
+          Seçili Üniversite
+        </span>
+        <span className="text-whitish/60">{selectedUni?.university?.name}</span>
+      </div>
+
       <DisplaySelectUniversity />
     </div>
   );

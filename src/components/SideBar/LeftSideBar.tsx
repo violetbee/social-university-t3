@@ -1,13 +1,11 @@
-import { FC } from "react";
-import University from "../UniversityArea/University";
+import { FC, useState } from "react";
 import Link from "next/link";
 import {
   IoFastFoodOutline,
   IoLocationOutline,
   IoSchoolOutline,
 } from "react-icons/io5";
-import { FaFacebook, FaGithub, FaInstagram, FaTwitter } from "react-icons/fa";
-import Image from "next/image";
+
 // import { useTheme } from "next-themes";
 
 // import University from "../UniversityArea/University";
@@ -15,31 +13,73 @@ import Image from "next/image";
 const LeftSideBar: FC = () => {
   // const { theme, setTheme } = useTheme();
 
+  const [isNavOpen, setIsNavOpen] = useState(false);
+
   return (
-    <div className="hidden flex-col justify-between border-r border-[#444]/10 bg-[#EFEFF1] dark:bg-darkBackground lg:w-64 xl:flex xl:w-80">
-      <div className="flex w-full flex-col pt-2">
-        <University />
-        <div className="mt-4 flex h-full w-full flex-col items-center pt-4">
+    <div
+      className={`relative hidden flex-col justify-between overflow-hidden border-r border-[#444]/10 bg-[#EFEFF1] duration-200 dark:bg-darkBackground ${
+        isNavOpen ? "lg:w-64 xl:flex xl:w-80" : "lg:w-12 xl:flex xl:w-16"
+      }`}
+    >
+      <button
+        onClick={() => {
+          setIsNavOpen((prev) => !prev);
+        }}
+        className="absolute right-4 top-3 z-10 flex h-8 w-8 flex-col items-center justify-center space-y-1 rounded-md bg-darkSecondary"
+      >
+        <span
+          className={`block h-[1px] w-4 rounded-full bg-whitish/60 transition-all duration-300 ${
+            isNavOpen
+              ? "translate-x-[1px] translate-y-[2px] rotate-45 transform"
+              : ""
+          }`}
+        ></span>
+        <span
+          className={`block h-[1px] w-4 rounded-full bg-whitish/60 transition-all duration-300 ${
+            isNavOpen && "hidden"
+          }`}
+        ></span>
+        <span
+          className={`block h-[1px] w-4 rounded-full bg-whitish/60 transition-all duration-300 ${
+            isNavOpen ? "-translate-y-[3px] -rotate-45 transform" : ""
+          }`}
+        ></span>
+      </button>
+      <div className="flex w-full flex-col pt-6">
+        <div
+          onClick={() => {
+            if (!isNavOpen) setIsNavOpen(true);
+          }}
+          className="mt-4 flex h-full w-full flex-col items-center pt-4"
+        >
           <Link
             href="#"
-            className="text-whitish flex h-12 w-full items-center gap-2 px-4 text-base font-medium transition-colors duration-150 dark:hover:bg-darkSecondary"
+            className="flex h-12 w-full items-center gap-2 px-4 text-base font-medium text-whitish transition-colors duration-150 dark:hover:bg-darkSecondary"
           >
-            <IoFastFoodOutline size={22} />
-            <span className="pt-1">Yemekhane Menüsü</span>
+            <IoFastFoodOutline size={22} className="shrink-0" />
+            {isNavOpen && (
+              <span className="shrink-0 pt-1 ">Yemekhane Menüsü</span>
+            )}
           </Link>
           <Link
             href="#"
-            className="text-whitish flex h-12 w-full items-center gap-2 px-4 text-sm font-medium transition-colors duration-150 dark:hover:bg-darkSecondary"
+            className="flex h-12 w-full items-center gap-2 px-4 text-sm font-medium text-whitish transition-colors duration-150 dark:hover:bg-darkSecondary"
           >
-            <IoLocationOutline size={22} />
-            <span className="pt-1">Üniversiteme Nasıl Giderim?</span>
+            <IoLocationOutline size={22} className="shrink-0" />
+            {isNavOpen && (
+              <span className="shrink-0 pt-1 ">
+                Üniversiteme Nasıl Giderim?
+              </span>
+            )}
           </Link>
           <Link
             href="#"
             className="flex h-12 w-full items-center gap-2 px-4 text-base font-medium text-white transition-colors duration-150 dark:hover:bg-darkSecondary"
           >
-            <IoSchoolOutline size={22} />
-            <span className="pt-1">Okul Kulüplerini Keşfet</span>
+            <IoSchoolOutline size={22} className="shrink-0" />
+            {isNavOpen && (
+              <span className="shrink-0 pt-1">Okul Kulüplerini Keşfet</span>
+            )}
           </Link>
         </div>
 
@@ -53,7 +93,7 @@ const LeftSideBar: FC = () => {
         </button> */}
       </div>
 
-      <div>
+      {/* <div>
         <div className="flex items-center justify-center border-y-[1px] border-[#444]/10 bg-white py-12 text-[#111] dark:bg-[#14151b] dark:text-white">
           Bu alan reklam için ayrılmıştır.
         </div>
@@ -85,7 +125,7 @@ const LeftSideBar: FC = () => {
             />
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

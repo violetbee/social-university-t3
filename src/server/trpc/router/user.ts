@@ -16,7 +16,7 @@ export const userRouter = router({
         surname: z
           .string()
           .min(2, { message: "Soy isim en az 2 karakter olmalıdır." }),
-      })
+      }),
     )
     .mutation(async ({ input, ctx }) => {
       const saltedPassword = await bcrypt.hash(input.password, 10);
@@ -50,6 +50,7 @@ export const userRouter = router({
           select: {
             id: true,
             name: true,
+            location: true,
           },
         },
       },
