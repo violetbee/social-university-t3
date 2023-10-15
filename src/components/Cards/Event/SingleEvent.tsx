@@ -5,7 +5,7 @@ const Event = ({ event }: { event: EventIncludedTypeOfEvent }) => {
   const endDate = new Date(event.endDate);
 
   return (
-    <div className={`w-full pt-1 duration-200 md:mb-5`}>
+    <div className={`w-full pt-1 duration-200`}>
       <div
         className={`flex flex-col rounded-lg border border-darkHelper bg-darkSecondary shadow-md duration-200 dark:text-white`}
       >

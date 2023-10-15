@@ -20,28 +20,23 @@ const Dashboard = () => {
   //   Announcements,
   //   "Duyurular"
   // );
-  const EventsWithExpanded = withDashboardSection(Events, "🎫 Etkinlikler", 4);
-  const FeaturedSchoolClubs = withDashboardSection(
-    Table,
-    "🎒 Seçkin Kulüpler",
-    4,
-  );
+  const EventsWithExpanded = withDashboardSection(Events, "Etkinlikler", 4);
+  const FeaturedSchoolClubs = withDashboardSection(Table, "Seçkin Kulüpler", 4);
   const PostsWithExpanded = withDashboardSection(
     MultiPost,
-    "📝 Trend Gönderiler",
+    "Trend Gönderiler",
     2,
   );
 
   const DiscoverYourCityExpanded = withDashboardSection(
     DiscoverYourCity,
     <>
-      <span className="text-green-400">🌇 {"Samsun"}</span> Şehrini Keşfet
+      <span className="text-green-400">{"Samsun"}</span> Şehrini Keşfet
     </>,
   );
 
   return (
     <>
-      <DiscoverYourCityExpanded />
       <PostsWithExpanded />
       <Image
         src="/images/banner.png"
@@ -52,6 +47,7 @@ const Dashboard = () => {
       />
       <EventsWithExpanded />
       <FeaturedSchoolClubs />
+      <DiscoverYourCityExpanded />
     </>
   );
 };

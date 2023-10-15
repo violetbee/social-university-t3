@@ -25,9 +25,10 @@ export function withDashboardSection(
     const [refresh, setRefresh] = useState<boolean>(false);
 
     return (
-      <div className="flex flex-col pt-4">
-        <div className="flex items-center py-3">
-          <span className="mr-4 flex-shrink text-2xl font-medium text-[#333] dark:text-white">
+      <div className="flex flex-col">
+        <div className="flex items-center pb-3">
+          <div className="w-4 border-t-[1px] border-[#888]/20"></div>
+          <span className="dark:text-whitish mx-4 flex-shrink text-2xl font-medium text-[#333]">
             {title}
           </span>
           <div className="flex-grow border-t-[1px] border-[#888]/20"></div>
@@ -39,7 +40,7 @@ export function withDashboardSection(
                 setRefresh(false);
               }, 3000);
             }}
-            className="mx-1 flex-shrink rounded-md bg-[#333] px-4 py-[2px] text-lg font-medium text-white md:mx-4 md:px-8"
+            className="text-whitish mx-1 flex-shrink rounded-md border border-darkHelper bg-darkSecondary px-4 py-[2px] text-lg font-medium shadow-md md:mx-4 md:px-5"
           >
             <BiRefresh
               className={`${refresh ? "animate-spin" : ""}`}
@@ -49,7 +50,7 @@ export function withDashboardSection(
           <div className="w-2 border-t-[1px] border-[#888]/20"></div>
           <button
             onClick={value.toggle}
-            className="mx-1 w-16 flex-shrink rounded-md  border-[1px] border-[#999] bg-white py-[2px] text-lg font-medium text-[#333] md:mx-4 md:w-20"
+            className="bg-whitish mx-1 w-16 flex-shrink  rounded-md border-[1px] border-white py-[2px] text-lg font-medium text-darkHelper shadow-md md:mx-4 md:w-20"
           >
             {value.isExpanded ? "Gizle" : "Göster"}
           </button>

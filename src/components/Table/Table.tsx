@@ -40,7 +40,7 @@ const schoolClubs = [
 
 export default function Table() {
   return (
-    <div className="mb-4 mt-2 grid overflow-hidden pb-2">
+    <div className="mt-2 grid overflow-hidden">
       <div className="overflow-hidden rounded-lg border border-darkHelper shadow-md">
         <table className="min-w-full divide-y divide-gray-200 dark:divide-darkHelper">
           <thead className="bg-darkSecondary">
@@ -116,10 +116,10 @@ export default function Table() {
                 </td>
                 <td className="whitespace-nowrap px-6 py-4 text-sm text-gray-500 dark:text-white">
                   <button
-                    className={`rounded px-4 py-2 font-bold text-white duration-150 ${
+                    className={`w-20 rounded py-2 font-bold text-darkSecondary duration-150 ${
                       club.application
                         ? "bg-darkPrimary hover:hue-rotate-15"
-                        : "bg-darkHelper"
+                        : "bg-darkHelper text-white"
                     }`}
                   >
                     {club.application ? "Başvur" : "Kapalı"}

@@ -1,26 +1,20 @@
-import { useRouter } from "next/router";
-import { trpc } from "../../../../utils/trpc";
 import { BiSearchAlt } from "react-icons/bi";
 
 const SearchInput = () => {
-  const { query } = useRouter();
-  const { data } = trpc.category.getAll.useQuery();
   return (
-    <>
-      <h1 className="text-xl font-semibold leading-none text-[#333] dark:text-white md:text-3xl">
-        {query.category
-          ? data?.find((item) => item.slug === query.category)?.name
-          : "Her Şey"}
-      </h1>
-      <label htmlFor="searchBar" className="relative h-full flex-1">
+    <label
+      htmlFor="searchBar"
+      className="flex h-full flex-1 items-center justify-center"
+    >
+      <div className="relative w-1/3">
         <input
           type="text"
-          className={`w-full rounded-md border-b-[1px] border-[#888]/20 bg-white py-4 pl-10 pr-4 font-medium leading-none text-[#333] outline-none placeholder:text-slate-400`}
+          className={`w-full border-b border-b-white/20 bg-transparent py-2 pl-8 pr-4 font-medium leading-none text-white outline-none placeholder:text-white/20`}
           placeholder="Ara"
         />
-        <BiSearchAlt className="absolute left-2 top-[23px] h-full -translate-y-1/2 transform text-2xl text-slate-400" />
-      </label>
-    </>
+        <BiSearchAlt className="absolute left-0 top-1/2 h-full -translate-y-1/2 transform text-2xl text-white/20" />
+      </div>
+    </label>
   );
 };
 

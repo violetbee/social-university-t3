@@ -6,6 +6,7 @@ import { Josefin_Sans } from "@next/font/google";
 import withPopup from "../HoC/withPopup";
 import { AfterAuthHeaderSection } from "./AuthedUser/TriggerUserPopupProfile";
 import { UserProfile } from "./AuthedUser/PoppedUpUserProfile";
+import SearchBarSection from "../Dashboard/SearchBarSection";
 
 const dosis = Josefin_Sans({
   weight: ["200", "300", "400", "500", "600", "700"],
@@ -19,28 +20,28 @@ const Header: FC = () => {
 
   const UserPopup = withPopup(AfterAuthHeaderSection, UserProfile);
 
-  const menuItems = [
-    {
-      id: 0,
-      name: "Özellikler",
-      url: "/",
-    },
-    {
-      id: 1,
-      name: "Hakkımızda",
-      url: "/about",
-    },
-    {
-      id: 2,
-      name: "İletişim",
-      url: "/contact",
-    },
-    {
-      id: 3,
-      name: "Şikayet",
-      url: "/contact",
-    },
-  ];
+  // const menuItems = [
+  //   {
+  //     id: 0,
+  //     name: "Özellikler",
+  //     url: "/",
+  //   },
+  //   {
+  //     id: 1,
+  //     name: "Hakkımızda",
+  //     url: "/about",
+  //   },
+  //   {
+  //     id: 2,
+  //     name: "İletişim",
+  //     url: "/contact",
+  //   },
+  //   {
+  //     id: 3,
+  //     name: "Şikayet",
+  //     url: "/contact",
+  //   },
+  // ];
 
   return (
     <>
@@ -60,21 +61,9 @@ const Header: FC = () => {
           /> */}
           SOSYAL<span className="font-bold">ÜNİVERSİTE</span>
         </Link>
-        <div className="hidden flex-1 items-center justify-evenly lg:flex">
-          <ul className="flex items-center gap-6">
-            {menuItems.map((item) => (
-              <Link
-                href={item.url}
-                key={item.id}
-                className="group flex h-20 cursor-default items-center justify-center duration-300"
-              >
-                <p className="text-md cursor-pointer pt-1 font-medium tracking-tighter text-[#666] after:block after:scale-x-0 after:border-b-[2px] after:border-white after:transition-transform after:content-[''] hover:text-white hover:after:origin-[0%_100%] hover:after:scale-x-100 dark:text-white">
-                  {item.name}
-                </p>
-              </Link>
-            ))}
-          </ul>
-        </div>
+
+        <SearchBarSection />
+
         <div className="hidden h-full lg:flex">
           {session ? (
             <div className="flex items-center">

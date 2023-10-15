@@ -9,7 +9,7 @@ import { uniqueFileName } from "../../../utils/func";
 import instance from "../../../utils/axios";
 import { memo } from "react";
 
-const ShareAnyTypePost = () => {
+const PublishPostSection = () => {
   const isOpen = useSelector((state: IPostSlicer) => state.app.isShareOpen);
 
   const { register, watch, handleSubmit, reset, setValue } = useForm();
@@ -76,9 +76,9 @@ const ShareAnyTypePost = () => {
     <div
       className={`${
         isOpen
-          ? "mb-6 mt-4 grid-rows-[1fr] opacity-100"
-          : "grid-rows-[0fr] opacity-0"
-      }  grid transition-all duration-300 ease-in-out`}
+          ? "my-5 grid-rows-[1fr] opacity-100"
+          : "mt-0 grid-rows-[0fr] opacity-0"
+      }  col-span-7 grid transition-all duration-300 ease-in-out`}
     >
       <form
         onSubmit={handleSubmit(onSubmit)}
@@ -209,4 +209,4 @@ const ShareAnyTypePost = () => {
   );
 };
 
-export default memo(ShareAnyTypePost);
+export default memo(PublishPostSection);

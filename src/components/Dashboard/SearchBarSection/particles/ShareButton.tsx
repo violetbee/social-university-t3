@@ -8,15 +8,16 @@ export const ShareButton = () => {
 
   const media = useMediaQuery("(max-width: 768px)");
   return (
-    <div className="relative">
-      <button
-        onClick={() => {
-          dispatch(setIsShareOpen());
-        }}
-        className="flex h-12 w-12 shrink-0 items-center justify-center rounded-md bg-[#333] text-xl text-white shadow-sm peer-focus:bg-slate-500 dark:border dark:border-darkHelper dark:bg-darkSecondary dark:shadow-md md:relative md:bottom-0 md:right-0 md:z-0 md:h-[48px] md:w-44 md:bg-[#dd4e63] md:dark:bg-darkPrimary"
-      >
-        {media ? <BiPlus size={40} /> : "Sen de Paylaş!"}
-      </button>
-    </div>
+    <button
+      onClick={() => {
+        dispatch(setIsShareOpen());
+      }}
+      className="flex h-full shrink-0 items-center justify-center rounded-lg border border-darkHelper bg-[#333] text-xl text-white duration-150 peer-focus:bg-slate-500 dark:border dark:border-darkHelper dark:bg-darkSecondary dark:shadow-md dark:hover:bg-darkBackground dark:hover:shadow-none"
+    >
+      <div className="mb-1 mr-2 rounded-md bg-darkPrimary p-1">
+        <BiPlus size={11} className="dark:text-darkSecondary" />
+      </div>
+      {media ? "" : "Sen de Paylaş!"}
+    </button>
   );
 };
