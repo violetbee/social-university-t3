@@ -14,7 +14,6 @@ import {
   FaTwitch,
 } from "react-icons/fa";
 import React, { ReactElement, useEffect, useRef } from "react";
-import autoAnimate from "@formkit/auto-animate";
 import { GoCommentDiscussion } from "react-icons/go";
 import { IoIosArrowUp } from "react-icons/io";
 import { trpc } from "../../../utils/trpc";
@@ -37,10 +36,7 @@ const PerPost: NextPageWithLayout<Props> = ({ post, params }) => {
   // const [comment, setComment] = useState<string>("");
 
   const parent = useRef(null);
-  useEffect(() => {
-    parent.current && autoAnimate(parent.current);
-  }, [parent]);
-
+ 
   const ctx = trpc.useContext();
   const like = trpc.like.like.useMutation({
     onSuccess: () => {
