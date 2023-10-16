@@ -12,7 +12,7 @@ export const ShareButton = () => {
       onClick={() => {
         dispatch(setIsShareOpen());
       }}
-      className="flex items-center justify-center gap-2 rounded-lg border  border-darkHelper bg-white px-3 duration-150 dark:bg-darkSecondary dark:shadow-md hover:dark:bg-darkBackground"
+      className="flex items-center justify-center gap-2 rounded-lg border border-darkHelper bg-white px-4 duration-150 dark:bg-darkSecondary dark:shadow-md hover:dark:bg-darkBackground"
     >
       <div className="mb-1 rounded-md bg-darkPrimary p-2">
         <BiPlus size={media ? 14 : 11} className="dark:text-darkSecondary" />

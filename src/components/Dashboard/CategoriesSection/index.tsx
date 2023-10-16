@@ -21,12 +21,12 @@ const Category = ({ params }: ICategoryProps) => {
     <div>
       <div className="flex w-full justify-between gap-4">
         <div className="relative flex max-w-full gap-4 overflow-x-hidden">
-          <div className="2.5xl:hidden absolute right-0 top-0 z-50 block h-full w-10 bg-gradient-to-r from-transparent to-darkBackground" />
+          <div className="absolute right-0 top-0 z-50 block h-full w-10 bg-gradient-to-r from-transparent to-darkBackground 2.5xl:hidden" />
           <Link
             href="/dashboard"
             className={`${
               url ? "border-b border-darkPrimary" : "border-b-darkHelper"
-            } flex shrink-0 flex-col items-center justify-center gap-2 rounded-lg border border-x-darkHelper border-t-darkHelper bg-white p-3 duration-150 dark:bg-darkSecondary dark:shadow-md hover:dark:bg-darkBackground`}
+            } flex shrink-0 flex-col items-center justify-center gap-2 rounded-lg border border-x-darkHelper border-t-darkHelper bg-white px-4 py-2 duration-150 dark:bg-darkSecondary dark:shadow-md hover:dark:bg-darkBackground`}
           >
             <span className="text-center text-lg font-medium tracking-wider text-darkSecondary dark:text-white dark:drop-shadow-[2px_1px_1px_rgb(0,0,0)]">
               Her Şey
@@ -44,7 +44,7 @@ const Category = ({ params }: ICategoryProps) => {
                 (params?.category === undefined && category.slug === "her-sey")
                   ? "border-b border-darkPrimary"
                   : "border-b-darkHelper"
-              } flex shrink-0 flex-col items-center justify-center gap-2 rounded-lg border border-x-darkHelper border-t-darkHelper bg-white p-3 duration-150 dark:bg-darkSecondary dark:shadow-md hover:dark:bg-darkBackground`}
+              } flex shrink-0 flex-col items-center justify-center gap-2 rounded-lg border border-x-darkHelper border-t-darkHelper bg-white px-4 py-2 duration-150 dark:bg-darkSecondary dark:shadow-md hover:dark:bg-darkBackground`}
             >
               <span className="text-center text-lg font-medium tracking-wider text-darkSecondary dark:text-white dark:drop-shadow-[2px_1px_2px_rgb(0,0,0)]">
                 {category.name}
