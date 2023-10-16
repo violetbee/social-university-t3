@@ -59,13 +59,10 @@ const Dashboard = () => {
             Daha Fazla Bilgi Al
           </button>
         </div>
-        <div className="col-span-1 row-span-2 rounded-md border border-darkHelper bg-[#101117] p-4 pb-0 md:col-span-2 xl:col-span-1">
-          <div className="flex items-center justify-between border-b border-darkHelper pb-1 ">
-            <h3 className="text-2xl font-semibold">Duyurular</h3>
-            <button className="rounded-md border border-darkHelper bg-darkBackground px-4 py-2 text-white duration-150 hover:bg-white hover:text-darkBackground">
-              Tümünü Gör
-            </button>
-          </div>
+        <div className="col-span-1 row-span-2 rounded-md border border-darkHelper bg-[#101117] p-4 pb-0 shadow-md md:col-span-2 xl:col-span-1">
+          <h3 className="border-b border-darkHelper pb-1 text-2xl font-semibold">
+            Duyurular
+          </h3>
           <div className="mt-3 h-[233px] overflow-y-auto pr-3">
             <div className="flex flex-col gap-2">
               <div className="flex cursor-pointer items-center gap-5 rounded-md p-2 px-4 duration-200 hover:bg-darkSecondary">
