@@ -40,26 +40,29 @@ const Dashboard = () => {
   return (
     <>
       <div className="grid h-full w-full grid-flow-row grid-cols-1 gap-5 md:grid-cols-4 xl:grid-cols-3">
-        <div className="relative col-span-1 row-span-2 flex flex-col items-center justify-center gap-3 overflow-hidden rounded-md border border-darkHelper bg-darkSecondary px-10 py-4 shadow-md md:col-span-2 xl:col-span-1">
+        <div className="relative col-span-1 row-span-2 overflow-hidden rounded-md border border-darkHelper bg-darkSecondary px-10 py-4 shadow-md md:col-span-2 xl:col-span-1">
           <div className="absolute -bottom-20 -right-32 h-32 w-1/2 bg-gradient-to-tl from-transparent via-transparent to-red-700 opacity-25 blur-2xl"></div>
           <div className="absolute left-0 top-0 h-40 w-1/2 bg-gradient-to-tl from-transparent via-transparent to-blue-700 opacity-25 blur-3xl"></div>
-          <h3 className="self-start border-b border-darkHelper pb-1 text-2xl font-semibold">
-            Selam Çağlar!
-          </h3>
-          <p className="mt-3 text-whitish/60">
-            Sosyal Üniversite&apos;ye hoşgeldin! Sosyal Üniversite, üniversite
-            ve üniversite adayları için geliştirilmiş bir sosyal medya
-            platformudur.
-          </p>
-          <p className="text-whitish/60">
-            Bu platformda üniversite hayatını kolaylaştıracak birçok özellik ve
-            bu özelliklerin yanında birçok eğlenceli aktivite bulunmaktadır.
-          </p>
-          <button className="mt-5 self-end rounded-md border border-darkHelper bg-darkBackground p-2 px-4 text-white duration-150 hover:bg-white hover:text-darkBackground">
-            Daha Fazla Bilgi Al
-          </button>
+          <div className="relative flex flex-col items-center justify-center gap-3">
+            <h3 className="w-full self-start border-b border-darkHelper pb-1 text-2xl font-semibold">
+              Selam Çağlar!
+            </h3>
+            <p className="mt-3 text-whitish/60">
+              Sosyal Üniversite&apos;ye hoşgeldin! Sosyal Üniversite, üniversite
+              ve üniversite adayları için geliştirilmiş bir sosyal medya
+              platformudur.
+            </p>
+            <p className="text-whitish/60">
+              Bu platformda üniversite hayatını kolaylaştıracak birçok özellik
+              ve bu özelliklerin yanında birçok eğlenceli aktivite
+              bulunmaktadır.
+            </p>
+            <button className="mt-5 self-end rounded-md border border-darkHelper bg-darkBackground p-2 px-4 text-white duration-150 hover:bg-white hover:text-darkBackground">
+              Daha Fazla Bilgi Al
+            </button>
+          </div>
         </div>
-        <div className="col-span-1 row-span-2 rounded-md border border-darkHelper bg-[#101117] p-4 pb-0 shadow-md md:col-span-2 xl:col-span-1">
+        <div className="col-span-1 row-span-2 rounded-md border border-darkHelper bg-[#101117] p-4 pb-0 shadow-md md:col-span-2 xl:col-span-1 xl:row-span-1 grid-xl:row-span-2">
           <h3 className="border-b border-darkHelper pb-1 text-2xl font-semibold">
             Duyurular
           </h3>
@@ -104,7 +107,7 @@ const Dashboard = () => {
             </div>
           </div>
         </div>
-        <div className="col-span-1 row-span-1 rounded-md border border-darkHelper bg-[#101117] p-4 shadow-md md:col-span-4 xl:col-span-1 xl:row-span-2">
+        <div className="col-span-1 row-span-1 rounded-md border border-darkHelper bg-[#101117] p-4 shadow-md md:col-span-2 xl:col-span-1 ">
           <h3 className="border-b border-darkHelper pb-1 text-2xl font-semibold">
             Yardımcı Araçlar
           </h3>
@@ -134,12 +137,9 @@ const Dashboard = () => {
               <span>Mekan Öner</span>
             </button>
           </div>
-          <div className="relative mt-6 w-full rounded-lg ">
-            <div className="h-full w-full bg-darkSecondary p-4 blur-md" />
-            <p className="absolute top-1/2 w-full -translate-y-1/2 text-center font-mono text-xl text-whitish/20">
-              Yeni Araçlar Yakında!
-            </p>
-          </div>
+        </div>
+        <div className="col-span-1 row-span-1 rounded-md border border-darkHelper bg-[#101117] p-4 shadow-md md:col-span-2 grid-xl:col-span-1">
+          <University />
         </div>
       </div>
       <Image
@@ -149,11 +149,85 @@ const Dashboard = () => {
         width={1864}
         height={209}
       />
+      {/* <PostsWithExpanded />
+        <EventsWithExpanded />
+        <FeaturedSchoolClubs />
+        <DiscoverYourCityExpanded /> */}
 
-      <PostsWithExpanded />
-      <EventsWithExpanded />
-      <FeaturedSchoolClubs />
-      <DiscoverYourCityExpanded />
+      <div className="grid grid-cols-3 gap-6">
+        <div className="col-span-2">
+          <div className="flex items-center justify-between gap-5">
+            <h3 className="text-2xl font-semibold">Akış</h3>
+            <button className="rounded-md border border-darkHelper bg-darkBackground p-2 px-4 text-white duration-150 hover:bg-white hover:text-darkBackground">
+              Tümünü Gör
+            </button>
+          </div>
+          <div className="mt-5 grid grid-cols-3 gap-4">
+            <Card title="Deneme" category="Serbest Alan" />
+            <Card
+              title="Bu uzun bir başlıktır, bayağı uzun"
+              category="Üniversite Yorumları"
+            />
+            <Card title="Matematik-2 Vize Notları" category="Soru Çözümleri" />
+            <Card title="Samü Ulaşım Hakkında" category="Anket" />
+            <Card
+              title="Neden dersleri takip edemiyorum?"
+              category="Etkinlik"
+            />
+            <Card title="Harika bir geziydi" category="İlanlar" />
+            <Card title="Deneme" category="Serbest Alan" />
+            <Card
+              title="Bu uzun bir başlıktır, bayağı uzun"
+              category="Üniversite Yorumları"
+            />
+            <Card title="Matematik-2 Vize Notları" category="Soru Çözümleri" />
+          </div>
+        </div>
+        <div
+          className="col-span-1 
+        rounded-md border border-darkHelper bg-[#101117] shadow-md
+        "
+        >
+          <div className="flex items-center justify-between gap-5 p-4">
+            <h3 className="text-2xl font-semibold">Başarı Sıralaması</h3>
+            <button className="rounded-md border border-darkHelper bg-darkBackground p-2 px-4 text-white duration-150 hover:bg-white hover:text-darkBackground">
+              Tümünü Gör
+            </button>
+          </div>
+          <b className="hr anim"></b>
+          {/* en başarılı 5 kullanıcıyı listele, kullanıcı resmi, adı, bölümü ve üniversitesi ve puanı yazsın */}
+          <div className="flex flex-col gap-4 py-4 pl-8 pr-4">
+            <MostSuccessfulUser
+              user={{
+                rank: 1,
+                name: "Ali Veli",
+                department: "Bilgisayar Mühendisliği",
+              }}
+            />
+            <MostSuccessfulUser
+              user={{
+                rank: 2,
+                name: "Çağlar Karahüseyin",
+                department: "Yazılım Mühendisliği",
+              }}
+            />
+            <MostSuccessfulUser
+              user={{
+                rank: 3,
+                name: "Nazlı Durmazbilek",
+                department: "Kimya Mühendisliği",
+              }}
+            />
+            <MostSuccessfulUser
+              user={{
+                rank: 4,
+                name: "Mehmet Ali",
+                department: "Tıp",
+              }}
+            />
+          </div>
+        </div>
+      </div>
     </>
   );
 };
@@ -189,198 +263,121 @@ export const getServerSideProps = async (
   }
 };
 
-{
-  /* <div className="relative grid grid-cols-1 gap-x-20 gap-y-10 rounded-md border border-darkHelper bg-[#101117] p-4 shadow-md lg:grid-cols-2">
-        <span className="absolute left-1/2 top-1/2 hidden w-full -translate-x-1/2 -translate-y-1/2 border-t border-dashed border-darkHelper lg:block" />
-        <span className="absolute left-1/2 top-1/2 hidden h-full -translate-x-1/2 -translate-y-1/2 rotate-1 border-l border-dashed border-darkHelper lg:block" />
+function Card({ title, category }) {
+  return (
+    <div
+      className={`flex flex-col gap-4 rounded-xl border border-l-4 border-darkHelper ${
+        category === "Soru Çözümleri"
+          ? "border-l-red-800"
+          : category === "Etkinlik"
+          ? "border-l-green-800"
+          : category === "İlanlar"
+          ? "border-l-yellow-400"
+          : category === "Anket"
+          ? "border-l-blue-800"
+          : category === "Üniversite Yorumları"
+          ? "border-l-orange-500"
+          : "border-l-purple-800"
+      } bg-darkSecondary p-4 text-white shadow-md`}
+    >
+      <div className="text-md font-bold">{title}</div>
+      <div className="flex items-center justify-between gap-10">
+        {/* category tag */}
+        <div className="rounded-md bg-darkBackground px-2 py-1 pt-[6px] text-sm">
+          #{category}
+        </div>
 
-        <div>
-          <div className="flex items-center justify-between">
-            <h3 className="border-b border-darkHelper pb-1 text-2xl font-semibold">
-              En Başarılı Gönderi
-            </h3>
-            <BsBookmarkStarFill className="text-yellow-400" size={32} />
+        <div className="flex items-center space-x-4">
+          <div className="cursor-pointer">
+            <img
+              className="h-5 w-5 rounded-lg"
+              src="https://i.pravatar.cc/300"
+            />
           </div>
-          <div className="flex flex-col gap-5 md:flex-row xl:flex-col">
-            <div className="mt-3 flex rounded-md border border-l-4 border-darkHelper border-l-darkPrimary bg-darkSecondary shadow-md">
-              <div className="flex flex-col gap-2 p-4">
-                <h4 className="text-xl">
-                  Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                  Praesentium, provident.
-                </h4>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <Image
-                      src="/images/43.jpg"
-                      alt="avatar"
-                      width={100}
-                      height={100}
-                      className="h-10 w-10 rounded-full object-cover object-center"
-                    />
-                    <div className="flex flex-col">
-                      <span className="text-whitish/60">
-                        Çağlar Karahüseyin
-                      </span>
-                      <span className="font-extralight text-whitish/20">
-                        Yazılım Mühendisliği
-                      </span>
-                    </div>
-                  </div>
-                  <div className="flex h-auto divide-x divide-darkHelper rounded-md bg-darkBackground text-whitish/40">
-                    <div className="flex h-full items-center justify-center gap-2 px-3 py-[2px]">
-                      <AiTwotoneLike />
-                      <span className="pt-1">+59</span>
-                    </div>
-                    <div className="flex h-full items-center justify-center gap-2 px-3 py-[2px]">
-                      <FaComments />
-                      <span className="pt-1">87</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+          <div className="cursor-pointer text-gray-500 hover:text-gray-300">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
+              />
+            </svg>
+          </div>
+          <div className="cursor-pointer text-gray-500 hover:text-gray-300">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6h-8.5l-1-1H5a2 2 0 00-2 2zm9-13.5V9"
+              />
+            </svg>
           </div>
         </div>
-        <div>
-          <div className="flex items-center justify-between">
-            <h3 className="border-b border-darkHelper pb-1 text-2xl font-semibold">
-              En Popüler Etkinlik
-            </h3>
-            <BsBookmarkStarFill className="text-yellow-400" size={32} />
-          </div>
-          <div className="flex flex-col gap-5 md:flex-row xl:flex-col">
-            <div className="mt-3 flex rounded-md border border-l-4 border-darkHelper border-l-darkPrimary bg-darkSecondary shadow-md">
-              <div className="flex flex-col gap-2 p-4">
-                <h4 className="text-xl">
-                  Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                  Praesentium, provident.
-                </h4>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <Image
-                      src="/images/43.jpg"
-                      alt="avatar"
-                      width={100}
-                      height={100}
-                      className="h-10 w-10 rounded-full object-cover object-center"
-                    />
-                    <div className="flex flex-col">
-                      <span className="text-whitish/60">
-                        Çağlar Karahüseyin
-                      </span>
-                      <span className="font-extralight text-whitish/20">
-                        Yazılım Mühendisliği
-                      </span>
-                    </div>
-                  </div>
-                  <div className="flex h-auto divide-x divide-darkHelper rounded-md bg-darkBackground text-whitish/40">
-                    <div className="flex h-full items-center justify-center gap-2 px-3 py-[2px]">
-                      <AiTwotoneLike />
-                      <span className="pt-1">+59</span>
-                    </div>
-                    <div className="flex h-full items-center justify-center gap-2 px-3 py-[2px]">
-                      <FaComments />
-                      <span className="pt-1">87</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div>
-          <div className="flex items-center justify-between">
-            <h3 className="border-b border-darkHelper pb-1 text-2xl font-semibold">
-              En Başarılı Gönderi
-            </h3>
-            <BsBookmarkStarFill className="text-yellow-400" size={32} />
-          </div>
-          <div className="flex flex-col gap-5 md:flex-row xl:flex-col">
-            <div className="mt-3 flex rounded-md border border-l-4 border-darkHelper border-l-darkPrimary bg-darkSecondary shadow-md">
-              <div className="flex flex-col gap-2 p-4">
-                <h4 className="text-xl">
-                  Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                  Praesentium, provident.
-                </h4>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <Image
-                      src="/images/43.jpg"
-                      alt="avatar"
-                      width={100}
-                      height={100}
-                      className="h-10 w-10 rounded-full object-cover object-center"
-                    />
-                    <div className="flex flex-col">
-                      <span className="text-whitish/60">
-                        Çağlar Karahüseyin
-                      </span>
-                      <span className="font-extralight text-whitish/20">
-                        Yazılım Mühendisliği
-                      </span>
-                    </div>
-                  </div>
-                  <div className="flex h-auto divide-x divide-darkHelper rounded-md bg-darkBackground text-whitish/40">
-                    <div className="flex h-full items-center justify-center gap-2 px-3 py-[2px]">
-                      <AiTwotoneLike />
-                      <span className="pt-1">+59</span>
-                    </div>
-                    <div className="flex h-full items-center justify-center gap-2 px-3 py-[2px]">
-                      <FaComments />
-                      <span className="pt-1">87</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div>
-          <div className="flex items-center justify-between">
-            <h3 className="border-b border-darkHelper pb-1 text-2xl font-semibold">
-              En Popüler Etkinlik
-            </h3>
-            <BsBookmarkStarFill className="text-yellow-400" size={32} />
-          </div>
-          <div className="flex flex-col gap-5 md:flex-row xl:flex-col">
-            <div className="mt-3 flex rounded-md border border-l-4 border-darkHelper border-l-darkPrimary bg-darkSecondary shadow-md">
-              <div className="flex flex-col gap-2 p-4">
-                <h4 className="text-xl">
-                  Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                  Praesentium, provident.
-                </h4>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <Image
-                      src="/images/43.jpg"
-                      alt="avatar"
-                      width={100}
-                      height={100}
-                      className="h-10 w-10 rounded-full object-cover object-center"
-                    />
-                    <div className="flex flex-col">
-                      <span className="text-whitish/60">
-                        Çağlar Karahüseyin
-                      </span>
-                      <span className="font-extralight text-whitish/20">
-                        Yazılım Mühendisliği
-                      </span>
-                    </div>
-                  </div>
-                  <div className="flex h-auto divide-x divide-darkHelper rounded-md bg-darkBackground text-whitish/40">
-                    <div className="flex h-full items-center justify-center gap-2 px-3 py-[2px]">
-                      <AiTwotoneLike />
-                      <span className="pt-1">+59</span>
-                    </div>
-                    <div className="flex h-full items-center justify-center gap-2 px-3 py-[2px]">
-                      <FaComments />
-                      <span className="pt-1">87</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div> */
+      </div>
+    </div>
+  );
 }
+
+const MostSuccessfulUser = ({ user }) => {
+  return (
+    <div className="relative">
+      <div
+        className={`absolute -left-6 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-start rounded-xl border border-darkHelper ${
+          user.rank === 1
+            ? "bg-yellow-500"
+            : user.rank === 2
+            ? "bg-slate-400"
+            : user.rank === 3
+            ? "bg-amber-800"
+            : "bg-white"
+        } pl-[10px] pt-[2px] font-bold text-darkHelper shadow-md`}
+      >
+        {user.rank}
+      </div>
+      <div className="relative flex justify-between rounded-md border border-darkHelper bg-darkBackground px-4 py-2">
+        {/* Kullanıcının sırasını belirten bir absolute item eklenecek */}
+
+        <div className="flex items-center gap-3">
+          <div className="flex h-12 w-12 items-center justify-center rounded-full bg-darkBackground">
+            <img
+              className="h-full w-full rounded-full"
+              src="https://i.pravatar.cc/300"
+            />
+          </div>
+          <div className="flex flex-col">
+            <span className="font-semibold text-white">{user.name}</span>
+            <span className="text-whitish/60">{user.department}</span>
+          </div>
+        </div>
+        <div className="flex items-center justify-between gap-3">
+          <div className="flex items-center gap-2">
+            <AiTwotoneLike size={24} className="text-green-500" />
+            <span className="mt-1 font-semibold text-green-500">
+              +{Math.ceil(Math.random() * 1000)}
+            </span>
+          </div>
+          <div className="flex items-center gap-2">
+            <BsBookmarkStarFill size={24} className="text-yellow-500" />
+            <span className="mt-1 font-semibold text-yellow-500">
+              +{Math.ceil(Math.random() * 50)}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};

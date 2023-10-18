@@ -12,7 +12,7 @@ const University = () => {
         onClick={() => {
           setOpen();
         }}
-        className="w-24 rounded-md border border-darkHelper bg-darkBackground px-4 py-1 text-white duration-150 hover:bg-white hover:text-darkBackground"
+        className="w-1/3 rounded-md border border-darkHelper bg-darkBackground px-4 py-1 text-white duration-150 hover:bg-white hover:text-darkBackground"
       >
         Tıkla ve Gez
       </button>
@@ -21,25 +21,23 @@ const University = () => {
   );
 
   return (
-    <div className="flex flex-col">
-      <div className="flex items-center justify-center gap-4">
-        <Image
-          src="/images/samu.png"
-          width={200}
-          height={200}
-          alt="Üniversite"
-          className="h-10 w-10 rounded-full"
-        />
-        <div className="flex flex-col">
-          <span className="text-2xl font-semibold">
-            {selectedUni?.university?.name}
-          </span>
-          <p className="text-sm text-whitish/30">
-            Kalan gezme hakkınız: {selectedUni?.university?.dailyLimit || 3}
-          </p>
-        </div>
-        <DisplaySelectUniversity />
+    <div className="flex h-full flex-row items-center justify-center gap-4 md:flex-col xl:flex-row">
+      <Image
+        src="/images/samu.png"
+        width={200}
+        height={200}
+        alt="Üniversite"
+        className="h-14 w-14 rounded-full"
+      />
+      <div className="flex flex-col">
+        <span className="text-2xl font-semibold">
+          {selectedUni?.university?.name}
+        </span>
+        <p className="text-sm font-thin text-whitish/30">
+          Kalan gezme hakkınız: {selectedUni?.university?.dailyLimit || 3}
+        </p>
       </div>
+      <DisplaySelectUniversity />
     </div>
   );
 };

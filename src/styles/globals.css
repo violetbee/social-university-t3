@@ -239,3 +239,124 @@ nprogress {
 .hoverButton {
   @apply rounded-full border-[#888] bg-white hover:-translate-x-1 hover:-translate-y-1 hover:shadow-[0.25rem_0.25rem_#333];
 }
+
+.hr {
+  width: 100%;
+  height: 1px;
+  display: block;
+  position: relative;
+  margin-bottom: 0em;
+  opacity: 10%;
+}
+
+.hr:after,
+.hr:before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  bottom: 50%;
+  left: 0;
+}
+
+.hr:before {
+  background: linear-gradient(
+    90deg,
+    #10111f 0%,
+    #10111f 50%,
+    transparent 50%,
+    transparent 100%
+  );
+  background-size: 15px;
+  background-position: center;
+  z-index: 1;
+}
+
+.hr:after {
+  transition:
+    opacity 0.3s ease,
+    animation 0.3s ease;
+  background: linear-gradient(
+    to right,
+    #62efab 5%,
+    #f2ea7d 15%,
+    #f2ea7d 25%,
+    #ff8797 35%,
+    #ff8797 45%,
+    #e1a4f4 55%,
+    #e1a4f4 65%,
+    #82fff4 75%,
+    #82fff4 85%,
+    #62efab 95%
+  );
+  background-size: 200%;
+  background-position: 0%;
+  animation: bar 15s linear infinite;
+}
+
+@keyframes bar {
+  0% {
+    background-position: 0%;
+  }
+  100% {
+    background-position: 200%;
+  }
+}
+
+.hr.anim:before {
+  background: linear-gradient(
+    90deg,
+    #10111f 0%,
+    #10111f 5%,
+    transparent 5%,
+    transparent 10%,
+    #10111f 10%,
+    #10111f 15%,
+    transparent 15%,
+    transparent 20%,
+    #10111f 20%,
+    #10111f 25%,
+    transparent 25%,
+    transparent 30%,
+    #10111f 30%,
+    #10111f 35%,
+    transparent 35%,
+    transparent 40%,
+    #10111f 40%,
+    #10111f 45%,
+    transparent 45%,
+    transparent 50%,
+    #10111f 50%,
+    #10111f 55%,
+    transparent 55%,
+    transparent 60%,
+    #10111f 60%,
+    #10111f 65%,
+    transparent 65%,
+    transparent 70%,
+    #10111f 70%,
+    #10111f 75%,
+    transparent 75%,
+    transparent 80%,
+    #10111f 80%,
+    #10111f 85%,
+    transparent 85%,
+    transparent 90%,
+    #10111f 90%,
+    #10111f 95%,
+    transparent 95%,
+    transparent 100%
+  );
+  background-size: 150px;
+  background-position: center;
+  z-index: 1;
+  animation: bar 120s linear infinite;
+}
+
+.hr.anim:hover:before {
+  animation-duration: 20s;
+}
+
+.hr.anim:hover:after {
+  animation-duration: 2s;
+}
