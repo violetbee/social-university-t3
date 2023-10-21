@@ -1,16 +1,16 @@
 import { GetServerSidePropsContext } from "next";
-import Events from "../../components/Cards/Event/MultiEvent";
+// import Events from "../../components/Cards/Event/MultiEvent";
 import RootLayout from "../../components/Layouts/RootLayout";
 import { getServerAuthSession } from "../../server/common/get-server-auth-session";
-import withDashboardSection from "../../components/HoC/withDashboardSection";
-import DiscoverYourCity from "../../components/Dashboard/DiscoverYourCitySection";
+// import withDashboardSection from "../../components/HoC/withDashboardSection";
+// import DiscoverYourCity from "../../components/Dashboard/DiscoverYourCitySection";
 import Image from "next/image";
-import MultiPost from "../../components/Post/MultiPost";
-import Table from "../../components/Table/Table";
+// import MultiPost from "../../components/Post/MultiPost";
+// import Table from "../../components/Table/Table";
 import { ReactElement } from "react";
 import DashboardLayout from "../../components/Layouts/DashboardLayout";
 import { AiTwotoneLike } from "react-icons/ai";
-import { FaComments } from "react-icons/fa";
+// import { FaComments } from "react-icons/fa";
 import { PiStudentLight } from "react-icons/pi";
 import { TbAward } from "react-icons/tb";
 import { LiaSchoolSolid } from "react-icons/lia";
@@ -23,19 +23,19 @@ import {
 } from "react-icons/io5";
 
 const Dashboard = () => {
-  const EventsWithExpanded = withDashboardSection(Events, "Etkinlikler", 4);
-  const FeaturedSchoolClubs = withDashboardSection(Table, "Seçkin Kulüpler", 4);
-  const PostsWithExpanded = withDashboardSection(
-    MultiPost,
-    "Trend Gönderiler",
-    2,
-  );
-  const DiscoverYourCityExpanded = withDashboardSection(
-    DiscoverYourCity,
-    <>
-      <span className="text-green-400">{"Samsun"}</span> Şehrini Keşfet
-    </>,
-  );
+  // const EventsWithExpanded = withDashboardSection(Events, "Etkinlikler", 4);
+  // const FeaturedSchoolClubs = withDashboardSection(Table, "Seçkin Kulüpler", 4);
+  // const PostsWithExpanded = withDashboardSection(
+  //   MultiPost,
+  //   "Trend Gönderiler",
+  //   2,
+  // );
+  // const DiscoverYourCityExpanded = withDashboardSection(
+  //   DiscoverYourCity,
+  //   <>
+  //     <span className="text-green-400">{"Samsun"}</span> Şehrini Keşfet
+  //   </>,
+  // );
 
   return (
     <>
@@ -73,8 +73,8 @@ const Dashboard = () => {
                   <IoSchoolOutline size={32} />
                 </div>
                 <div className="flex flex-col">
-                  <span className="text-whitish/60">Samsun Üniversitesi</span>
-                  <span className="font-extralight text-whitish/20">
+                  <span className="text-whitish/90">Samsun Üniversitesi</span>
+                  <span className="font-extralight text-whitish/50">
                     Samsun Üniversitesi 2021-2022 Eğitim-Öğretim Yılı Mezuniyet
                     Töreni
                   </span>
@@ -85,8 +85,8 @@ const Dashboard = () => {
                   <IoLocationOutline size={32} />
                 </div>
                 <div className="flex flex-col">
-                  <span className="text-whitish/60">Samsun Üniversitesi</span>
-                  <span className="font-extralight text-whitish/20">
+                  <span className="text-whitish/90">Samsun Üniversitesi</span>
+                  <span className="font-extralight text-whitish/50">
                     Samsun Üniversitesi 2021-2022 Eğitim-Öğretim Yılı Mezuniyet
                     Töreni
                   </span>
@@ -98,7 +98,7 @@ const Dashboard = () => {
                 </div>
                 <div className="flex flex-col">
                   <span className="text-whitish/60">Samsun Üniversitesi</span>
-                  <span className="font-extralight text-whitish/20">
+                  <span className="font-extralight text-whitish/50">
                     Samsun Üniversitesi 2021-2022 Eğitim-Öğretim Yılı Mezuniyet
                     Töreni
                   </span>
@@ -155,14 +155,14 @@ const Dashboard = () => {
         <DiscoverYourCityExpanded /> */}
 
       <div className="grid grid-cols-3 gap-6">
-        <div className="col-span-2">
+        <div className="col-span-3 xl:col-span-2">
           <div className="flex items-center justify-between gap-5">
             <h3 className="text-2xl font-semibold">Akış</h3>
             <button className="rounded-md border border-darkHelper bg-darkBackground p-2 px-4 text-white duration-150 hover:bg-white hover:text-darkBackground">
               Tümünü Gör
             </button>
           </div>
-          <div className="mt-5 grid grid-cols-3 gap-4">
+          <div className="mt-5 grid grid-cols-1 gap-4 lg:grid-cols-2 2xl:grid-cols-3">
             <Card title="Deneme" category="Serbest Alan" />
             <Card
               title="Bu uzun bir başlıktır, bayağı uzun"
@@ -184,8 +184,8 @@ const Dashboard = () => {
           </div>
         </div>
         <div
-          className="col-span-1 
-        rounded-md border border-darkHelper bg-[#101117] shadow-md
+          className="col-span-3 rounded-md 
+        border border-darkHelper bg-[#101117] shadow-md xl:col-span-1
         "
         >
           <div className="flex items-center justify-between gap-5 p-4">
@@ -195,7 +195,6 @@ const Dashboard = () => {
             </button>
           </div>
           <b className="hr anim"></b>
-          {/* en başarılı 5 kullanıcıyı listele, kullanıcı resmi, adı, bölümü ve üniversitesi ve puanı yazsın */}
           <div className="flex flex-col gap-4 py-4 pl-8 pr-4">
             <MostSuccessfulUser
               user={{
@@ -263,7 +262,7 @@ export const getServerSideProps = async (
   }
 };
 
-function Card({ title, category }) {
+function Card({ title, category }: { title: string; category: string }) {
   return (
     <div
       className={`flex flex-col gap-4 rounded-xl border border-l-4 border-darkHelper ${
@@ -332,7 +331,15 @@ function Card({ title, category }) {
   );
 }
 
-const MostSuccessfulUser = ({ user }) => {
+const MostSuccessfulUser = ({
+  user,
+}: {
+  user: {
+    rank: number;
+    name: string;
+    department: string;
+  };
+}) => {
   return (
     <div className="relative">
       <div
@@ -349,8 +356,6 @@ const MostSuccessfulUser = ({ user }) => {
         {user.rank}
       </div>
       <div className="relative flex justify-between rounded-md border border-darkHelper bg-darkBackground px-4 py-2">
-        {/* Kullanıcının sırasını belirten bir absolute item eklenecek */}
-
         <div className="flex items-center gap-3">
           <div className="flex h-12 w-12 items-center justify-center rounded-full bg-darkBackground">
             <img
@@ -366,15 +371,11 @@ const MostSuccessfulUser = ({ user }) => {
         <div className="flex items-center justify-between gap-3">
           <div className="flex items-center gap-2">
             <AiTwotoneLike size={24} className="text-green-500" />
-            <span className="mt-1 font-semibold text-green-500">
-              +{Math.ceil(Math.random() * 1000)}
-            </span>
+            <span className="mt-1 font-semibold text-green-500">+44</span>
           </div>
           <div className="flex items-center gap-2">
             <BsBookmarkStarFill size={24} className="text-yellow-500" />
-            <span className="mt-1 font-semibold text-yellow-500">
-              +{Math.ceil(Math.random() * 50)}
-            </span>
+            <span className="mt-1 font-semibold text-yellow-500">+32</span>
           </div>
         </div>
       </div>

@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useSelector } from "react-redux";
-import Image from "next/image";
 import { IPostSlicer } from "../../../types/post";
 import { useForm } from "react-hook-form";
 import { AnketForm, GonderiForm, EtkinlikForm, DosyaForm } from "./particles";
@@ -8,6 +7,10 @@ import { trpc } from "../../../utils/trpc";
 import { uniqueFileName } from "../../../utils/func";
 import instance from "../../../utils/axios";
 import { memo } from "react";
+import { TfiFiles, TfiLayoutListPost } from "react-icons/tfi";
+import { MdEmojiEvents } from "react-icons/md";
+import { RiQuestionAnswerLine, RiSurveyLine } from "react-icons/ri";
+import { SiHomeadvisor } from "react-icons/si";
 
 const PublishPostSection = () => {
   const isOpen = useSelector((state: IPostSlicer) => state.app.isShareOpen);
@@ -81,97 +84,76 @@ const PublishPostSection = () => {
       }  col-span-7 grid transition-all duration-300 ease-in-out`}
     >
       <form
-        onSubmit={handleSubmit(onSubmit)}
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleSubmit(onSubmit);
+        }}
         className="grid w-full grid-cols-1 overflow-hidden rounded-md bg-white shadow-md dark:border dark:border-darkHelper dark:bg-darkSecondary"
       >
         <div
           className={`${
             option.formType && "hidden"
-          } grid w-full grid-cols-1 justify-between lg-m:grid-cols-2 lg:grid-cols-4`}
+          } grid w-full grid-cols-1 justify-between divide-y divide-darkHelper dark:bg-darkSecondary lg-m:grid-cols-2 lg:grid-cols-6 lg:divide-x`}
         >
-          <label className="group flex cursor-pointer items-center justify-evenly gap-3 p-4 dark:hover:bg-darkBackground">
-            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#525252] duration-150 group-hover:bg-darkPrimary">
-              <Image
-                src={"/svg/plus.svg"}
-                alt="newPost"
-                width={100}
-                height={100}
-                className="h-10 w-10 shrink-0"
-              ></Image>
-            </div>
-            <div className="flex flex-col">
-              <h1 className="text-lg font-semibold ">Gönderi Paylaş</h1>
-              <input
-                type="radio"
-                value="gonderi"
-                {...register("formType")}
-                className="hidden"
-              />
-              Bir gönderi paylaşmak için buraya tıklayın.
-            </div>
+          <label className="flex h-full cursor-pointer flex-col items-center justify-center gap-2 p-4 hover:bg-darkBackground">
+            <TfiLayoutListPost className="h-6 w-6" />
+            Gönderi Paylaş
+            <input
+              type="radio"
+              value="gonderi"
+              {...register("formType")}
+              className="hidden"
+            />
           </label>
-          <label className="group flex cursor-pointer items-center justify-evenly gap-3 p-4 dark:hover:bg-darkBackground">
-            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#525252] duration-150 group-hover:bg-darkPrimary">
-              <Image
-                src={"/svg/fileD.svg"}
-                alt="newPost"
-                width={100}
-                height={100}
-                className="h-5 w-5 shrink-0"
-              ></Image>
-            </div>
-            <div className="flex flex-col">
-              <h1 className="text-lg font-semibold ">Dosya Paylaş</h1>
-              <input
-                type="radio"
-                value="dosya"
-                {...register("formType")}
-                className="hidden"
-              />
-              Bir gönderi paylaşmak için buraya tıklayın.
-            </div>
+          <label className="flex h-full cursor-pointer flex-col items-center justify-center gap-2 p-4 hover:bg-darkBackground">
+            <TfiFiles className="h-6 w-6" />
+            Dosya Paylaş
+            <input
+              type="radio"
+              value="dosya"
+              {...register("formType")}
+              className="hidden"
+            />
           </label>
-          <label className="group flex cursor-pointer items-center justify-evenly gap-3 p-4 dark:hover:bg-darkBackground">
-            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#525252] duration-150 group-hover:bg-darkPrimary">
-              <Image
-                src={"/svg/plus.svg"}
-                alt="newPost"
-                width={100}
-                height={100}
-                className="h-10 w-10"
-              ></Image>
-            </div>
-            <div className="flex flex-col">
-              <h1 className="text-lg font-semibold ">Etkinlik Oluştur</h1>
-              <input
-                type="radio"
-                value="etkinlik"
-                {...register("formType")}
-                className="hidden"
-              />
-              Bir gönderi paylaşmak için buraya tıklayın.
-            </div>
+          <label className="flex h-full cursor-pointer flex-col items-center justify-center gap-2 p-4 hover:bg-darkBackground">
+            <MdEmojiEvents className="h-6 w-6" />
+            Etkinlik Oluştur
+            <input
+              type="radio"
+              value="etkinlik"
+              {...register("formType")}
+              className="hidden"
+            />
           </label>
-          <label className="group flex cursor-pointer items-center justify-evenly gap-3 p-4 dark:hover:bg-darkBackground">
-            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#525252] duration-150 group-hover:bg-darkPrimary">
-              <Image
-                src={"/svg/plus.svg"}
-                alt="newPost"
-                width={100}
-                height={100}
-                className="h-10 w-10 shrink-0"
-              ></Image>
-            </div>
-            <div className="flex flex-col">
-              <h1 className="text-lg font-semibold ">Anket Oluştur</h1>
-              <input
-                type="radio"
-                value="anket"
-                {...register("formType")}
-                className="hidden"
-              />
-              Bir gönderi paylaşmak için buraya tıklayın.
-            </div>
+          <label className="flex h-full cursor-pointer flex-col items-center justify-center gap-2 p-4 hover:bg-darkBackground">
+            <RiQuestionAnswerLine className="h-6 w-6" />
+            Soru Sor
+            <input
+              type="radio"
+              value="soru-cevap"
+              {...register("formType")}
+              className="hidden"
+            />
+          </label>
+          <label className="flex h-full cursor-pointer flex-col items-center justify-center gap-2 p-4 hover:bg-darkBackground">
+            <RiSurveyLine className="h-6 w-6" />
+            Anket Oluştur
+            <input
+              type="radio"
+              value="anket"
+              {...register("formType")}
+              className="hidden"
+            />
+          </label>
+          <label className="flex h-full cursor-pointer flex-col items-center justify-center gap-2 p-4 hover:bg-darkBackground">
+            <SiHomeadvisor className="h-6 w-6" />
+            İlan Oluştur
+            <input
+              type="radio"
+              value="ilan"
+              {...register("formType")}
+              className="hidden"
+            />
           </label>
         </div>
         {option.formType === "gonderi" && (

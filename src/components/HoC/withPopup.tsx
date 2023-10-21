@@ -19,6 +19,7 @@ function withPopup(Trigger: FC<TriggerProps>, WrappedComponent: FC) {
 
     return (
       <>
+        {open && <div className="fixed inset-0 z-10 bg-black opacity-50" />}
         <Trigger setOpen={() => setOpen(!open)} />
         <Popup
           open={open}
