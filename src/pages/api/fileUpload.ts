@@ -1,6 +1,8 @@
 import multer from "multer";
 import { NextApiRequest, NextApiResponse } from "next";
-import nextConnect from "next-connect";
+import { createRouter } from "next-connect";
+
+const router = createRouter<NextApiRequest, NextApiResponse>();
 
 const upload = multer({
   storage: multer.diskStorage({
@@ -11,30 +13,29 @@ const upload = multer({
   }),
 });
 
-const uploadRoute = nextConnect({
-  onError(error, req: NextApiRequest, res: NextApiResponse) {
-    res
-      .status(501)
-      .json({ error: `Sorry something Happened! ${error.message}` });
-  },
-  onNoMatch(req: NextApiRequest, res: NextApiResponse) {
-    res.status(405).json({ error: `Method '${req.method}' Not Allowed` });
-  },
-});
+router
+  .use(() => {
+    upload.single("coverImage");
+  })
+  .post((req, res) => {
+    console.log(req.body);
+    res.status(200).json({ message: "success" });
+  });
 
-const uploadMiddleware = upload.array("theFiles", 5);
-
-uploadRoute.use(uploadMiddleware);
-
-uploadRoute.post((req, res) => {
-  console.log(req.body);
-  res.status(200).json({ message: "success" });
-});
-
-export default uploadRoute;
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse,
+) {
+  try {
+    await router.run(req, res);
+  } catch (e) {
+    console.log(e.message);
+    res.status(400).json({ error: e.message });
+  }
+}
 
 export const config = {
   api: {
-    bodyParser: false, // Disallow body parsing, consume as stream
+    bodyParser: false,
   },
 };
