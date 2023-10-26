@@ -11,6 +11,8 @@ import Image from "next/image";
 function GonderiForm({ cancelProcess }: { cancelProcess: () => void }) {
   const { register, watch, handleSubmit, reset, setValue } = useForm();
 
+  const watchForm = watch();
+
   const ctx = trpc.useContext();
   const createTextPost = trpc.post.createTextPost.useMutation();
   const getUserUniversityId = trpc.user.getUserUniversityById.useQuery();
@@ -33,17 +35,17 @@ function GonderiForm({ cancelProcess }: { cancelProcess: () => void }) {
   };
 
   useEffect(() => {
-    if (!watch().coverImage || watch().coverImage.length === 0) {
+    if (!watchForm.coverImage || watchForm.coverImage.length === 0) {
       setPreview("");
       return;
     } else {
-      const imgUrl = URL.createObjectURL(watch().coverImage[0]);
+      const imgUrl = URL.createObjectURL(watchForm.coverImage[0]);
       setPreview(imgUrl);
       return () => {
         URL.revokeObjectURL(imgUrl);
       };
     }
-  }, [watch().coverImage]);
+  }, [watchForm.coverImage]);
 
   useEffect(() => {
     setValue("tags", tags.join(","));
@@ -67,6 +69,7 @@ function GonderiForm({ cancelProcess }: { cancelProcess: () => void }) {
           onSuccess: () => {
             reset();
             ctx.invalidate();
+            cancelProcess();
           },
         },
       );
@@ -152,7 +155,7 @@ function GonderiForm({ cancelProcess }: { cancelProcess: () => void }) {
       <div className="flex flex-col gap-2">
         <span className="text-lg font-semibold">Gönderi Kapak Resmi</span>
         <div className="relative flex h-32 w-full border-2 border-dashed border-darkHelper hover:border-gray-300 hover:bg-gray-100 dark:bg-darkBackground">
-          {watch().coverImage?.length > 0 && (
+          {watchForm.coverImage?.length > 0 && (
             <button
               className="absolute right-2 top-2"
               onClick={() => {
@@ -167,7 +170,8 @@ function GonderiForm({ cancelProcess }: { cancelProcess: () => void }) {
               preview ? "cursor-auto" : "cursor-pointer"
             } flex-col items-center justify-center`}
           >
-            {watch().coverImage && Array.from(watch().coverImage).length > 0 ? (
+            {watchForm.coverImage &&
+            Array.from(watchForm.coverImage).length > 0 ? (
               <div className="flex items-center gap-4">
                 {preview ? (
                   <Image alt="as" src={preview} width={200} height={200} />
@@ -189,7 +193,7 @@ function GonderiForm({ cancelProcess }: { cancelProcess: () => void }) {
                 )}
 
                 <p className="rounded-md border-[1px] border-[#999]/10 px-2 py-1 text-sm text-gray-500 group-hover:text-gray-600">
-                  {watch().coverImage[0].name}
+                  {watchForm.coverImage[0].name}
                 </p>
               </div>
             ) : (
@@ -203,7 +207,7 @@ function GonderiForm({ cancelProcess }: { cancelProcess: () => void }) {
               onChange={(e) => {
                 setValue("coverImage", e.target.files);
               }}
-              disabled={watch().coverImage?.length > 0 ? true : false}
+              disabled={watchForm.coverImage?.length > 0 ? true : false}
             />
           </label>
         </div>

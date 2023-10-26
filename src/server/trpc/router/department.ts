@@ -6,14 +6,14 @@ export const departmentRouter = router({
     .input(
       z.object({
         universityId: z.string(),
-      })
+      }),
     )
     .query(async ({ ctx, input }) => {
       const departments = await ctx.prisma.universityOnDepartment.findMany({
         where: {
           universityId: input.universityId,
         },
-        include: {
+        select: {
           department: true,
         },
       });
@@ -23,14 +23,14 @@ export const departmentRouter = router({
     .input(
       z.object({
         departmentId: z.string(),
-      })
+      }),
     )
     .query(async ({ ctx, input }) => {
       const classLevels = await ctx.prisma.departmentsOnClassLevel.findMany({
         where: {
           departmentId: input.departmentId,
         },
-        include: {
+        select: {
           classLevel: true,
         },
       });
@@ -42,7 +42,7 @@ export const departmentRouter = router({
       z.object({
         classLevelId: z.string(),
         departmentId: z.string(),
-      })
+      }),
     )
     .query(async ({ ctx, input }) => {
       const classes = await ctx.prisma.class.findMany({
@@ -58,7 +58,7 @@ export const departmentRouter = router({
     .input(
       z.object({
         userId: z.string(),
-      })
+      }),
     )
     .query(async ({ ctx, input }) => {
       const user = await ctx.prisma.user.findUnique({

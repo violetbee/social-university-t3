@@ -11,7 +11,7 @@ export const postRouter = router({
         categoryId: z.string(),
         universityId: z.string(),
         image: z.string().nullable(),
-      })
+      }),
     )
     .mutation(async ({ ctx, input }) => {
       await ctx.prisma.textTypePost.create({
@@ -29,45 +29,62 @@ export const postRouter = router({
   createDocPost: publicProcedure
     .input(
       z.object({
-        title: z.string(),
-        content: z.string(),
+        title: z
+          .string()
+          .min(4, "Başlık için minimum 4 karakter gerekmektedir.")
+          .max(40, "Başlık için maksimum 40 karakter kullanabilirsiniz."),
+        content: z
+          .string()
+          .min(10, "Açıklama için minimum 10 karakter gerekmektedir.")
+          .max(300, "Açıklama için maksimum 300 karakter kullanabilirsiniz."),
         departmentId: z.string(),
         classId: z.string(),
         classLevelId: z.string(),
         universityId: z.string(),
-        files: z.array(
-          z.object({
-            name: z.string(),
-            size: z.number(),
-            type: z.string(),
-            url: z.string(),
-          })
-        ),
-      })
+        files: z
+          .array(
+            z.object({
+              name: z.string(),
+              size: z.number(),
+              type: z.string(),
+              url: z.string(),
+            }),
+          )
+          .min(
+            1,
+            "Dosya türünde bir gönderi oluşturabilmek için en az bir dosya yüklemeniz gerekmektedir.",
+          )
+          .max(8, "Bir gönderi için maksimum 8 dosya ekleyebilirsiniz."),
+      }),
     )
     .mutation(async ({ ctx, input }) => {
-      await ctx.prisma.docTypePost.create({
-        data: {
-          title: input.title,
-          slug: slugify(input.title),
-          content: input.content,
-          classId: input.classId,
-          classLevelId: input.classLevelId,
-          universityId: input.universityId,
-          departmentId: input.departmentId,
-          userId: ctx.session?.user?.id as string,
-          files: {
-            createMany: {
-              data: input.files.map((file) => ({
-                name: file.name,
-                size: file.size,
-                type: file.type,
-                url: file.url,
-              })),
+      try {
+        await ctx.prisma.docTypePost.create({
+          data: {
+            title: input.title,
+            slug: slugify(input.title),
+            content: input.content,
+            classId: input.classId,
+            classLevelId: input.classLevelId,
+            universityId: input.universityId,
+            departmentId: input.departmentId,
+            userId: ctx.session?.user?.id as string,
+            files: {
+              createMany: {
+                data: input.files.map((file) => ({
+                  name: file.name,
+                  size: file.size,
+                  type: file.type,
+                  url: file.url,
+                })),
+              },
             },
           },
-        },
-      });
+        });
+        return { message: "Gönderiniz başarıyla oluşturuldu." };
+      } catch (e) {
+        throw new Error((e as Error).message);
+      }
     }),
   removePosts: publicProcedure.mutation(async ({ ctx }) => {
     await ctx.prisma.textTypePost.deleteMany();
@@ -77,7 +94,7 @@ export const postRouter = router({
       z.object({
         query: z.string().nullable(),
         slug: z.string().nullable(),
-      })
+      }),
     )
     .query(async ({ ctx, input }) => {
       const textPosts = await ctx.prisma.textTypePost.findMany({
@@ -126,7 +143,7 @@ export const postRouter = router({
       ];
 
       const sortedPostsByCreatedAt = textPostsAndDocPostsTimeAgo.sort(
-        (a, b) => Number(b.createdAt) - Number(a.createdAt)
+        (a, b) => Number(b.createdAt) - Number(a.createdAt),
       );
 
       return { posts: sortedPostsByCreatedAt };
@@ -135,7 +152,7 @@ export const postRouter = router({
     .input(
       z.object({
         slug: z.string(),
-      })
+      }),
     )
     .query(async ({ ctx, input }) => {
       const textPosts = await ctx.prisma.textTypePost.findMany({
