@@ -65,7 +65,7 @@ export interface PostUserBar {
   user: User;
 }
 
-export interface ICategoryProps {
+export interface IMenuSectionProps {
   params?: {
     [key: string]: string | string[] | ParsedUrlQuery;
   };

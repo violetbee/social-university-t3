@@ -1,4 +1,4 @@
-import { League_Spartan } from "@next/font/google";
+import { League_Spartan } from "next/font/google";
 // import RightSideBar from "./SideBar/RightSideBar";
 import Header from "../Header/Header";
 import { useSession } from "next-auth/react";

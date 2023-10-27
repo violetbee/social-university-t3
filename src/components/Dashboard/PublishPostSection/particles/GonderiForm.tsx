@@ -53,22 +53,26 @@ function GonderiForm({ cancelProcess }: { cancelProcess: () => void }) {
 
   const handlePost = async (data: any) => {
     try {
-      const res = await instance.post("/api/imageUpload", {
-        data: await getBase64(data.coverImage[0]),
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      let image = "";
+      if (data.coverImage && data.coverImage.length > 0) {
+        const res = await instance.post("/api/imageUpload", {
+          data: await getBase64(data.coverImage[0]),
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        });
+        image = res.data.url;
+      }
       await createTextPost.mutateAsync(
         {
           ...data,
           universityId: getUserUniversityId.data?.university?.id,
-          image: res.data.name,
+          image: image ? image : null,
         },
         {
           onSuccess: () => {
             reset();
-            ctx.invalidate();
+            ctx.post.invalidate();
             cancelProcess();
           },
         },
@@ -98,7 +102,7 @@ function GonderiForm({ cancelProcess }: { cancelProcess: () => void }) {
           <span className="text-lg font-semibold">Kategori Seç</span>
           <div className="relative w-full">
             <select
-              {...register("category")}
+              {...register("categoryId")}
               className="block w-full rounded-sm border-b-[1px] border-b-gray-800/20 bg-darkBackground px-2 py-[9px] pr-10 text-base focus:border-indigo-500 focus:outline-none sm:text-lg"
             >
               {getCategories.data?.map((item: any) => (

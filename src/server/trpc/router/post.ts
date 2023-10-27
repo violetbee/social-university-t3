@@ -89,11 +89,10 @@ export const postRouter = router({
   removePosts: publicProcedure.mutation(async ({ ctx }) => {
     await ctx.prisma.textTypePost.deleteMany();
   }),
-  getAllTypePosts: publicProcedure
+  getAllPosts: publicProcedure
     .input(
       z.object({
-        query: z.string().nullable(),
-        slug: z.string().nullable(),
+        universityId: z.string(),
       }),
     )
     .query(async ({ ctx, input }) => {
@@ -102,51 +101,30 @@ export const postRouter = router({
           createdAt: "desc",
         },
         where: {
-          universityId: input.query,
-          category: {
-            slug: input.slug || undefined,
-          },
+          universityId: input.universityId,
+          // category: {
+          //   slug: input.slug || undefined,
+          // },
         },
         include: {
-          user: true,
+          user: {
+            include: {
+              department: true,
+            },
+          },
           category: true,
           likes: true,
         },
       });
 
-      const docPosts = await ctx.prisma.docTypePost.findMany({
-        orderBy: {
-          createdAt: "desc",
-        },
-        where: {
-          universityId: input.query,
-        },
-        include: {
-          user: true,
-          likes: true,
-          files: true,
-          department: true,
-          class: true,
-          classLevel: true,
-        },
-      });
-
-      const textPostsAndDocPostsTimeAgo = [
+      const textPostsTimeAgo = [
         ...textPosts.map((post) => ({
-          ...post,
-          timeAgo: publishedTimeAgo(post.createdAt),
-        })),
-        ...docPosts.map((post) => ({
           ...post,
           timeAgo: publishedTimeAgo(post.createdAt),
         })),
       ];
 
-      const sortedPostsByCreatedAt = textPostsAndDocPostsTimeAgo.sort(
-        (a, b) => Number(b.createdAt) - Number(a.createdAt),
-      );
-
-      return { posts: sortedPostsByCreatedAt };
+      return { posts: textPostsTimeAgo };
     }),
   getTextPostsByCategory: publicProcedure
     .input(
@@ -169,7 +147,6 @@ export const postRouter = router({
             include: {
               department: true,
               university: true,
-              class: true,
               classLevel: true,
             },
           },
@@ -186,7 +163,6 @@ export const postRouter = router({
           include: {
             department: true,
             university: true,
-            class: true,
             classLevel: true,
           },
         },

@@ -1,4 +1,4 @@
-import { Dosis } from "@next/font/google";
+import { Dosis } from "next/font/google";
 import KeyImage from "../../img/key.png";
 import Image from "next/image";
 import { signIn } from "next-auth/react";

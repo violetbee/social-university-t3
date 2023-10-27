@@ -234,7 +234,7 @@ export default Dashboard;
 
 Dashboard.getLayout = (page: ReactElement) => (
   <RootLayout>
-    <DashboardLayout params={page.props.params}>{page}</DashboardLayout>
+    <DashboardLayout>{page}</DashboardLayout>
   </RootLayout>
 );
 

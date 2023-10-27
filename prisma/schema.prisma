@@ -63,8 +63,6 @@ model User {
     departmentId  String?
     schoolClub    SchoolClub?    @relation(fields: [schoolClubId], references: [id], onDelete: Cascade)
     schoolClubId  String?
-    class         Class?         @relation(fields: [classId], references: [id], onDelete: Cascade)
-    classId       String?
     classLevel    ClassLevel?    @relation(fields: [classLevelId], references: [id], onDelete: Cascade)
     classLevelId  String?
     DocTypePost   DocTypePost[]
@@ -120,7 +118,6 @@ model Class {
     slug         String        @unique
     department   Department    @relation(fields: [departmentId], references: [id], onDelete: Cascade)
     departmentId String
-    users        User[]
     classLevel   ClassLevel?   @relation(fields: [classLevelId], references: [id])
     classLevelId String?
     docTypePosts DocTypePost[]

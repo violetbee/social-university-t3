@@ -1,16 +1,15 @@
-import Category from "../Dashboard/CategoriesSection";
-import { ICategoryProps } from "../../types/app";
+import MenuSection from "../Dashboard/MenuSection";
+import { IMenuSectionProps } from "../../types/app";
 
 export default function DashboardLayout({
   children,
-  params,
 }: {
   children: React.ReactNode;
-  params?: ICategoryProps;
+  params?: IMenuSectionProps;
 }) {
   return (
     <>
-      <Category params={params} />
+      <MenuSection />
       {children}
     </>
   );

@@ -2,7 +2,7 @@ import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { FC } from "react";
 // import Image from "next/image";
-import { Josefin_Sans } from "@next/font/google";
+import { Josefin_Sans } from "next/font/google";
 import withPopup from "../HoC/withPopup";
 import { AfterAuthHeaderSection } from "./AuthedUser/TriggerUserPopupProfile";
 import { UserProfile } from "./AuthedUser/PoppedUpUserProfile";
