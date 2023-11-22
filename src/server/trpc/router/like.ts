@@ -23,10 +23,11 @@ export const likeRouter = router({
       return total;
     }),
 
-  like: publicProcedure
+  handleLike: publicProcedure
     .input(
       z.object({
         postId: z.string(),
+        isLiked: z.boolean(),
       }),
     )
     .mutation(async ({ input, ctx }) => {
@@ -43,7 +44,7 @@ export const likeRouter = router({
           data: {
             postId: input.postId,
             userId: ctx?.session?.user?.id as string,
-            isLike: true,
+            isLike: input.isLiked,
           },
         });
       }
@@ -57,5 +58,21 @@ export const likeRouter = router({
           },
         });
       }
+    }),
+  isUserLiked: publicProcedure
+    .input(z.object({ postId: z.string() }))
+    .query(async ({ input, ctx }) => {
+      const liked = await ctx.prisma.like.findUnique({
+        where: {
+          postId_userId: {
+            postId: input.postId,
+            userId: ctx?.session?.user?.id as string,
+          },
+        },
+      });
+      if (!liked) {
+        return "notLiked";
+      }
+      return liked.isLike;
     }),
 });

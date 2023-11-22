@@ -2,6 +2,7 @@ import { Category, Department, User } from "@prisma/client";
 import Image from "next/image";
 
 import Link from "next/link";
+import { FaRegComments } from "react-icons/fa";
 import { MdOutlineReport } from "react-icons/md";
 
 type Props = {
@@ -11,9 +12,12 @@ type Props = {
   timeAgo?: string;
   image?: string | null;
   slug?: string;
-  category: Pick<Category, "name" | "color"> | null;
+  category: Pick<Category, "name" | "color" | "slug"> | null;
   user: Pick<User, "id" | "name" | "surname" | "image"> & {
     department?: Pick<Department, "name"> | null;
+  };
+  _count?: {
+    comments: number;
   };
 };
 
@@ -25,11 +29,12 @@ function PostBox({
   timeAgo,
   image,
   slug,
+  _count,
 }: Props) {
   return (
     <Link
-      href={`/gonderi/yazi/${slug}`}
-      className={`relative rounded-xl border-l-4 bg-darkSecondary text-white shadow-md before:absolute before:-inset-1 before:z-[-1] before:rounded-xl before:bg-gradient-to-tr before:from-red-600 before:via-indigo-700 before:to-blue-800 before:opacity-0 before:transition-all before:duration-150 before:ease-in-out before:hover:z-0 before:hover:scale-105 before:hover:opacity-75 before:hover:shadow-2xl before:hover:blur-xl`}
+      href={`/yazi/${slug}`}
+      className={`relative rounded-xl border-l-4 bg-darkSecondary text-white shadow-md duration-150 hover:shadow-lg dark:border-darkPrimary dark:hover:bg-darkSecondary/50`}
       style={{ borderLeftColor: category?.color as string }}
     >
       <div className="flex flex-col gap-4 p-4">
@@ -45,8 +50,8 @@ function PostBox({
           </div>
         )}
         <div className="flex items-center justify-between">
-          <div className="text-md font-bold">
-            <h3 className="inline">{title}</h3>
+          <div>
+            <h3 className="text-md inline font-bold">{title}</h3>
             {timeAgo && (
               <span className="ml-2 text-xs font-extralight text-whitish/50">
                 {timeAgo}
@@ -65,12 +70,38 @@ function PostBox({
           </p>
         )}
         <div className="flex flex-wrap items-center justify-between">
-          <Link
-            href="#"
-            className="shrink-0 rounded-md bg-darkBackground px-2 py-1 pt-[6px] text-sm"
-          >
-            #{category?.name}
-          </Link>
+          {user && (
+            <div className="flex items-center gap-2">
+              <Image
+                src={(user.image as string) || "/images/avatar-male.svg"}
+                alt={user.name as string}
+                width={20}
+                height={20}
+                className="rounded-full"
+              />
+              <span className="text-xs font-light text-whitish">
+                {user.name}
+              </span>
+            </div>
+          )}
+
+          <div className="flex items-center gap-2 rounded-md">
+            {_count && (
+              <div className="flex shrink-0 items-center gap-2 rounded-md border border-darkHelper bg-darkBackground px-2 text-white">
+                <FaRegComments />
+                <span className="pb-[1px] pt-[5px]">{_count?.comments}</span>
+              </div>
+            )}
+            <Link
+              href={{
+                pathname: "/gonderiler",
+                query: { category: category?.slug },
+              }}
+              className="shrink-0 rounded-md border border-darkHelper bg-darkBackground px-2 py-[2px] pt-[4px] text-white duration-150 hover:bg-white hover:text-darkBackground"
+            >
+              #{category?.name}
+            </Link>
+          </div>
         </div>
       </div>
     </Link>

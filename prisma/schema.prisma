@@ -169,13 +169,13 @@ model TextTypePost {
     title        String
     content      String
     image        String?
-    tags         Tag[]
     category     Category?   @relation(fields: [categoryId], references: [id], onDelete: Cascade)
     user         User        @relation(fields: [userId], references: [id], onDelete: Cascade)
     comments     Comment[]
     categoryId   String?
     userId       String
     likes        Like[]
+    tags         String[]
     university   University? @relation(fields: [universityId], references: [id])
     universityId String?
 }
@@ -186,8 +186,8 @@ model DocTypePost {
     slug         String      @unique
     title        String
     content      String
-    tags         Tag[]
     likes        Like[]
+    tags         String[]
     user         User        @relation(fields: [userId], references: [id], onDelete: Cascade)
     userId       String
     university   University? @relation(fields: [universityId], references: [id])
@@ -199,13 +199,6 @@ model DocTypePost {
     classLevel   ClassLevel? @relation(fields: [classLevelId], references: [id])
     classLevelId String?
     files        File[]
-}
-
-model Tag {
-    id           String         @id @default(cuid())
-    name         String
-    posts        TextTypePost[]
-    docTypePosts DocTypePost[]
 }
 
 model Event {

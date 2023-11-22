@@ -11,6 +11,7 @@ export const postRouter = router({
         categoryId: z.string(),
         universityId: z.string(),
         image: z.string().nullable(),
+        tags: z.array(z.string()).nullable(),
       }),
     )
     .mutation(async ({ ctx, input }) => {
@@ -23,6 +24,7 @@ export const postRouter = router({
           userId: ctx.session?.user?.id as string,
           universityId: input.universityId,
           image: input.image,
+          tags: input.tags || [],
         },
       });
     }),
@@ -93,6 +95,7 @@ export const postRouter = router({
     .input(
       z.object({
         universityId: z.string(),
+        slug: z.array(z.string()).nullish(),
       }),
     )
     .query(async ({ ctx, input }) => {
@@ -102,9 +105,9 @@ export const postRouter = router({
         },
         where: {
           universityId: input.universityId,
-          // category: {
-          //   slug: input.slug || undefined,
-          // },
+          category: {
+            slug: input.slug ? { in: input.slug } : undefined,
+          },
         },
         select: {
           id: true,
@@ -117,6 +120,7 @@ export const postRouter = router({
             select: {
               name: true,
               color: true,
+              slug: true,
             },
           },
           user: {
@@ -130,6 +134,11 @@ export const postRouter = router({
                   name: true,
                 },
               },
+            },
+          },
+          _count: {
+            select: {
+              comments: true,
             },
           },
         },
@@ -167,6 +176,7 @@ export const postRouter = router({
             select: {
               name: true,
               color: true,
+              slug: true,
             },
           },
           user: {

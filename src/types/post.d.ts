@@ -30,6 +30,7 @@ export type ISinglePost = {
   category: Category | null;
   user: User & SchoolProps;
   timeAgo: string;
+  tags: string[];
 } & (TextTypePost & DocTypePost & SchoolProps);
 
 export interface IPostSummary {

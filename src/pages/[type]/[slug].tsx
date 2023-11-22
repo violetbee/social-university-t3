@@ -1,6 +1,6 @@
 import { GetServerSideProps } from "next";
-import Layout from "../../../components/layouts/RootLayout";
-import { prisma } from "../../../server/db/client";
+import Layout from "../../components/layouts/RootLayout";
+import { prisma } from "../../server/db/client";
 import Head from "next/head";
 
 import {
@@ -16,12 +16,12 @@ import {
 import React, { ReactElement } from "react";
 import { GoCommentDiscussion } from "react-icons/go";
 import { IoIosArrowUp } from "react-icons/io";
-import { trpc } from "../../../utils/trpc";
+import { trpc } from "../../utils/trpc";
 import { ParsedUrlQuery } from "querystring";
 import Image from "next/image";
-import { ISinglePost } from "../../../types/post";
-import { DocTypePost, TextTypePost } from "@prisma/client";
-import type { NextPageWithLayout } from "../../_app";
+import { ISinglePost } from "../../types/post";
+import type { NextPageWithLayout } from "../_app";
+import Link from "next/link";
 
 type Props = {
   post: ISinglePost;
@@ -33,16 +33,18 @@ type Props = {
 const PerPost: NextPageWithLayout<Props> = ({ post, params }) => {
   const { type } = params;
 
-  // const [comment, setComment] = useState<string>("");
-
   const ctx = trpc.useContext();
-  const like = trpc.like.like.useMutation({
+  const like = trpc.like.handleLike.useMutation({
     onSuccess: () => {
       ctx.like.invalidate();
     },
   });
 
   const getAllLikes = trpc.like.totalLikes.useQuery({
+    postId: post.id,
+  });
+
+  const isUserLiked = trpc.like.isUserLiked.useQuery({
     postId: post.id,
   });
 
@@ -55,7 +57,23 @@ const PerPost: NextPageWithLayout<Props> = ({ post, params }) => {
         <meta name="description" content="Sosyal Üniversite" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="w-full pb-4 pt-8 ">
+      <div className="w-full pb-4 pt-6">
+        <div className="mb-4 flex items-center gap-2 text-sm/4 text-darkSecondary dark:text-white">
+          <div className="flex items-center gap-2">
+            <Link href="/">Anasayfa </Link>
+            <span>/</span>
+            <Link href="/gonderiler">Gönderiler </Link>
+            <span>/</span>
+            <Link
+              href="/gonderiler/[type]"
+              as={`/gonderiler/${post.category?.slug}`}
+            >
+              {post.category?.name}
+            </Link>
+            <span>/</span>
+            <span className="text-[#333] dark:text-[#777]">{post.title}</span>
+          </div>
+        </div>
         <div className="flex gap-10">
           <div className=" flex w-full flex-col gap-6 xl:w-9/12">
             <div className="relative h-72 w-full">
@@ -101,17 +119,30 @@ const PerPost: NextPageWithLayout<Props> = ({ post, params }) => {
                     onClick={() => {
                       like.mutate({
                         postId: post.id,
+                        isLiked: true,
                       });
                     }}
-                    className="cursor-pointer"
+                    className={`cursor-pointer ${
+                      isUserLiked.data !== "notLiked" && isUserLiked.data
+                        ? "text-green-700"
+                        : ""
+                    }`}
                     size={28}
                   />
                   <p className="text-[#333] dark:text-white/80">
                     {getAllLikes.data}
                   </p>
                   <IoIosArrowUp
+                    onClick={() => {
+                      like.mutate({
+                        postId: post.id,
+                        isLiked: false,
+                      });
+                    }}
                     size={28}
-                    className="rotate-180 transform cursor-pointer"
+                    className={`rotate-180 transform cursor-pointer ${
+                      isUserLiked.data ? "" : "text-red-500"
+                    }`}
                   />
                 </div>
                 <p className="text-[#333] dark:text-[#777]">{post.content}</p>
@@ -130,14 +161,22 @@ const PerPost: NextPageWithLayout<Props> = ({ post, params }) => {
                     ))}
                   </div>
                 )}
-                <div className="flex justify-between">
-                  <div className="flex items-center gap-2">
-                    <FaHashtag className="h-6 w-6 text-[#676767]" />
-                    <button className="rounded-md bg-[#ededed] px-2 py-1 text-[#6a6a6a] shadow-md dark:border dark:border-darkHelper dark:bg-darkBackground dark:text-white/80">
-                      deneme
-                    </button>
-                  </div>
-                  {/* up vote button */}
+                <div className="flex items-center gap-2">
+                  <FaHashtag className="h-6 w-6 text-[#676767]" />
+                  {post.tags.length > 0 ? (
+                    post.tags.map((tag, idx) => (
+                      <button
+                        key={idx}
+                        className="rounded-md bg-[#ededed] px-2 py-1 text-[#6a6a6a] shadow-md dark:border dark:border-darkHelper dark:bg-darkBackground dark:text-white/80"
+                      >
+                        {tag}
+                      </button>
+                    ))
+                  ) : (
+                    <span className="text-sm/4 text-[#333] dark:text-[#777]">
+                      Henüz etiket eklenmemiş
+                    </span>
+                  )}
                 </div>
               </div>
             </div>
@@ -151,7 +190,7 @@ const PerPost: NextPageWithLayout<Props> = ({ post, params }) => {
                 <button className="flex items-center justify-center gap-1  rounded-md bg-[#d2d2d2] px-4 py-2 text-[#5a5a5a] dark:border dark:border-darkHelper dark:bg-darkBackground dark:text-white">
                   İptal Et
                 </button>
-                <button className="flex items-center justify-center gap-1  rounded-md bg-darkPrimary px-4 py-2 text-white dark:border dark:border-darkHelper">
+                <button className="flex items-center justify-center gap-1  rounded-md bg-darkPrimary/30 px-4 py-2 text-white dark:border dark:border-darkHelper">
                   <GoCommentDiscussion className="mx-1 h-5 w-5 text-white" />
                   Gönder
                 </button>
@@ -232,23 +271,44 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   if (context.params) {
     const { slug, type } = context.params;
 
-    let basePost: TextTypePost | DocTypePost | null;
+    let basePost;
 
     if (type === "yazi") {
       basePost = await prisma.textTypePost.findUnique({
         where: {
           slug: String(slug),
         },
-        include: {
-          user: {
-            include: {
-              department: true,
-              university: true,
-              classLevel: true,
+        select: {
+          id: true,
+          title: true,
+          content: true,
+          createdAt: true,
+          image: true,
+          tags: true,
+          category: {
+            select: {
+              name: true,
+              slug: true,
             },
           },
-          likes: true,
-          category: true,
+          user: {
+            select: {
+              id: true,
+              name: true,
+              surname: true,
+              image: true,
+              department: {
+                select: {
+                  name: true,
+                },
+              },
+              university: {
+                select: {
+                  name: true,
+                },
+              },
+            },
+          },
         },
       });
     } else {

@@ -1,5 +1,6 @@
 import PostBox from "../../Cards/Post/PostBox";
 import { trpc } from "../../../utils/trpc";
+import Link from "next/link";
 
 const PostFlowSection = () => {
   const { data: user } = trpc.user.getUserUniversityById.useQuery();
@@ -16,9 +17,12 @@ const PostFlowSection = () => {
     <div className="col-span-3 xl:col-span-2">
       <div className="flex items-center justify-between gap-5">
         <h3 className="text-2xl font-semibold">Akış</h3>
-        <button className="rounded-md border border-darkHelper bg-darkBackground p-2 px-4 text-white duration-150 hover:bg-white hover:text-darkBackground">
+        <Link
+          href="/gonderiler"
+          className="rounded-md border border-darkHelper bg-darkBackground p-2 px-4 text-white duration-150 hover:bg-white hover:text-darkBackground"
+        >
           Tümünü Gör
-        </button>
+        </Link>
       </div>
       {data?.posts.length === 0 ? (
         <div className="flex h-[200px] flex-col items-center justify-center gap-4 text-gray-500">

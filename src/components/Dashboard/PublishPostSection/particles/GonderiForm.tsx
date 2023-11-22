@@ -68,6 +68,7 @@ function GonderiForm({ cancelProcess }: { cancelProcess: () => void }) {
           ...data,
           universityId: getUserUniversityId.data?.university?.id,
           image: image ? image : null,
+          tags,
         },
         {
           onSuccess: () => {
