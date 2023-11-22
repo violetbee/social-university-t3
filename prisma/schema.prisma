@@ -149,6 +149,7 @@ model Category {
     name      String
     slug      String         @unique
     image     String?
+    color     String?
     posts     TextTypePost[]
 }
 

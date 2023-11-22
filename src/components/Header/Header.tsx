@@ -50,7 +50,7 @@ const Header: FC = () => {
       >
         <Link
           href={"/"}
-          className="relative flex cursor-pointer items-center pt-2 text-3xl/10 tracking-tighter text-darkSecondary dark:text-white"
+          className="relative flex cursor-pointer items-center pt-2 text-xl tracking-tighter text-darkSecondary dark:text-white lg:text-3xl/10"
         >
           {/* <Image
             src={"/images/logo.png"}

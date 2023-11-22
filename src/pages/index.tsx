@@ -1,9 +1,9 @@
 import type { GetServerSidePropsContext, NextPage } from "next";
 import Head from "next/head";
-import Layout from "../components/Layouts/RootLayout";
+import Layout from "../components/layouts/RootLayout";
 import { getServerAuthSession } from "../server/common/get-server-auth-session";
 import { prisma } from "../server/db/client";
-import Features from "../components/Landing/Feature";
+import Features from "../components/landing/Feature";
 
 const Home: NextPage = () => {
   return (

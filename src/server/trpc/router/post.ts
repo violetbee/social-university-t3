@@ -106,14 +106,32 @@ export const postRouter = router({
           //   slug: input.slug || undefined,
           // },
         },
-        include: {
-          user: {
-            include: {
-              department: true,
+        select: {
+          id: true,
+          title: true,
+          content: true,
+          slug: true,
+          createdAt: true,
+          image: true,
+          category: {
+            select: {
+              name: true,
+              color: true,
             },
           },
-          category: true,
-          likes: true,
+          user: {
+            select: {
+              id: true,
+              name: true,
+              surname: true,
+              image: true,
+              department: {
+                select: {
+                  name: true,
+                },
+              },
+            },
+          },
         },
       });
 
@@ -126,6 +144,45 @@ export const postRouter = router({
 
       return { posts: textPostsTimeAgo };
     }),
+
+  getPostsSummary: publicProcedure
+    .input(
+      z.object({
+        universityId: z.string(),
+      }),
+    )
+    .query(async ({ ctx, input }) => {
+      const textPosts = await ctx.prisma.textTypePost.findMany({
+        orderBy: {
+          createdAt: "desc",
+        },
+        where: {
+          universityId: input.universityId,
+        },
+        select: {
+          id: true,
+          title: true,
+          slug: true,
+          category: {
+            select: {
+              name: true,
+              color: true,
+            },
+          },
+          user: {
+            select: {
+              id: true,
+              name: true,
+              surname: true,
+              image: true,
+            },
+          },
+        },
+      });
+
+      return { posts: textPosts };
+    }),
+
   getTextPostsByCategory: publicProcedure
     .input(
       z.object({
@@ -154,6 +211,7 @@ export const postRouter = router({
           likes: true,
         },
       });
+
       return { posts: textPosts };
     }),
   getDocPosts: publicProcedure.query(async ({ ctx }) => {

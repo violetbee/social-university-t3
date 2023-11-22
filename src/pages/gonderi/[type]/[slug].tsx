@@ -1,5 +1,5 @@
 import { GetServerSideProps } from "next";
-import Layout from "../../../components/Layouts/RootLayout";
+import Layout from "../../../components/layouts/RootLayout";
 import { prisma } from "../../../server/db/client";
 import Head from "next/head";
 
@@ -13,7 +13,7 @@ import {
   FaTwitter,
   FaTwitch,
 } from "react-icons/fa";
-import React, { ReactElement, useEffect, useRef } from "react";
+import React, { ReactElement } from "react";
 import { GoCommentDiscussion } from "react-icons/go";
 import { IoIosArrowUp } from "react-icons/io";
 import { trpc } from "../../../utils/trpc";
@@ -35,8 +35,6 @@ const PerPost: NextPageWithLayout<Props> = ({ post, params }) => {
 
   // const [comment, setComment] = useState<string>("");
 
-  const parent = useRef(null);
- 
   const ctx = trpc.useContext();
   const like = trpc.like.like.useMutation({
     onSuccess: () => {
@@ -227,7 +225,7 @@ const PerPost: NextPageWithLayout<Props> = ({ post, params }) => {
 export default PerPost;
 
 PerPost.getLayout = function getLayout(page: ReactElement) {
-  return <Layout isPostPage={true}>{page}</Layout>;
+  return <Layout>{page}</Layout>;
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
@@ -246,7 +244,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
             include: {
               department: true,
               university: true,
-              class: true,
               classLevel: true,
             },
           },
@@ -264,7 +261,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
             include: {
               department: true,
               university: true,
-              class: true,
               classLevel: true,
             },
           },

@@ -1,6 +1,6 @@
 import { GetServerSidePropsContext } from "next";
 // import Events from "../../components/Cards/Event/MultiEvent";
-import RootLayout from "../../components/Layouts/RootLayout";
+import RootLayout from "../../components/layouts/RootLayout";
 import { getServerAuthSession } from "../../server/common/get-server-auth-session";
 // import withDashboardSection from "../../components/HoC/withDashboardSection";
 // import DiscoverYourCity from "../../components/Dashboard/DiscoverYourCitySection";
@@ -8,19 +8,21 @@ import Image from "next/image";
 // import MultiPost from "../../components/Post/MultiPost";
 // import Table from "../../components/Table/Table";
 import { ReactElement } from "react";
-import DashboardLayout from "../../components/Layouts/DashboardLayout";
+import DashboardLayout from "../../components/layouts/DashboardLayout";
 import { AiTwotoneLike } from "react-icons/ai";
 // import { FaComments } from "react-icons/fa";
 import { PiStudentLight } from "react-icons/pi";
 import { TbAward } from "react-icons/tb";
 import { LiaSchoolSolid } from "react-icons/lia";
-import University from "../../components/UniversityArea/University";
+import University from "../../components/universityArea/University";
 import { BsBookmarkStarFill } from "react-icons/bs";
 import {
   IoCafeOutline,
   IoLocationOutline,
   IoSchoolOutline,
 } from "react-icons/io5";
+import PostBox from "../../components/Cards/Post/PostBox";
+import PostFlowSection from "../../components/Dashboard/PostFlowSection";
 
 const Dashboard = () => {
   // const EventsWithExpanded = withDashboardSection(Events, "Etkinlikler", 4);
@@ -155,34 +157,7 @@ const Dashboard = () => {
         <DiscoverYourCityExpanded /> */}
 
       <div className="grid grid-cols-3 gap-6">
-        <div className="col-span-3 xl:col-span-2">
-          <div className="flex items-center justify-between gap-5">
-            <h3 className="text-2xl font-semibold">Akış</h3>
-            <button className="rounded-md border border-darkHelper bg-darkBackground p-2 px-4 text-white duration-150 hover:bg-white hover:text-darkBackground">
-              Tümünü Gör
-            </button>
-          </div>
-          <div className="mt-5 grid grid-cols-1 gap-4 lg:grid-cols-2 2xl:grid-cols-3">
-            <Card title="Deneme" category="Serbest Alan" />
-            <Card
-              title="Bu uzun bir başlıktır, bayağı uzun"
-              category="Üniversite Yorumları"
-            />
-            <Card title="Matematik-2 Vize Notları" category="Soru Çözümleri" />
-            <Card title="Samü Ulaşım Hakkında" category="Anket" />
-            <Card
-              title="Neden dersleri takip edemiyorum?"
-              category="Etkinlik"
-            />
-            <Card title="Harika bir geziydi" category="İlanlar" />
-            <Card title="Deneme" category="Serbest Alan" />
-            <Card
-              title="Bu uzun bir başlıktır, bayağı uzun"
-              category="Üniversite Yorumları"
-            />
-            <Card title="Matematik-2 Vize Notları" category="Soru Çözümleri" />
-          </div>
-        </div>
+        <PostFlowSection />
         <div
           className="col-span-3 rounded-md 
         border border-darkHelper bg-[#101117] shadow-md xl:col-span-1
@@ -262,75 +237,6 @@ export const getServerSideProps = async (
   }
 };
 
-function Card({ title, category }: { title: string; category: string }) {
-  return (
-    <div
-      className={`flex flex-col gap-4 rounded-xl border border-l-4 border-darkHelper ${
-        category === "Soru Çözümleri"
-          ? "border-l-red-800"
-          : category === "Etkinlik"
-          ? "border-l-green-800"
-          : category === "İlanlar"
-          ? "border-l-yellow-400"
-          : category === "Anket"
-          ? "border-l-blue-800"
-          : category === "Üniversite Yorumları"
-          ? "border-l-orange-500"
-          : "border-l-purple-800"
-      } bg-darkSecondary p-4 text-white shadow-md`}
-    >
-      <div className="text-md font-bold">{title}</div>
-      <div className="flex items-center justify-between gap-10">
-        {/* category tag */}
-        <div className="rounded-md bg-darkBackground px-2 py-1 pt-[6px] text-sm">
-          #{category}
-        </div>
-
-        <div className="flex items-center space-x-4">
-          <div className="cursor-pointer">
-            <img
-              className="h-5 w-5 rounded-lg"
-              src="https://i.pravatar.cc/300"
-            />
-          </div>
-          <div className="cursor-pointer text-gray-500 hover:text-gray-300">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
-              />
-            </svg>
-          </div>
-          <div className="cursor-pointer text-gray-500 hover:text-gray-300">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6h-8.5l-1-1H5a2 2 0 00-2 2zm9-13.5V9"
-              />
-            </svg>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
 const MostSuccessfulUser = ({
   user,
 }: {
@@ -347,10 +253,10 @@ const MostSuccessfulUser = ({
           user.rank === 1
             ? "bg-yellow-500"
             : user.rank === 2
-            ? "bg-slate-400"
-            : user.rank === 3
-            ? "bg-amber-800"
-            : "bg-white"
+              ? "bg-slate-400"
+              : user.rank === 3
+                ? "bg-amber-800"
+                : "bg-white"
         } pl-[10px] pt-[2px] font-bold text-darkHelper shadow-md`}
       >
         {user.rank}

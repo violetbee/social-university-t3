@@ -1,8 +1,8 @@
 import { GetServerSideProps } from "next";
-import RootLayout from "../../components/Layouts/RootLayout";
+import RootLayout from "../../components/layouts/RootLayout";
 import { ParsedUrlQuery } from "querystring";
 import { MultiEvent as Events } from "../../components/Cards/Event";
-import DashboardLayout from "../../components/Layouts/DashboardLayout";
+import DashboardLayout from "../../components/layouts/DashboardLayout";
 
 type Props = {
   params: {

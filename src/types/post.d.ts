@@ -31,3 +31,20 @@ export type ISinglePost = {
   user: User & SchoolProps;
   timeAgo: string;
 } & (TextTypePost & DocTypePost & SchoolProps);
+
+export interface IPostSummary {
+  id: string;
+  title: string;
+  category: ICategorySummary | null;
+  user: IUserSummary;
+}
+interface IUserSummary {
+  id: string;
+  name: string | null;
+  surname: string | null;
+  image: string | null;
+}
+interface ICategorySummary {
+  name: string;
+  color: string | null;
+}

@@ -2,7 +2,7 @@ import { League_Spartan } from "next/font/google";
 // import RightSideBar from "./SideBar/RightSideBar";
 import Header from "../Header/Header";
 import { useSession } from "next-auth/react";
-import LeftSideBar from "../SideBar/LeftSideBar";
+import LeftSideBar from "../sidebar/LeftSideBar";
 import Link from "next/link";
 
 const dosis = League_Spartan({
@@ -30,8 +30,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               {children}
             </div>
             <div className="border-t border-t-darkHelper">
-              <div className="mx-auto flex justify-between gap-6 p-5 lg:px-16 lg:py-8 xl:max-w-[1700px]">
-                <div className="w-1/3">
+              <div className="mx-auto flex flex-col justify-between gap-6 p-5 md:flex-row lg:px-16 lg:py-8 xl:max-w-[1700px]">
+                <div className="w-full md:w-1/3">
                   <Link
                     href={"/"}
                     className="cursor-pointer pt-2 text-3xl/10 tracking-tighter text-darkSecondary dark:text-white"
@@ -46,7 +46,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                     bulunmaktadır.
                   </p>
                 </div>
-                <div className="flex w-1/3 justify-center gap-16">
+                <div className="flex w-full justify-center gap-8 text-center md:w-1/3 md:gap-16">
                   <div>
                     <h3 className="text-xl font-semibold">Keşfet</h3>
                     <div className="mt-3 flex flex-col gap-2 text-xs">
@@ -82,7 +82,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                     </div>
                   </div>
                 </div>
-                <div className="w-1/5">
+                <div className="w-full md:w-1/5">
                   <h3 className="text-xl font-semibold">İletişim</h3>
                   <div className="mt-3 flex flex-col gap-2 text-xs">
                     <span className="text-whitish/60">
