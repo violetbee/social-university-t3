@@ -94,8 +94,8 @@ function PostBox({
             )}
             <Link
               href={{
-                pathname: "/gonderiler",
-                query: { category: category?.slug },
+                pathname: "/sub/gonderiler",
+                query: { textCategory: category?.slug },
               }}
               className="shrink-0 rounded-md border border-darkHelper bg-darkBackground px-2 py-[2px] pt-[4px] text-white duration-150 hover:bg-white hover:text-darkBackground"
             >

@@ -24,9 +24,9 @@ const MenuSection = () => {
             </span>
           </Link>
           <Link
-            href="/gonderiler"
+            href="/sub/gonderiler"
             className={`${
-              router.asPath === "/gonderiler"
+              router.asPath === "/sub/gonderiler"
                 ? "border-darkPrimary"
                 : "border-darkHelper"
             } flex shrink-0 flex-col items-center justify-center gap-2 rounded-lg border bg-white px-4 py-2 duration-150 dark:bg-darkSecondary dark:shadow-md hover:dark:bg-darkBackground`}
@@ -36,9 +36,9 @@ const MenuSection = () => {
             </span>
           </Link>
           <Link
-            href="/dosya-paylasimlari"
+            href="/sub/dosya-paylasimlari"
             className={`${
-              router.asPath === "/dosya-paylasimlari"
+              router.asPath === "/sub/dosya-paylasimlari"
                 ? "border-darkPrimary"
                 : "border-darkHelper"
             } flex shrink-0 flex-col items-center justify-center gap-2 rounded-lg border bg-white px-4 py-2 duration-150 dark:bg-darkSecondary dark:shadow-md hover:dark:bg-darkBackground`}
@@ -48,9 +48,9 @@ const MenuSection = () => {
             </span>
           </Link>
           <Link
-            href="/soru-cevap-paylasimlari"
+            href="/sub/soru-cevap-paylasimlari"
             className={`${
-              router.asPath === "/soru-cevap-paylasimlari"
+              router.asPath === "/sub/soru-cevap-paylasimlari"
                 ? "border-darkPrimary"
                 : "border-darkHelper"
             } flex shrink-0 flex-col items-center justify-center gap-2 rounded-lg border bg-white px-4 py-2 duration-150 dark:bg-darkSecondary dark:shadow-md hover:dark:bg-darkBackground`}
@@ -60,9 +60,9 @@ const MenuSection = () => {
             </span>
           </Link>
           <Link
-            href="/anketler"
+            href="/sub/anketler"
             className={`${
-              router.asPath === "/anketler"
+              router.asPath === "/sub/anketler"
                 ? "border-darkPrimary"
                 : "border-darkHelper"
             } flex shrink-0 flex-col items-center justify-center gap-2 rounded-lg border bg-white px-4 py-2 duration-150 dark:bg-darkSecondary dark:shadow-md hover:dark:bg-darkBackground`}
@@ -72,9 +72,9 @@ const MenuSection = () => {
             </span>
           </Link>
           <Link
-            href="/etkinlikler"
+            href="/sub/etkinlikler"
             className={`${
-              router.asPath === "/etkinlikler"
+              router.asPath === "/sub/etkinlikler"
                 ? "border-darkPrimary"
                 : "border-darkHelper"
             } flex shrink-0 flex-col items-center justify-center gap-2 rounded-lg border bg-white px-4 py-2 duration-150 dark:bg-darkSecondary dark:shadow-md hover:dark:bg-darkBackground`}
@@ -84,9 +84,9 @@ const MenuSection = () => {
             </span>
           </Link>
           <Link
-            href="/okul-kulupleri"
+            href="/sub/okul-kulupleri"
             className={`${
-              router.asPath === "/okul-kulupleri"
+              router.asPath === "/sub/okul-kulupleri"
                 ? "border-darkPrimary"
                 : "border-darkHelper"
             } flex shrink-0 flex-col items-center justify-center gap-2 rounded-lg border bg-white px-4 py-2 duration-150 dark:bg-darkSecondary dark:shadow-md hover:dark:bg-darkBackground`}
@@ -96,9 +96,9 @@ const MenuSection = () => {
             </span>
           </Link>
           <Link
-            href="/ilanlar"
+            href="/sub/ilanlar"
             className={`${
-              router.asPath === "/ilanlar"
+              router.asPath === "/sub/ilanlar"
                 ? "border-darkPrimary"
                 : "border-darkHelper"
             } flex shrink-0 flex-col items-center justify-center gap-2 rounded-lg border bg-white px-4 py-2 duration-150 dark:bg-darkSecondary dark:shadow-md hover:dark:bg-darkBackground`}

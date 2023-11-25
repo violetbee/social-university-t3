@@ -337,9 +337,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       };
     } else {
       return {
-        props: {
-          msg: "Could not find any post",
-        },
+        notFound: true,
       };
     }
   } else {

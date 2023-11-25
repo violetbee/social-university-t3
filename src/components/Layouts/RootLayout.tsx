@@ -4,6 +4,10 @@ import Header from "../Header/Header";
 import { useSession } from "next-auth/react";
 import LeftSideBar from "../sidebar/LeftSideBar";
 import Link from "next/link";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { trpc } from "../../utils/trpc";
+import { setUniversityId } from "../../store/slices/universitySlice";
 
 const dosis = League_Spartan({
   weight: ["200", "300", "400", "500", "600", "700", "800"],
@@ -14,6 +18,16 @@ const dosis = League_Spartan({
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const { data } = useSession();
+
+  const { data: universityData } = trpc.user.getUserUniversityById.useQuery();
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (data?.user?.id) {
+      dispatch(setUniversityId(universityData?.university?.id as string));
+    }
+  }, [data?.user, dispatch, universityData?.university?.id]);
 
   return (
     <>

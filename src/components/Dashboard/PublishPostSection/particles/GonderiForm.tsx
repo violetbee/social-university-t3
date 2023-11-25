@@ -7,15 +7,19 @@ import { getBase64 } from "../../../../utils/func";
 import instance from "../../../../utils/axios";
 import { useForm } from "react-hook-form";
 import Image from "next/image";
+import { useSelector } from "react-redux";
+import type { RootState } from "../../../../store/store";
 
 function GonderiForm({ cancelProcess }: { cancelProcess: () => void }) {
   const { register, watch, handleSubmit, reset, setValue } = useForm();
 
   const watchForm = watch();
-
+  const universityId = useSelector(
+    (state: RootState) => state.university.universityId,
+  );
   const ctx = trpc.useContext();
   const createTextPost = trpc.post.createTextPost.useMutation();
-  const getUserUniversityId = trpc.user.getUserUniversityById.useQuery();
+
   const getCategories = trpc.category.getAll.useQuery();
 
   const [tag, setTag] = useState<string>("");
@@ -66,7 +70,7 @@ function GonderiForm({ cancelProcess }: { cancelProcess: () => void }) {
       await createTextPost.mutateAsync(
         {
           ...data,
-          universityId: getUserUniversityId.data?.university?.id,
+          universityId,
           image: image ? image : null,
           tags,
         },

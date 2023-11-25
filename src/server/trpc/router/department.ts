@@ -19,35 +19,18 @@ export const departmentRouter = router({
       });
       return departments;
     }),
-  getClassLevels: publicProcedure
-    .input(
-      z.object({
-        departmentId: z.string(),
-      }),
-    )
-    .query(async ({ ctx, input }) => {
-      const classLevels = await ctx.prisma.departmentsOnClassLevel.findMany({
-        where: {
-          departmentId: input.departmentId,
-        },
-        select: {
-          classLevel: true,
-        },
-      });
-      return classLevels;
-    }),
 
   getClasses: publicProcedure
     .input(
       z.object({
-        classLevelId: z.string(),
+        level: z.number(),
         departmentId: z.string(),
       }),
     )
     .query(async ({ ctx, input }) => {
       const classes = await ctx.prisma.class.findMany({
         where: {
-          classLevelId: input.classLevelId,
+          level: input.level,
           departmentId: input.departmentId,
         },
       });

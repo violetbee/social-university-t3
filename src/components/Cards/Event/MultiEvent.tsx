@@ -1,11 +1,16 @@
 import Event from "./SingleEvent";
 import { trpc } from "../../../utils/trpc";
 import { MultiEventProps } from "../../../types/event";
+import { useSelector } from "react-redux";
+import type { RootState } from "../../../store/store";
 
 const Events = ({ itemPiece }: MultiEventProps) => {
-  const { data: universityId } = trpc.user.getUserUniversityById.useQuery();
+  const universityId = useSelector(
+    (state: RootState) => state.university.universityId,
+  );
+
   const { data: eventsByQuery } = trpc.event.getAllEvents.useQuery({
-    query: universityId?.university?.id || "",
+    query: universityId,
   });
 
   return (

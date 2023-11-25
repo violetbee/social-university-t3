@@ -63,8 +63,6 @@ model User {
     departmentId  String?
     schoolClub    SchoolClub?    @relation(fields: [schoolClubId], references: [id], onDelete: Cascade)
     schoolClubId  String?
-    classLevel    ClassLevel?    @relation(fields: [classLevelId], references: [id], onDelete: Cascade)
-    classLevelId  String?
     DocTypePost   DocTypePost[]
 }
 
@@ -91,15 +89,15 @@ model University {
 }
 
 model Department {
-    id           String                    @id @default(cuid())
-    createdAt    DateTime                  @default(now()) @db.Timestamp(6)
-    name         String
-    slug         String                    @unique
-    users        User[]
-    classes      Class[]
-    classLevels  DepartmentsOnClassLevel[]
-    universities UniversityOnDepartment[]
-    docTypePosts DocTypePost[]
+    id            String                   @id @default(cuid())
+    createdAt     DateTime                 @default(now()) @db.Timestamp(6)
+    name          String
+    slug          String                   @unique
+    maxClassLevel Int
+    users         User[]
+    classes       Class[]
+    universities  UniversityOnDepartment[]
+    docTypePosts  DocTypePost[]
 }
 
 model UniversityOnDepartment {
@@ -116,31 +114,10 @@ model Class {
     id           String        @id @default(cuid())
     name         String
     slug         String        @unique
+    level        Int?
     department   Department    @relation(fields: [departmentId], references: [id], onDelete: Cascade)
     departmentId String
-    classLevel   ClassLevel?   @relation(fields: [classLevelId], references: [id])
-    classLevelId String?
     docTypePosts DocTypePost[]
-}
-
-model ClassLevel {
-    id           String                    @id @default(cuid())
-    name         String
-    slug         String                    @unique
-    users        User[]
-    departments  DepartmentsOnClassLevel[]
-    classes      Class[]
-    docTypePosts DocTypePost[]
-}
-
-model DepartmentsOnClassLevel {
-    createdAt    DateTime   @default(now()) @db.Timestamp(6)
-    department   Department @relation(fields: [departmentId], references: [id], onDelete: Cascade)
-    departmentId String
-    classLevel   ClassLevel @relation(fields: [classLevelId], references: [id], onDelete: Cascade)
-    classLevelId String
-
-    @@id([departmentId, classLevelId])
 }
 
 model Category {
@@ -196,8 +173,6 @@ model DocTypePost {
     departmentId String?
     class        Class?      @relation(fields: [classId], references: [id])
     classId      String?
-    classLevel   ClassLevel? @relation(fields: [classLevelId], references: [id])
-    classLevelId String?
     files        File[]
 }
 

@@ -1,12 +1,17 @@
 import PostBox from "../../Cards/Post/PostBox";
 import { trpc } from "../../../utils/trpc";
 import Link from "next/link";
+import { useSelector } from "react-redux";
+import type { RootState } from "../../../store/store";
 
 const PostFlowSection = () => {
-  const { data: user } = trpc.user.getUserUniversityById.useQuery();
+  const universityId = useSelector(
+    (state: RootState) => state.university.universityId,
+  );
+
   const { data } = trpc.post.getPostsSummary.useQuery(
     {
-      universityId: user?.university?.id as string,
+      universityId,
     },
     {
       staleTime: 1000 * 60 * 60,
@@ -18,7 +23,7 @@ const PostFlowSection = () => {
       <div className="flex items-center justify-between gap-5">
         <h3 className="text-2xl font-semibold">Akış</h3>
         <Link
-          href="/gonderiler"
+          href="/sub/gonderiler"
           className="rounded-md border border-darkHelper bg-darkBackground p-2 px-4 text-white duration-150 hover:bg-white hover:text-darkBackground"
         >
           Tümünü Gör
@@ -30,7 +35,7 @@ const PostFlowSection = () => {
             viewBox="0 0 246.861 246.861"
             xmlSpace="preserve"
             className=""
-            stroke-width="1.5"
+            strokeWidth="1.5"
             stroke="currentColor"
           >
             <g>

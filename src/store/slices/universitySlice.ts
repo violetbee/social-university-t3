@@ -15,4 +15,4 @@ export const universitySlice = createSlice({
   },
 });
 
-export const { setUniversityId, getUniversityId } = universitySlice.actions;
+export const { setUniversityId } = universitySlice.actions;

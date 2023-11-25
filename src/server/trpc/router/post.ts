@@ -41,7 +41,6 @@ export const postRouter = router({
           .max(300, "Açıklama için maksimum 300 karakter kullanabilirsiniz."),
         departmentId: z.string(),
         classId: z.string(),
-        classLevelId: z.string(),
         universityId: z.string(),
         files: z
           .array(
@@ -67,7 +66,6 @@ export const postRouter = router({
             slug: slugify(input.title),
             content: input.content,
             classId: input.classId,
-            classLevelId: input.classLevelId,
             universityId: input.universityId,
             departmentId: input.departmentId,
             userId: ctx.session?.user?.id as string,
@@ -214,7 +212,6 @@ export const postRouter = router({
             include: {
               department: true,
               university: true,
-              classLevel: true,
             },
           },
           category: true,
@@ -231,14 +228,12 @@ export const postRouter = router({
           include: {
             department: true,
             university: true,
-            classLevel: true,
           },
         },
         likes: true,
         files: true,
         department: true,
         class: true,
-        classLevel: true,
       },
     });
     return { posts: textPosts };

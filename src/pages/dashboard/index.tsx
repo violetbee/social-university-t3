@@ -21,7 +21,6 @@ import {
   IoLocationOutline,
   IoSchoolOutline,
 } from "react-icons/io5";
-import PostBox from "../../components/Cards/Post/PostBox";
 import PostFlowSection from "../../components/Dashboard/PostFlowSection";
 
 const Dashboard = () => {

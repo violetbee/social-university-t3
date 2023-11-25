@@ -1,6 +1,8 @@
 import { ISinglePost } from "../../types/post";
 import { trpc } from "../../utils/trpc";
 import SinglePost from "./SinglePost";
+import { useSelector } from "react-redux";
+import type { RootState } from "../../store/store";
 
 type Props = {
   itemPiece?: number;
@@ -8,11 +10,13 @@ type Props = {
 };
 
 const MultiPost = ({ itemPiece, slug }: Props) => {
-  const { data: universityId } = trpc.user.getUserUniversityById.useQuery();
-  const { data: allTypePosts } = trpc.post.getAllTypePosts.useQuery(
+  const universityId = useSelector(
+    (state: RootState) => state.university.universityId,
+  );
+
+  const { data: allTypePosts } = trpc.post.getAllPosts.useQuery(
     {
-      query: universityId?.university?.id || "",
-      slug: slug || "",
+      universityId,
     },
     {
       enabled: slug !== "dokumanlar" && !slug,

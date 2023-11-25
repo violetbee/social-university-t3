@@ -6,19 +6,25 @@ import { CiSquareRemove } from "react-icons/ci";
 import instance from "../../../../utils/axios";
 import { getBase64 } from "../../../../utils/func";
 import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
+import type { RootState } from "../../../../store/store";
 
 const initialValues = {
   title: "",
   content: "",
   departmentId: "",
   classId: "",
-  classLevelId: "",
+  level: 0,
   universityId: "",
   files: [] as File[],
 };
 
 function DosyaForm({ cancelProcess }: { cancelProcess: () => void }) {
   const [files, setFiles] = useState<File[]>([]);
+
+  const universityId = useSelector(
+    (state: RootState) => state.university.universityId,
+  );
 
   const { register, handleSubmit, reset, setValue, watch, resetField } =
     useForm({
@@ -29,26 +35,17 @@ function DosyaForm({ cancelProcess }: { cancelProcess: () => void }) {
 
   const ctx = trpc.useContext();
 
-  const getUniversityId = trpc.user.getUserUniversityById.useQuery();
   const getDepartments = trpc.department.getAllDepartments.useQuery({
-    universityId: getUniversityId.data?.university?.id as string,
+    universityId,
   });
-  const getClassLevels = trpc.department.getClassLevels.useQuery(
-    {
-      departmentId: watchForm.departmentId,
-    },
-    {
-      enabled: !!watchForm.departmentId,
-    },
-  );
 
   const getClasses = trpc.department.getClasses.useQuery(
     {
       departmentId: watchForm.departmentId,
-      classLevelId: watchForm.classLevelId,
+      level: Number(watchForm.level),
     },
     {
-      enabled: !!watchForm.classLevelId && !!watchForm.departmentId,
+      enabled: !!watchForm.level && !!watchForm.departmentId,
     },
   );
 
@@ -72,7 +69,7 @@ function DosyaForm({ cancelProcess }: { cancelProcess: () => void }) {
       createDocPost.mutate(
         {
           ...data,
-          universityId: getUniversityId.data?.university?.id as string,
+          universityId,
           files: res.map((file) => {
             return {
               name: file.name,
@@ -103,16 +100,16 @@ function DosyaForm({ cancelProcess }: { cancelProcess: () => void }) {
 
   useEffect(() => {
     if (watchForm.departmentId) {
-      resetField("classLevelId");
+      resetField("level");
       resetField("classId");
     }
   }, [watchForm.departmentId, resetField]);
 
   useEffect(() => {
-    if (watchForm.classLevelId) {
+    if (watchForm.level) {
       resetField("classId");
     }
-  }, [watchForm.classLevelId, resetField]);
+  }, [watchForm.level, resetField]);
 
   return (
     <form
@@ -136,9 +133,9 @@ function DosyaForm({ cancelProcess }: { cancelProcess: () => void }) {
               className="block w-full rounded-sm border-b-[1px] border-b-gray-800/20 bg-darkBackground px-2 py-[9px] pr-10 text-base focus:border-indigo-500 focus:outline-none sm:text-lg"
             >
               <option value="" disabled={!!watchForm.departmentId}>
-                {getClassLevels.data?.length === 0
-                  ? "Bölüm Seçilmedi"
-                  : "Bölüm Seç"}
+                {getClasses.data?.length === 0
+                  ? "Henüz bir ders yok"
+                  : "Ders Seç"}
               </option>
               {getDepartments.data?.map(({ department }) => (
                 <option key={department.id} value={department.id}>
@@ -156,18 +153,21 @@ function DosyaForm({ cancelProcess }: { cancelProcess: () => void }) {
           <span className="text-lg font-semibold">Sınıf Seç</span>
           <div className="relative w-full">
             <select
-              {...register("classLevelId")}
+              {...register("level")}
               disabled={!watchForm.departmentId}
               className="block w-full rounded-sm border-b-[1px] border-b-gray-800/20 bg-darkBackground px-2 py-[9px] pr-10 text-base focus:border-indigo-500 focus:outline-none sm:text-lg"
             >
-              <option value="" disabled={!!watchForm.classLevelId}>
-                {getClassLevels.data?.length === 0
-                  ? "Henüz bir sınıf yok"
-                  : "Sınıf Seç"}
-              </option>
-              {getClassLevels.data?.map(({ classLevel }) => (
-                <option key={classLevel.id} value={classLevel.id}>
-                  {classLevel.name}
+              {Array.from(
+                {
+                  length:
+                    getDepartments.data?.find(
+                      (item) => item.department.id === watchForm.departmentId,
+                    )?.department.maxClassLevel || 0,
+                },
+                (_, i) => i + 1,
+              ).map((item) => (
+                <option key={item} value={item}>
+                  {item}
                 </option>
               ))}
             </select>
@@ -175,7 +175,7 @@ function DosyaForm({ cancelProcess }: { cancelProcess: () => void }) {
         </div>
         <div
           className={`flex w-full flex-col md:w-2/6 ${
-            watchForm.classLevelId ? "opacity-100" : "opacity-50"
+            watchForm.level ? "opacity-100" : "opacity-50"
           }`}
         >
           <span className="text-lg font-semibold">Ders Seç</span>
@@ -183,7 +183,7 @@ function DosyaForm({ cancelProcess }: { cancelProcess: () => void }) {
             <select
               {...register("classId")}
               className="block w-full rounded-sm border-b-[1px] border-b-gray-800/20 bg-darkBackground px-2 py-[9px] pr-10 text-base focus:border-indigo-500 focus:outline-none sm:text-lg"
-              disabled={!watchForm.classLevelId}
+              disabled={!watchForm.level}
             >
               <option value="" disabled={!!watchForm.classId}>
                 {getClasses.data?.length === 0
