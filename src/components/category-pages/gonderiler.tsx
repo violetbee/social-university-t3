@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 import type { RootState } from "../../store/store";
+import Pagination from "../pagination";
 
 const Gonderiler = () => {
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
@@ -59,6 +60,9 @@ const Gonderiler = () => {
       </div>
       <div className="relative z-0 grid flex-1 grid-cols-1 items-start gap-5 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
         {data?.posts?.map((post) => <PostBox key={post.id} {...post} />)}
+      </div>
+      <div className="mt-8 self-center">
+        <Pagination pageSize={2} totalItemLength={16} />
       </div>
     </div>
   );
