@@ -51,6 +51,7 @@ export const userRouter = router({
             id: true,
             name: true,
             location: true,
+            logo: true,
           },
         },
       },

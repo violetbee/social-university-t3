@@ -50,6 +50,7 @@ model User {
     emailVerified DateTime?
     password      String?
     image         String?
+    grade         Int?
     userType      User_TYPE?     @default(STUDENT)
     accounts      Account[]
     sessions      Session[]
@@ -81,6 +82,7 @@ model University {
     name        String
     slug        String                   @unique
     location    String
+    logo        String?
     users       User[]
     posts       TextTypePost[]
     events      Event[]

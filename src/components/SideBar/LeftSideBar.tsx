@@ -6,18 +6,17 @@ import {
   IoSchoolOutline,
 } from "react-icons/io5";
 
-// import { useTheme } from "next-themes";
-
-// import University from "../UniversityArea/University";
+import { useTheme } from "next-themes";
+import { MdDarkMode, MdLightMode } from "react-icons/md";
 
 const LeftSideBar: FC = () => {
-  // const { theme, setTheme } = useTheme();
+  const { theme, setTheme } = useTheme();
 
   const [isNavOpen, setIsNavOpen] = useState(false);
 
   return (
-    <div
-      className={`relative hidden flex-col justify-between overflow-hidden border-r border-[#444]/10 bg-[#EFEFF1] duration-200 dark:bg-darkBackground ${
+    <aside
+      className={`sticky top-[60px] hidden h-[calc(100vh-60px)] flex-col justify-between overflow-hidden border-r border-[#444]/10 bg-[#EFEFF1] duration-200 dark:bg-darkBackground ${
         isNavOpen ? "lg:w-64 xl:flex xl:w-80" : "lg:w-12 xl:flex xl:w-16"
       }`}
     >
@@ -45,53 +44,50 @@ const LeftSideBar: FC = () => {
           }`}
         ></span>
       </button>
-      <div className="flex w-full flex-col pt-6">
-        <div
-          onClick={() => {
-            if (!isNavOpen) setIsNavOpen(true);
-          }}
-          className="mt-4 flex h-full w-full flex-col items-center pt-4"
+      <div
+        onClick={() => {
+          if (!isNavOpen) setIsNavOpen(true);
+        }}
+        className="mt-16 flex h-full w-full flex-col items-center"
+      >
+        <Link
+          href="#"
+          className="flex h-12 w-full items-center gap-2 px-4 pl-[18px] text-base font-medium text-whitish transition-colors duration-150 dark:hover:bg-darkSecondary"
         >
-          <Link
-            href="#"
-            className="flex h-12 w-full items-center gap-2 px-4 text-base font-medium text-whitish transition-colors duration-150 dark:hover:bg-darkSecondary"
-          >
-            <IoFastFoodOutline size={22} className="shrink-0" />
-            {isNavOpen && (
-              <span className="shrink-0 pt-1 ">Yemekhane Menüsü</span>
-            )}
-          </Link>
-          <Link
-            href="#"
-            className="flex h-12 w-full items-center gap-2 px-4 text-sm font-medium text-whitish transition-colors duration-150 dark:hover:bg-darkSecondary"
-          >
-            <IoLocationOutline size={22} className="shrink-0" />
-            {isNavOpen && (
-              <span className="shrink-0 pt-1 ">
-                Üniversiteme Nasıl Giderim?
-              </span>
-            )}
-          </Link>
-          <Link
-            href="#"
-            className="flex h-12 w-full items-center gap-2 px-4 text-base font-medium text-white transition-colors duration-150 dark:hover:bg-darkSecondary"
-          >
-            <IoSchoolOutline size={22} className="shrink-0" />
-            {isNavOpen && (
-              <span className="shrink-0 pt-1">Okul Kulüplerini Keşfet</span>
-            )}
-          </Link>
-        </div>
-
-        {/* <button
-          onClick={() =>
-            theme == "dark" ? setTheme("light") : setTheme("dark")
-          }
-          className="flex h-12 w-full flex-shrink-0 items-center justify-center bg-[#14151b] text-white"
+          <IoFastFoodOutline size={22} className="shrink-0" />
+          {isNavOpen && (
+            <span className="shrink-0 pt-1 ">Yemekhane Menüsü</span>
+          )}
+        </Link>
+        <Link
+          href="#"
+          className="flex h-12 w-full items-center gap-2 px-4 pl-[18px] text-sm font-medium text-whitish transition-colors duration-150 dark:hover:bg-darkSecondary"
         >
-          Karanlık Moda Geç
-        </button> */}
+          <IoLocationOutline size={22} className="shrink-0" />
+          {isNavOpen && (
+            <span className="shrink-0 pt-1 ">Üniversiteme Nasıl Giderim?</span>
+          )}
+        </Link>
+        <Link
+          href="#"
+          className="flex h-12 w-full items-center gap-2 px-4 pl-[18px] text-base font-medium text-white transition-colors duration-150 dark:hover:bg-darkSecondary"
+        >
+          <IoSchoolOutline size={22} className="shrink-0" />
+          {isNavOpen && (
+            <span className="shrink-0 pt-1">Okul Kulüplerini Keşfet</span>
+          )}
+        </Link>
       </div>
+      <button
+        onClick={() => (theme == "dark" ? setTheme("light") : setTheme("dark"))}
+        className="flex h-12 w-full items-center justify-center gap-2 px-4 text-base font-medium text-whitish transition-colors duration-150 hover:bg-whitish dark:hover:bg-darkSecondary"
+      >
+        {theme === "dark" ? (
+          <MdDarkMode size={22} />
+        ) : (
+          <MdLightMode size={22} color="#333" />
+        )}
+      </button>
 
       {/* <div>
         <div className="flex items-center justify-center border-y-[1px] border-[#444]/10 bg-white py-12 text-[#111] dark:bg-[#14151b] dark:text-white">
@@ -126,7 +122,7 @@ const LeftSideBar: FC = () => {
           </div>
         </div>
       </div> */}
-    </div>
+    </aside>
   );
 };
 

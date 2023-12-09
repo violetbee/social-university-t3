@@ -2,9 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  .animation-delay-100 {
+    animation-delay: 100ms;
+  }
+  .animation-delay-200 {
+    animation-delay: 200ms;
+  }
+  .animation-delay-300 {
+    animation-delay: 300ms;
+  }
+}
+
 ::-webkit-scrollbar {
   width: 5px;
   height: 5px;
+}
+
+html,
+body {
+  height: auto !important;
 }
 
 body {
@@ -16,6 +33,14 @@ body {
 html {
   scroll-behavior: smooth;
 }
+
+/* html,
+body {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  overflow-x: hidden;
+} */
 
 /* Nprogress styles */
 

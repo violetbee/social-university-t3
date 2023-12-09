@@ -35,6 +35,10 @@ export default defineNextConfig({
         protocol: "https",
         hostname: "ik.imagekit.io",
       },
+      {
+        protocol: "https",
+        hostname: "i.hizliresim.com",
+      },
     ],
   },
 });

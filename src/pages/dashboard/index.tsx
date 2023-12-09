@@ -9,19 +9,19 @@ import Image from "next/image";
 // import Table from "../../components/Table/Table";
 import { ReactElement } from "react";
 import DashboardLayout from "../../components/layouts/DashboardLayout";
-import { AiTwotoneLike } from "react-icons/ai";
+import { AiOutlineLike } from "react-icons/ai";
 // import { FaComments } from "react-icons/fa";
 import { PiStudentLight } from "react-icons/pi";
 import { TbAward } from "react-icons/tb";
 import { LiaSchoolSolid } from "react-icons/lia";
 import University from "../../components/universityArea/University";
-import { BsBookmarkStarFill } from "react-icons/bs";
 import {
   IoCafeOutline,
   IoLocationOutline,
   IoSchoolOutline,
 } from "react-icons/io5";
 import PostFlowSection from "../../components/Dashboard/PostFlowSection";
+import { MdOutlineBookmarkAdded } from "react-icons/md";
 
 const Dashboard = () => {
   // const EventsWithExpanded = withDashboardSection(Events, "Etkinlikler", 4);
@@ -63,6 +63,7 @@ const Dashboard = () => {
             </button>
           </div>
         </div>
+
         <div className="col-span-1 row-span-2 rounded-md border border-darkHelper bg-[#101117] p-4 pb-0 shadow-md md:col-span-2 xl:col-span-1 xl:row-span-1 grid-xl:row-span-2">
           <h3 className="border-b border-darkHelper pb-1 text-2xl font-semibold">
             Duyurular
@@ -169,7 +170,7 @@ const Dashboard = () => {
             </button>
           </div>
           <b className="hr anim"></b>
-          <div className="flex flex-col gap-4 py-4 pl-8 pr-4">
+          <div className="flex flex-col divide-y divide-darkSecondary px-4 py-2">
             <MostSuccessfulUser
               user={{
                 rank: 1,
@@ -246,21 +247,13 @@ const MostSuccessfulUser = ({
   };
 }) => {
   return (
-    <div className="relative">
+    <div className="flex items-center py-2">
       <div
-        className={`absolute -left-6 top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-start rounded-xl border border-darkHelper ${
-          user.rank === 1
-            ? "bg-yellow-500"
-            : user.rank === 2
-              ? "bg-slate-400"
-              : user.rank === 3
-                ? "bg-amber-800"
-                : "bg-white"
-        } pl-[10px] pt-[2px] font-bold text-darkHelper shadow-md`}
+        className={`flex h-10 w-10 items-center justify-center rounded-xl border border-darkHelper font-bold text-white shadow-md`}
       >
         {user.rank}
       </div>
-      <div className="relative flex justify-between rounded-md border border-darkHelper bg-darkBackground px-4 py-2">
+      <div className="flex flex-1 justify-between px-4 py-2">
         <div className="flex items-center gap-3">
           <div className="flex h-12 w-12 items-center justify-center rounded-full bg-darkBackground">
             <img
@@ -273,14 +266,14 @@ const MostSuccessfulUser = ({
             <span className="text-whitish/60">{user.department}</span>
           </div>
         </div>
-        <div className="flex items-center justify-between gap-3">
-          <div className="flex items-center gap-2">
-            <AiTwotoneLike size={24} className="text-green-500" />
-            <span className="mt-1 font-semibold text-green-500">+44</span>
+        <div className="flex items-center justify-between gap-3 font-light text-whitish">
+          <div className="flex items-center gap-1">
+            <AiOutlineLike />
+            <span className="mt-1">+44</span>
           </div>
-          <div className="flex items-center gap-2">
-            <BsBookmarkStarFill size={24} className="text-yellow-500" />
-            <span className="mt-1 font-semibold text-yellow-500">+32</span>
+          <div className="flex items-center gap-1">
+            <MdOutlineBookmarkAdded />
+            <span className="mt-1">+32</span>
           </div>
         </div>
       </div>

@@ -1,23 +1,23 @@
-import { usePagination } from "../../hooks/usePagination";
-
 type IPaginationProps = {
-  pageSize: number;
-  totalItemLength: number;
+  isPrevDisabled: boolean;
+  isNextDisabled: boolean;
+  setPreviousPage: () => void;
+  setNextPage: () => void;
+  isPaginationLongEnough: () => (string | number)[];
+  currentPage: number;
+  setClickedPage: (item: number) => void;
 };
 
-export default function Pagination({
-  pageSize,
-  totalItemLength,
-}: IPaginationProps) {
+export default function Pagination(props: IPaginationProps) {
   const {
-    currentPage,
-    setNextPage,
+    isPrevDisabled,
     setPreviousPage,
     isPaginationLongEnough,
+    currentPage,
     setClickedPage,
+    setNextPage,
     isNextDisabled,
-    isPrevDisabled,
-  } = usePagination(pageSize, totalItemLength);
+  } = props;
 
   return (
     <div className="flex h-8 items-center justify-center gap-2">

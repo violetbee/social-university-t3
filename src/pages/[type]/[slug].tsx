@@ -57,7 +57,7 @@ const PerPost: NextPageWithLayout<Props> = ({ post, params }) => {
         <meta name="description" content="Sosyal Üniversite" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="w-full pb-4 pt-6">
+      <div className="h-full w-full py-5">
         <div className="mb-4 flex items-center gap-2 text-sm/4 text-darkSecondary dark:text-white">
           <div className="flex items-center gap-2">
             <Link href="/">Anasayfa </Link>
@@ -74,17 +74,19 @@ const PerPost: NextPageWithLayout<Props> = ({ post, params }) => {
             <span className="text-[#333] dark:text-[#777]">{post.title}</span>
           </div>
         </div>
-        <div className="flex gap-10">
+        <div className="flex gap-10" id="post-area">
           <div className=" flex w-full flex-col gap-6 xl:w-9/12">
-            <div className="relative h-72 w-full">
-              <Image
-                alt="image"
-                src="/images/categories/rain.jpg"
-                layout="fill"
-                objectFit="cover"
-                className="h-full w-full rounded-md border border-darkHelper shadow-md"
-              />
-            </div>
+            {post.image && (
+              <div className="relative h-72 w-full">
+                <Image
+                  alt="image"
+                  src={post.image}
+                  layout="fill"
+                  objectFit="cover"
+                  className="h-full w-full rounded-md border border-darkHelper shadow-md"
+                />
+              </div>
+            )}
 
             <div className="flex flex-col gap-4 rounded-md border bg-white p-7 shadow-md dark:border-darkHelper dark:bg-darkSecondary ">
               <div className="flex flex-col gap-2 text-white/50">
@@ -321,7 +323,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
             include: {
               department: true,
               university: true,
-              classLevel: true,
             },
           },
           likes: true,

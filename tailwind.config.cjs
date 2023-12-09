@@ -23,7 +23,7 @@ module.exports = {
         whitish: "#E4E4E5",
         darkBackground: "#111217",
         primary: "#32445a",
-        darkPrimary: "#8AEA9C",
+        darkPrimary: "#8279e3",
         secondary: "#334756",
         darkSecondary: "#17181F",
         darkHelper: "#1d1d1d",

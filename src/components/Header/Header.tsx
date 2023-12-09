@@ -46,7 +46,7 @@ const Header: FC = () => {
   return (
     <>
       <header
-        className={`flex ${dosis.className} h-[60px] items-center justify-between border-b-[1px] border-[#444]/40 px-6 text-[#222] dark:bg-darkSecondary lg:border-[#444]/10`}
+        className={`sticky top-0 z-50 flex ${dosis.className} h-[60px] items-center justify-between border-b-[1px] border-[#444]/40 px-6 text-[#222] dark:bg-darkSecondary lg:border-[#444]/10`}
       >
         <Link
           href={"/"}

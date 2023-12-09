@@ -23,7 +23,7 @@ const University = () => {
   return (
     <div className="flex h-full flex-row items-center justify-center gap-4 md:flex-col xl:flex-row">
       <Image
-        src="/images/samu.png"
+        src={`/images/${selectedUni?.university?.logo}`}
         width={200}
         height={200}
         alt="Üniversite"

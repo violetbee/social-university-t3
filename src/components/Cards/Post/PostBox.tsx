@@ -36,6 +36,7 @@ function PostBox({
       href={`/yazi/${slug}`}
       className={`relative rounded-xl border-l-4 bg-darkSecondary text-white shadow-md duration-150 hover:shadow-lg dark:border-darkPrimary dark:hover:bg-darkSecondary/50`}
       style={{ borderLeftColor: category?.color as string }}
+      passHref
     >
       <div className="flex flex-col gap-4 p-4">
         {image && (

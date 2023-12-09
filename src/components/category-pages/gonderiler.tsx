@@ -5,9 +5,13 @@ import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 import type { RootState } from "../../store/store";
 import Pagination from "../pagination";
+import { usePagination } from "../../hooks/usePagination";
+
+const NUMBER_OF_POSTS_RECEIVED = 4;
 
 const Gonderiler = () => {
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const [totalPostsLength, setTotalPostsLength] = useState(0);
 
   const { query } = useRouter();
 
@@ -17,15 +21,25 @@ const Gonderiler = () => {
 
   const { data: categories } = trpc.category.getAll.useQuery();
 
-  const { data } = trpc.post.getAllPosts.useQuery(
+  const pagination = usePagination(NUMBER_OF_POSTS_RECEIVED, totalPostsLength);
+
+  const { data, isSuccess } = trpc.post.getAllPosts.useQuery(
     {
       universityId,
       slug: selectedCategories.length > 0 ? selectedCategories : undefined,
+      skip: pagination.currentPage * NUMBER_OF_POSTS_RECEIVED,
+      take: NUMBER_OF_POSTS_RECEIVED,
     },
     {
       enabled: universityId !== undefined,
     },
   );
+
+  useEffect(() => {
+    if (isSuccess) {
+      setTotalPostsLength(data.count);
+    }
+  }, [isSuccess, data?.count]);
 
   useEffect(() => {
     if (query.textCategory) {
@@ -45,6 +59,7 @@ const Gonderiler = () => {
                 : "border-b-transparent hover:border-darkPrimary dark:hover:border-darkPrimary"
             }`}
             onClick={() => {
+              pagination.setClickedPage(0);
               if (selectedCategories.includes(category.slug)) {
                 setSelectedCategories((prev) =>
                   prev.filter((item) => item !== category.slug),
@@ -62,7 +77,7 @@ const Gonderiler = () => {
         {data?.posts?.map((post) => <PostBox key={post.id} {...post} />)}
       </div>
       <div className="mt-8 self-center">
-        <Pagination pageSize={2} totalItemLength={16} />
+        <Pagination {...pagination} />
       </div>
     </div>
   );

@@ -11,7 +11,6 @@ export const usePagination = (pageSize: number, totalItemLength: number) => {
   const pagesAsArray = Array(countPages)
     .fill(0)
     .map((_, idx) => idx);
-  console.log(pagesAsArray);
 
   const isPrevDisabled = currentPage === 0;
 

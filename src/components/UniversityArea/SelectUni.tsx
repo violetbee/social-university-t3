@@ -7,6 +7,7 @@ type University = {
   name: string;
   slug: string;
   location: string;
+  logo: string;
   _count: {
     users: number;
   };
@@ -15,24 +16,26 @@ type University = {
 export default function SelectUni() {
   const [uniName, setUniName] = useState("");
 
-  const debouncedValue = useDebounce(uniName, 5000);
-
-  const isValDifferent = debouncedValue !== uniName;
+  const isValueDebounced = useDebounce(uniName, 500);
 
   const { data: university, isLoading } = trpc.university.getAll.useQuery<
     University[]
-  >({
-    universityName: debouncedValue,
-  });
+  >(
+    {
+      universityName: uniName,
+    },
+    {
+      enabled: isValueDebounced,
+    },
+  );
   const { mutateAsync: setUserUniversity } =
     trpc.university.changeUserUniversity.useMutation();
   const universityCtx = trpc.useContext();
 
   return (
     <div className="flex min-w-[500px] flex-col items-center justify-center gap-10 rounded-md border border-gray-200 bg-white p-4 shadow-lg dark:border-darkHelper dark:bg-darkSecondary dark:shadow-md">
-      {isValDifferent && <p>Yükleniyor...</p>}
       <div className="grid w-full grid-cols-1 gap-3 [&>*:nth-child(1)]:shadow-sm [&>*:nth-child(1)]:shadow-indigo-500 [&>*:nth-child(2)]:shadow-sm [&>*:nth-child(2)]:shadow-rose-500 [&>*:nth-child(3)]:shadow-sm [&>*:nth-child(3)]:shadow-emerald-800">
-        {!isValDifferent &&
+        {isValueDebounced &&
           !isLoading &&
           university
             ?.sort((prev, next) => next._count.users - prev._count.users)
@@ -57,6 +60,16 @@ export default function SelectUni() {
                 <small>{uni._count.users} Öğrenci Mevcut</small>
               </button>
             ))}
+
+        {(isLoading || !isValueDebounced) && (
+          <div className="mx-auto flex h-24 w-24 animate-waving-hand items-center justify-center self-center rounded-full border border-darkHelper bg-darkBackground !shadow-none">
+            <div className="flex items-center justify-center gap-2">
+              <div className="animation-delay-100 h-4 w-4 animate-bounce rounded-full bg-gray-300"></div>
+              <div className="animation-delay-200 h-4 w-4 animate-bounce rounded-full bg-gray-300 delay-300"></div>
+              <div className="animation-delay-300 h-4 w-4 animate-bounce rounded-full bg-gray-300"></div>
+            </div>
+          </div>
+        )}
       </div>
       <div className="flex w-full items-center justify-between gap-4">
         <input

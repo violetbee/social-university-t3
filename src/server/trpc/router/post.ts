@@ -94,6 +94,8 @@ export const postRouter = router({
       z.object({
         universityId: z.string(),
         slug: z.array(z.string()).nullish(),
+        skip: z.number(),
+        take: z.number(),
       }),
     )
     .query(async ({ ctx, input }) => {
@@ -101,6 +103,8 @@ export const postRouter = router({
         orderBy: {
           createdAt: "desc",
         },
+        skip: input.skip,
+        take: input.take,
         where: {
           universityId: input.universityId,
           category: {
@@ -142,14 +146,22 @@ export const postRouter = router({
         },
       });
 
+      const countTextPosts = await ctx.prisma.textTypePost.count({
+        where: {
+          universityId: input.universityId,
+          category: {
+            slug: input.slug ? { in: input.slug } : undefined,
+          },
+        },
+      });
+
       const textPostsTimeAgo = [
         ...textPosts.map((post) => ({
           ...post,
           timeAgo: publishedTimeAgo(post.createdAt),
         })),
       ];
-
-      return { posts: textPostsTimeAgo };
+      return { posts: textPostsTimeAgo, count: countTextPosts };
     }),
 
   getPostsSummary: publicProcedure
@@ -221,21 +233,79 @@ export const postRouter = router({
 
       return { posts: textPosts };
     }),
-  getDocPosts: publicProcedure.query(async ({ ctx }) => {
-    const textPosts = await ctx.prisma.docTypePost.findMany({
-      include: {
-        user: {
-          include: {
-            department: true,
-            university: true,
+  getDocPosts: publicProcedure
+    .input(
+      z.object({
+        universityId: z.string(),
+        departmentId: z.string(),
+        level: z.number(),
+        classId: z.string(),
+        take: z.number(),
+        skip: z.number(),
+      }),
+    )
+    .query(async ({ ctx, input }) => {
+      const docTypePosts = await ctx.prisma.docTypePost.findMany({
+        orderBy: {
+          createdAt: "desc",
+        },
+        skip: input.skip,
+        take: input.take,
+        where: {
+          universityId: input.universityId,
+          departmentId: input.departmentId || undefined,
+          class: {
+            level: input.level || undefined,
+          },
+          classId: input.classId || undefined,
+        },
+        select: {
+          _count: {
+            select: {
+              files: true,
+            },
+          },
+          id: true,
+          title: true,
+          content: true,
+          slug: true,
+          department: {
+            select: {
+              id: true,
+              name: true,
+            },
+          },
+          class: {
+            select: {
+              id: true,
+              name: true,
+              level: true,
+            },
+          },
+          files: {
+            select: {
+              id: true,
+              name: true,
+              size: true,
+            },
+          },
+          user: {
+            select: {
+              id: true,
+              name: true,
+              surname: true,
+              grade: true,
+              image: true,
+              department: {
+                select: {
+                  name: true,
+                },
+              },
+            },
           },
         },
-        likes: true,
-        files: true,
-        department: true,
-        class: true,
-      },
-    });
-    return { posts: textPosts };
-  }),
+      });
+
+      return docTypePosts;
+    }),
 });
