@@ -1,8 +1,9 @@
 import RootLayout from "../../components/layouts/RootLayout";
 import DashboardLayout from "../../components/layouts/DashboardLayout";
-import Gonderiler from "../../components/category-pages/gonderiler";
+import Gonderiler from "../../components/pages/category/Gonderiler";
 import { GetServerSideProps } from "next";
-import DosyaPaylasimlari from "../../components/category-pages/dosyaPaylasimlari";
+import DosyaPaylasimlari from "../../components/pages/category/DosyaPaylasimlari";
+import Etkinlikler from "../../components/pages/category/Etkinlikler";
 
 const CategoryPage = ({ params }: { params: { category: string } }) => {
   switch (params.category) {
@@ -10,6 +11,8 @@ const CategoryPage = ({ params }: { params: { category: string } }) => {
       return <Gonderiler />;
     case "dosya-paylasimlari":
       return <DosyaPaylasimlari />;
+    case "etkinlikler":
+      return <Etkinlikler />;
   }
 };
 

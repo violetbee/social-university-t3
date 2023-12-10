@@ -167,6 +167,7 @@ model DocTypePost {
     content      String
     likes        Like[]
     tags         String[]
+    comments     Comment[]
     user         User        @relation(fields: [userId], references: [id], onDelete: Cascade)
     userId       String
     university   University? @relation(fields: [universityId], references: [id])
@@ -216,25 +217,28 @@ model File {
 }
 
 model Like {
-    id            String       @id @default(cuid())
-    isLike        Boolean      @default(true)
-    post          TextTypePost @relation(fields: [postId], references: [id], onDelete: Cascade)
-    user          User         @relation(fields: [userId], references: [id], onDelete: Cascade)
-    postId        String
+    id            String        @id @default(cuid())
+    isLike        Boolean       @default(true)
+    post          TextTypePost? @relation(fields: [postId], references: [id], onDelete: Cascade)
+    user          User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+    postId        String?
     userId        String
-    DocTypePost   DocTypePost? @relation(fields: [docTypePostId], references: [id])
+    DocTypePost   DocTypePost?  @relation(fields: [docTypePostId], references: [id], onDelete: Cascade)
     docTypePostId String?
 
     @@unique([postId, userId])
+    @@unique([docTypePostId, userId])
 }
 
 model Comment {
-    id      String       @id @default(cuid())
-    content String
-    user    User         @relation(fields: [userId], references: [id], onDelete: Cascade)
-    post    TextTypePost @relation(fields: [postId], references: [id], onDelete: Cascade)
-    userId  String
-    postId  String
+    id            String       @id @default(cuid())
+    content       String
+    user          User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+    post          TextTypePost @relation(fields: [postId], references: [id], onDelete: Cascade)
+    userId        String
+    postId        String
+    DocTypePost   DocTypePost? @relation(fields: [docTypePostId], references: [id])
+    docTypePostId String?
 }
 
 model VerificationToken {

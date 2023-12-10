@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, use } from "react";
 
 export const useSlider = (length: number, autoMove: boolean) => {
   const [currentSlide, setCurrentSlide] = useState(0);

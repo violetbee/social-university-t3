@@ -34,7 +34,7 @@ const University = () => {
           {selectedUni?.university?.name}
         </span>
         <p className="text-sm font-thin text-whitish/30">
-          Kalan gezme hakkınız: {selectedUni?.university?.dailyLimit || 3}
+          Kalan gezme hakkınız: 3
         </p>
       </div>
       <DisplaySelectUniversity />

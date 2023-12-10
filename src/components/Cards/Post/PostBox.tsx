@@ -33,7 +33,7 @@ function PostBox({
 }: Props) {
   return (
     <Link
-      href={`/yazi/${slug}`}
+      href={`gonderiler/${slug}`}
       className={`relative rounded-xl border-l-4 bg-darkSecondary text-white shadow-md duration-150 hover:shadow-lg dark:border-darkPrimary dark:hover:bg-darkSecondary/50`}
       style={{ borderLeftColor: category?.color as string }}
       passHref
@@ -95,8 +95,8 @@ function PostBox({
             )}
             <Link
               href={{
-                pathname: "/sub/gonderiler",
-                query: { textCategory: category?.slug },
+                pathname: "/gonderiler",
+                query: { sub: category?.slug },
               }}
               className="shrink-0 rounded-md border border-darkHelper bg-darkBackground px-2 py-[2px] pt-[4px] text-white duration-150 hover:bg-white hover:text-darkBackground"
             >

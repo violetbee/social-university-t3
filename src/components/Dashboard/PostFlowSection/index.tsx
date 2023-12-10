@@ -23,7 +23,7 @@ const PostFlowSection = () => {
       <div className="flex items-center justify-between gap-5">
         <h3 className="text-2xl font-semibold">Akış</h3>
         <Link
-          href="/sub/gonderiler"
+          href="/gonderiler"
           className="rounded-md border border-darkHelper bg-darkBackground p-2 px-4 text-white duration-150 hover:bg-white hover:text-darkBackground"
         >
           Tümünü Gör

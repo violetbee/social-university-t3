@@ -27,17 +27,17 @@ const PublishPostSection = () => {
   const handleSubContent = (subContent: string) => {
     switch (subContent) {
       case "anket":
-        return <AnketForm cancelProcess={cancelProcess} />;
+        return <AnketForm />;
       case "etkinlik":
-        return <EtkinlikForm cancelProcess={cancelProcess} />;
+        return <EtkinlikForm />;
       case "dosya":
         return <DosyaForm cancelProcess={cancelProcess} />;
       case "gonderi":
         return <GonderiForm cancelProcess={cancelProcess} />;
       case "soru-cevap":
-        return <SoruCevapForm cancelProcess={cancelProcess} />;
+        return <SoruCevapForm />;
       case "ilan":
-        return <IlanForm cancelProcess={cancelProcess} />;
+        return <IlanForm />;
       default:
         return (
           <>

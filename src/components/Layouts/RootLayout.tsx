@@ -35,8 +35,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         className={`${dosis.className} flex h-full w-full bg-background dark:bg-darkBackground`}
       >
         <LeftSideBar />
-        <div className="h-full w-full overflow-y-scroll">
-          <div className="mx-auto flex h-full max-w-[1700px] flex-col gap-12 p-5 lg:px-16 lg:py-8">
+        <div className="flex w-full flex-col">
+          <div className="mx-auto flex w-full max-w-[1700px] flex-col gap-12 p-5 lg:px-16 lg:py-10">
             {children}
           </div>
           <Footer />

@@ -1,11 +1,11 @@
-import { trpc } from "../../utils/trpc";
-import PostBox from "../../components/Cards/Post/PostBox";
+import { trpc } from "../../../../utils/trpc";
+import PostBox from "../../../Cards/Post/PostBox";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
-import type { RootState } from "../../store/store";
-import Pagination from "../pagination";
-import { usePagination } from "../../hooks/usePagination";
+import type { RootState } from "../../../../store/store";
+import Pagination from "../../../pagination";
+import { usePagination } from "../../../../hooks/usePagination";
 
 const NUMBER_OF_POSTS_RECEIVED = 4;
 
@@ -42,8 +42,8 @@ const Gonderiler = () => {
   }, [isSuccess, data?.count]);
 
   useEffect(() => {
-    if (query.textCategory) {
-      setSelectedCategories([query.textCategory as string]);
+    if (query.sub) {
+      setSelectedCategories([query.sub as string]);
     }
   }, [query]);
 

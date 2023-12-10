@@ -39,6 +39,10 @@ export default defineNextConfig({
         protocol: "https",
         hostname: "i.hizliresim.com",
       },
+      {
+        protocol: "https",
+        hostname: "cdn.bubilet.com.tr",
+      },
     ],
   },
 });
