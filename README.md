@@ -10,7 +10,7 @@ NextJS, tRPC, Next-Auth.js, PrismaORM, TailwindCSS, Amazon S3, OpenAI
 
 ## Video
 
-https://github.com/violetbee/social-university-t3/assets/61601796/92027e65-9674-42dc-85b9-5cb2ea283eec
+https://github.com/violetbee/social-university-t3/assets/61601796/1852616b-927f-4206-9020-8385a698f24d
 
 ## Main
 
