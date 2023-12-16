@@ -14,6 +14,14 @@
   }
 }
 
+.openIt {
+  animation: fade-in 0.5s forwards;
+}
+
+.closeIt {
+  animation: fade-out 0.5s forwards;
+}
+
 ::-webkit-scrollbar {
   width: 5px;
   height: 5px;

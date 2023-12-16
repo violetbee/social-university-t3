@@ -5,13 +5,17 @@ import React, { ReactElement } from "react";
 import { ParsedUrlQuery } from "querystring";
 import { ISinglePost } from "../../types/post";
 import type { NextPageWithLayout } from "../_app";
-import { getTextTypePosts } from "../../apis/textTypePosts";
-import { getFileTypePosts } from "../../apis/fileTypePosts";
+import { getTextTypePosts } from "../../apis/Post/textTypePosts";
+import { getFileTypePosts } from "../../apis/Post/fileTypePosts";
 import GonderiVeDosyaInPage from "../../components/pages/category/inPageDetail/GonderiVeDosya";
 import EtkinliklerInPage from "../../components/pages/category/inPageDetail/Etkinlikler";
+import {
+  type EventDetails,
+  getEventDetails,
+} from "../../apis/Event/getEventDetails";
 
 type Props = {
-  content: ISinglePost;
+  content: ISinglePost | EventDetails;
   params: {
     [key: string]: string | string[] | ParsedUrlQuery;
   };
@@ -25,14 +29,22 @@ const ContentPage: NextPageWithLayout<Props> = ({ content, params }) => {
       case "dosya-paylasimlari":
       case "gonderiler":
         return (
-          <GonderiVeDosyaInPage post={content} category={category as string} />
+          <GonderiVeDosyaInPage
+            post={content as ISinglePost}
+            category={category as string}
+          />
         );
       case "soru-cevap-paylasimlari":
         return <div>Soru-Cevap</div>;
       case "anketler":
         return <div>Anketler</div>;
       case "etkinlikler":
-        return <EtkinliklerInPage />;
+        return (
+          <EtkinliklerInPage
+            event={content as EventDetails}
+            category={category as string}
+          />
+        );
     }
   };
 
@@ -70,6 +82,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         return getTextTypePosts(slug as string);
       case "dosya-paylasimlari":
         return getFileTypePosts(slug as string);
+      case "etkinlikler":
+        return getEventDetails(slug as string);
     }
   };
 

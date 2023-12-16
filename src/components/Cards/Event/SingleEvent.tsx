@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { EventIncludedTypeOfEvent } from "../../../types/event";
+import Link from "next/link";
 
 const Event = ({ event }: { event: EventIncludedTypeOfEvent }) => {
   const startDate = new Date(event.startDate);
@@ -50,9 +51,12 @@ const Event = ({ event }: { event: EventIncludedTypeOfEvent }) => {
           </div>
         </div>
         <div className="flex items-center justify-between px-4 py-3">
-          <button className="seeMore flex w-full items-center justify-center !bg-darkBackground dark:hover:!bg-darkPrimary dark:hover:text-white">
+          <Link
+            href={`/etkinlikler/${event.slug || ""}`}
+            className="seeMore flex w-full items-center justify-center !bg-darkBackground dark:hover:!bg-darkPrimary dark:hover:text-white"
+          >
             Etkinliği İncele
-          </button>
+          </Link>
         </div>
       </div>
     </div>

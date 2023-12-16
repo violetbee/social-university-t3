@@ -6,7 +6,9 @@ import DosyaPaylasimlari from "../../components/pages/category/DosyaPaylasimlari
 import Etkinlikler from "../../components/pages/category/Etkinlikler";
 
 const CategoryPage = ({ params }: { params: { category: string } }) => {
-  switch (params.category) {
+  const { category } = params;
+
+  switch (category) {
     case "gonderiler":
       return <Gonderiler />;
     case "dosya-paylasimlari":

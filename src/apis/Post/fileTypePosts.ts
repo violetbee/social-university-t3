@@ -1,4 +1,4 @@
-import { prisma } from "../server/db/client";
+import { prisma } from "../../server/db/client";
 
 export const getFileTypePosts = async (slug: string) => {
   const fileTypePost = await prisma.docTypePost.findUnique({

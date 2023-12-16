@@ -188,6 +188,7 @@ model Event {
     price        Float?
     description  String
     image        String?
+    slug         String?
     location     String
     user         User        @relation(fields: [userId], references: [id], onDelete: Cascade)
     userId       String

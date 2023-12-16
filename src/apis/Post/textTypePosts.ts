@@ -1,4 +1,4 @@
-import { prisma } from "../server/db/client";
+import { prisma } from "../../server/db/client";
 
 export const getTextTypePosts = async (slug: string) => {
   const textPostBySlug = await prisma.textTypePost.findUnique({
