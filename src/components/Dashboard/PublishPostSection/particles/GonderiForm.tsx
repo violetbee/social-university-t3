@@ -20,7 +20,7 @@ function GonderiForm({ cancelProcess }: { cancelProcess: () => void }) {
   const ctx = trpc.useContext();
   const createTextPost = trpc.post.createTextPost.useMutation();
 
-  const getCategories = trpc.category.getAll.useQuery();
+  const getCategories = trpc.subCategory.getAll.useQuery();
 
   const [tag, setTag] = useState<string>("");
   const [tags, setTags] = useState<string[]>([]);

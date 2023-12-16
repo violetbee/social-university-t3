@@ -4,7 +4,7 @@ import { authRouter } from "./auth";
 import { userRouter } from "./user";
 import { likeRouter } from "./like";
 import { postRouter } from "./post";
-import { categoryRouter } from "./category";
+import { subCategory } from "./category";
 import { eventRouter } from "./event";
 import { departmentRouter } from "./department";
 import { universityRouter } from "./university";
@@ -14,7 +14,7 @@ export const appRouter = router({
   user: userRouter,
   like: likeRouter,
   post: postRouter,
-  category: categoryRouter,
+  subCategory: subCategory,
   event: eventRouter,
   department: departmentRouter,
   university: universityRouter,

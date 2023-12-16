@@ -1,7 +1,7 @@
 import { router, publicProcedure } from "../trpc";
 import { z } from "zod";
 
-export const categoryRouter = router({
+export const subCategory = router({
   getAll: publicProcedure.query(async ({ ctx }) => {
     const categories = await ctx.prisma.category.findMany({
       orderBy: {
@@ -15,7 +15,7 @@ export const categoryRouter = router({
       z.object({
         name: z.string(),
         slug: z.string(),
-      })
+      }),
     )
     .mutation(async ({ ctx, input }) => {
       await ctx.prisma.category.create({

@@ -6,7 +6,7 @@ export const eventRouter = router({
     .input(
       z.object({
         query: z.string(),
-      })
+      }),
     )
     .query(async ({ ctx, input }) => {
       const events = await ctx.prisma.event.findMany({
@@ -23,4 +23,15 @@ export const eventRouter = router({
       });
       return events;
     }),
+  getEventTypes: publicProcedure.query(async ({ ctx }) => {
+    const eventTypes = await ctx.prisma.eventType.findMany({
+      orderBy: {
+        events: {
+          _count: "desc",
+        },
+      },
+    });
+
+    return { data: eventTypes, count: eventTypes.length };
+  }),
 });
