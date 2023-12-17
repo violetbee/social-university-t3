@@ -179,6 +179,14 @@ model DocTypePost {
     files        File[]
 }
 
+enum EventForWho {
+    ALL
+    CLASS_MEMBER
+    DEPARTMENT_MEMBER
+    UNIVERSITY_MEMBER
+    SCHOOL_CLUB_MEMBER
+}
+
 model Event {
     id           String      @id @default(cuid())
     createdAt    DateTime    @default(now()) @db.Timestamp(6)
@@ -190,6 +198,7 @@ model Event {
     image        String?
     slug         String?
     location     String
+    forWho       EventForWho @default(ALL)
     user         User        @relation(fields: [userId], references: [id], onDelete: Cascade)
     userId       String
     eventType    EventType   @relation(fields: [eventTypeId], references: [id], onDelete: Cascade)

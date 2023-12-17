@@ -7,7 +7,7 @@ function BreadCrumb({
   title,
 }: {
   category: string;
-  subCategory: string;
+  subCategory?: string;
   name: string;
   title: string;
 }) {
@@ -35,7 +35,7 @@ function BreadCrumb({
         <span>/</span>
         <Link href={`/${category}`}>{handleCategoryName(category)}</Link>
         <span>/</span>
-        {subCategory.length > 0 ? (
+        {subCategory && subCategory.length > 0 ? (
           <Link href={`/${category}?sub=${subCategory}`}>{name}</Link>
         ) : (
           <span className="text-[#333] dark:text-[#777]">{name}</span>

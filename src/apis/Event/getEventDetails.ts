@@ -25,6 +25,7 @@ export const getEventDetails = async (slug: InputGetEventDetails) => {
       endDate: true,
       location: true,
       price: true,
+      forWho: true,
       schoolClub: {
         select: {
           name: true,
@@ -66,6 +67,7 @@ export type EventDetails = {
   endDate: Date;
   location: string;
   price: number | null;
+  forWho: string;
   schoolClub: {
     name: string;
     slug: string;
