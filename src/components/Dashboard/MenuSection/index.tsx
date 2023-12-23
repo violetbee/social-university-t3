@@ -51,7 +51,7 @@ const MenuSection = () => {
               Dosya Paylaşımları
             </span>
           </Link>
-          <Link
+          {/* <Link
             href="/soru-cevap-paylasimlari"
             className={`${
               removeQueries(router.asPath) === "/soru-cevap-paylasimlari"
@@ -62,7 +62,7 @@ const MenuSection = () => {
             <span className="text-center text-base font-normal tracking-wider text-darkSecondary dark:text-white dark:drop-shadow-[2px_1px_1px_rgb(0,0,0)]">
               Soru-Cevap Paylaşımları
             </span>
-          </Link>
+          </Link> */}
           <Link
             href="/anketler"
             className={`${

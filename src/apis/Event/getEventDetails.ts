@@ -53,7 +53,6 @@ export const getEventDetails = async (slug: InputGetEventDetails) => {
       },
     },
   });
-
   return events;
 };
 

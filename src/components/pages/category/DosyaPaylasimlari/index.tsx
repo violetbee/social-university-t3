@@ -163,119 +163,115 @@ const DosyaPaylasimlari = () => {
             Yükleniyor...
           </div>
         )}
-        {docTypePosts &&
-          docTypePosts.length > 0 &&
-          docTypePosts.map((item, idx) => (
-            <div
-              className={`flex flex-col ${
-                isLoading ? "blur-md" : ""
-              } relative gap-1 rounded-md border border-darkHelper bg-darkSecondary p-4 pt-5 text-lg/6 text-white`}
-              key={idx}
-            >
-              <div className="flex">
-                <span className="flex gap-2 rounded-md text-sm">
-                  <Image
-                    src={item.user.image || "/images/avatar-male.svg"}
-                    className="h-8 w-auto rounded-full object-cover"
-                    alt={item.user.name || "default profile image"}
-                    width={64}
-                    height={64}
-                  />
-                  <button className="mt-1 flex flex-col items-start text-sm/4">
-                    <span>{`@${item.user?.name}`}</span>
-                    <span className="text-xs font-extralight text-whitish/60">
-                      {item.user?.department?.name} ({item.user?.grade}. Sınıf)
-                    </span>
-                  </button>
-                </span>
-                <div className="ml-auto">
-                  <button className="text-xs font-extralight tracking-tight text-darkHelper dark:text-whitish/50">
-                    <MdOutlineReport className="text-xl hover:text-red-500" />
-                  </button>
-                </div>
+        {docTypePosts?.map((item, idx) => (
+          <div
+            className={`flex flex-col ${
+              isLoading ? "blur-md" : ""
+            } relative gap-1 rounded-md border border-darkHelper bg-darkSecondary p-4 pt-5 text-lg/6 text-white`}
+            key={idx}
+          >
+            <div className="flex">
+              <span className="flex gap-2 rounded-md text-sm">
+                <Image
+                  src={item.user.image || "/images/avatar-male.svg"}
+                  className="h-8 w-auto rounded-full object-cover"
+                  alt={item.user.name || "default profile image"}
+                  width={64}
+                  height={64}
+                />
+                <button className="mt-1 flex flex-col items-start text-sm/4">
+                  <span>{`@${item.user?.name}`}</span>
+                  <span className="text-xs font-extralight text-whitish/60">
+                    {item.user?.department?.name} ({item.user?.grade}. Sınıf)
+                  </span>
+                </button>
+              </span>
+              <div className="ml-auto">
+                <button className="text-xs font-extralight tracking-tight text-darkHelper dark:text-whitish/50">
+                  <MdOutlineReport className="text-xl hover:text-red-500" />
+                </button>
               </div>
-              <div className="my-2 h-[1px] bg-darkHelper/50"></div>
-              <h3>{item.title}</h3>
-              <div className="flex flex-wrap items-center gap-2">
-                <Badge
-                  title={item.class?.name}
-                  className=" bg-rose-700/30 hover:bg-rose-700/60"
-                  fn={() => {
-                    setPreferences((prev) => ({
-                      ...prev,
-                      departmentId: item.department?.id as string,
-                      level: item.class?.level as number,
-                      classId: item.class?.id as string,
-                    }));
-                  }}
-                />
-                <Badge
-                  title={item.department?.name}
-                  className="bg-darkPrimary/40 hover:bg-darkPrimary/70"
-                  fn={() => {
-                    setPreferences({
-                      ...initialPreferences,
-                      departmentId: item.department?.id as string,
-                    });
-                  }}
-                />
-                <Badge
-                  title={item.class?.level + ". Sınıf"}
-                  className="bg-lime-700/70 hover:bg-lime-700"
-                  fn={() => {
-                    setPreferences((prev) => ({
-                      ...prev,
-                      departmentId: item.department?.id as string,
-                      level: item.class?.level as number,
-                    }));
-                  }}
-                />
-              </div>
-              <p className="mt-4 h-10 text-sm text-whitish/70">
-                {item.content}
-              </p>
-              {item.files && item.files.length > 0 && (
-                <>
-                  <div className="mt-3 flex items-center gap-2">
-                    <GoFileDirectory className="text-2xl" />
-                    <span className="mt-[3px] text-sm">
-                      {item._count.files} Dosya
-                    </span>
-                  </div>
-                  <div
-                    className={`relative mt-1 grid h-16 grid-cols-3 gap-2 ${
-                      item.files.length > 3
-                        ? "overflow-hidden after:absolute after:bottom-0 after:right-0 after:h-9 after:w-full after:bg-gradient-to-t after:from-darkSecondary after:via-darkSecondary/50 after:to-transparent after:content-['']"
-                        : ""
-                    }`}
-                  >
-                    {item.files.map((file) => (
-                      <div
-                        className="flex flex-col items-center justify-center rounded-md bg-darkBackground px-3 py-2 text-center"
-                        key={file.id}
-                      >
-                        <span className="text-sm">
-                          {file.name.length > 8
-                            ? file.name.slice(0, 8) + "..."
-                            : file.name}
-                        </span>
-                        <span className="text-xs text-whitish/30">
-                          {(file.size / 1024 / 1024).toFixed(2)} MB
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-                </>
-              )}
-              <Link
-                href={`dosya-paylasimlari/${item.slug}`}
-                className="group mt-5 flex h-full flex-1 items-center justify-center gap-1 rounded-md border border-darkHelper bg-darkBackground py-2 text-center text-white duration-150 hover:border-darkPrimary hover:bg-white hover:text-darkBackground"
-              >
-                <span className="mt-1">Detaylı Görüntüle</span>
-                <PiCursorClickLight className="text-darkPrimary group-hover:text-darkBackground" />
-              </Link>
             </div>
-          ))}
+            <div className="my-2 h-[1px] bg-darkHelper/50"></div>
+            <h3>{item.title}</h3>
+            <div className="flex flex-wrap items-center gap-2">
+              <Badge
+                title={item.class?.name}
+                className=" bg-rose-700/30 hover:bg-rose-700/60"
+                fn={() => {
+                  setPreferences((prev) => ({
+                    ...prev,
+                    departmentId: item.department?.id as string,
+                    level: item.class?.level as number,
+                    classId: item.class?.id as string,
+                  }));
+                }}
+              />
+              <Badge
+                title={item.department?.name}
+                className="bg-darkPrimary/40 hover:bg-darkPrimary/70"
+                fn={() => {
+                  setPreferences({
+                    ...initialPreferences,
+                    departmentId: item.department?.id as string,
+                  });
+                }}
+              />
+              <Badge
+                title={item.class?.level + ". Sınıf"}
+                className="bg-lime-700/70 hover:bg-lime-700"
+                fn={() => {
+                  setPreferences((prev) => ({
+                    ...prev,
+                    departmentId: item.department?.id as string,
+                    level: item.class?.level as number,
+                  }));
+                }}
+              />
+            </div>
+            <p className="mt-4 h-10 text-sm text-whitish/70">{item.content}</p>
+            {item.files && item.files.length > 0 && (
+              <>
+                <div className="mt-3 flex items-center gap-2">
+                  <GoFileDirectory className="text-2xl" />
+                  <span className="mt-[3px] text-sm">
+                    {item._count.files} Dosya
+                  </span>
+                </div>
+                <div
+                  className={`relative mt-1 grid h-16 grid-cols-3 gap-2 ${
+                    item.files.length > 3
+                      ? "overflow-hidden after:absolute after:bottom-0 after:right-0 after:h-9 after:w-full after:bg-gradient-to-t after:from-darkSecondary after:via-darkSecondary/50 after:to-transparent after:content-['']"
+                      : ""
+                  }`}
+                >
+                  {item.files.map((file) => (
+                    <div
+                      className="flex flex-col items-center justify-center rounded-md bg-darkBackground px-3 py-2 text-center"
+                      key={file.id}
+                    >
+                      <span className="text-sm">
+                        {file.name.length > 8
+                          ? file.name.slice(0, 8) + "..."
+                          : file.name}
+                      </span>
+                      <span className="text-xs text-whitish/30">
+                        {(file.size / 1024 / 1024).toFixed(2)} MB
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </>
+            )}
+            <Link
+              href={`dosya-paylasimlari/${item.slug}`}
+              className="group mt-5 flex h-full flex-1 items-center justify-center gap-1 rounded-md border border-darkHelper bg-darkBackground py-2 text-center text-white duration-150 hover:border-darkPrimary hover:bg-white hover:text-darkBackground"
+            >
+              <span className="mt-1">Detaylı Görüntüle</span>
+              <PiCursorClickLight className="text-darkPrimary group-hover:text-darkBackground" />
+            </Link>
+          </div>
+        ))}
         {docTypePosts && docTypePosts.length === 0 && (
           <div className="col-span-12 flex h-40 items-center justify-center text-whitish/50">
             Bu kategoride henüz bir paylaşım yapılmamıştır.
