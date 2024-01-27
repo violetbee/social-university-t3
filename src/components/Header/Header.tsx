@@ -48,12 +48,12 @@ const Header: FC = () => {
   return (
     <>
       <header
-        className={`sticky top-0 z-50 flex ${dosis.className} h-[60px] items-center justify-between border-b-[1px] border-[#444]/40 px-6 text-[#222] dark:bg-darkSecondary lg:border-[#444]/10`}
+        className={`sticky top-0 z-50 flex ${dosis.className} h-[60px] items-center justify-between border-b-[1px] border-[#444]/40 px-6 text-[#222] lg:border-[#444]/10 dark:bg-darkSecondary`}
       >
         <div className="flex h-full items-center gap-5">
           <Link
             href={"/"}
-            className="relative flex cursor-pointer items-center pt-2 text-xl tracking-tighter text-darkSecondary dark:text-white lg:text-3xl/10"
+            className="relative flex cursor-pointer items-center pt-2 text-xl tracking-tighter text-darkSecondary lg:text-3xl/10 dark:text-white"
           >
             SOSYAL<span className="font-bold">ÜNİVERSİTE</span>
           </Link>

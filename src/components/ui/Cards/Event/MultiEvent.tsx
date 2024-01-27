@@ -1,9 +1,8 @@
 import Event from "./SingleEvent";
-import {MultiEventProps} from "../../../../types/event";
-import {RootState} from "../../../../store/store";
-import {trpc} from "../../../../utils/trpc";
-import {useSelector} from "react-redux";
-
+import { MultiEventProps } from "../../../../types/event";
+import { RootState } from "../../../../store/store";
+import { trpc } from "../../../../utils/trpc";
+import { useSelector } from "react-redux";
 
 const Events = ({ itemPiece }: MultiEventProps) => {
   const universityId = useSelector(

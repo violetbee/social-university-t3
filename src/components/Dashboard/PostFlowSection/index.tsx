@@ -2,7 +2,7 @@ import { trpc } from "../../../utils/trpc";
 import Link from "next/link";
 import { useSelector } from "react-redux";
 import type { RootState } from "../../../store/store";
-import PostBox from "../../ui/Cards/Post/PostBox";
+import PostBox from "../../ui/cards/Post/PostBox";
 
 const PostFlowSection = () => {
   const universityId = useSelector(

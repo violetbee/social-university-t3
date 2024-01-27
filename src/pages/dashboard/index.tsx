@@ -20,7 +20,7 @@ import {
   IoLocationOutline,
   IoSchoolOutline,
 } from "react-icons/io5";
-import PostFlowSection from "../../components/Dashboard/PostFlowSection";
+import PostFlowSection from "../../components/dashboard/PostFlowSection";
 import { MdOutlineBookmarkAdded } from "react-icons/md";
 
 const Dashboard = () => {

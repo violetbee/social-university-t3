@@ -5,15 +5,15 @@ import React, { ReactElement } from "react";
 import { ParsedUrlQuery } from "querystring";
 import { ISinglePost } from "../../types/post";
 import type { NextPageWithLayout } from "../_app";
-import { getTextTypePosts } from "../../apis/post/GET/text-type-posts";
-import { getFileTypePosts } from "../../apis/post/GET/file-type-posts";
+import { getTextTypePosts } from "../../server/utils/post/GET/text-type-posts";
+import { getFileTypePosts } from "../../server/utils/post/GET/file-type-posts";
 import GonderilerDetail from "../../components/pages/category/gonderiler/detail";
 import EtkinliklerInPage from "../../components/pages/category/etkinlikler/detail";
 import {
   type EventDetails,
   getEventDetails,
-} from "../../apis/event/GET/event-detail";
-import { getSchoolClubDetails } from "../../apis/school-club/GET/school-club";
+} from "../../server/utils/event/GET/event-detail";
+import { getSchoolClubDetails } from "../../server/utils/school-club/GET/school-club";
 
 type Props = {
   content: ISinglePost | EventDetails;

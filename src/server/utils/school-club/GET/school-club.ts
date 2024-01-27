@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { Prisma } from "@prisma/client";
-import { type prisma } from "../../../server/db/client";
+import { Context } from "../../../trpc/context";
 
 export const getSchoolClubDetailsProps = z.string();
 
@@ -44,9 +44,9 @@ const schoolClubDetails: Prisma.SchoolClubSelect = {
 
 export const getSchoolClubDetails = async (
   slug: GetSchoolClubDetailsPropsScheme,
-  ctx?: typeof prisma,
+  { prisma }: Context,
 ) => {
-  const schoolClub = await ctx?.schoolClub.findUnique({
+  const schoolClub = await prisma?.schoolClub.findUnique({
     where: {
       slug,
     },

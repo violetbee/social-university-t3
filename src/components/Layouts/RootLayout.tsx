@@ -1,13 +1,13 @@
 import { League_Spartan } from "next/font/google";
 // import RightSideBar from "./SideBar/RightSideBar";
-import Header from "../Header/Header";
+import Header from "../header/Header";
 import { useSession } from "next-auth/react";
 import LeftSideBar from "../sidebar/LeftSideBar";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { trpc } from "../../utils/trpc";
 import { setUniversityId } from "../../store/slices/universitySlice";
-import Footer from "../Footer";
+import Footer from "../footer";
 
 const dosis = League_Spartan({
   weight: ["200", "300", "400", "500", "600", "700", "800"],

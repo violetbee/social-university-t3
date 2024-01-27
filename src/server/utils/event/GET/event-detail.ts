@@ -1,5 +1,5 @@
 import { Prisma } from "@prisma/client";
-import { prisma } from "../../../server/db/client";
+import { prisma } from "../../../db/client";
 import { z } from "zod";
 
 const getEventDetailsProps = z.string();

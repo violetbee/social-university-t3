@@ -1,5 +1,5 @@
 import { trpc } from "../../../../../utils/trpc";
-import PostBox from "../../../../ui/Cards/Post/PostBox";
+import PostBox from "../../../../ui/cards/Post/PostBox";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";

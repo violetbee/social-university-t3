@@ -1,4 +1,4 @@
-import MenuSection from "../Dashboard/MenuSection";
+import MenuSection from "../dashboard/MenuSection";
 import { IMenuSectionProps } from "../../types/app";
 
 export default function DashboardLayout({

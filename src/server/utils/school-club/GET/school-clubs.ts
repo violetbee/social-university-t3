@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { Prisma } from "@prisma/client";
-import type { prisma } from "../../../server/db/client";
+import { Context } from "../../../trpc/context";
 
 export const getSchoolClubsProps = z.object({
   universityId: z.string(),
@@ -23,9 +23,9 @@ const schoolClubs: Prisma.SchoolClubSelect = {
 
 export const getSchoolClubs = async (
   { universityId }: GetSchoolClubsPropsScheme,
-  ctx?: typeof prisma,
+  { prisma }: Context,
 ) => {
-  const data = await ctx?.schoolClub.findMany({
+  const data = await prisma?.schoolClub.findMany({
     where: {
       universityId,
     },
