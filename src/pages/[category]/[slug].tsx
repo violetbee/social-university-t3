@@ -5,14 +5,15 @@ import React, { ReactElement } from "react";
 import { ParsedUrlQuery } from "querystring";
 import { ISinglePost } from "../../types/post";
 import type { NextPageWithLayout } from "../_app";
-import { getTextTypePosts } from "../../apis/Post/textTypePosts";
-import { getFileTypePosts } from "../../apis/Post/fileTypePosts";
-import GonderiVeDosyaInPage from "../../components/pages/category/inPageDetail/GonderiVeDosya";
-import EtkinliklerInPage from "../../components/pages/category/inPageDetail/Etkinlikler";
+import { getTextTypePosts } from "../../apis/post/GET/text-type-posts";
+import { getFileTypePosts } from "../../apis/post/GET/file-type-posts";
+import GonderilerDetail from "../../components/pages/category/gonderiler/detail";
+import EtkinliklerInPage from "../../components/pages/category/etkinlikler/detail";
 import {
   type EventDetails,
   getEventDetails,
-} from "../../apis/Event/getEventDetails";
+} from "../../apis/event/GET/event-detail";
+import { getSchoolClubDetails } from "../../apis/school-club/GET/school-club";
 
 type Props = {
   content: ISinglePost | EventDetails;
@@ -29,7 +30,7 @@ const ContentPage: NextPageWithLayout<Props> = ({ content, params }) => {
       case "dosya-paylasimlari":
       case "gonderiler":
         return (
-          <GonderiVeDosyaInPage
+          <GonderilerDetail
             post={content as ISinglePost}
             category={category as string}
           />
@@ -38,6 +39,8 @@ const ContentPage: NextPageWithLayout<Props> = ({ content, params }) => {
         return <div>Soru-Cevap</div>;
       case "anketler":
         return <div>Anketler</div>;
+      case "okul-topluluklari":
+        return <div>Okul Toplulukları</div>;
       case "etkinlikler":
         return (
           <EtkinliklerInPage
@@ -84,10 +87,14 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         return getFileTypePosts(slug as string);
       case "etkinlikler":
         return getEventDetails(slug as string);
+      case "okul-topluluklari":
+        return getSchoolClubDetails(slug as string);
     }
   };
 
   const content = await handleContentAPISwitch(category as string);
+
+  console.log(content);
 
   if (content) {
     const parsedContent = JSON.parse(JSON.stringify(content));

@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { usePagination } from "../../../../hooks/usePagination";
 import { trpc } from "../../../../utils/trpc";
-import { MultiEvent } from "../../../Cards/Event";
+import { MultiEvent } from "../../../ui/Cards/Event";
 import Banner from "../../../banner";
-import Pagination from "../../../pagination";
+import Pagination from "../../../ui/pagination";
 import SubCategory from "../../../subCategory";
 
 const NUMBER_OF_EVENTS_RECEIVED = 9;

@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
-import { trpc } from "../../../../utils/trpc";
+import { trpc } from "../../../../../utils/trpc";
 import { useSelector } from "react-redux";
-import type { RootState } from "../../../../store/store";
+import type { RootState } from "../../../../../store/store";
 import { GoFileDirectory } from "react-icons/go";
-import Pagination from "../../../pagination";
-import { usePagination } from "../../../../hooks/usePagination";
+import Pagination from "../../../../ui/pagination";
+import { usePagination } from "../../../../../hooks/usePagination";
 import Link from "next/link";
 import { PiCursorClickLight } from "react-icons/pi";
 import Image from "next/image";
 import { MdOutlineReport } from "react-icons/md";
-import Badge from "../../../badge";
+import Badge from "../../../../ui/badge";
 
 const NUMBER_OF_POSTS_RECEIVED = 9;
 
@@ -64,7 +64,7 @@ const DosyaPaylasimlari = () => {
 
   return (
     <div className="grid grid-cols-12 items-start gap-6">
-      <div className="col-span-12 divide-y divide-darkHelper rounded-md border border-darkHelper bg-darkSecondary lg:sticky lg:top-[92px] lg:col-span-3">
+      <div className="col-span-12 divide-y divide-darkHelper rounded-md border border-darkHelper bg-darkSecondary xl:sticky xl:top-[92px] xl:col-span-2">
         <div className="space-y-2 p-3">
           <span className="text-base text-white">Bölüm Filtrele</span>
           <div className="flex flex-wrap gap-2">
@@ -157,7 +157,7 @@ const DosyaPaylasimlari = () => {
           </div>
         </div>
       </div>
-      <div className="relative col-span-12 grid grid-cols-1 gap-6 md:grid-cols-2 lg:col-span-9 lg:ml-5 xl:grid-cols-3 3xl:grid-cols-3">
+      <div className="relative col-span-12 grid grid-cols-1 gap-6 md:grid-cols-2 lg:col-span-12 lg:grid-cols-3 xl:col-span-10 xl:ml-5 ">
         {isLoading && (
           <div className="absolute left-1/2 top-1/2 flex h-20 w-full -translate-x-1/2 translate-y-1/2 animate-pulse items-center justify-center">
             Yükleniyor...
@@ -167,7 +167,7 @@ const DosyaPaylasimlari = () => {
           <div
             className={`flex flex-col ${
               isLoading ? "blur-md" : ""
-            } relative gap-1 rounded-md border border-darkHelper bg-darkSecondary p-4 pt-5 text-lg/6 text-white`}
+            } relative justify-between gap-1 rounded-md border border-darkHelper bg-darkSecondary p-4 pt-5 text-lg/6 text-white`}
             key={idx}
           >
             <div className="flex">
@@ -265,7 +265,7 @@ const DosyaPaylasimlari = () => {
             )}
             <Link
               href={`dosya-paylasimlari/${item.slug}`}
-              className="group mt-5 flex h-full flex-1 items-center justify-center gap-1 rounded-md border border-darkHelper bg-darkBackground py-2 text-center text-white duration-150 hover:border-darkPrimary hover:bg-white hover:text-darkBackground"
+              className="group mt-5 flex items-center justify-center gap-1 rounded-md border border-darkHelper bg-darkBackground py-2 text-center text-white duration-150 hover:border-darkPrimary hover:bg-white hover:text-darkBackground"
             >
               <span className="mt-1">Detaylı Görüntüle</span>
               <PiCursorClickLight className="text-darkPrimary group-hover:text-darkBackground" />

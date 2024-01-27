@@ -9,6 +9,7 @@ import { useForm } from "react-hook-form";
 import Image from "next/image";
 import { useSelector } from "react-redux";
 import type { RootState } from "../../../../store/store";
+import { Input } from "../../../ui/input";
 
 function GonderiForm({ cancelProcess }: { cancelProcess: () => void }) {
   const { register, watch, handleSubmit, reset, setValue } = useForm();
@@ -95,29 +96,15 @@ function GonderiForm({ cancelProcess }: { cancelProcess: () => void }) {
       className="mx-auto flex w-full flex-col gap-4 p-4"
     >
       <div className="flex flex-col justify-between gap-5 md:flex-row">
-        <label className="flex w-full flex-col md:w-1/4">
-          <span className="text-lg font-semibold">Gönderi Başlığı</span>
-          <input
-            type="text"
-            {...register("title")}
-            className="block w-full rounded-sm border-b-[1px] border-b-gray-800/20 bg-darkBackground px-2 py-1 pr-10 text-base focus:border-indigo-500 focus:outline-none sm:text-lg"
-          />
-        </label>
-        <div className="flex w-full flex-col md:w-1/6">
-          <span className="text-lg font-semibold">Kategori Seç</span>
-          <div className="relative w-full">
-            <select
-              {...register("categoryId")}
-              className="block w-full rounded-sm border-b-[1px] border-b-gray-800/20 bg-darkBackground px-2 py-[9px] pr-10 text-base focus:border-indigo-500 focus:outline-none sm:text-lg"
-            >
-              {getCategories.data?.map((item: any) => (
-                <option key={item.id} value={item.id}>
-                  {item.name}
-                </option>
-              ))}
-            </select>
-          </div>
-        </div>
+        <Input label="Gönderi Başlığı" type="text" {...register("title")} />
+        <Input.Select
+          label="Kategori"
+          {...register("subCategoryId")}
+          options={getCategories.data?.map((category) => ({
+            name: category.name,
+            id: category.id,
+          }))}
+        />
         <label className="relative flex flex-grow flex-col">
           <span className="text-lg font-semibold">Gönderi Etiketleri</span>
           <div className="relative flex gap-2">
@@ -153,13 +140,7 @@ function GonderiForm({ cancelProcess }: { cancelProcess: () => void }) {
         </label>
       </div>
 
-      <label className="flex flex-grow flex-col gap-2">
-        <span className="text-lg font-semibold">Gönderi İçeriği*</span>
-        <textarea
-          {...register("content")}
-          className="block w-full rounded-sm border-b-[1px] border-b-gray-800/20 bg-darkBackground px-2 py-1 pr-10 text-base focus:border-indigo-500 focus:outline-none sm:text-lg"
-        />
-      </label>
+      <Input.TextArea label="Gönderi İçeriği" {...register("content")} />
 
       <div className="flex flex-col gap-2">
         <span className="text-lg font-semibold">Gönderi Kapak Resmi</span>

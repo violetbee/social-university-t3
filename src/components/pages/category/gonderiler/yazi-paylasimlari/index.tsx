@@ -1,12 +1,12 @@
-import { trpc } from "../../../../utils/trpc";
-import PostBox from "../../../Cards/Post/PostBox";
+import { trpc } from "../../../../../utils/trpc";
+import PostBox from "../../../../ui/Cards/Post/PostBox";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
-import type { RootState } from "../../../../store/store";
-import Pagination from "../../../pagination";
-import { usePagination } from "../../../../hooks/usePagination";
-import SubCategory from "../../../subCategory";
+import type { RootState } from "../../../../../store/store";
+import Pagination from "../../../../ui/pagination";
+import { usePagination } from "../../../../../hooks/usePagination";
+import SubCategory from "../../../../subCategory";
 
 const NUMBER_OF_POSTS_RECEIVED = 6;
 

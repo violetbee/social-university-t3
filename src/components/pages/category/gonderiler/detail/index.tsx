@@ -1,7 +1,7 @@
 import Image from "next/image";
-import { ISinglePost } from "../../../../types/post";
-import { trpc } from "../../../../utils/trpc";
-import BreadCrumb from "../../../breadcrumb";
+import { ISinglePost } from "../../../../../types/post";
+import { trpc } from "../../../../../utils/trpc";
+import BreadCrumb from "../../../../ui/breadcrumb";
 import { IoIosArrowUp } from "react-icons/io";
 import Link from "next/link";
 import {

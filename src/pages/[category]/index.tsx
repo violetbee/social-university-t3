@@ -1,10 +1,11 @@
 import RootLayout from "../../components/layouts/RootLayout";
 import DashboardLayout from "../../components/layouts/DashboardLayout";
-import Gonderiler from "../../components/pages/category/Gonderiler";
+import Gonderiler from "../../components/pages/category/gonderiler/yazi-paylasimlari";
+import DosyaPaylasimlari from "../../components/pages/category/gonderiler/dosya-paylasimlari";
+import Etkinlikler from "../../components/pages/category/etkinlikler";
+import Anketler from "../../components/pages/category/anketler";
 import { GetServerSideProps } from "next";
-import DosyaPaylasimlari from "../../components/pages/category/DosyaPaylasimlari";
-import Etkinlikler from "../../components/pages/category/Etkinlikler";
-import Anketler from "../../components/pages/category/Anketler";
+import OkulKulupleri from "../../components/pages/category/okul-topluluklari";
 
 const CategoryPage = ({ params }: { params: { category: string } }) => {
   const { category } = params;
@@ -16,6 +17,8 @@ const CategoryPage = ({ params }: { params: { category: string } }) => {
       return <DosyaPaylasimlari />;
     case "anketler":
       return <Anketler />;
+    case "okul-topluluklari":
+      return <OkulKulupleri />;
     case "etkinlikler":
       return <Etkinlikler />;
   }

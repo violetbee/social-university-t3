@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { FaCheck } from "react-icons/fa";
-import Pagination from "../../../pagination";
+import Pagination from "../../../ui/pagination";
 import { usePagination } from "../../../../hooks/usePagination";
 
 const NUMBER_OF_SURVEYS_RECEIVED = 9;

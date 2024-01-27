@@ -88,9 +88,9 @@ const MenuSection = () => {
             </span>
           </Link>
           <Link
-            href="/okul-kulupleri"
+            href="/okul-topluluklari"
             className={`${
-              removeQueries(router.asPath) === "/okul-kulupleri"
+              removeQueries(router.asPath) === "/okul-topluluklari"
                 ? "border-darkPrimary"
                 : "border-darkHelper"
             } flex shrink-0 flex-col items-center justify-center gap-2 rounded-lg border bg-white px-4 py-2 duration-150 dark:bg-darkSecondary dark:shadow-md hover:dark:bg-darkBackground`}

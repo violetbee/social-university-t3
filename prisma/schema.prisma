@@ -78,16 +78,18 @@ enum User_TYPE {
 }
 
 model University {
-    id          String                   @id @default(cuid())
-    name        String
-    slug        String                   @unique
-    location    String
-    logo        String?
-    users       User[]
-    posts       TextTypePost[]
-    events      Event[]
-    departments UniversityOnDepartment[]
-    DocTypePost DocTypePost[]
+    id                     String                   @id @default(cuid())
+    name                   String
+    slug                   String                   @unique
+    location               String
+    logo                   String?
+    users                  User[]
+    posts                  TextTypePost[]
+    events                 Event[]
+    departments            UniversityOnDepartment[]
+    DocTypePost            DocTypePost[]
+    SchoolClub             SchoolClub[]
+    SchoolClubOnUniversity SchoolClubOnUniversity[]
 }
 
 model Department {
@@ -133,12 +135,31 @@ model Category {
 }
 
 model SchoolClub {
-    id        String   @id @default(cuid())
-    createdAt DateTime @default(now()) @db.Timestamp(6)
-    name      String
-    slug      String   @unique
-    users     User[]
-    events    Event[]
+    id                     String                   @id @default(cuid())
+    createdAt              DateTime                 @default(now()) @db.Timestamp(6)
+    name                   String
+    description            String?
+    slug                   String                   @unique
+    banner                 String?
+    rating                 Float?
+    comments               Comment[]
+    users                  User[]
+    events                 Event[]
+    SchoolClubOnUniversity SchoolClubOnUniversity[]
+    University             University?              @relation(fields: [universityId], references: [id])
+    universityId           String?
+
+    @@unique([universityId, slug])
+}
+
+model SchoolClubOnUniversity {
+    createdAt    DateTime   @default(now()) @db.Timestamp(6)
+    university   University @relation(fields: [universityId], references: [id], onDelete: Cascade)
+    universityId String
+    schoolClub   SchoolClub @relation(fields: [schoolClubId], references: [id], onDelete: Cascade)
+    schoolClubId String
+
+    @@id([universityId, schoolClubId])
 }
 
 model TextTypePost {
@@ -250,6 +271,8 @@ model Comment {
     postId        String
     DocTypePost   DocTypePost? @relation(fields: [docTypePostId], references: [id])
     docTypePostId String?
+    SchoolClub    SchoolClub?  @relation(fields: [schoolClubId], references: [id])
+    schoolClubId  String?
 }
 
 model VerificationToken {

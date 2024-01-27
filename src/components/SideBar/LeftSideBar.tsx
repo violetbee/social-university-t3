@@ -11,7 +11,6 @@ import { MdDarkMode, MdLightMode } from "react-icons/md";
 
 const LeftSideBar: FC = () => {
   const { theme, setTheme } = useTheme();
-
   const [isNavOpen, setIsNavOpen] = useState(false);
 
   return (

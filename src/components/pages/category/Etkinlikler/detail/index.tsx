@@ -1,5 +1,5 @@
 import Image from "next/image";
-import type { EventDetails } from "../../../../apis/Event/getEventDetails";
+import type { EventDetails } from "../../../../../apis/event/GET/event-detail";
 import { PiHandsClappingDuotone } from "react-icons/pi";
 import { useState } from "react";
 import { TbTimelineEvent } from "react-icons/tb";
@@ -7,8 +7,8 @@ import { IoLocationSharp } from "react-icons/io5";
 import { FaCalendarAlt } from "react-icons/fa";
 import { FaPeopleGroup, FaTurkishLiraSign } from "react-icons/fa6";
 import { BiHeart } from "react-icons/bi";
-import BreadCrumb from "../../../breadcrumb";
-import { MultiEvent } from "../../../Cards/Event";
+import BreadCrumb from "../../../../ui/breadcrumb";
+import MultiEvent from "../../../../ui/Cards/Event/MultiEvent";
 
 type Props = {
   event: EventDetails;
