@@ -1,7 +1,3 @@
-import React from "react";
-
-function IlanForm() {
+export default function IlanForm() {
   return <div>IlanForm</div>;
 }
-
-export default IlanForm;

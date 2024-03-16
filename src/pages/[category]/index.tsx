@@ -1,11 +1,11 @@
 import RootLayout from "../../components/layouts/RootLayout";
 import DashboardLayout from "../../components/layouts/DashboardLayout";
-import Gonderiler from "../../components/pages/category/gonderiler/yazi-paylasimlari";
-import DosyaPaylasimlari from "../../components/pages/category/gonderiler/dosya-paylasimlari";
-import Etkinlikler from "../../components/pages/category/etkinlikler";
-import Anketler from "../../components/pages/category/anketler";
+import Gonderiler from "../../components/ui/organisms/pages/category/gonderiler/yazi-paylasimlari";
+import DosyaPaylasimlari from "../../components/ui/organisms/pages/category/gonderiler/dosya-paylasimlari";
+import Etkinlikler from "../../components/ui/organisms/pages/category/etkinlikler";
+import Anketler from "../../components/ui/organisms/pages/category/anketler";
 import { GetServerSideProps } from "next";
-import OkulKulupleri from "../../components/pages/category/okul-topluluklari";
+import OkulKulupleri from "../../components/ui/organisms/pages/category/okul-topluluklari";
 
 const CategoryPage = ({ params }: { params: { category: string } }) => {
   const { category } = params;

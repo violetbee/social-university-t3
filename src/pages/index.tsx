@@ -3,7 +3,7 @@ import Head from "next/head";
 import Layout from "../components/layouts/RootLayout";
 import { getServerAuthSession } from "../server/common/get-server-auth-session";
 import { prisma } from "../server/db/client";
-import Features from "../components/landing/Feature";
+import Features from "../components/ui/organisms/pages/landing/Feature";
 
 const Home: NextPage = () => {
   return (

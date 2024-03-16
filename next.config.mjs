@@ -43,6 +43,10 @@ export default defineNextConfig({
         protocol: "https",
         hostname: "cdn.bubilet.com.tr",
       },
+      {
+        protocol: "http",
+        hostname: "localhost",
+      },
     ],
   },
 });

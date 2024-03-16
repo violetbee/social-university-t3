@@ -1,19 +1,20 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useSelector } from "react-redux";
 import { IPostSlicer } from "../../../types/post";
-import {
-  AnketForm,
-  GonderiForm,
-  EtkinlikForm,
-  DosyaForm,
-  SoruCevapForm,
-  IlanForm,
-} from "./particles";
+
 import { memo, useState } from "react";
 import { TfiFiles, TfiLayoutListPost } from "react-icons/tfi";
 import { MdEmojiEvents } from "react-icons/md";
 import { RiQuestionAnswerLine, RiSurveyLine } from "react-icons/ri";
 import { SiHomeadvisor } from "react-icons/si";
+import {
+  AnketForm,
+  EtkinlikForm,
+  DosyaForm,
+  GonderiForm,
+  SoruCevapForm,
+  IlanForm,
+} from "./particles";
 
 const PublishPostSection = () => {
   const isOpen = useSelector((state: IPostSlicer) => state.app.isShareOpen);
@@ -42,7 +43,7 @@ const PublishPostSection = () => {
         return (
           <>
             <div
-              className={`grid w-full grid-cols-1 justify-between divide-y divide-darkHelper dark:bg-darkSecondary lg-m:grid-cols-2 lg:grid-cols-6 lg:divide-x`}
+              className={`grid w-full grid-cols-1 justify-between divide-y divide-darkHelper lg-m:grid-cols-2 lg:grid-cols-6 lg:divide-x dark:bg-darkSecondary`}
             >
               <label className="flex h-full cursor-pointer flex-col items-center justify-center gap-2 p-4 hover:bg-darkBackground">
                 <TfiLayoutListPost className="h-6 w-6" />

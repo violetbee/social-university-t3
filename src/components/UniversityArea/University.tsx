@@ -1,5 +1,5 @@
 import { trpc } from "../../utils/trpc";
-import withPopup from "../HoC/withPopup";
+import withPopup from "../HOC/withPopup";
 import Image from "next/image";
 import SelectUni from "./SelectUni";
 

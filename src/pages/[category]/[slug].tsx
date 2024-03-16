@@ -5,15 +5,15 @@ import React, { ReactElement } from "react";
 import { ParsedUrlQuery } from "querystring";
 import { ISinglePost } from "../../types/post";
 import type { NextPageWithLayout } from "../_app";
-import { getTextTypePosts } from "../../server/utils/post/GET/text-type-posts";
-import { getFileTypePosts } from "../../server/utils/post/GET/file-type-posts";
-import GonderilerDetail from "../../components/pages/category/gonderiler/detail";
-import EtkinliklerInPage from "../../components/pages/category/etkinlikler/detail";
+import { getTextTypePosts } from "../../server/api/post/GET/text-type-posts";
+import { getFileTypePosts } from "../../server/api/post/GET/file-type-posts";
+import GonderilerDetail from "../../components/ui/organisms/pages/category/gonderiler/detail";
+import EtkinliklerInPage from "../../components/ui/organisms/pages/category/etkinlikler/detail";
 import {
   type EventDetails,
   getEventDetails,
-} from "../../server/utils/event/GET/event-detail";
-import { getSchoolClubDetails } from "../../server/utils/school-club/GET/school-club";
+} from "../../server/api/event/GET/event-detail";
+import { getSchoolClubDetails } from "../../server/api/school-club/GET/detail";
 
 type Props = {
   content: ISinglePost | EventDetails;
@@ -79,22 +79,26 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
   const { slug, category } = context.params;
 
-  const handleContentAPISwitch = (type: string) => {
+  if (!slug || !category) {
+    return {
+      notFound: true,
+    };
+  }
+
+  const handleContentAPISwitch = (type: string | string[]) => {
     switch (type) {
       case "gonderiler":
-        return getTextTypePosts(slug as string);
+        return getTextTypePosts(slug);
       case "dosya-paylasimlari":
-        return getFileTypePosts(slug as string);
+        return getFileTypePosts(slug);
       case "etkinlikler":
-        return getEventDetails(slug as string);
+        return getEventDetails(slug);
       case "okul-topluluklari":
-        return getSchoolClubDetails(slug as string);
+        return getSchoolClubDetails(slug, undefined);
     }
   };
 
-  const content = await handleContentAPISwitch(category as string);
-
-  console.log(content);
+  const content = await handleContentAPISwitch(category);
 
   if (content) {
     const parsedContent = JSON.parse(JSON.stringify(content));

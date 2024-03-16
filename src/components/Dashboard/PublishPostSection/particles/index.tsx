@@ -1,6 +1,15 @@
-export { default as AnketForm } from "./AnketForm";
-export { default as DosyaForm } from "./DosyaForm";
-export { default as EtkinlikForm } from "./EtkinlikForm";
-export { default as GonderiForm } from "./GonderiForm";
-export { default as IlanForm } from "./IlanForm";
-export { default as SoruCevapForm } from "./SoruCevapForm";
+import AnketForm from "./anketForm";
+import DosyaForm from "./dosyaForm";
+import EtkinlikForm from "./etkinlikForm";
+import GonderiForm from "./gonderiForm";
+import IlanForm from "./ilanForm";
+import SoruCevapForm from "./soruCevapForm";
+
+export {
+  AnketForm,
+  EtkinlikForm,
+  DosyaForm,
+  GonderiForm,
+  IlanForm,
+  SoruCevapForm,
+};

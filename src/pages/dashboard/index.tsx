@@ -20,8 +20,8 @@ import {
   IoLocationOutline,
   IoSchoolOutline,
 } from "react-icons/io5";
-import PostFlowSection from "../../components/dashboard/PostFlowSection";
 import { MdOutlineBookmarkAdded } from "react-icons/md";
+import PostFlowSection from "../../components/Dashboard/PostFlowSection";
 
 const Dashboard = () => {
   // const EventsWithExpanded = withDashboardSection(Events, "Etkinlikler", 4);

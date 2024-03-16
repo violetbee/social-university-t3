@@ -9,7 +9,7 @@ import { useForm } from "react-hook-form";
 import Image from "next/image";
 import { useSelector } from "react-redux";
 import type { RootState } from "../../../../store/store";
-import { Input } from "../../../ui/input";
+import { Input } from "../../../ui/atoms/input";
 
 function GonderiForm({ cancelProcess }: { cancelProcess: () => void }) {
   const { register, watch, handleSubmit, reset, setValue } = useForm();
@@ -83,6 +83,8 @@ function GonderiForm({ cancelProcess }: { cancelProcess: () => void }) {
           },
         },
       );
+
+      console.log(tags);
     } catch (e) {
       console.log(e);
     }
@@ -96,10 +98,14 @@ function GonderiForm({ cancelProcess }: { cancelProcess: () => void }) {
       className="mx-auto flex w-full flex-col gap-4 p-4"
     >
       <div className="flex flex-col justify-between gap-5 md:flex-row">
-        <Input label="Gönderi Başlığı" type="text" {...register("title")} />
+        <Input
+          label="Gönderi Başlığı"
+          type="text"
+          register={register("title")}
+        />
         <Input.Select
           label="Kategori"
-          {...register("subCategoryId")}
+          register={register("categoryId")}
           options={getCategories.data?.map((category) => ({
             name: category.name,
             id: category.id,
@@ -140,11 +146,11 @@ function GonderiForm({ cancelProcess }: { cancelProcess: () => void }) {
         </label>
       </div>
 
-      <Input.TextArea label="Gönderi İçeriği" {...register("content")} />
+      <Input.TextArea label="Gönderi İçeriği" register={register("content")} />
 
       <div className="flex flex-col gap-2">
         <span className="text-lg font-semibold">Gönderi Kapak Resmi</span>
-        <div className="relative flex h-32 w-full border-2 border-dashed border-darkHelper hover:border-gray-300 hover:bg-gray-100 dark:bg-darkBackground">
+        <div className="relative flex h-32 w-full border-2 border-dashed border-darkHelper hover:border-gray-300 hover:bg-gray-100 dark:bg-darkBackground dark:hover:border-darkHelper/85 dark:hover:bg-darkBackground/85">
           {watchForm.coverImage?.length > 0 && (
             <button
               className="absolute right-2 top-2"
@@ -219,4 +225,5 @@ function GonderiForm({ cancelProcess }: { cancelProcess: () => void }) {
     </form>
   );
 }
+
 export default GonderiForm;

@@ -257,13 +257,17 @@ model Like {
     userId        String
     DocTypePost   DocTypePost?  @relation(fields: [docTypePostId], references: [id], onDelete: Cascade)
     docTypePostId String?
+    commentId     String?
+    comment       Comment?      @relation(fields: [commentId], references: [id], onDelete: Cascade)
 
-    @@unique([postId, userId])
-    @@unique([docTypePostId, userId])
+    @@index([postId, userId])
+    @@index([docTypePostId, userId])
+    @@index([commentId, userId])
 }
 
 model Comment {
     id            String       @id @default(cuid())
+    createdAt     DateTime     @default(now())
     content       String
     user          User         @relation(fields: [userId], references: [id], onDelete: Cascade)
     post          TextTypePost @relation(fields: [postId], references: [id], onDelete: Cascade)
@@ -273,6 +277,7 @@ model Comment {
     docTypePostId String?
     SchoolClub    SchoolClub?  @relation(fields: [schoolClubId], references: [id])
     schoolClubId  String?
+    Like          Like[]
 }
 
 model VerificationToken {

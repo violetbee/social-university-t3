@@ -29,34 +29,25 @@ export const likeRouter = router({
   handleLike: publicProcedure
     .input(
       z.object({
-        postId: z.string(),
+        id: z.string(),
         isLiked: z.boolean(),
         type: z.string().optional(),
       }),
     )
     .mutation(async ({ input, ctx }) => {
+      const category = input.type! + "_userId";
       const liked = await ctx.prisma.like.findUnique({
-        where:
-          input.type === "gonderiler"
-            ? {
-                postId_userId: {
-                  postId: input.postId,
-                  userId: ctx?.session?.user?.id as string,
-                },
-              }
-            : {
-                docTypePostId_userId: {
-                  docTypePostId: input.postId,
-                  userId: ctx?.session?.user?.id as string,
-                },
-              },
+        where: {
+          [category]: {
+            [input.type as string]: input.id,
+            userId: ctx?.session?.user?.id as string,
+          },
+        },
       });
       if (!liked) {
         await ctx.prisma.like.create({
           data: {
-            ...(input.type === "gonderiler"
-              ? { postId: input.postId }
-              : { docTypePostId: input.postId }),
+            [input.type!]: input.id,
             userId: ctx?.session?.user?.id as string,
             isLike: input.isLiked,
           },
@@ -64,20 +55,12 @@ export const likeRouter = router({
       }
       if (liked) {
         await ctx.prisma.like.delete({
-          where:
-            input.type === "gonderiler"
-              ? {
-                  postId_userId: {
-                    postId: input.postId,
-                    userId: ctx?.session?.user?.id as string,
-                  },
-                }
-              : {
-                  docTypePostId_userId: {
-                    docTypePostId: input.postId,
-                    userId: ctx?.session?.user?.id as string,
-                  },
-                },
+          where: {
+            [category]: {
+              [input.type!]: input.id,
+              userId: ctx?.session?.user?.id,
+            },
+          },
         });
       }
     }),

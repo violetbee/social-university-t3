@@ -157,6 +157,9 @@ function DosyaForm({ cancelProcess }: { cancelProcess: () => void }) {
               disabled={!watchForm.departmentId}
               className="block w-full rounded-sm border-b-[1px] border-b-gray-800/20 bg-darkBackground px-2 py-[9px] pr-10 text-base focus:border-indigo-500 focus:outline-none sm:text-lg"
             >
+              <option value={0} disabled={!!watchForm.departmentId}>
+                Sınıf Seç
+              </option>
               {Array.from(
                 {
                   length:

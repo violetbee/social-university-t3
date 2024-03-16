@@ -1,13 +1,13 @@
 import { League_Spartan } from "next/font/google";
 // import RightSideBar from "./SideBar/RightSideBar";
-import Header from "../header/Header";
+import Index from "../ui/molecules/header";
 import { useSession } from "next-auth/react";
-import LeftSideBar from "../sidebar/LeftSideBar";
+import LeftSideBar from "../ui/molecules/sidebar/LeftSideBar";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { trpc } from "../../utils/trpc";
 import { setUniversityId } from "../../store/slices/universitySlice";
-import Footer from "../footer";
+import Footer from "../ui/molecules/footer";
 
 const dosis = League_Spartan({
   weight: ["200", "300", "400", "500", "600", "700", "800"],
@@ -30,7 +30,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
   return (
     <>
-      <Header />
+      <Index />
       <main
         className={`${dosis.className} flex h-full w-full bg-background dark:bg-darkBackground`}
       >

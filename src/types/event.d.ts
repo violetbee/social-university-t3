@@ -7,4 +7,5 @@ export type EventIncludedTypeOfEvent = Event & {
 export type MultiEventProps = {
   itemPiece?: number;
   events?: EventIncludedTypeOfEvent[];
+  columnCount?: number;
 };
