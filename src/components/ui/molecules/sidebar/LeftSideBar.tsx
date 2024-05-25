@@ -15,7 +15,7 @@ const LeftSideBar: FC = () => {
 
   return (
     <aside
-      className={`sticky top-[60px] hidden h-[calc(100vh-60px)] flex-col justify-between overflow-hidden border-r border-[#444]/10 bg-[#EFEFF1] duration-200 dark:bg-darkBackground ${
+      className={`fixed top-[60px] z-50 hidden h-[calc(100vh-60px)] flex-col justify-between overflow-hidden border-r border-[#444]/10 bg-[#EFEFF1] duration-200 dark:bg-darkBackground ${
         isNavOpen ? "lg:w-64 xl:flex xl:w-80" : "lg:w-12 xl:flex xl:w-16"
       }`}
     >

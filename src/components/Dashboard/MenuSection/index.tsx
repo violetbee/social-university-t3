@@ -11,7 +11,7 @@ const MenuSection = () => {
   }
 
   return (
-    <div>
+    <>
       <div className="flex w-full justify-between gap-4">
         <div className="relative flex max-w-full gap-4 overflow-x-hidden">
           <div className="absolute right-0 top-0 block h-full w-10 bg-gradient-to-r from-transparent to-darkBackground 2.5xl:hidden" />
@@ -134,7 +134,7 @@ const MenuSection = () => {
         <ShareButton />
       </div>
       <PublishPostSection />
-    </div>
+    </>
   );
 };
 

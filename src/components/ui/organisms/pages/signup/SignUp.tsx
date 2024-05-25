@@ -58,12 +58,12 @@ const SignUp = ({ signUpForm, setSignUpForm, setAuth }: SignUpProps) => {
   return (
     <form
       onSubmit={signUpHandler}
-      className="flex w-full flex-col items-center gap-2 p-4"
+      className="flex w-full flex-col items-center gap-3 p-4"
     >
-      <div className="flex w-full items-center justify-between gap-8">
+      <div className="flex w-full flex-col justify-between">
         <label htmlFor="email">Email</label>
         <input
-          className="w-full rounded-md border-2 px-2 py-1 text-primary"
+          className="rounded-md border border-darkHelper px-2 py-1 text-white"
           type="email"
           name="email"
           id="email"
@@ -73,10 +73,10 @@ const SignUp = ({ signUpForm, setSignUpForm, setAuth }: SignUpProps) => {
           }}
         />
       </div>
-      <div className="flex w-full items-center justify-between">
+      <div className="flex w-full flex-col justify-between">
         <label htmlFor="name">İsim</label>
         <input
-          className=" rounded-md border-2 px-2 py-1 text-primary"
+          className="rounded-md border border-darkHelper px-2 py-1 text-white"
           type="text"
           name="name"
           id="name"
@@ -86,10 +86,10 @@ const SignUp = ({ signUpForm, setSignUpForm, setAuth }: SignUpProps) => {
           }}
         />
       </div>
-      <div className="flex w-full items-center justify-between">
+      <div className="flex w-full flex-col justify-between">
         <label htmlFor="surname">Soy isim</label>
         <input
-          className="rounded-md border-2 px-2 py-1 text-primary"
+          className="rounded-md border border-darkHelper px-2 py-1 text-white"
           type="text"
           name="surname"
           id="surname"
@@ -100,10 +100,10 @@ const SignUp = ({ signUpForm, setSignUpForm, setAuth }: SignUpProps) => {
         />
       </div>
 
-      <div className="flex w-full items-center justify-between">
+      <div className="flex w-full flex-col justify-between">
         <label htmlFor="password">Şifre</label>
         <input
-          className="rounded-md border-2 px-2 py-1 text-primary"
+          className="rounded-md border border-darkHelper px-2 py-1 text-white"
           type="password"
           name="password"
           id="password"

@@ -31,6 +31,10 @@ export type ISinglePost = {
   user: User & SchoolProps;
   timeAgo: string;
   tags: string[];
+  _count: {
+    likes: number;
+    comments: number;
+  };
 } & (TextTypePost & DocTypePost & SchoolProps);
 
 export interface IPostSummary {

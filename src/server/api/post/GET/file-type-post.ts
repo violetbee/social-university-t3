@@ -1,6 +1,6 @@
 import { prisma } from "../../../db/client";
 
-export const getFileTypePosts = async (slug: string | string[]) => {
+export const getFileTypePost = async (slug: string | string[]) => {
   return prisma.docTypePost.findUnique({
     where: {
       slug: String(slug),

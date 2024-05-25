@@ -15,6 +15,7 @@ const SignIn = ({ signInForm, setSignInForm, setAuth }: SignInProps) => {
   return (
     <>
       <form
+        className="flex w-full flex-col items-center gap-3"
         onSubmit={async (e) => {
           e.preventDefault();
           await signIn("credentials", {
@@ -36,12 +37,12 @@ const SignIn = ({ signInForm, setSignInForm, setAuth }: SignInProps) => {
                 }, 1000);
           });
         }}
-        className="flex w-full flex-col items-center gap-2 px-4 py-3 "
       >
-        <div className="flex w-full items-center justify-between gap-4">
+        <div className="flex w-full flex-col justify-between">
           <label htmlFor="email">Email</label>
           <input
-            className="rounded-md border-2 px-2 py-1 text-primary"
+            className="rounded-md border border-darkHelper px-2 py-1 text-white"
+            placeholder="Email adresinizi girin"
             type="email"
             name="email"
             id="email"
@@ -51,10 +52,11 @@ const SignIn = ({ signInForm, setSignInForm, setAuth }: SignInProps) => {
             }}
           />
         </div>
-        <div className="flex w-full items-center justify-between gap-4">
+        <div className="flex w-full flex-col justify-between">
           <label htmlFor="password">Şifre</label>
           <input
-            className="rounded-md border-2 px-2 py-1 text-primary"
+            className="rounded-md border border-darkHelper px-2 py-1 text-white"
+            placeholder="Şifrenizi girin"
             type="password"
             name="password"
             id="password"
@@ -65,14 +67,14 @@ const SignIn = ({ signInForm, setSignInForm, setAuth }: SignInProps) => {
           />
         </div>
         <button
-          disabled={data ? true : false}
-          type="submit"
           className="w-full rounded-md bg-[#B21EED] px-2 py-1 text-white"
+          disabled={!!data}
+          type="submit"
         >
           Giriş Yap
         </button>
       </form>
-      <div className="flex w-full flex-col">
+      <div className="mt-4 flex w-full flex-col">
         <div className="flex w-full">
           <button
             onClick={() => {

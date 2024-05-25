@@ -1,6 +1,6 @@
 import { League_Spartan } from "next/font/google";
 // import RightSideBar from "./SideBar/RightSideBar";
-import Index from "../ui/molecules/header";
+import Header from "../ui/molecules/header";
 import { useSession } from "next-auth/react";
 import LeftSideBar from "../ui/molecules/sidebar/LeftSideBar";
 import { useDispatch } from "react-redux";
@@ -16,11 +16,22 @@ const dosis = League_Spartan({
   subsets: ["latin"],
 });
 
-export default function Layout({ children }: { children: React.ReactNode }) {
+export default function Layout({
+  children,
+  css,
+}: {
+  children: React.ReactNode;
+  css?: string;
+}) {
   const { data } = useSession();
   const dispatch = useDispatch();
 
-  const { data: universityData } = trpc.user.getUserUniversityById.useQuery();
+  const { data: universityData } = trpc.user.getUserUniversityById.useQuery(
+    undefined,
+    {
+      enabled: !!data?.user?.id,
+    },
+  );
 
   useEffect(() => {
     if (data?.user?.id) {
@@ -30,17 +41,13 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
   return (
     <>
-      <Index />
+      <Header />
       <main
-        className={`${dosis.className} flex h-full w-full bg-background dark:bg-darkBackground`}
+        className={`${dosis.className} flex min-h-screen w-full flex-col bg-background dark:bg-darkBackground`}
       >
         <LeftSideBar />
-        <div className="flex w-full flex-col">
-          <div className="mx-auto flex w-full max-w-[1700px] flex-col gap-12 p-5 lg:px-16 lg:py-10">
-            {children}
-          </div>
-          <Footer />
-        </div>
+        <section className={css}>{children}</section>
+        <Footer />
       </main>
     </>
   );

@@ -127,8 +127,8 @@ const PublishPostSection = () => {
     <div
       className={`${
         isOpen
-          ? "my-5 grid-rows-[1fr] opacity-100"
-          : "mt-0 grid-rows-[0fr] opacity-0"
+          ? "my-7 grid-rows-[1fr] opacity-100"
+          : "mb-7 grid-rows-[0fr] opacity-0"
       }  col-span-7 grid transition-all duration-300 ease-in-out`}
     >
       <div className="grid w-full grid-cols-1 overflow-hidden rounded-md bg-white shadow-md dark:border dark:border-darkHelper dark:bg-darkSecondary">

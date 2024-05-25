@@ -2,9 +2,16 @@ import { trpc } from "../../utils/trpc";
 import withPopup from "../HOC/withPopup";
 import Image from "next/image";
 import SelectUni from "./SelectUni";
+import { useSession } from "next-auth/react";
 
 const University = () => {
-  const { data: selectedUni } = trpc.user.getUserUniversityById.useQuery();
+  const { data: user } = useSession();
+  const { data: selectedUni } = trpc.user.getUserUniversityById.useQuery(
+    undefined,
+    {
+      enabled: !!user?.user?.id,
+    },
+  );
 
   const DisplaySelectUniversity = withPopup(
     ({ setOpen }: { setOpen: () => void }) => (

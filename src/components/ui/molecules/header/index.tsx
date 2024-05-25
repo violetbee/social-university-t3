@@ -18,32 +18,14 @@ const dosis = Josefin_Sans({
 
 const Index: FC = () => {
   const { data: session } = useSession();
-  const { data: selectedUni } = trpc.user.getUserUniversityById.useQuery();
+  const { data: selectedUni } = trpc.user.getUserUniversityById.useQuery(
+    undefined,
+    {
+      enabled: !!session?.user?.id,
+    },
+  );
 
   const UserPopup = withPopup(AfterAuthHeaderSection, UserProfile);
-
-  // const menuItems = [
-  //   {
-  //     id: 0,
-  //     name: "Özellikler",
-  //     url: "/",
-  //   },
-  //   {
-  //     id: 1,
-  //     name: "Hakkımızda",
-  //     url: "/about",
-  //   },
-  //   {
-  //     id: 2,
-  //     name: "İletişim",
-  //     url: "/contact",
-  //   },
-  //   {
-  //     id: 3,
-  //     name: "Şikayet",
-  //     url: "/contact",
-  //   },
-  // ];
 
   return (
     <>
@@ -57,35 +39,29 @@ const Index: FC = () => {
           >
             SOSYAL<span className="font-bold">ÜNİVERSİTE</span>
           </Link>
-          <div className="h-1/2 w-[1px] rounded-full bg-gradient-to-t from-darkSecondary via-darkPrimary/40 to-darkSecondary"></div>
-          <div className="flex items-center gap-2 text-white">
-            <Image
-              src={`/images/${selectedUni?.university?.logo}`}
-              alt="logo"
-              width={50}
-              height={50}
-              className="h-10 w-10"
-            />
-            <div className="flex flex-col">
-              <span className="text-sm font-semibold">
-                {selectedUni?.university?.name}
-              </span>
-              <p className="text-xs font-thin text-whitish/30">
-                Kalan gezme hakkınız: 3
-              </p>
-            </div>
-          </div>
+          {session && (
+            <>
+              <div className="h-1/2 w-[1px] rounded-full bg-gradient-to-t from-darkSecondary via-darkPrimary/40 to-darkSecondary" />
+              <div className="flex items-center gap-2 text-white">
+                <Image
+                  src={`/images/${selectedUni?.university?.logo}`}
+                  alt="logo"
+                  width={50}
+                  height={50}
+                  className="h-10 w-10"
+                />
+                <div className="flex flex-col">
+                  <span className="text-sm font-semibold">
+                    {selectedUni?.university?.name}
+                  </span>
+                  <p className="text-xs font-thin text-whitish/30">
+                    Kalan gezme hakkınız: 3
+                  </p>
+                </div>
+              </div>
+            </>
+          )}
         </div>
-
-        {/* <SearchBarSection /> */}
-        {/* <div className="flex items-center justify-center text-white">
-          <div className="relative">
-            <button className="flex h-10 items-center justify-center rounded-full bg-darkBackground px-4 transition-all duration-200 hover:bg-darkPrimary">
-              Tıkla ve Etrafı Dolaş :)
-            </button>
-            <div className="absolute -right-2 top-0 h-4 w-4 rounded-full border-2 border-white bg-red-500"></div>
-          </div>
-        </div> */}
 
         <div className="hidden h-full lg:flex">
           {session ? (
@@ -95,24 +71,20 @@ const Index: FC = () => {
               </div>
             </div>
           ) : (
-            <div className="flex">
-              <div className="m-3">
-                <Link
-                  href={"/auth"}
-                  className="inline-flex w-32 items-center rounded border-b-2 border-blue-500 bg-white px-6 py-2 font-bold tracking-wide text-gray-800 shadow-md hover:border-blue-600 hover:bg-blue-500 hover:text-white"
-                >
-                  <span className="mx-auto">Giriş Yap</span>
-                </Link>
-              </div>
-              <div className="m-3">
-                <Link
-                  href={"/auth"}
-                  className="inline-flex w-32 items-center rounded border-b-2 border-red-500 bg-white px-6 py-2 font-bold tracking-wide text-gray-800 shadow-md hover:border-red-600 hover:bg-red-500 hover:text-white"
-                >
-                  <span className="mx-auto">Üye Ol</span>
-                </Link>
-              </div>
-            </div>
+            <ul className="flex items-center gap-2 font-bold tracking-wide">
+              <Link
+                href={"/auth"}
+                className="inline-flex w-32 items-center px-6 py-2 text-white"
+              >
+                <span className="mx-auto">Giriş Yap</span>
+              </Link>
+              <Link
+                href={"/auth"}
+                className="inline-flex w-32 items-center rounded border border-whitish/20 bg-darkBackground px-6 py-2 text-white shadow-md"
+              >
+                <span className="mx-auto">Üye Ol</span>
+              </Link>
+            </ul>
           )}
         </div>
         <div className="flex items-center lg:hidden">

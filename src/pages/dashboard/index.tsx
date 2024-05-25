@@ -39,7 +39,7 @@ const Dashboard = () => {
   // );
 
   return (
-    <>
+    <section className="space-y-8">
       <div className="grid h-full w-full grid-flow-row grid-cols-1 gap-5 md:grid-cols-4 xl:grid-cols-3">
         <div className="relative col-span-1 row-span-2 overflow-hidden rounded-md border border-darkHelper bg-darkSecondary px-10 py-4 shadow-md md:col-span-2 xl:col-span-1">
           <div className="absolute -bottom-20 -right-32 h-32 w-1/2 bg-gradient-to-tl from-transparent via-transparent to-red-700 opacity-25 blur-2xl"></div>
@@ -202,7 +202,7 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
-    </>
+    </section>
   );
 };
 export default Dashboard;

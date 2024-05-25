@@ -33,28 +33,26 @@ function GonderiVeDosyaInPage({
 
   const ctx = trpc.useContext();
 
-  const like = trpc.like.handleLike.useMutation({
+  const postLike = trpc.like.handleLike.useMutation({
     onSuccess: () => {
-      ctx.like.invalidate();
+      ctx.like.isUserLiked.invalidate({
+        postId: post.id,
+      });
+    },
+  });
+  const commentLike = trpc.like.handleLike.useMutation({
+    onSuccess: () => {
+      ctx.like.isUserLiked.invalidate({
+        postId: post.id,
+      });
     },
   });
 
-  const getAllLikes = trpc.like.totalLikes.useQuery({
-    postId: post.id,
-    type: category === "gonderiler" ? category : "",
-  });
-
-  const isUserLiked = trpc.like.isUserLiked.useQuery({
-    postId: post.id,
-    type: category === "gonderiler" ? category : "",
-  });
-
   const commentMutation = trpc.comment.postComment.useMutation();
+
   const getAllComments = trpc.comment.getComments.useQuery({
     postId: post.id,
   });
-
-  console.log(getAllComments);
 
   const postComment = async (message: string) => {
     try {
@@ -131,30 +129,23 @@ function GonderiVeDosyaInPage({
               <div className="flex flex-col items-center gap-2">
                 <IoIosArrowUp
                   onClick={() => {
-                    like.mutate({
+                    postLike.mutate({
                       id: post.id,
                       isLiked: true,
-                      type:
-                        category === "gonderiler"
-                          ? "postId"
-                          : category === "dosya-paylasimlari"
-                            ? "docTypePostId"
-                            : "commentId",
+                      type: category,
                     });
                   }}
                   className={`cursor-pointer ${
-                    isUserLiked.data !== "notLiked" && isUserLiked.data
-                      ? "text-green-700"
-                      : ""
+                    !!postLike?.data?.liked ? "text-green-700" : ""
                   }`}
                   size={28}
                 />
                 <p className="text-[#333] dark:text-white/80">
-                  {getAllLikes.data}
+                  {(postLike?.data?.likeCount || post?._count?.likes) ?? 0}
                 </p>
                 <IoIosArrowUp
                   onClick={() => {
-                    like.mutate({
+                    postLike.mutate({
                       id: post.id,
                       isLiked: false,
                       type: category,
@@ -162,7 +153,7 @@ function GonderiVeDosyaInPage({
                   }}
                   size={28}
                   className={`rotate-180 transform cursor-pointer ${
-                    isUserLiked.data ? "" : "text-red-500"
+                    postLike?.data?.liked === false ? "text-red-500" : ""
                   }`}
                 />
               </div>
@@ -269,33 +260,35 @@ function GonderiVeDosyaInPage({
                       <div className="flex gap-2">
                         <IoIosArrowUp
                           onClick={() => {
-                            like.mutate({
+                            commentLike.mutate({
                               id: comment.id,
                               isLiked: true,
-                              type: "comments",
+                              type: "yorum",
                             });
                           }}
                           className={`cursor-pointer ${
-                            isUserLiked.data !== "notLiked" && isUserLiked.data
-                              ? "text-green-700"
-                              : ""
+                            !!commentLike?.data?.liked ? "text-green-700" : ""
                           }`}
                           size={18}
                         />
                         <p className="text-white/60">
-                          {comment._count.Like ?? ""}
+                          {(commentLike?.data?.commentCount ||
+                            comment._count.Like) ??
+                            0}
                         </p>
                         <IoIosArrowUp
                           onClick={() => {
-                            like.mutate({
+                            commentLike.mutate({
                               id: comment.id,
                               isLiked: false,
-                              type: "comments",
+                              type: "yorum",
                             });
                           }}
                           size={18}
                           className={`rotate-180 transform cursor-pointer ${
-                            isUserLiked.data ? "" : "text-red-500"
+                            commentLike?.data?.liked === false
+                              ? "text-red-500"
+                              : ""
                           }`}
                         />
                       </div>

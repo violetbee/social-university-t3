@@ -1,6 +1,6 @@
 import { prisma } from "../../../db/client";
 
-export const getTextTypePosts = async (slug: string | string[]) => {
+export const getTextTypePost = async (slug: string | string[]) => {
   return prisma.textTypePost.findUnique({
     where: {
       slug: String(slug),
@@ -34,6 +34,12 @@ export const getTextTypePosts = async (slug: string | string[]) => {
               name: true,
             },
           },
+        },
+      },
+      _count: {
+        select: {
+          likes: true,
+          comments: true,
         },
       },
     },

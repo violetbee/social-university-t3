@@ -260,9 +260,9 @@ model Like {
     commentId     String?
     comment       Comment?      @relation(fields: [commentId], references: [id], onDelete: Cascade)
 
-    @@index([postId, userId])
-    @@index([docTypePostId, userId])
-    @@index([commentId, userId])
+    @@unique([postId, userId])
+    @@unique([docTypePostId, userId])
+    @@unique([commentId, userId])
 }
 
 model Comment {

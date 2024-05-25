@@ -5,8 +5,8 @@ import React, { ReactElement } from "react";
 import { ParsedUrlQuery } from "querystring";
 import { ISinglePost } from "../../types/post";
 import type { NextPageWithLayout } from "../_app";
-import { getTextTypePosts } from "../../server/api/post/GET/text-type-posts";
-import { getFileTypePosts } from "../../server/api/post/GET/file-type-posts";
+import { getTextTypePost } from "../../server/api/post/GET/text-type-post";
+import { getFileTypePost } from "../../server/api/post/GET/file-type-post";
 import GonderilerDetail from "../../components/ui/organisms/pages/category/gonderiler/detail";
 import EtkinliklerInPage from "../../components/ui/organisms/pages/category/etkinlikler/detail";
 import {
@@ -14,6 +14,7 @@ import {
   getEventDetails,
 } from "../../server/api/event/GET/event-detail";
 import { getSchoolClubDetails } from "../../server/api/school-club/GET/detail";
+import DashboardLayout from "../../components/layouts/DashboardLayout";
 
 type Props = {
   content: ISinglePost | EventDetails;
@@ -68,7 +69,11 @@ const ContentPage: NextPageWithLayout<Props> = ({ content, params }) => {
 export default ContentPage;
 
 ContentPage.getLayout = function getLayout(page: ReactElement) {
-  return <Layout>{page}</Layout>;
+  return (
+    <Layout>
+      <DashboardLayout>{page}</DashboardLayout>
+    </Layout>
+  );
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
@@ -88,9 +93,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const handleContentAPISwitch = (type: string | string[]) => {
     switch (type) {
       case "gonderiler":
-        return getTextTypePosts(slug);
+        return getTextTypePost(slug);
       case "dosya-paylasimlari":
-        return getFileTypePosts(slug);
+        return getFileTypePost(slug);
       case "etkinlikler":
         return getEventDetails(slug);
       case "okul-topluluklari":
