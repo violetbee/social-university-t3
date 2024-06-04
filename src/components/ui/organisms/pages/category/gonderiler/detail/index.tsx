@@ -49,6 +49,8 @@ function GonderiVeDosyaInPage({
     },
   });
 
+  // test
+
   const commentMutation = trpc.comment.postComment.useMutation();
 
   const getAllComments = trpc.comment.getComments.useQuery({
