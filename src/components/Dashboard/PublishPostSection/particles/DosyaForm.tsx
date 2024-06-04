@@ -269,7 +269,7 @@ function DosyaForm({ cancelProcess }: { cancelProcess: () => void }) {
         </button>
         <button
           onClick={cancelProcess}
-          className="h-10 font-medium text-[#555]"
+          className="h-10 font-medium text-[#555] hover:text-white"
         >
           İşlemi İptal Et
         </button>

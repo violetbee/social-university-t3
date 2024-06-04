@@ -39,13 +39,13 @@ function PostBox({
       passHref
     >
       <div className="flex flex-col gap-4 p-4">
-        {image && (
+        {content && (
           <div className="h-40 w-full overflow-hidden rounded-lg">
             <Image
-              src={image}
+              src={image || "/images/no-banner.png"}
               alt={title}
-              width={400}
-              height={500}
+              width={900}
+              height={400}
               className="h-full w-full object-cover object-center"
             />
           </div>

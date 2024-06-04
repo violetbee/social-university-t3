@@ -9,7 +9,7 @@ type Props = {
   label?: string;
   type?: string;
   options?: { name: string; id: string }[];
-  register: UseFormRegisterReturn<string>;
+  register?: UseFormRegisterReturn<string>;
 } & HTMLProps;
 
 export const Input = ({ label, type, register, ...rest }: Props) => {

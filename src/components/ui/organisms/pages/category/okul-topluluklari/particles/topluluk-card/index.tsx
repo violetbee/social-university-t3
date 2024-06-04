@@ -61,7 +61,7 @@ const ToplulukCard = (props: Props) => {
       <div className="flex w-full flex-col items-center justify-center gap-4">
         <button
           onClick={() => console.log(id)}
-          className="w-full rounded-lg bg-darkBackground p-4 text-white duration-150 hover:bg-[#0d0d11] focus:outline focus:outline-1 focus:outline-darkPrimary"
+          className="w-full rounded-lg bg-darkPrimary p-4 text-white duration-150 hover:bg-[#0d0d11] hover:bg-darkPrimary/90 focus:outline focus:outline-1 focus:outline-darkPrimary"
         >
           Katılma Talebi Gönder
         </button>

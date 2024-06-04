@@ -10,6 +10,7 @@ import { PiCursorClickLight } from "react-icons/pi";
 import Image from "next/image";
 import { MdOutlineReport } from "react-icons/md";
 import Badge from "../../../../../atoms/badge";
+import { RxDragHandleDots2 } from "react-icons/rx";
 
 const NUMBER_OF_POSTS_RECEIVED = 9;
 
@@ -64,7 +65,12 @@ const DosyaPaylasimlari = () => {
 
   return (
     <div className="grid grid-cols-12 items-start gap-6">
-      <div className="col-span-12 divide-y divide-darkHelper rounded-md border border-darkHelper bg-darkSecondary xl:sticky xl:top-[92px] xl:col-span-2">
+      <div className="col-span-12 divide-y divide-darkHelper overflow-hidden rounded-md border border-darkHelper bg-darkSecondary xl:sticky xl:top-[92px] xl:col-span-2">
+        <div className="relative bg-darkPrimary px-3 py-1 pt-2 text-white">
+          Araçlar
+          <RxDragHandleDots2 className="absolute right-2 top-1/2 -translate-y-1/2 opacity-75" />
+        </div>
+
         <div className="space-y-2 p-3">
           <span className="text-base text-white">Bölüm Filtrele</span>
           <div className="flex flex-wrap gap-2">
@@ -229,7 +235,9 @@ const DosyaPaylasimlari = () => {
                 }}
               />
             </div>
-            <p className="mt-4 h-10 text-sm text-whitish/70">{item.content}</p>
+            <p className="mt-4 h-10 truncate text-sm text-whitish/70">
+              {item.content}
+            </p>
             {item.files && item.files.length > 0 && (
               <>
                 <div className="mt-3 flex items-center gap-2">

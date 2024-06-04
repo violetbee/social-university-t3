@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Image from "next/image";
 import { ISinglePost } from "../../../../../../../types/post";
 import { trpc } from "../../../../../../../utils/trpc";
@@ -33,14 +34,14 @@ function GonderiVeDosyaInPage({
 
   const ctx = trpc.useContext();
 
-  const postLike = trpc.like.handleLike.useMutation({
+  const postLike: any = trpc.like.handleLike.useMutation({
     onSuccess: () => {
       ctx.like.isUserLiked.invalidate({
         postId: post.id,
       });
     },
   });
-  const commentLike = trpc.like.handleLike.useMutation({
+  const commentLike: any = trpc.like.handleLike.useMutation({
     onSuccess: () => {
       ctx.like.isUserLiked.invalidate({
         postId: post.id,
@@ -86,19 +87,17 @@ function GonderiVeDosyaInPage({
       />
       <div className="flex gap-10">
         <div className=" flex flex-col gap-6 xl:w-9/12">
-          {post.image && (
-            <div className="relative h-72 w-full">
-              <Image
-                alt="image"
-                src={post.image}
-                layout="fill"
-                objectFit="cover"
-                className="h-full w-full rounded-md border border-darkHelper shadow-md"
-              />
-            </div>
-          )}
+          <div className="relative h-72 w-full">
+            <Image
+              alt="image"
+              src={post.image || "/images/no-banner.png"}
+              className="h-full w-full rounded-md border border-darkHelper shadow-md"
+              layout="fill"
+              objectFit="cover"
+            />
+          </div>
 
-          <div className="flex flex-col gap-4 rounded-md border bg-white p-7 shadow-md dark:border-darkHelper dark:bg-darkSecondary ">
+          <div className="flex flex-col gap-4 rounded-md border bg-white p-7 shadow-md dark:border-darkHelper dark:bg-darkSecondary">
             <div className="flex flex-col gap-2 text-white/50">
               <div className="flex justify-between">
                 <div className="flex items-end gap-3 ">

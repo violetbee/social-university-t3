@@ -96,7 +96,7 @@ const MenuSection = () => {
             } flex shrink-0 flex-col items-center justify-center gap-2 rounded-lg border bg-white px-4 py-2 duration-150 dark:bg-darkSecondary dark:shadow-md hover:dark:bg-darkBackground`}
           >
             <span className="text-center text-base font-normal tracking-wider text-darkSecondary dark:text-white dark:drop-shadow-[2px_1px_1px_rgb(0,0,0)]">
-              Okul Kulüpleri
+              Topluluklar
             </span>
           </Link>
           <Link

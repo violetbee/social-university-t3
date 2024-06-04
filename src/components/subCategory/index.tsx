@@ -22,7 +22,7 @@ function SubCategory({ data, onChange, filter, setFilter }: Props) {
     setFilter(updatedFilter);
   };
   return (
-    <div className="flex gap-4 self-start">
+    <div className="flex flex-wrap gap-4 self-start">
       {data?.map((subCategory) => (
         <button
           key={subCategory.id}

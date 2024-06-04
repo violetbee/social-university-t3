@@ -176,6 +176,7 @@ const Dashboard = () => {
                 rank: 1,
                 name: "Ali Veli",
                 department: "Bilgisayar Mühendisliği",
+                img: "/images/43.jpg",
               }}
             />
             <MostSuccessfulUser
@@ -183,6 +184,7 @@ const Dashboard = () => {
                 rank: 2,
                 name: "Çağlar Karahüseyin",
                 department: "Yazılım Mühendisliği",
+                img: "/images/me.jpeg",
               }}
             />
             <MostSuccessfulUser
@@ -190,6 +192,7 @@ const Dashboard = () => {
                 rank: 3,
                 name: "Nazlı Durmazbilek",
                 department: "Kimya Mühendisliği",
+                img: "/images/nazli.jpeg",
               }}
             />
             <MostSuccessfulUser
@@ -197,6 +200,7 @@ const Dashboard = () => {
                 rank: 4,
                 name: "Mehmet Ali",
                 department: "Tıp",
+                img: "/images/45.jpg",
               }}
             />
           </div>
@@ -244,21 +248,23 @@ const MostSuccessfulUser = ({
     rank: number;
     name: string;
     department: string;
+    img: string;
   };
 }) => {
   return (
     <div className="flex items-center py-2">
-      <div
-        className={`flex h-10 w-10 items-center justify-center rounded-xl border border-darkHelper font-bold text-white shadow-md`}
-      >
+      <div className={`flex h-10 w-10 items-center justify-center  text-white`}>
         {user.rank}
       </div>
       <div className="flex flex-1 justify-between px-4 py-2">
         <div className="flex items-center gap-3">
           <div className="flex h-12 w-12 items-center justify-center rounded-full bg-darkBackground">
-            <img
+            <Image
               className="h-full w-full rounded-full"
-              src="https://i.pravatar.cc/300"
+              src={user.img}
+              alt={user.name}
+              width={48}
+              height={48}
             />
           </div>
           <div className="flex flex-col">
@@ -266,7 +272,7 @@ const MostSuccessfulUser = ({
             <span className="text-whitish/60">{user.department}</span>
           </div>
         </div>
-        <div className="flex items-center justify-between gap-3 font-light text-whitish">
+        <div className="flex flex-col items-center justify-between text-sm font-light text-whitish">
           <div className="flex items-center gap-1">
             <AiOutlineLike />
             <span className="mt-1">+44</span>

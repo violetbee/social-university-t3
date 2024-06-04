@@ -150,7 +150,7 @@ function GonderiForm({ cancelProcess }: { cancelProcess: () => void }) {
 
       <div className="flex flex-col gap-2">
         <span className="text-lg font-semibold">Gönderi Kapak Resmi</span>
-        <div className="relative flex h-32 w-full border-2 border-dashed border-darkHelper hover:border-gray-300 hover:bg-gray-100 dark:bg-darkBackground dark:hover:border-darkHelper/85 dark:hover:bg-darkBackground/85">
+        <div className="relative flex min-h-32 w-full border-2 border-dashed border-darkHelper p-5 hover:border-gray-300 hover:bg-gray-100 dark:bg-darkBackground dark:hover:border-darkHelper/85 dark:hover:bg-darkBackground/85">
           {watchForm.coverImage?.length > 0 && (
             <button
               className="absolute right-2 top-2"
@@ -188,9 +188,14 @@ function GonderiForm({ cancelProcess }: { cancelProcess: () => void }) {
                   </svg>
                 )}
 
-                <p className="rounded-md border-[1px] border-[#999]/10 px-2 py-1 text-sm text-gray-500 group-hover:text-gray-600">
-                  {watchForm.coverImage[0].name}
-                </p>
+                <div className="text-center">
+                  <p className="rounded-md border-[1px] border-[#999]/10 px-2 py-1 text-sm text-gray-500 group-hover:text-gray-600">
+                    {watchForm.coverImage[0].name}
+                  </p>
+                  <span className="text-xs text-gray-500 group-hover:text-gray-600">
+                    {(watchForm.coverImage[0].size / 1000000).toFixed(3)} MB
+                  </span>
+                </div>
               </div>
             ) : (
               <p className="text-sm text-gray-500 group-hover:text-gray-600">
@@ -217,7 +222,7 @@ function GonderiForm({ cancelProcess }: { cancelProcess: () => void }) {
         </button>
         <button
           onClick={cancelProcess}
-          className="h-10 font-medium text-[#555]"
+          className="h-10 font-medium text-[#555] hover:text-white"
         >
           İşlemi İptal Et
         </button>

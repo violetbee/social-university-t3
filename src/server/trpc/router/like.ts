@@ -247,7 +247,9 @@ export const likeRouter = router({
         },
       };
 
-      return likeHandler[input.type ?? "default"]();
+      return likeHandler[
+        (input.type as keyof typeof likeHandler) ?? "default"
+      ]();
     }),
   isUserLiked: publicProcedure
     .input(z.object({ postId: z.string(), type: z.string().optional() }))
@@ -312,6 +314,8 @@ export const likeRouter = router({
         },
       };
 
-      return isLikedHandler[input.type ?? "default"]();
+      return isLikedHandler[
+        (input.type as keyof typeof isLikedHandler) ?? "default"
+      ]();
     }),
 });

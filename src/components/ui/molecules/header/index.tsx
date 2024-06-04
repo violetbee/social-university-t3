@@ -30,19 +30,19 @@ const Index: FC = () => {
   return (
     <>
       <header
-        className={`sticky top-0 z-50 flex ${dosis.className} h-[60px] items-center justify-between border-b-[1px] border-[#444]/40 px-6 text-[#222] lg:border-[#444]/10 dark:bg-darkSecondary`}
+        className={`sticky top-0 z-50 flex ${dosis.className} h-[60px] items-center justify-between border-b-[1px] border-[#444]/40 px-6 text-[#222] dark:bg-darkSecondary lg:border-[#444]/10`}
       >
         <div className="flex h-full items-center gap-5">
           <Link
             href={"/"}
-            className="relative flex cursor-pointer items-center pt-2 text-xl tracking-tighter text-darkSecondary lg:text-3xl/10 dark:text-white"
+            className="relative flex cursor-pointer items-center pt-2 text-xl tracking-tighter text-darkSecondary dark:text-white lg:text-3xl/10"
           >
             SOSYAL<span className="font-bold">ÜNİVERSİTE</span>
           </Link>
           {session && (
             <>
-              <div className="h-1/2 w-[1px] rounded-full bg-gradient-to-t from-darkSecondary via-darkPrimary/40 to-darkSecondary" />
-              <div className="flex items-center gap-2 text-white">
+              <div className="hidden h-1/2 w-[1px] rounded-full bg-gradient-to-t from-darkSecondary via-darkPrimary/40 to-darkSecondary sm:block" />
+              <div className="hidden items-center gap-2 text-white sm:flex">
                 <Image
                   src={`/images/${selectedUni?.university?.logo}`}
                   alt="logo"

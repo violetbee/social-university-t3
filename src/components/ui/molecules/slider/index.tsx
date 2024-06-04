@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { useSlider } from "../../../../hooks/useSlider";
 
 function Banner() {
@@ -13,19 +14,38 @@ function Banner() {
           style={{ transform: `translate(calc(100%*0))` }}
           className="absolute left-0 flex h-full w-full shrink-0 items-center justify-center bg-zinc-950"
         >
-          <h1 className="text-4xl font-bold text-white">Slide 1</h1>
+          <Image
+            src="/images/slider.png"
+            alt="banner"
+            width={1570}
+            height={320}
+            className="absolute left-0 top-0 h-full w-full object-cover object-center"
+          />
         </div>
         <div
           style={{ transform: `translate(calc(100%*1))` }}
           className="absolute left-0 flex h-full w-full shrink-0 items-center justify-center bg-slate-950"
         >
-          <h1 className="text-4xl font-bold text-white">Slide 2</h1>
+          <Image
+            src="/images/slider.png"
+            alt="banner"
+            width={1570}
+            height={320}
+            className="absolute left-0 top-0 h-full w-full object-cover object-center"
+          />
         </div>
         <div
           style={{ transform: `translate(calc(100%*2))` }}
           className="absolute left-0 flex h-full w-full shrink-0 items-center justify-center bg-stone-950"
         >
-          <h1 className="text-4xl font-bold text-white">Slide 3</h1>
+          {/* <h1 className="text-4xl font-bold text-white">Slide 3</h1> */}
+          <Image
+            src="/images/slider.png"
+            alt="banner"
+            width={1570}
+            height={320}
+            className="absolute left-0 top-0 h-full w-full object-cover object-center"
+          />
         </div>
       </div>
       <div className="absolute bottom-3 left-4 flex gap-2">
